@@ -36,6 +36,7 @@ model Lead {
   auditEvents     AuditEvent[]
   hired           Boolean       @default(false)
   hiredAt         DateTime?
+  nurturePaused   Boolean       @default(false)
 
   clioContactId   String?
   clioMatterId    String?
@@ -58,6 +59,7 @@ model Sequence {
   lastError   String?
   lockedAt    DateTime?
   createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
 
   @@index([leadId])
   @@index([scheduledAt])
@@ -128,6 +130,21 @@ enum SequenceStatus {
   SENT
   FAILED
   CANCELLED
+  SKIPPED
+}
+
+model NurtureTemplate {
+  id        String   @id @default(cuid())
+  day       Int
+  channel   Channel
+  subject   String?
+  body      String
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([day])
+  @@index([channel])
 }
 
 model AdminUser {

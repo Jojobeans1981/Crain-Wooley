@@ -1,7 +1,7 @@
 export const dynamic = 'force-dynamic'
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/db/prisma'
-import { buildSequenceJobs } from '@/lib/ghost/sequences'
+import { buildSequenceJobsFromTemplates } from '@/lib/ghost/sequences'
 
 export async function POST(req: NextRequest) {
   try {
@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
     if (!lead) return NextResponse.json({ error: 'Lead not found' }, { status: 404 })
 
     const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
-    const jobs = buildSequenceJobs(lead.id, {
+    const jobs = await buildSequenceJobsFromTemplates(lead.id, {
       firstName: lead.firstName,
       practiceArea: lead.practiceArea.replace(/_/g, ' '),
       paymentLink: `${appUrl}/payment?leadId=${lead.id}`,

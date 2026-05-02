@@ -26,7 +26,7 @@ export type LeadStatus =
 
 export type PaymentStatus = 'UNPAID' | 'PENDING' | 'PAID' | 'REFUNDED'
 export type Channel = 'SMS' | 'EMAIL'
-export type SequenceStatus = 'PENDING' | 'SENT' | 'FAILED' | 'CANCELLED'
+export type SequenceStatus = 'PENDING' | 'SENT' | 'FAILED' | 'CANCELLED' | 'SKIPPED'
 
 export interface IntakeFormData {
   // Step 1 — Contact

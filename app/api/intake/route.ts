@@ -2,7 +2,7 @@ export const dynamic = 'force-dynamic'
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/db/prisma'
 import { qualifyLead } from '@/lib/qualify'
-import { buildSequenceJobs } from '@/lib/ghost/sequences'
+import { buildSequenceJobsFromTemplates } from '@/lib/ghost/sequences'
 import type { IntakeFormData } from '@/types'
 import { auditEvent } from '@/lib/audit'
 
@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
       const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
       const paymentLink = `${appUrl}/payment?leadId=${lead.id}`
 
-      const jobs = buildSequenceJobs(lead.id, {
+      const jobs = await buildSequenceJobsFromTemplates(lead.id, {
         firstName: body.firstName,
         practiceArea: body.practiceArea.replace(/_/g, ' '),
         paymentLink,

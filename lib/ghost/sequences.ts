@@ -1,4 +1,5 @@
 import type { SequenceStep } from '@/types'
+import { prisma } from '@/lib/db/prisma'
 
 export const GHOST_SEQUENCE: SequenceStep[] = [
   {
@@ -94,4 +95,60 @@ export function buildSequenceJobs(
     template: interpolate(seq.template, vars),
     status: 'PENDING' as const,
   }))
+}
+
+export async function buildSequenceJobsFromTemplates(
+  leadId: string,
+  vars: Record<string, string>,
+  baseTime: Date = new Date()
+) {
+  try {
+    const count = await prisma.nurtureTemplate.count()
+    if (count === 0) {
+      await prisma.nurtureTemplate.createMany({
+        data: GHOST_SEQUENCE.map((s) => ({
+          day: s.step,
+          channel: s.channel,
+          subject: s.subject ?? null,
+          body: s.template,
+          active: true,
+        })),
+      })
+    }
+
+    const templates = await prisma.nurtureTemplate.findMany({
+      where: { active: true },
+      orderBy: [{ day: 'asc' }, { channel: 'asc' }],
+    })
+
+    const byDay = new Map<string, { day: number; channel: 'SMS' | 'EMAIL'; subject: string | null; body: string }>()
+    for (const t of templates) {
+      byDay.set(`${t.day}:${t.channel}`, { day: t.day, channel: t.channel, subject: t.subject, body: t.body })
+    }
+
+    // Delay hours are still defined by the canonical sequence timeline.
+    return GHOST_SEQUENCE.map((seq) => {
+      const t = byDay.get(`${seq.step}:${seq.channel}`)
+      const rawBody = t?.body ?? seq.template
+      const rawSubject = t?.subject ?? seq.subject
+
+      const renderedBody = interpolate(rawBody, vars)
+      const rendered =
+        seq.channel === 'EMAIL' && rawSubject
+          ? `Subject: ${interpolate(rawSubject, vars)}\n\n${renderedBody}`
+          : renderedBody
+
+      return {
+        leadId,
+        channel: seq.channel,
+        step: seq.step,
+        scheduledAt: new Date(baseTime.getTime() + seq.delayHours * 60 * 60 * 1000),
+        template: rendered,
+        status: 'PENDING' as const,
+      }
+    })
+  } catch {
+    // Fallback to hard-coded sequence if templates table isn't ready.
+    return buildSequenceJobs(leadId, vars, baseTime)
+  }
 }

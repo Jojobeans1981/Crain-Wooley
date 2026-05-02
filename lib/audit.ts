@@ -11,6 +11,10 @@ export type AuditEventType =
   | 'SEQUENCE_FAILED'
   | 'SEQUENCE_CANCELLED'
   | 'ADMIN_SIGNOUT'
+  | 'SEQUENCE_PAUSED'
+  | 'SEQUENCE_RESUMED'
+  | 'MESSAGE_RETRY'
+  | 'TEMPLATE_UPDATED'
 
 export async function auditEvent(input: {
   type: AuditEventType
