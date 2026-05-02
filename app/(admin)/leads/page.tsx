@@ -2,6 +2,15 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import type { Lead, LeadStatus } from '@/types'
+import { SignOutButton } from '@/components/admin/SignOutButton'
+
+type AuditEventRow = {
+  id: string
+  createdAt: string
+  type: string
+  actor: string | null
+  meta: any
+}
 
 const STATUS_BADGE: Record<LeadStatus, string> = {
   NEW: 'text-blue-400 border-blue-800',
@@ -18,6 +27,8 @@ const STATUS_BADGE: Record<LeadStatus, string> = {
 export default function LeadsPage() {
   const [leads, setLeads] = useState<Lead[]>([])
   const [selected, setSelected] = useState<Lead | null>(null)
+  const [audit, setAudit] = useState<AuditEventRow[]>([])
+  const [auditLoading, setAuditLoading] = useState(false)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [updatingId, setUpdatingId] = useState<string | null>(null)
@@ -25,7 +36,7 @@ export default function LeadsPage() {
   const fetchLeads = async () => {
     try {
       setLoading(true)
-      const res = await fetch('/api/leads')
+      const res = await fetch('/api/admin/leads')
       if (!res.ok) throw new Error('Failed to fetch leads')
       const data = await res.json()
       setLeads(data.leads)
@@ -40,13 +51,30 @@ export default function LeadsPage() {
     fetchLeads()
   }, [])
 
+  useEffect(() => {
+    async function loadAudit() {
+      if (!selected) return
+      setAuditLoading(true)
+      try {
+        const res = await fetch(`/api/audit/lead/${selected.id}?limit=100`)
+        const data = await res.json()
+        setAudit(Array.isArray(data.events) ? data.events : [])
+      } catch {
+        setAudit([])
+      } finally {
+        setAuditLoading(false)
+      }
+    }
+    loadAudit()
+  }, [selected?.id])
+
   const handleStatusUpdate = async (leadId: string, status: LeadStatus) => {
     setUpdatingId(leadId)
     try {
-      const res = await fetch('/api/leads', {
+      const res = await fetch(`/api/admin/leads/${leadId}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ leadId, status })
+        body: JSON.stringify({ status })
       })
       if (!res.ok) throw new Error('Update failed')
       
@@ -62,7 +90,7 @@ export default function LeadsPage() {
   const handleHire = async (leadId: string) => {
     setUpdatingId(leadId)
     try {
-      const res = await fetch('/api/onboarding', {
+      const res = await fetch('/api/admin/onboarding', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ leadId })
@@ -137,6 +165,7 @@ export default function LeadsPage() {
           <a href="/dashboard" className="font-mono text-xs text-cw-muted hover:text-cw-white transition-colors block text-center">
             ← Back to Dashboard
           </a>
+          <SignOutButton />
         </div>
       </aside>
 
@@ -273,6 +302,48 @@ export default function LeadsPage() {
                   </button>
                 )}
               </div>
+            </div>
+
+            {/* Timeline */}
+            <div className="cw-panel p-6">
+              <div className="flex items-center justify-between mb-4">
+                <div className="font-mono text-xs text-cw-gold uppercase tracking-widest">Timeline</div>
+                <button
+                  className="font-mono text-xs text-cw-muted uppercase tracking-widest hover:text-cw-gold transition-colors"
+                  onClick={() => selected && setSelected({ ...selected })}
+                  disabled={auditLoading}
+                >
+                  {auditLoading ? 'Loading' : 'Refresh'}
+                </button>
+              </div>
+
+              {audit.length === 0 && !auditLoading ? (
+                <div className="font-mono text-xs text-cw-muted uppercase tracking-widest">
+                  No events yet
+                </div>
+              ) : (
+                <div className="divide-y divide-cw-border">
+                  {audit.map((evt) => (
+                    <div key={evt.id} className="py-3">
+                      <div className="flex items-start justify-between gap-4">
+                        <div>
+                          <div className="font-mono text-xs text-cw-white uppercase tracking-wider">
+                            {evt.type.replace(/_/g, ' ')}
+                          </div>
+                          {evt.meta ? (
+                            <div className="font-mono text-[10px] text-cw-muted mt-1 break-words">
+                              {JSON.stringify(evt.meta)}
+                            </div>
+                          ) : null}
+                        </div>
+                        <div className="font-mono text-[10px] text-cw-muted uppercase tracking-widest shrink-0">
+                          {new Date(evt.createdAt).toLocaleString()}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         )}

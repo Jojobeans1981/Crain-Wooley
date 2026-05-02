@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { stripe } from '@/lib/stripe/stripe'
 import { prisma } from '@/lib/db/prisma'
 import { ClioService } from '@/lib/clio/ClioService'
+import { auditEvent } from '@/lib/audit'
 import type Stripe from 'stripe'
 
 export async function POST(req: NextRequest) {
@@ -39,6 +40,12 @@ export async function POST(req: NextRequest) {
         },
       })
 
+      await auditEvent({
+        type: 'PAYMENT_COMPLETED',
+        leadId,
+        meta: { stripeSessionId: session.id },
+      })
+
       // Automated Action: Create contact in Clio
       try {
         let contactId = lead.clioContactId
@@ -70,6 +77,7 @@ export async function POST(req: NextRequest) {
         where: { leadId, status: 'PENDING' },
         data: { status: 'CANCELLED' },
       })
+      await auditEvent({ type: 'SEQUENCE_CANCELLED', leadId, meta: { reason: 'payment_completed' } })
     }
   }
 

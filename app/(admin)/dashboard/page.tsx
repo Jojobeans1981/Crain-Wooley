@@ -2,6 +2,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import type { Lead, LeadStatus } from '@/types'
+import { SignOutButton } from '@/components/admin/SignOutButton'
 
 const STATUS_COLORS: Record<LeadStatus, string> = {
   NEW: 'text-blue-400 border-blue-800',
@@ -35,8 +36,8 @@ export default function DashboardPage() {
     try {
       setLoading(true)
       const [leadsRes, metricsRes] = await Promise.all([
-        fetch('/api/leads'),
-        fetch('/api/metrics')
+        fetch('/api/admin/leads'),
+        fetch('/api/admin/metrics')
       ])
 
       if (!leadsRes.ok || !metricsRes.ok) throw new Error('Failed to fetch data')
@@ -62,16 +63,16 @@ export default function DashboardPage() {
   const handleStatusChange = async (leadId: string, status: LeadStatus) => {
     setUpdatingId(leadId)
     try {
-      const res = await fetch('/api/leads', {
+      const res = await fetch(`/api/admin/leads/${leadId}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ leadId, status })
+        body: JSON.stringify({ status })
       })
       if (!res.ok) throw new Error('Update failed')
       
       setLeads(prev => prev.map(l => l.id === leadId ? { ...l, status } : l))
       // Refresh metrics
-      const metricsRes = await fetch('/api/metrics')
+      const metricsRes = await fetch('/api/admin/metrics')
       if (metricsRes.ok) {
         setMetrics(await metricsRes.json())
       }
@@ -85,7 +86,7 @@ export default function DashboardPage() {
   const handleHire = async (leadId: string) => {
     setUpdatingId(leadId)
     try {
-      const res = await fetch('/api/onboarding', {
+      const res = await fetch('/api/admin/onboarding', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ leadId })
@@ -97,7 +98,7 @@ export default function DashboardPage() {
       
       setLeads(prev => prev.map(l => l.id === leadId ? { ...l, status: 'HIRED' as LeadStatus, hired: true } : l))
       // Refresh metrics
-      const metricsRes = await fetch('/api/metrics')
+      const metricsRes = await fetch('/api/admin/metrics')
       if (metricsRes.ok) {
         setMetrics(await metricsRes.json())
       }
@@ -148,6 +149,7 @@ export default function DashboardPage() {
             <div className="w-2 h-2 bg-green-500 animate-pulse" />
             <span className="font-mono text-xs text-cw-muted uppercase tracking-widest">System Active</span>
           </div>
+          <SignOutButton className="font-mono text-[10px] text-cw-muted border border-cw-border px-2 py-1 hover:border-cw-gold hover:text-cw-gold transition-colors uppercase tracking-widest" />
         </div>
       </header>
 

@@ -4,6 +4,7 @@ import { prisma } from '@/lib/db/prisma'
 import { qualifyLead } from '@/lib/qualify'
 import { buildSequenceJobs } from '@/lib/ghost/sequences'
 import type { IntakeFormData } from '@/types'
+import { auditEvent } from '@/lib/audit'
 
 export async function POST(req: NextRequest) {
   try {
@@ -29,6 +30,16 @@ export async function POST(req: NextRequest) {
       },
     })
 
+    await auditEvent({
+      type: 'LEAD_CREATED',
+      leadId: lead.id,
+      meta: {
+        qualified,
+        practiceArea: body.practiceArea,
+        urgency: body.urgency,
+      },
+    })
+
     // If qualified, seed Ghost Assistant sequence
     if (qualified) {
       const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
@@ -41,6 +52,7 @@ export async function POST(req: NextRequest) {
       })
 
       await prisma.sequence.createMany({ data: jobs })
+      await auditEvent({ type: 'SEQUENCE_ENQUEUED', leadId: lead.id, meta: { count: jobs.length } })
     }
 
     return NextResponse.json({

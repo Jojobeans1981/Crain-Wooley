@@ -1,6 +1,7 @@
 export const dynamic = 'force-dynamic'
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/db/prisma'
+import { auditEvent } from '@/lib/audit'
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url)
@@ -29,9 +30,16 @@ export async function PATCH(req: NextRequest) {
   try {
     const { leadId, status } = await req.json()
 
+    const before = await prisma.lead.findUnique({ where: { id: leadId } })
     const lead = await prisma.lead.update({
       where: { id: leadId },
       data: { status },
+    })
+
+    await auditEvent({
+      type: 'LEAD_STATUS_CHANGED',
+      leadId,
+      meta: { from: before?.status, to: status },
     })
 
     return NextResponse.json({ success: true, lead })

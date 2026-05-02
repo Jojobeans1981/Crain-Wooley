@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/db/prisma'
+import { auditEvent } from '@/lib/audit'
 
 export async function POST(req: NextRequest) {
   try {
@@ -36,6 +37,12 @@ export async function POST(req: NextRequest) {
         },
       })
 
+      await auditEvent({
+        type: 'SCHEDULED',
+        leadId: lead.id,
+        meta: { calEventId: String(booking.id), startTime: booking.startTime },
+      })
+
       // Cancel any pending follow-up sequences for this lead
       await prisma.sequence.updateMany({
         where: {
@@ -46,6 +53,7 @@ export async function POST(req: NextRequest) {
           status: 'CANCELLED',
         },
       })
+      await auditEvent({ type: 'SEQUENCE_CANCELLED', leadId: lead.id, meta: { reason: 'scheduled' } })
 
       console.log(`[CAL WEBHOOK] Updated lead ${lead.id} to SCHEDULED`)
     }

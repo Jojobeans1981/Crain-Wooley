@@ -33,6 +33,7 @@ model Lead {
   calEventId      String?
 
   sequences       Sequence[]
+  auditEvents     AuditEvent[]
   hired           Boolean       @default(false)
   hiredAt         DateTime?
 
@@ -53,11 +54,32 @@ model Sequence {
   sentAt      DateTime?
   status      SequenceStatus  @default(PENDING)
   template    String
+  attempts    Int             @default(0)
+  lastError   String?
+  lockedAt    DateTime?
   createdAt   DateTime        @default(now())
 
   @@index([leadId])
   @@index([scheduledAt])
   @@index([status])
+}
+
+model AuditEvent {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  leadId    String?
+  lead      Lead?    @relation(fields: [leadId], references: [id])
+
+  type      String
+  actor     String?
+  ip        String?
+  userAgent String?
+  meta      Json?
+
+  @@index([leadId])
+  @@index([type])
+  @@index([createdAt])
 }
 
 enum PracticeArea {
@@ -106,4 +128,17 @@ enum SequenceStatus {
   SENT
   FAILED
   CANCELLED
+}
+
+model AdminUser {
+  id        String    @id @default(cuid())
+  email     String    @unique
+  role      AdminRole @default(VIEWER)
+  createdAt DateTime  @default(now())
+}
+
+enum AdminRole {
+  SUPER_ADMIN
+  ADMIN
+  VIEWER
 }
