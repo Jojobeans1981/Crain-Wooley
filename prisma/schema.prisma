@@ -1,0 +1,109 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Lead {
+  id              String        @id @default(cuid())
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  firstName       String
+  lastName        String
+  email           String        @unique
+  phone           String
+
+  practiceArea    PracticeArea
+  caseType        String
+  description     String
+  urgency         Urgency
+  qualified       Boolean       @default(false)
+  disqualifyReason String?
+
+  status          LeadStatus    @default(NEW)
+
+  paymentStatus   PaymentStatus @default(UNPAID)
+  stripeSessionId String?
+  paidAt          DateTime?
+
+  consultAt       DateTime?
+  calEventId      String?
+
+  sequences       Sequence[]
+  hired           Boolean       @default(false)
+  hiredAt         DateTime?
+
+  clioContactId   String?
+  clioMatterId    String?
+
+  @@index([status])
+  @@index([email])
+}
+
+model Sequence {
+  id          String          @id @default(cuid())
+  leadId      String
+  lead        Lead            @relation(fields: [leadId], references: [id])
+  channel     Channel
+  step        Int
+  scheduledAt DateTime
+  sentAt      DateTime?
+  status      SequenceStatus  @default(PENDING)
+  template    String
+  createdAt   DateTime        @default(now())
+
+  @@index([leadId])
+  @@index([scheduledAt])
+  @@index([status])
+}
+
+enum PracticeArea {
+  ESTATE_PLANNING
+  FAMILY_LAW
+  PERSONAL_INJURY
+  BUSINESS_LAW
+  CRIMINAL_DEFENSE
+  REAL_ESTATE
+  OTHER
+}
+
+enum Urgency {
+  IMMEDIATE
+  WITHIN_WEEK
+  WITHIN_MONTH
+  RESEARCHING
+}
+
+enum LeadStatus {
+  NEW
+  QUALIFIED
+  DISQUALIFIED
+  PAYMENT_PENDING
+  PAYMENT_COMPLETE
+  SCHEDULED
+  CONSULTED
+  HIRED
+  CLOSED_LOST
+}
+
+enum PaymentStatus {
+  UNPAID
+  PENDING
+  PAID
+  REFUNDED
+}
+
+enum Channel {
+  SMS
+  EMAIL
+}
+
+enum SequenceStatus {
+  PENDING
+  SENT
+  FAILED
+  CANCELLED
+}

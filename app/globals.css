@@ -1,0 +1,174 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Fonts are configured in app/layout.tsx via next/font. */
+
+@layer base {
+  * { box-sizing: border-box; }
+  :root { color-scheme: dark; }
+  body {
+    background-color: #0B0D11;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 39px, #1A1D24 39px, #1A1D24 40px),
+      repeating-linear-gradient(90deg, transparent, transparent 39px, #1A1D24 39px, #1A1D24 40px);
+    color: #E8E2D6;
+    font-family: var(--font-sans);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  h1, h2, h3 { font-family: var(--font-display); letter-spacing: 0; }
+  code, pre, .mono { font-family: var(--font-mono); }
+  select { color-scheme: dark; }
+  select option {
+    background-color: #111318;
+    color: #E8E2D6;
+  }
+  ::selection {
+    background: rgba(197, 147, 58, 0.28);
+  }
+}
+
+@layer utilities {
+  /* Back-compat aliases (old cw-* tokens) */
+  .bg-cw-black { background-color: #0B0D11; }
+  .bg-cw-dark { background-color: #1A1D24; }
+  .bg-cw-panel { background-color: #111318; }
+  .text-cw-white { color: #E8E2D6; }
+  .text-cw-gold { color: #C5933A; }
+  .text-cw-muted { color: #6B7B8E; }
+  .border-cw { border-color: #2A2D35; }
+  .border-cw-gold { border-color: #C5933A; }
+
+  .cw-container { width: 100%; max-width: 1200px; margin-left: auto; margin-right: auto; padding-left: 1.5rem; padding-right: 1.5rem; }
+  @media (min-width: 768px) {
+    .cw-container { padding-left: 3rem; padding-right: 3rem; }
+  }
+
+  .cw-page {
+    min-height: 100vh;
+    background: transparent;
+  }
+
+  .cw-header {
+    border-bottom: 1px solid #2A2D35;
+    background: rgba(11, 13, 17, 0.95);
+    backdrop-filter: blur(6px);
+  }
+
+  .cw-panel {
+    background: #111318;
+    border: 1px solid #2A2D35;
+    border-radius: 0;
+  }
+
+  .cw-panel-gold {
+    background: #111318;
+    border: 1px solid #C5933A;
+    border-radius: 0;
+  }
+
+  .cw-btn-primary,
+  .cw-button {
+    background: #C5933A;
+    color: #0B0D11;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    transition: background-color 150ms;
+  }
+  .cw-btn-primary:hover,
+  .cw-button:hover {
+    background: #8A6422;
+  }
+  .cw-btn-primary:disabled,
+  .cw-button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  .cw-btn-primary:focus-visible,
+  .cw-button:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(197, 147, 58, 0.55);
+  }
+
+  .cw-btn-ghost {
+    background: transparent;
+    color: #6B7B8E;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.75rem 1.5rem;
+    border: 1px solid #2A2D35;
+    border-radius: 0;
+    cursor: pointer;
+    transition: border-color 150ms, color 150ms;
+  }
+  .cw-btn-ghost:hover {
+    border-color: #C5933A;
+    color: #C5933A;
+  }
+  .cw-btn-ghost:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(197, 147, 58, 0.45);
+    border-color: rgba(197, 147, 58, 0.75);
+  }
+
+  .cw-input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #2A2D35;
+    color: #E8E2D6;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    line-height: 1.4;
+    padding: 0.5rem 0;
+    width: 100%;
+    outline: none;
+    transition: border-color 150ms;
+    caret-color: #C5933A;
+  }
+  .cw-input:focus { border-color: #C5933A; }
+  .cw-input::placeholder { color: #2A2D35; }
+
+  .cw-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #6B7B8E;
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+
+  .cw-select {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #2A2D35;
+    color: #E8E2D6;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    line-height: 1.4;
+    padding: 0.5rem 0;
+    width: 100%;
+    outline: none;
+    appearance: none;
+    cursor: pointer;
+  }
+  .cw-select:focus { border-bottom-color: #C5933A; }
+
+  .cw-divider {
+    border: none;
+    border-top: 1px solid #2A2D35;
+  }
+
+  /* No drop shadows in vault-dark. */
+}
