@@ -154,6 +154,22 @@ export default function DashboardPage() {
       </header>
 
       <div className="p-8 space-y-8">
+        {/* Export buttons */}
+        <div className="flex gap-3 justify-end">
+          <a
+            href="/api/admin/export/leads"
+            className="border border-cw-border text-cw-muted font-mono text-xs uppercase tracking-widest px-4 py-2 hover:border-cw-gold hover:text-cw-gold transition-colors"
+          >
+            Export Leads CSV
+          </a>
+          <a
+            href="/api/admin/export/audit"
+            className="border border-cw-border text-cw-muted font-mono text-xs uppercase tracking-widest px-4 py-2 hover:border-cw-gold hover:text-cw-gold transition-colors"
+          >
+            Export Audit CSV
+          </a>
+        </div>
+
         {/* Funnel Metrics */}
         {metrics && (
           <div>

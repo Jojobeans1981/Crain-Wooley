@@ -29,6 +29,7 @@ export async function POST(
         status: 'PENDING',
         attempts: 0,
         lastError: null,
+        consecutiveFailures: 0,
         lockedAt: null,
         scheduledAt: new Date(),
       },

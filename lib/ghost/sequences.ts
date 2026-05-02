@@ -1,6 +1,22 @@
 import type { SequenceStep } from '@/types'
 import { prisma } from '@/lib/db/prisma'
 
+const SMS_FOOTER = '\n\nReply STOP to opt out.'
+
+const EMAIL_FOOTER = (unsubscribeUrl: string) =>
+  `\n\n---\nYou are receiving this because you submitted an inquiry to Crain & Wooley. To unsubscribe: ${unsubscribeUrl}`
+
+function appendSmsFooter(body: string): string {
+  if (body.includes('Reply STOP to opt out')) return body
+  return body + SMS_FOOTER
+}
+
+function appendEmailFooter(body: string, leadId: string): string {
+  const base = process.env.NEXT_PUBLIC_BASE_URL ?? ''
+  const url = `${base}/unsubscribe?token=${leadId}`
+  return body + EMAIL_FOOTER(url)
+}
+
 export const GHOST_SEQUENCE: SequenceStep[] = [
   {
     step: 1,
@@ -87,14 +103,21 @@ export function buildSequenceJobs(
   template: string
   status: 'PENDING'
 }> {
-  return GHOST_SEQUENCE.map((seq) => ({
-    leadId,
-    channel: seq.channel,
-    step: seq.step,
-    scheduledAt: new Date(baseTime.getTime() + seq.delayHours * 60 * 60 * 1000),
-    template: interpolate(seq.template, vars),
-    status: 'PENDING' as const,
-  }))
+  return GHOST_SEQUENCE.map((seq) => {
+    const rendered = interpolate(seq.template, vars)
+    const withFooter =
+      seq.channel === 'SMS'
+        ? appendSmsFooter(rendered)
+        : appendEmailFooter(rendered, leadId)
+    return {
+      leadId,
+      channel: seq.channel,
+      step: seq.step,
+      scheduledAt: new Date(baseTime.getTime() + seq.delayHours * 60 * 60 * 1000),
+      template: withFooter,
+      status: 'PENDING' as const,
+    }
+  })
 }
 
 export async function buildSequenceJobsFromTemplates(
@@ -133,17 +156,22 @@ export async function buildSequenceJobsFromTemplates(
       const rawSubject = t?.subject ?? seq.subject
 
       const renderedBody = interpolate(rawBody, vars)
-      const rendered =
+      const withSubject =
         seq.channel === 'EMAIL' && rawSubject
           ? `Subject: ${interpolate(rawSubject, vars)}\n\n${renderedBody}`
           : renderedBody
+
+      const withFooter =
+        seq.channel === 'SMS'
+          ? appendSmsFooter(withSubject)
+          : appendEmailFooter(withSubject, leadId)
 
       return {
         leadId,
         channel: seq.channel,
         step: seq.step,
         scheduledAt: new Date(baseTime.getTime() + seq.delayHours * 60 * 60 * 1000),
-        template: rendered,
+        template: withFooter,
         status: 'PENDING' as const,
       }
     })

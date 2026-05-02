@@ -15,6 +15,12 @@ export type AuditEventType =
   | 'SEQUENCE_RESUMED'
   | 'MESSAGE_RETRY'
   | 'TEMPLATE_UPDATED'
+  | 'DEAD_LETTER_THRESHOLD'
+  | 'OPTED_OUT'
+  | 'OPTED_IN'
+  | 'MESSAGE_BLOCKED_OPT_OUT'
+  | 'LEADS_EXPORTED'
+  | 'AUDIT_EXPORTED'
 
 export async function auditEvent(input: {
   type: AuditEventType
@@ -25,17 +31,8 @@ export async function auditEvent(input: {
   meta?: Prisma.InputJsonValue
 }) {
   try {
-    await prisma.auditEvent.create({
-      data: {
-        type: input.type,
-        leadId: input.leadId,
-        actor: input.actor,
-        ip: input.ip,
-        userAgent: input.userAgent,
-        meta: input.meta,
-      },
-    })
+    await prisma.auditEvent.create({ data: input })
   } catch {
-    // Audit logging must never break core flows.
+    //
   }
 }

@@ -4,6 +4,8 @@ import { prisma } from '@/lib/db/prisma'
 import { sendSMS } from '@/lib/twilio/sms'
 import { sendEmail } from '@/lib/resend/email'
 import { auditEvent } from '@/lib/audit'
+import { getNextRetryTime, checkDeadLetter } from '@/lib/reliability'
+import { randomUUID } from 'crypto'
 
 export async function POST(req: NextRequest) {
   // Secure cron endpoint
@@ -53,8 +55,11 @@ export async function POST(req: NextRequest) {
         continue
       }
 
+      // Use externalId as idempotency key (create if missing)
+      const externalId = seq.externalId || randomUUID()
+
       if (seq.channel === 'SMS') {
-        await sendSMS(lead.phone, seq.template)
+        await sendSMS(lead.phone, seq.template, { idempotencyKey: externalId })
       } else {
         // Extract subject from template first line if present
         const lines = seq.template.split('\n')
@@ -66,22 +71,55 @@ export async function POST(req: NextRequest) {
           to: lead.email,
           subject,
           text: seq.template,
+          idempotencyKey: externalId,
         })
       }
 
       await prisma.sequence.update({
         where: { id: seq.id },
-        data: { status: 'SENT', sentAt: now, attempts: { increment: 1 }, lastError: null, lockedAt: null },
+        data: {
+          status: 'SENT',
+          sentAt: now,
+          attempts: { increment: 1 },
+          lastError: null,
+          externalId,
+          consecutiveFailures: 0,
+          lockedAt: null,
+        },
       })
       await auditEvent({ type: 'SEQUENCE_SENT', leadId: lead.id, meta: { seqId: seq.id, channel: seq.channel, step: seq.step } })
       results.sent++
     } catch (err) {
       console.error(`[GHOST CRON] Failed to send seq ${seq.id}`, err)
+
+      const newFailureCount = (seq.consecutiveFailures || 0) + 1
+      const nextRetry = getNextRetryTime(now, seq.attempts)
+
       await prisma.sequence.update({
         where: { id: seq.id },
-        data: { status: 'FAILED', attempts: { increment: 1 }, lastError: String(err), lockedAt: null },
+        data: {
+          status: 'FAILED',
+          attempts: { increment: 1 },
+          lastError: String(err),
+          consecutiveFailures: newFailureCount,
+          scheduledAt: nextRetry, // Schedule next retry with backoff
+          lockedAt: null,
+        },
       })
-      await auditEvent({ type: 'SEQUENCE_FAILED', leadId: lead.id, meta: { seqId: seq.id, error: String(err) } })
+
+      // Check if dead-letter threshold reached
+      await checkDeadLetter(seq.id)
+
+      await auditEvent({
+        type: 'SEQUENCE_FAILED',
+        leadId: lead.id,
+        meta: {
+          seqId: seq.id,
+          error: String(err),
+          failureCount: newFailureCount,
+          nextRetry: nextRetry.toISOString(),
+        },
+      })
       results.failed++
     }
   }

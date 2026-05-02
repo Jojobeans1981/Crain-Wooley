@@ -186,7 +186,7 @@ export default function LeadsPage() {
                 <h1 className="font-display text-5xl text-cw-white">
                   {selected.firstName} {selected.lastName}
                 </h1>
-                <div className="flex items-center gap-3 mt-2">
+                <div className="flex items-center gap-3 mt-2 flex-wrap">
                   <span className={`font-mono text-xs border px-2 py-1 uppercase tracking-wide ${STATUS_BADGE[selected.status]}`}>
                     {selected.status.replace(/_/g, ' ')}
                   </span>
@@ -194,7 +194,17 @@ export default function LeadsPage() {
                     ? <span className="font-mono text-xs text-green-400">✓ Qualified</span>
                     : <span className="font-mono text-xs text-cw-muted">✗ Disqualified</span>
                   }
+                  {selected.optedOut && (
+                    <span className="font-mono text-xs px-2 py-1 uppercase tracking-wide bg-red-900/10 border border-red-900 text-red-400">
+                      OPT-OUT
+                    </span>
+                  )}
                 </div>
+                {selected.optedOut && selected.optedOutAt && (
+                  <div className="font-mono text-[10px] text-cw-muted mt-1 uppercase tracking-widest">
+                    Opted out {new Date(selected.optedOutAt).toLocaleString()}
+                  </div>
+                )}
               </div>
             </div>
 

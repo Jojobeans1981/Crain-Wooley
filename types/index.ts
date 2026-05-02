@@ -65,6 +65,8 @@ export interface Lead {
   hiredAt?: string
   clioContactId?: string
   clioMatterId?: string
+  optedOut: boolean
+  optedOutAt?: string
   createdAt: string
   updatedAt: string
 }

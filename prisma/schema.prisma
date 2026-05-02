@@ -41,25 +41,31 @@ model Lead {
   clioContactId   String?
   clioMatterId    String?
 
+  optedOut        Boolean   @default(false)
+  optedOutAt      DateTime?
+
   @@index([status])
   @@index([email])
+  @@index([phone])
 }
 
 model Sequence {
-  id          String          @id @default(cuid())
-  leadId      String
-  lead        Lead            @relation(fields: [leadId], references: [id])
-  channel     Channel
-  step        Int
-  scheduledAt DateTime
-  sentAt      DateTime?
-  status      SequenceStatus  @default(PENDING)
-  template    String
-  attempts    Int             @default(0)
-  lastError   String?
-  lockedAt    DateTime?
-  createdAt   DateTime        @default(now())
-  updatedAt   DateTime        @updatedAt
+  id                 String          @id @default(cuid())
+  leadId             String
+  lead               Lead            @relation(fields: [leadId], references: [id])
+  channel            Channel
+  step               Int
+  scheduledAt        DateTime
+  sentAt             DateTime?
+  status             SequenceStatus  @default(PENDING)
+  template           String
+  attempts           Int             @default(0)
+  lastError          String?
+  lockedAt           DateTime?
+  externalId         String?         @unique // Idempotency key for SMS/email providers
+  consecutiveFailures Int            @default(0)
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
 
   @@index([leadId])
   @@index([scheduledAt])
