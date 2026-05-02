@@ -48,4 +48,19 @@ Thumbs.db
 # TypeScript
 *.tsbuildinfo
 next-env.d.ts
+# AI Interaction Logs & History
+docs/DEV_LOG.md
+docs/AI_COST_LOG.md
+docs/AI_DECISIONS.md
+docs/ISSUES_TRACKER.md
+docs/prompts/
+docs/phases/
+
+# Local Learning & Memory
+.data/
+prisma/*.db
+prisma/*.db-journal
+
+# Agent State & Traces
+.forge-stage-data.json
 
