@@ -21,9 +21,9 @@ const sans = IBM_Plex_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'Crain & Wooley — Automated Intake Engine',
+  title: 'Crain & Wooley — Attorneys at Law | Plano, TX',
   description:
-    'Schedule your confidential legal consultation with Crain & Wooley. Estate Planning, Family Law, and more.',
+    'Get clear legal answers fast. Crain & Wooley offers confidential consultations in estate planning, family law, personal injury, criminal defense, and more. Serving Plano, TX and surrounding areas.',
 }
 
 const jsonLd = {

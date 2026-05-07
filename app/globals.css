@@ -5,43 +5,60 @@
 /* Fonts are configured in app/layout.tsx via next/font. */
 
 @layer base {
-  * { box-sizing: border-box; }
+  *, *::before, *::after { box-sizing: border-box; }
+
   :root { color-scheme: dark; }
+
   body {
     background-color: #0B0D11;
+    /* Subtle refined grid — tighter and less aggressive */
     background-image:
-      repeating-linear-gradient(0deg, transparent, transparent 39px, #1A1D24 39px, #1A1D24 40px),
-      repeating-linear-gradient(90deg, transparent, transparent 39px, #1A1D24 39px, #1A1D24 40px);
+      repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(42,45,53,0.45) 59px, rgba(42,45,53,0.45) 60px),
+      repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(42,45,53,0.45) 59px, rgba(42,45,53,0.45) 60px);
     color: #E8E2D6;
     font-family: var(--font-sans);
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  h1, h2, h3 { font-family: var(--font-display); letter-spacing: 0; }
+
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: 0; }
   code, pre, .mono { font-family: var(--font-mono); }
+
   select { color-scheme: dark; }
   select option {
     background-color: #111318;
     color: #E8E2D6;
   }
+
   ::selection {
     background: rgba(197, 147, 58, 0.28);
   }
+
+  /* Smooth scroll */
+  html { scroll-behavior: smooth; }
 }
 
 @layer utilities {
-  /* Back-compat aliases (old cw-* tokens) */
-  .bg-cw-black { background-color: #0B0D11; }
-  .bg-cw-dark { background-color: #1A1D24; }
-  .bg-cw-panel { background-color: #111318; }
+  /* ── Color aliases (back-compat) ── */
+  .bg-cw-black   { background-color: #0B0D11; }
+  .bg-cw-dark    { background-color: #1A1D24; }
+  .bg-cw-panel   { background-color: #111318; }
   .text-cw-white { color: #E8E2D6; }
-  .text-cw-gold { color: #C5933A; }
+  .text-cw-gold  { color: #C5933A; }
   .text-cw-muted { color: #6B7B8E; }
-  .border-cw { border-color: #2A2D35; }
-  .border-cw-gold { border-color: #C5933A; }
+  .border-cw     { border-color: #2A2D35; }
+  .border-cw-gold{ border-color: #C5933A; }
 
-  .cw-container { width: 100%; max-width: 1200px; margin-left: auto; margin-right: auto; padding-left: 1.5rem; padding-right: 1.5rem; }
+  /* ── Layout ── */
+  .cw-container {
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
   @media (min-width: 768px) {
     .cw-container { padding-left: 3rem; padding-right: 3rem; }
   }
@@ -51,12 +68,15 @@
     background: transparent;
   }
 
+  /* ── Header ── */
   .cw-header {
     border-bottom: 1px solid #2A2D35;
-    background: rgba(11, 13, 17, 0.95);
-    backdrop-filter: blur(6px);
+    background: rgba(11, 13, 17, 0.97);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
 
+  /* ── Panels ── */
   .cw-panel {
     background: #111318;
     border: 1px solid #2A2D35;
@@ -69,6 +89,7 @@
     border-radius: 0;
   }
 
+  /* ── Buttons ── */
   .cw-btn-primary,
   .cw-button {
     background: #C5933A;
@@ -78,20 +99,28 @@
     font-size: 0.75rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    padding: 0.75rem 1.5rem;
+    padding: 0.75rem 1.75rem;
     border: none;
     border-radius: 0;
     cursor: pointer;
-    transition: background-color 150ms;
+    transition: background-color 150ms, transform 150ms;
+    display: inline-block;
+    text-decoration: none;
   }
   .cw-btn-primary:hover,
   .cw-button:hover {
-    background: #8A6422;
+    background: #d9a448;
+    transform: translateY(-1px);
+  }
+  .cw-btn-primary:active,
+  .cw-button:active {
+    transform: translateY(0);
   }
   .cw-btn-primary:disabled,
   .cw-button:disabled {
     opacity: 0.4;
     cursor: not-allowed;
+    transform: none;
   }
   .cw-btn-primary:focus-visible,
   .cw-button:focus-visible {
@@ -106,7 +135,7 @@
     font-size: 0.75rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    padding: 0.75rem 1.5rem;
+    padding: 0.75rem 1.75rem;
     border: 1px solid #2A2D35;
     border-radius: 0;
     cursor: pointer;
@@ -122,6 +151,7 @@
     border-color: rgba(197, 147, 58, 0.75);
   }
 
+  /* ── Inputs ── */
   .cw-input {
     background: transparent;
     border: none;
@@ -165,10 +195,22 @@
   }
   .cw-select:focus { border-bottom-color: #C5933A; }
 
+  /* ── Divider ── */
   .cw-divider {
     border: none;
     border-top: 1px solid #2A2D35;
   }
 
-  /* No drop shadows in vault-dark. */
+  /* ── Animations ── */
+  @keyframes pulse-gold {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.5; transform: scale(1.4); }
+  }
+  .animate-pulse-gold { animation: pulse-gold 2s infinite; }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-up { animation: fade-up 0.5s ease both; }
 }

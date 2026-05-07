@@ -1,10 +1,3 @@
-/**
- * ClioService — STUBBED
- * All Clio API calls route through this interface.
- * When real credentials arrive, replace method bodies only.
- * No other files need to change.
- */
-
 export interface ClioContact {
   id: string
   firstName: string
@@ -55,27 +48,31 @@ class ClioServiceClass {
     return response.json()
   }
 
-  private log(method: string, payload: unknown) {
-    if (process.env.NODE_ENV === 'development') {
-      console.log(`[CLIO STUB] ${method}`, JSON.stringify(payload, null, 2))
-    }
-  }
-
-  // API Endpoints for Reference:
-  // POST /contacts -> { data: { first_name, last_name, email_addresses: [{ address, primary: true }], phone_numbers: [{ number, primary: true }], type: 'Person' } }
-  // POST /matters -> { data: { display_number, status: 'Pending', client: { id: contact_id }, description, practice_area: { id: pa_id } } }
-
   async createContact(data: {
     firstName: string
     lastName: string
     email: string
     phone: string
   }): Promise<ClioContact> {
-    this.log('createContact', data)
-    // STUB — returns mock response
+    const res = await this.request<{ data: any }>('/contacts', {
+      method: 'POST',
+      body: JSON.stringify({
+        data: {
+          type: 'Person',
+          first_name: data.firstName,
+          last_name: data.lastName,
+          email_addresses: [{ address: data.email, primary: true }],
+          phone_numbers: [{ number: data.phone, primary: true }],
+        },
+      }),
+    })
+
     return {
-      id: `clio_contact_${Date.now()}`,
-      ...data,
+      id: String(res.data.id),
+      firstName: res.data.first_name,
+      lastName: res.data.last_name,
+      email: data.email,
+      phone: data.phone,
     }
   }
 
@@ -84,11 +81,24 @@ class ClioServiceClass {
     description: string
     practiceArea: string
   }): Promise<ClioMatter> {
-    this.log('createMatter', data)
+    const res = await this.request<{ data: any }>('/matters', {
+      method: 'POST',
+      body: JSON.stringify({
+        data: {
+          status: 'Pending',
+          description: data.description,
+          client: { id: Number(data.contactId) },
+          practice_area: { name: data.practiceArea },
+        },
+      }),
+    })
+
     return {
-      id: `clio_matter_${Date.now()}`,
-      status: 'Pending',
-      ...data,
+      id: String(res.data.id),
+      contactId: data.contactId,
+      description: data.description,
+      practiceArea: data.practiceArea,
+      status: res.data.status ?? 'Pending',
     }
   }
 
@@ -98,27 +108,66 @@ class ClioServiceClass {
     dueAt: string
     assigneeId?: string
   }): Promise<ClioTask> {
-    this.log('createTask', data)
+    const res = await this.request<{ data: any }>('/tasks', {
+      method: 'POST',
+      body: JSON.stringify({
+        data: {
+          name: data.name,
+          due_at: data.dueAt,
+          matter: { id: Number(data.matterId) },
+          ...(data.assigneeId ? { assignee: { id: Number(data.assigneeId), type: 'User' } } : {}),
+        },
+      }),
+    })
+
     return {
-      id: `clio_task_${Date.now()}`,
-      ...data,
+      id: String(res.data.id),
+      matterId: data.matterId,
+      name: data.name,
+      dueAt: data.dueAt,
     }
   }
 
   async triggerOnboardingTemplate(matterId: string): Promise<void> {
-    this.log('triggerOnboardingTemplate', { matterId })
-    // STUB — in prod this fires Clio's matter template workflow
+    // Clio does not expose a generic "apply template" endpoint.
+    // Onboarding tasks are created individually via createTask().
+    // This method is intentionally a no-op.
+    void matterId
   }
 
   async getContactByEmail(email: string): Promise<ClioContact | null> {
-    this.log('getContactByEmail', { email })
-    // In prod: GET /contacts?email_address={{email}}
-    return null
+    const res = await this.request<{ data: any[] }>(
+      `/contacts?email_address=${encodeURIComponent(email)}&fields=id,first_name,last_name,email_addresses,phone_numbers`
+    )
+
+    const contact = res.data?.[0]
+    if (!contact) return null
+
+    return {
+      id: String(contact.id),
+      firstName: contact.first_name,
+      lastName: contact.last_name,
+      email: contact.email_addresses?.[0]?.address ?? email,
+      phone: contact.phone_numbers?.[0]?.number ?? '',
+    }
   }
 
   async getContactById(id: string): Promise<ClioContact | null> {
-    this.log('getContactById', { id })
-    return null
+    try {
+      const res = await this.request<{ data: any }>(
+        `/contacts/${id}?fields=id,first_name,last_name,email_addresses,phone_numbers`
+      )
+      const c = res.data
+      return {
+        id: String(c.id),
+        firstName: c.first_name,
+        lastName: c.last_name,
+        email: c.email_addresses?.[0]?.address ?? '',
+        phone: c.phone_numbers?.[0]?.number ?? '',
+      }
+    } catch {
+      return null
+    }
   }
 }
 
