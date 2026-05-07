@@ -88,6 +88,7 @@ export default function IntakeLanding() {
               display: 'inline-flex', alignItems: 'center', gap: '8px',
               background: 'rgba(197,147,58,0.1)',
               border: '1px solid rgba(197,147,58,0.35)',
+              borderRadius: '999px',
               color: '#C5933A',
               fontFamily: 'var(--font-mono)', fontSize: '0.68rem',
               fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase',
@@ -163,6 +164,7 @@ export default function IntakeLanding() {
           <div style={{
             background: 'rgba(255,255,255,0.04)',
             border: '1px solid rgba(197,147,58,0.25)',
+            borderRadius: '12px',
             padding: '44px 40px',
             backdropFilter: 'blur(12px)',
             WebkitBackdropFilter: 'blur(12px)',
@@ -185,6 +187,7 @@ export default function IntakeLanding() {
               {practiceAreas.map(area => (
                 <span key={area.label} style={{
                   border: '1px solid rgba(197,147,58,0.4)',
+                  borderRadius: '999px',
                   color: '#C5933A',
                   fontFamily: 'var(--font-mono)', fontSize: '0.68rem',
                   fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase',
@@ -250,30 +253,30 @@ export default function IntakeLanding() {
             Three Steps to Knowing<br />Where You Stand
           </h2>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', border: '1px solid rgba(255,255,255,0.08)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
             {[
               { num: '01', title: 'Answer a Few Questions', desc: 'Tell us your practice area, what happened, and how urgent it is. Takes about 3 minutes from any device.' },
               { num: '02', title: 'We Review Instantly', desc: 'Our system checks if your matter fits. You get a yes or no right away — no waiting, no runaround.' },
               { num: '03', title: 'Book Your Consultation', desc: 'If we can help, pay the $300 fee and lock in a time on our calendar. Confirmed immediately.' },
-            ].map((step, i) => (
+            ].map((step) => (
               <div key={step.num} style={{
                 padding: '44px 36px',
-                borderRight: i < 2 ? '1px solid rgba(255,255,255,0.08)' : 'none',
+                background: 'rgba(255,255,255,0.03)',
+                border: '1px solid rgba(255,255,255,0.07)',
+                borderRadius: '12px',
                 position: 'relative', cursor: 'default',
-                transition: 'background 0.2s',
+                transition: 'background 0.2s, border-color 0.2s',
               }}
                 onMouseEnter={e => {
-                  e.currentTarget.style.background = 'rgba(255,255,255,0.03)'
-                  const line = e.currentTarget.querySelector('.step-top-line') as HTMLElement
-                  if (line) line.style.width = '100%'
+                  e.currentTarget.style.background = 'rgba(255,255,255,0.05)'
+                  e.currentTarget.style.borderColor = 'rgba(197,147,58,0.3)'
                 }}
                 onMouseLeave={e => {
-                  e.currentTarget.style.background = 'transparent'
-                  const line = e.currentTarget.querySelector('.step-top-line') as HTMLElement
-                  if (line) line.style.width = '0'
+                  e.currentTarget.style.background = 'rgba(255,255,255,0.03)'
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'
                 }}
               >
-                <div className="step-top-line" style={{ position: 'absolute', top: 0, left: 0, height: '2px', width: '0', background: '#C5933A', transition: 'width 0.4s' }} />
+                <div style={{ display: 'none' }} />
                 <div style={{ fontFamily: 'var(--font-display)', fontSize: '3.5rem', fontWeight: 900, color: 'rgba(197,147,58,0.15)', lineHeight: 1, marginBottom: '20px' }}>{step.num}</div>
                 <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.15rem', fontWeight: 700, color: '#fff', marginBottom: '12px' }}>{step.title}</h3>
                 <p style={{ fontSize: '0.85rem', lineHeight: 1.75, color: 'rgba(255,255,255,0.5)' }}>{step.desc}</p>
@@ -293,26 +296,27 @@ export default function IntakeLanding() {
             Comprehensive Representation<br />Across Texas
           </h2>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2px', background: 'rgba(255,255,255,0.06)' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
             {practiceAreas.map((area) => (
               <div key={area.label} style={{
-                background: '#0B1D35', padding: '40px 32px',
+                background: 'rgba(255,255,255,0.03)',
+                border: '1px solid rgba(255,255,255,0.07)',
+                borderRadius: '12px',
+                padding: '40px 32px',
                 position: 'relative', cursor: 'default',
                 overflow: 'hidden',
-                transition: 'background 0.2s',
+                transition: 'background 0.2s, border-color 0.2s',
               }}
                 onMouseEnter={e => {
-                  e.currentTarget.style.background = 'rgba(255,255,255,0.04)'
-                  const line = e.currentTarget.querySelector('.area-line') as HTMLElement
-                  if (line) line.style.width = '100%'
+                  e.currentTarget.style.background = 'rgba(255,255,255,0.05)'
+                  e.currentTarget.style.borderColor = 'rgba(197,147,58,0.3)'
                 }}
                 onMouseLeave={e => {
-                  e.currentTarget.style.background = '#0B1D35'
-                  const line = e.currentTarget.querySelector('.area-line') as HTMLElement
-                  if (line) line.style.width = '0'
+                  e.currentTarget.style.background = 'rgba(255,255,255,0.03)'
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'
                 }}
               >
-                <div className="area-line" style={{ position: 'absolute', bottom: 0, left: 0, height: '2px', width: '0', background: '#C5933A', transition: 'width 0.5s' }} />
+                <div style={{ display: 'none' }} />
                 <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.2rem', fontWeight: 700, color: '#fff', marginBottom: '12px' }}>{area.label}</h3>
                 <p style={{ fontSize: '0.83rem', lineHeight: 1.75, color: 'rgba(255,255,255,0.45)' }}>{area.desc}</p>
               </div>
