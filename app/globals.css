@@ -11,10 +11,6 @@
 
   body {
     background-color: #0B0D11;
-    /* Subtle refined grid — tighter and less aggressive */
-    background-image:
-      repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(42,45,53,0.45) 59px, rgba(42,45,53,0.45) 60px),
-      repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(42,45,53,0.45) 59px, rgba(42,45,53,0.45) 60px);
     color: #E8E2D6;
     font-family: var(--font-sans);
     text-rendering: optimizeLegibility;

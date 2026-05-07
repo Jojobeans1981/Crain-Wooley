@@ -12,7 +12,24 @@ const practiceAreas = [
 
 export default function IntakeLanding() {
   return (
-    <div style={{ fontFamily: 'var(--font-sans)', color: '#E8E2D6' }}>
+    <div style={{ fontFamily: 'var(--font-sans)', color: '#E8E2D6', position: 'relative' }}>
+
+      {/* scales of justice watermark — centered in full page, scrolls with content */}
+      <img
+        src="/scales.jpg"
+        alt=""
+        aria-hidden="true"
+        style={{
+          position: 'fixed', top: '50%', left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '1100px', height: '1100px',
+          objectFit: 'contain',
+          opacity: 0.12,
+          pointerEvents: 'none',
+          mixBlendMode: 'luminosity',
+          zIndex: 0,
+        }}
+      />
 
       {/* ── NAV ── */}
       <nav style={{
@@ -74,6 +91,7 @@ export default function IntakeLanding() {
           background: 'radial-gradient(circle, rgba(197,147,58,0.07) 0%, transparent 70%)',
           pointerEvents: 'none',
         }} />
+
 
         <div style={{
           display: 'grid', gridTemplateColumns: '1fr 1fr',
@@ -202,7 +220,7 @@ export default function IntakeLanding() {
               ))}
             </div>
 
-            <div style={{ borderTop: '1px solid rgba(197,147,58,0.15)', paddingTop: '28px' }}>
+            <div style={{ paddingTop: '28px' }}>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px', textAlign: 'center' }}>
                 {[
                   { num: '20+', label: 'Years Experience' },
@@ -244,7 +262,7 @@ export default function IntakeLanding() {
       </div>
 
       {/* ── HOW IT WORKS ── */}
-      <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)', background: 'rgba(0,0,0,0.2)' }}>
+      <section style={{ background: 'rgba(0,0,0,0.2)' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '90px 60px' }}>
           <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', color: '#C5933A', letterSpacing: '0.2em', textTransform: 'uppercase', display: 'block', marginBottom: '14px' }}>
             Simple Process
@@ -287,7 +305,7 @@ export default function IntakeLanding() {
       </section>
 
       {/* ── PRACTICE AREAS ── */}
-      <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+      <section>
         <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '90px 60px' }}>
           <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', color: '#C5933A', letterSpacing: '0.2em', textTransform: 'uppercase', display: 'block', marginBottom: '14px' }}>
             Areas of Law
@@ -326,7 +344,7 @@ export default function IntakeLanding() {
       </section>
 
       {/* ── CTA ── */}
-      <section style={{ borderTop: '1px solid rgba(255,255,255,0.06)', background: 'rgba(0,0,0,0.2)' }}>
+      <section style={{ background: 'rgba(0,0,0,0.2)' }}>
         <div style={{ maxWidth: '680px', margin: '0 auto', padding: '90px 40px', textAlign: 'center' }}>
           <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem, 3.5vw, 3rem)', fontWeight: 900, color: '#fff', marginBottom: '18px', lineHeight: 1.2 }}>
             Find Out in Minutes if<br /><span style={{ color: '#C5933A' }}>We&apos;re the Right Fit.</span>
@@ -353,7 +371,7 @@ export default function IntakeLanding() {
       </section>
 
       {/* ── FOOTER ── */}
-      <footer style={{ borderTop: '1px solid rgba(255,255,255,0.06)', background: 'rgba(0,0,0,0.3)', padding: '60px 60px 36px' }}>
+      <footer style={{ background: 'rgba(0,0,0,0.3)', padding: '60px 60px 36px' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: '60px', marginBottom: '48px' }}>
             <div>
@@ -387,7 +405,7 @@ export default function IntakeLanding() {
             </div>
           </div>
 
-          <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '28px', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
+          <div style={{ paddingTop: '28px', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
             <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'rgba(255,255,255,0.25)', letterSpacing: '0.05em' }}>
               © 2026 Crain &amp; Wooley PLLC. All rights reserved.
             </p>

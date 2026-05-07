@@ -64,3 +64,5 @@ prisma/*.db-journal
 # Agent State & Traces
 .forge-stage-data.json
 
+
+.vercel
