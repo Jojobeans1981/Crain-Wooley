@@ -47,7 +47,7 @@ function ScheduleContent() {
       <main className="cw-page flex flex-col">
         <header className="cw-header">
           <div className="cw-container py-5">
-            <span className="font-display text-xl text-cw-gold tracking-widest">CRAIN & WOOLEY</span>
+            <span className="font-display text-3xl font-bold text-cw-white tracking-widest">CRAIN <span className="text-cw-gold">&amp;</span> WOOLEY</span>
           </div>
         </header>
         <div className="flex-1 flex items-center justify-center py-16">
@@ -72,7 +72,7 @@ function ScheduleContent() {
     <main className="cw-page flex flex-col">
       <header className="cw-header">
         <div className="cw-container py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <span className="font-display text-xl text-cw-gold tracking-widest">CRAIN & WOOLEY</span>
+          <span className="font-display text-3xl font-bold text-cw-white tracking-widest">CRAIN <span className="text-cw-gold">&amp;</span> WOOLEY</span>
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 bg-green-500 animate-pulse inline-block" />
             <span className="font-mono text-xs text-cw-muted uppercase tracking-widest">Payment Confirmed</span>

@@ -13,7 +13,7 @@ function ConfirmationContent() {
       <main className="cw-page flex flex-col">
         <header className="cw-header">
           <div className="cw-container py-5">
-            <span className="font-display text-xl text-cw-gold tracking-widest">CRAIN & WOOLEY</span>
+            <span className="font-display text-3xl font-bold text-cw-white tracking-widest">CRAIN <span className="text-cw-gold">&amp;</span> WOOLEY</span>
           </div>
         </header>
 
@@ -46,7 +46,7 @@ function ConfirmationContent() {
     <main className="cw-page flex flex-col">
       <header className="cw-header">
         <div className="cw-container py-5">
-          <span className="font-display text-xl text-cw-gold tracking-widest">CRAIN & WOOLEY</span>
+          <span className="font-display text-3xl font-bold text-cw-white tracking-widest">CRAIN <span className="text-cw-gold">&amp;</span> WOOLEY</span>
         </div>
       </header>
 

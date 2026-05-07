@@ -1,19 +1,28 @@
 'use client'
 import { useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { useState, Suspense } from 'react'
 
 function PaymentContent() {
+  const router = useRouter()
   const params = useSearchParams()
   const leadId = params.get('leadId')
   const cancelled = params.get('cancelled')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
+  const DEMO = process.env.NEXT_PUBLIC_DEMO_MODE === 'true'
+
   const handlePayment = async () => {
     if (!leadId) return
     setLoading(true)
     setError('')
     try {
+      if (DEMO) {
+        await new Promise(r => setTimeout(r, 900))
+        router.push(`/confirmation?session_id=demo&leadId=${leadId}`)
+        return
+      }
       const res = await fetch('/api/stripe/create-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -33,7 +42,7 @@ function PaymentContent() {
     <main className="cw-page flex flex-col">
       <header className="cw-header">
         <div className="cw-container py-5">
-          <span className="font-display text-xl text-cw-gold tracking-widest">CRAIN & WOOLEY</span>
+          <span className="font-display text-3xl font-bold text-cw-white tracking-widest">CRAIN <span className="text-cw-gold">&amp;</span> WOOLEY</span>
         </div>
       </header>
 

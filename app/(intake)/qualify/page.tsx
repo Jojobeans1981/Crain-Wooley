@@ -45,10 +45,17 @@ export default function QualifyPage() {
     return false
   }
 
+  const DEMO = process.env.NEXT_PUBLIC_DEMO_MODE === 'true'
+
   const handleSubmit = async () => {
     setLoading(true)
     setError('')
     try {
+      if (DEMO) {
+        await new Promise(r => setTimeout(r, 900))
+        router.push('/payment?leadId=demo-lead')
+        return
+      }
       const res = await fetch('/api/intake', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -72,7 +79,7 @@ export default function QualifyPage() {
     <main className="cw-page flex flex-col">
       <header className="cw-header">
         <div className="cw-container py-5">
-          <span className="font-display text-xl text-cw-gold tracking-widest">CRAIN & WOOLEY</span>
+          <span className="font-display text-3xl font-bold text-cw-white tracking-widest">CRAIN <span className="text-cw-gold">&amp;</span> WOOLEY</span>
         </div>
       </header>
 
