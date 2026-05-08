@@ -153,11 +153,33 @@ model NurtureTemplate {
   @@index([channel])
 }
 
+model OnboardingTaskTemplate {
+  id             String   @id @default(cuid())
+  name           String
+  dueOffsetHours Int      @default(24)
+  sortOrder      Int      @default(0)
+  active         Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([active])
+  @@index([sortOrder])
+}
+
 model AdminUser {
   id        String    @id @default(cuid())
   email     String    @unique
   role      AdminRole @default(VIEWER)
   createdAt DateTime  @default(now())
+}
+
+model ClioToken {
+  id           String   @id @default("singleton")
+  accessToken  String
+  refreshToken String
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
 
 enum AdminRole {

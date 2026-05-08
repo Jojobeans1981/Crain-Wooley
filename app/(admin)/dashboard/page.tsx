@@ -1,8 +1,17 @@
 'use client'
 import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
-import type { Lead, LeadStatus } from '@/types'
+import type { Lead, LeadStatus, FunnelMetrics } from '@/types'
 import { SignOutButton } from '@/components/admin/SignOutButton'
+
+type ClioStatus = { connected: boolean; expiresAt?: string; expired?: boolean } | null
+type OnboardingTemplate = {
+  id?: string
+  name: string
+  dueOffsetHours: number
+  sortOrder?: number
+  active: boolean
+}
 
 const STATUS_COLORS: Record<LeadStatus, string> = {
   NEW: 'text-blue-400 border-blue-800',
@@ -16,7 +25,7 @@ const STATUS_COLORS: Record<LeadStatus, string> = {
   CLOSED_LOST: 'text-red-400 border-red-900',
 }
 
-const FUNNEL_STAGES = [
+const FUNNEL_STAGES: { key: keyof FunnelMetrics; label: string }[] = [
   { key: 'totalLeads', label: 'Total Leads' },
   { key: 'qualified', label: 'Qualified' },
   { key: 'paid', label: 'Paid' },
@@ -26,11 +35,16 @@ const FUNNEL_STAGES = [
 
 export default function DashboardPage() {
   const [leads, setLeads] = useState<Lead[]>([])
-  const [metrics, setMetrics] = useState<any>(null)
+  const [metrics, setMetrics] = useState<FunnelMetrics | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [actionError, setActionError] = useState<string | null>(null)
   const [filter, setFilter] = useState<LeadStatus | 'ALL'>('ALL')
   const [updatingId, setUpdatingId] = useState<string | null>(null)
+  const [clioStatus, setClioStatus] = useState<ClioStatus>(null)
+  const [clioBanner, setClioBanner] = useState<'connected' | 'error' | null>(null)
+  const [onboardingTemplates, setOnboardingTemplates] = useState<OnboardingTemplate[]>([])
+  const [savingOnboarding, setSavingOnboarding] = useState(false)
 
   const fetchData = useCallback(async () => {
     try {
@@ -55,29 +69,47 @@ export default function DashboardPage() {
   }, [])
 
   useEffect(() => {
-    fetchData()
+    void Promise.resolve().then(async () => {
+      await fetchData()
+      const clio = await fetch('/api/clio/status').then(r => r.ok ? r.json() : null).catch(() => null)
+      setClioStatus(clio)
+      const onboarding = await fetch('/api/admin/onboarding').then(r => r.ok ? r.json() : null).catch(() => null)
+      if (Array.isArray(onboarding?.templates)) setOnboardingTemplates(onboarding.templates)
+      const sp = new URLSearchParams(window.location.search)
+      if (sp.get('clio') === 'connected') setClioBanner('connected')
+      if (sp.get('clio') === 'error') setClioBanner('error')
+    })
   }, [fetchData])
 
   const filtered = filter === 'ALL' ? leads : leads.filter(l => l.status === filter)
+  const activeOnboardingTasks = onboardingTemplates
+    .filter(t => t.active && t.name.trim())
+    .map(t => ({ name: t.name.trim(), dueOffsetHours: Number(t.dueOffsetHours) || 24, active: t.active }))
 
-  const handleStatusChange = async (leadId: string, status: LeadStatus) => {
+  const handleStatusChange = async (leadId: string, status: LeadStatus, autoOnboard = false) => {
     setUpdatingId(leadId)
     try {
       const res = await fetch(`/api/admin/leads/${leadId}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status })
+        body: JSON.stringify({ status, autoOnboard, tasks: autoOnboard ? activeOnboardingTasks : undefined })
       })
-      if (!res.ok) throw new Error('Update failed')
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        throw new Error(data.error || 'Update failed')
+      }
+      const data = await res.json()
+      const updatedLead = data.lead ?? { id: leadId, status }
       
-      setLeads(prev => prev.map(l => l.id === leadId ? { ...l, status } : l))
+      setLeads(prev => prev.map(l => l.id === leadId ? { ...l, ...updatedLead } : l))
       // Refresh metrics
       const metricsRes = await fetch('/api/admin/metrics')
       if (metricsRes.ok) {
         setMetrics(await metricsRes.json())
       }
     } catch (err) {
-      alert('Failed to update status')
+      setActionError(err instanceof Error ? err.message : 'Failed to update status')
+      setTimeout(() => setActionError(null), 5000)
     } finally {
       setUpdatingId(null)
     }
@@ -89,7 +121,7 @@ export default function DashboardPage() {
       const res = await fetch('/api/admin/onboarding', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ leadId })
+        body: JSON.stringify({ leadId, tasks: activeOnboardingTasks })
       })
       if (!res.ok) {
         const data = await res.json()
@@ -103,9 +135,36 @@ export default function DashboardPage() {
         setMetrics(await metricsRes.json())
       }
     } catch (err) {
-      alert(err instanceof Error ? err.message : 'Failed to trigger onboarding')
+      setActionError(err instanceof Error ? err.message : 'Failed to trigger onboarding')
+      setTimeout(() => setActionError(null), 5000)
     } finally {
       setUpdatingId(null)
+    }
+  }
+
+  const updateOnboardingTemplate = (index: number, patch: Partial<OnboardingTemplate>) => {
+    setOnboardingTemplates(prev => prev.map((template, i) => i === index ? { ...template, ...patch } : template))
+  }
+
+  const saveOnboardingTemplates = async () => {
+    setSavingOnboarding(true)
+    try {
+      const res = await fetch('/api/admin/onboarding', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ templates: onboardingTemplates }),
+      })
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        throw new Error(data.error || 'Failed to save onboarding plan')
+      }
+      const data = await res.json()
+      setOnboardingTemplates(data.templates ?? [])
+    } catch (err) {
+      setActionError(err instanceof Error ? err.message : 'Failed to save onboarding plan')
+      setTimeout(() => setActionError(null), 5000)
+    } finally {
+      setSavingOnboarding(false)
     }
   }
 
@@ -154,6 +213,127 @@ export default function DashboardPage() {
       </header>
 
       <div className="p-8 space-y-8">
+        {/* Clio OAuth result banners */}
+        {clioBanner === 'connected' && (
+          <div className="border border-green-900 bg-green-900/10 px-4 py-3 flex items-center justify-between">
+            <span className="font-mono text-xs text-green-400 uppercase tracking-widest">Clio connected successfully. Contact and matter creation is now active.</span>
+            <button onClick={() => setClioBanner(null)} className="font-mono text-xs text-green-400 hover:text-cw-white transition-colors">✕</button>
+          </div>
+        )}
+        {clioBanner === 'error' && (
+          <div className="border border-red-900 bg-red-900/10 px-4 py-3 flex items-center justify-between">
+            <span className="font-mono text-xs text-red-400 uppercase tracking-widest">Clio authorization failed. Check CLIO_CLIENT_ID, CLIO_CLIENT_SECRET, and CLIO_REDIRECT_URI.</span>
+            <button onClick={() => setClioBanner(null)} className="font-mono text-xs text-red-400 hover:text-cw-white transition-colors">✕</button>
+          </div>
+        )}
+
+        {/* Action error banner */}
+        {actionError && (
+          <div className="border border-red-900 bg-red-900/10 px-4 py-3 flex items-center justify-between">
+            <span className="font-mono text-xs text-red-400 uppercase tracking-widest">{actionError}</span>
+            <button onClick={() => setActionError(null)} className="font-mono text-xs text-red-400 hover:text-cw-white transition-colors">✕</button>
+          </div>
+        )}
+        {/* Clio Integration Status */}
+        {clioStatus !== null && (
+          <div className="flex items-center justify-between border border-cw-border bg-cw-panel px-5 py-3">
+            <div className="flex items-center gap-3">
+              <div className={`w-2 h-2 shrink-0 ${clioStatus.connected && !clioStatus.expired ? 'bg-green-500 animate-pulse' : 'bg-red-500'}`} />
+              <span className="font-mono text-xs text-cw-muted uppercase tracking-widest">
+                Clio {clioStatus.connected && !clioStatus.expired ? 'Connected' : clioStatus.connected ? 'Token Expired' : 'Not Connected'}
+              </span>
+              {clioStatus.connected && clioStatus.expiresAt && !clioStatus.expired && (
+                <span className="font-mono text-[10px] text-cw-muted">
+                  (refreshes automatically)
+                </span>
+              )}
+            </div>
+            {(!clioStatus.connected || clioStatus.expired) && (
+              <a
+                href="/api/clio/authorize"
+                className="font-mono text-[10px] uppercase tracking-widest border border-cw-gold text-cw-gold px-3 py-1 hover:bg-cw-gold/10 transition-colors"
+              >
+                {clioStatus.connected ? 'Re-Authorize →' : 'Connect Clio →'}
+              </a>
+            )}
+          </div>
+        )}
+
+        {/* Autonomous Onboarding */}
+        <div className="border border-cw-border bg-cw-panel">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 px-5 py-4 border-b border-cw-border">
+            <div>
+              <h2 className="font-display text-2xl text-cw-white">Autonomous Onboarding</h2>
+              <div className="font-mono text-xs text-cw-muted uppercase tracking-widest mt-1">
+                Default Clio task plan for each new client
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={() => setOnboardingTemplates(prev => [
+                  ...prev,
+                  { name: 'New onboarding task', dueOffsetHours: 24, active: true },
+                ])}
+                className="border border-cw-border text-cw-muted font-mono text-xs uppercase tracking-widest px-4 py-2 hover:border-cw-gold hover:text-cw-gold transition-colors"
+              >
+                Add Task
+              </button>
+              <button
+                type="button"
+                disabled={savingOnboarding}
+                onClick={saveOnboardingTemplates}
+                className="bg-cw-gold text-cw-black font-mono text-xs uppercase tracking-widest px-4 py-2 hover:bg-cw-gold-dim transition-colors disabled:opacity-50"
+              >
+                {savingOnboarding ? 'Saving...' : 'Save Plan'}
+              </button>
+            </div>
+          </div>
+
+          <div className="divide-y divide-cw-border">
+            {onboardingTemplates.map((template, index) => (
+              <div key={template.id ?? index} className="grid grid-cols-1 md:grid-cols-[1fr_150px_120px] gap-4 p-5 items-end">
+                <label className="flex flex-col gap-2">
+                  <span className="font-mono text-xs text-cw-muted uppercase tracking-widest">Task</span>
+                  <input
+                    className="bg-transparent border border-cw-border text-cw-white text-sm px-3 py-2 focus:outline-none focus:border-cw-gold transition-colors"
+                    value={template.name}
+                    onChange={e => updateOnboardingTemplate(index, { name: e.target.value })}
+                  />
+                </label>
+                <label className="flex flex-col gap-2">
+                  <span className="font-mono text-xs text-cw-muted uppercase tracking-widest">Due Hours</span>
+                  <input
+                    type="number"
+                    min={1}
+                    max={720}
+                    className="bg-transparent border border-cw-border text-cw-white text-sm px-3 py-2 focus:outline-none focus:border-cw-gold transition-colors"
+                    value={template.dueOffsetHours}
+                    onChange={e => updateOnboardingTemplate(index, { dueOffsetHours: Number(e.target.value) })}
+                  />
+                </label>
+                <button
+                  type="button"
+                  onClick={() => updateOnboardingTemplate(index, { active: !template.active })}
+                  className={`border font-mono text-xs uppercase tracking-widest px-3 py-2 transition-colors ${
+                    template.active
+                      ? 'border-emerald-800 text-emerald-400 hover:bg-emerald-900/20'
+                      : 'border-cw-border text-cw-muted hover:border-cw-gold hover:text-cw-gold'
+                  }`}
+                >
+                  {template.active ? 'Active' : 'Paused'}
+                </button>
+              </div>
+            ))}
+          </div>
+
+          {onboardingTemplates.length === 0 && (
+            <div className="p-5 font-mono text-xs text-cw-muted uppercase tracking-widest">
+              Loading onboarding plan...
+            </div>
+          )}
+        </div>
+
         {/* Export buttons */}
         <div className="flex gap-3 justify-end">
           <a
@@ -274,11 +454,11 @@ export default function DashboardPage() {
                         )}
                         {lead.status === 'SCHEDULED' && (
                           <button
-                            onClick={() => handleStatusChange(lead.id, 'CONSULTED')}
+                            onClick={() => handleStatusChange(lead.id, 'CONSULTED', true)}
                             disabled={updatingId === lead.id}
                             className="font-mono text-xs border border-cyan-800 text-cyan-400 px-3 py-1 hover:bg-cyan-900/20 transition-colors disabled:opacity-40"
                           >
-                            Mark Consulted
+                            Start Onboarding
                           </button>
                         )}
                         {lead.hired && (

@@ -1,3 +1,5 @@
+import { prisma } from '@/lib/db/prisma'
+
 export interface ClioContact {
   id: string
   firstName: string
@@ -23,13 +25,53 @@ export interface ClioTask {
 }
 
 class ClioServiceClass {
-  private async request<T>(path: string, options: RequestInit = {}): Promise<T> {
-    const baseUrl = process.env.CLIO_BASE_URL || 'https://app.clio.com/api/v4'
-    const token = process.env.CLIO_ACCESS_TOKEN
-
-    if (!token) {
-      throw new Error('CLIO_ACCESS_TOKEN is not configured')
+  private async getToken(): Promise<string> {
+    const record = await prisma.clioToken.findUnique({ where: { id: 'singleton' } })
+    if (!record) {
+      throw new Error('Clio not connected. Visit the admin dashboard to authorize.')
     }
+
+    if (record.expiresAt.getTime() - Date.now() < 5 * 60 * 1000) {
+      return this.refreshToken(record.refreshToken)
+    }
+
+    return record.accessToken
+  }
+
+  private async refreshToken(refreshToken: string): Promise<string> {
+    const res = await fetch('https://app.clio.com/oauth/token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        grant_type: 'refresh_token',
+        refresh_token: refreshToken,
+        client_id: process.env.CLIO_CLIENT_ID!,
+        client_secret: process.env.CLIO_CLIENT_SECRET!,
+      }),
+    })
+
+    if (!res.ok) {
+      const body = await res.text()
+      throw new Error(`Clio token refresh failed: ${res.status} ${body}`)
+    }
+
+    const data = await res.json()
+
+    await prisma.clioToken.update({
+      where: { id: 'singleton' },
+      data: {
+        accessToken: data.access_token,
+        refreshToken: data.refresh_token ?? refreshToken,
+        expiresAt: new Date(Date.now() + data.expires_in * 1000),
+      },
+    })
+
+    return data.access_token
+  }
+
+  private async request<T>(path: string, options: RequestInit = {}): Promise<T> {
+    const token = await this.getToken()
+    const baseUrl = process.env.CLIO_BASE_URL || 'https://app.clio.com/api/v4'
 
     const response = await fetch(`${baseUrl}${path}`, {
       ...options,
@@ -129,9 +171,6 @@ class ClioServiceClass {
   }
 
   async triggerOnboardingTemplate(matterId: string): Promise<void> {
-    // Clio does not expose a generic "apply template" endpoint.
-    // Onboarding tasks are created individually via createTask().
-    // This method is intentionally a no-op.
     void matterId
   }
 
@@ -167,6 +206,15 @@ class ClioServiceClass {
       }
     } catch {
       return null
+    }
+  }
+
+  async isConnected(): Promise<boolean> {
+    try {
+      const record = await prisma.clioToken.findUnique({ where: { id: 'singleton' } })
+      return !!record
+    } catch {
+      return false
     }
   }
 }

@@ -21,6 +21,11 @@ export type AuditEventType =
   | 'MESSAGE_BLOCKED_OPT_OUT'
   | 'LEADS_EXPORTED'
   | 'AUDIT_EXPORTED'
+  | 'ONBOARDING_STARTED'
+  | 'ONBOARDING_SKIPPED'
+  | 'ONBOARDING_FAILED'
+  | 'ONBOARDING_TEMPLATE_UPDATED'
+  | 'CLIO_CONNECTED'
 
 export async function auditEvent(input: {
   type: AuditEventType
@@ -32,7 +37,7 @@ export async function auditEvent(input: {
 }) {
   try {
     await prisma.auditEvent.create({ data: input })
-  } catch {
-    //
+  } catch (e) {
+    console.error('[AUDIT_WRITE_ERROR]', e)
   }
 }
