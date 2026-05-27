@@ -65,13 +65,13 @@ function ScheduleContent() {
         <div className="flex-1 flex items-center justify-center py-16">
           <div className="cw-container">
             <div className="w-full max-w-md mx-auto cw-panel p-8 sm:p-10 text-center space-y-5">
-              <div className="text-cw-danger text-5xl">⚠</div>
+              <div className="text-cw-danger text-4xl">⚠</div>
               <h2 className="font-display text-3xl text-cw-navy font-semibold">Access Restricted</h2>
               <p className="text-cw-ink-soft text-sm leading-relaxed">
                 Scheduling is only available after the consultation fee is confirmed.
               </p>
               <Link href="/qualify" className="cw-btn-primary inline-block mt-4">
-                Start Qualification →
+                Start Qualification
               </Link>
             </div>
           </div>
@@ -103,7 +103,7 @@ function ScheduleContent() {
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
               <div className="space-y-3">
                 <p className="cw-eyebrow">Final Step — Select Your Consultation Time</p>
-                <h1 className="font-display text-4xl sm:text-5xl text-cw-navy font-semibold leading-tight">
+                <h1 className="font-display text-3xl sm:text-4xl text-cw-navy font-semibold leading-[1.15]">
                   Welcome, <span className="text-cw-gold italic">{leadName}</span>
                 </h1>
                 <div className="w-12 h-[2px] bg-cw-gold" aria-hidden="true" />

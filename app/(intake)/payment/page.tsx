@@ -73,8 +73,8 @@ function PaymentContent() {
             <div className="cw-panel-gold p-8 sm:p-10 space-y-7">
               <div>
                 <p className="cw-eyebrow mb-3">Step 2 of 3</p>
-                <h1 className="font-display text-4xl sm:text-5xl text-cw-navy font-semibold leading-tight">
-                  Secure Your Slot
+                <h1 className="font-display text-3xl sm:text-4xl text-cw-navy font-semibold leading-[1.15]">
+                  Secure Your Consultation
                 </h1>
                 <div className="w-12 h-[2px] bg-cw-gold mt-4 mb-4" aria-hidden="true" />
                 <p className="text-cw-ink-soft text-base mt-3 leading-relaxed">
@@ -121,7 +121,7 @@ function PaymentContent() {
               )}
 
               <button className="cw-btn-primary w-full !py-4" onClick={handlePayment} disabled={loading || !leadId}>
-                {loading ? 'Redirecting to Stripe...' : 'Pay $300 & Book Consultation →'}
+                {loading ? 'Redirecting to Stripe…' : 'Pay $300 & Book Consultation'}
               </button>
 
               <p className="text-xs text-cw-ink-mute text-center">

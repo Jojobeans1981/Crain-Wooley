@@ -163,7 +163,7 @@ export default async function TrackerPage({ params }: TrackerPageProps) {
             {(lead.status === 'QUALIFIED' || lead.status === 'PAYMENT_PENDING') && (
               <div className="mt-8">
                 <a href={`/payment?leadId=${lead.id}`} className="cw-btn-primary inline-block">
-                  Proceed to Payment →
+                  Proceed to Payment
                 </a>
               </div>
             )}
@@ -171,7 +171,7 @@ export default async function TrackerPage({ params }: TrackerPageProps) {
             {lead.status === 'PAYMENT_COMPLETE' && (
               <div className="mt-8">
                 <a href={`/schedule?leadId=${lead.id}`} className="cw-btn-primary inline-block">
-                  Schedule Consultation →
+                  Schedule Consultation
                 </a>
               </div>
             )}

@@ -48,7 +48,7 @@ function ConfirmationContent() {
               <p className="text-cw-ink-soft text-sm leading-relaxed border-t border-cw-line pt-5">
                 We encourage you to reach out to the State Bar referral service for assistance finding the right attorney.
               </p>
-              <Link href="/" className="cw-btn-ghost inline-block">← Return Home</Link>
+              <Link href="/" className="cw-btn-ghost inline-block">Return Home</Link>
             </div>
           </div>
         </div>
@@ -86,7 +86,7 @@ function ConfirmationContent() {
                 <div className="text-[11px] text-cw-gold tracking-[0.2em] uppercase font-semibold">Payment Confirmed</div>
               </div>
               <div>
-                <h1 className="font-display text-4xl sm:text-5xl text-cw-navy font-semibold leading-tight">
+                <h1 className="font-display text-3xl sm:text-4xl text-cw-navy font-semibold leading-[1.15]">
                   You&apos;re Confirmed.
                 </h1>
                 <div className="w-12 h-[2px] bg-cw-gold mt-4 mb-4" aria-hidden="true" />
@@ -96,10 +96,9 @@ function ConfirmationContent() {
               </div>
               <Link
                 href={`/schedule?session_id=${params.get('session_id')}&leadId=${params.get('leadId')}`}
-                className="cw-btn-primary inline-flex items-center gap-3 w-full justify-center !py-4 group"
+                className="cw-btn-primary inline-flex items-center justify-center w-full !py-4"
               >
                 Schedule Your Consultation
-                <span className="transition-transform group-hover:translate-x-1">→</span>
               </Link>
             </div>
 
