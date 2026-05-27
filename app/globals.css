@@ -78,18 +78,18 @@
 
   /* ── Panels (cards) ── */
   .cw-panel {
-    background: #FBF8F2;
-    border: 1px solid #E2D9C6;
+    background: #FFFFFF;
+    border: 1px solid #D5C7B0;
     border-radius: 6px;
-    box-shadow: 0 1px 3px rgba(16,35,66,0.05), 0 8px 24px rgba(16,35,66,0.04);
+    box-shadow: 0 1px 3px rgba(16,35,66,0.06), 0 12px 32px rgba(16,35,66,0.05);
   }
 
   .cw-panel-gold {
-    background: #FBF8F2;
-    border: 1px solid #9B8059;
+    background: #FFFFFF;
+    border: 1px solid #D5C7B0;
     border-top: 3px solid #9B8059;
     border-radius: 6px;
-    box-shadow: 0 1px 3px rgba(16,35,66,0.05), 0 8px 24px rgba(16,35,66,0.04);
+    box-shadow: 0 1px 3px rgba(16,35,66,0.06), 0 12px 32px rgba(16,35,66,0.05);
   }
 
   /* ── Buttons ── */

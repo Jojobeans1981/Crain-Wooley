@@ -98,10 +98,10 @@ export default function QualifyPage() {
 
       <div className="flex-1 flex flex-col items-center py-10 sm:py-16">
         <div className="cw-container">
-          <div className="w-full max-w-2xl mx-auto">
+          <div className="w-full max-w-xl mx-auto">
 
             {/* Page heading */}
-            <div className="text-center mb-10">
+            <div className="text-center mb-8">
               <p className="cw-eyebrow mb-3">Free Case Review</p>
               <h1 className="font-display text-cw-navy text-3xl sm:text-4xl font-semibold leading-[1.15] mb-3">
                 Tell Us About Your Situation
@@ -114,24 +114,23 @@ export default function QualifyPage() {
             </div>
 
             {/* Step indicator */}
-            <div className="flex items-center mb-10">
-              {STEPS.map((s, i) => (
-                <div key={s} className="flex items-center flex-1 last:flex-none">
-                  <div className={`flex items-center gap-3 ${i <= step ? 'opacity-100' : 'opacity-50'}`}>
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold shrink-0 transition-all
-                      ${i < step  ? 'bg-cw-gold text-white' : ''}
-                      ${i === step ? 'bg-cw-navy text-white' : ''}
-                      ${i > step  ? 'bg-white border border-cw-line text-cw-ink-mute' : ''}`}>
-                      {i < step ? '✓' : i + 1}
-                    </div>
-                    <span className={`font-sans text-xs sm:text-sm font-medium hidden sm:block ${i <= step ? 'text-cw-navy' : 'text-cw-ink-mute'}`}>
-                      {s}
-                    </span>
-                  </div>
-                  {i < STEPS.length - 1 && (
-                    <div className={`flex-1 h-[2px] mx-3 transition-colors ${i < step ? 'bg-cw-gold' : 'bg-cw-line'}`} />
-                  )}
-                </div>
+            <div className="flex items-center justify-center gap-2 mb-8" role="status" aria-label={`Step ${step + 1} of ${STEPS.length}: ${STEPS[step]}`}>
+              <span className="font-sans text-[11px] text-cw-ink-mute tracking-[0.18em] uppercase font-semibold">
+                Step {step + 1} of {STEPS.length}
+              </span>
+              <span className="text-cw-ink-mute">·</span>
+              <span className="font-sans text-[11px] text-cw-navy tracking-[0.18em] uppercase font-semibold">
+                {STEPS[step]}
+              </span>
+            </div>
+            <div className="flex items-center gap-2 mb-10" aria-hidden="true">
+              {STEPS.map((_, i) => (
+                <div
+                  key={i}
+                  className={`flex-1 h-[3px] rounded-full transition-colors ${
+                    i < step ? 'bg-cw-gold' : i === step ? 'bg-cw-navy' : 'bg-cw-line'
+                  }`}
+                />
               ))}
             </div>
 
@@ -146,7 +145,7 @@ export default function QualifyPage() {
                 </div>
 
                 <div className="space-y-6">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div className="grid grid-cols-2 gap-4">
                     <div>
                       <label className="cw-label">First Name</label>
                       <input className="cw-input" value={form.firstName} onChange={e => set('firstName', e.target.value)} placeholder="First" autoFocus />
