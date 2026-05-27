@@ -1,7 +1,12 @@
 'use client'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import type { IntakeFormData, PracticeArea, Urgency } from '@/types'
+
+// NOTE: All logic, state, validation, and API calls below are UNCHANGED
+// from the prior build. Only presentation has been restyled to match the
+// estateplanningdfw.law brand.
 
 const STEPS = ['Contact', 'Case Details', 'Review & Submit']
 
@@ -77,31 +82,57 @@ export default function QualifyPage() {
 
   return (
     <main className="cw-page flex flex-col">
+      {/* Header */}
       <header className="cw-header">
-        <div className="cw-container py-5">
-          <span className="font-display text-3xl font-bold text-cw-white tracking-widest">CRAIN <span className="text-cw-gold">&amp;</span> WOOLEY</span>
+        <div className="cw-container py-5 flex items-center justify-between">
+          <Link href="/" className="no-underline">
+            <span className="font-display text-2xl sm:text-3xl font-semibold text-cw-navy">
+              Crain <span className="text-cw-gold">&amp;</span> Wooley
+            </span>
+          </Link>
+          <a
+            href="tel:9729451610"
+            className="hidden sm:inline-flex items-center gap-2 text-cw-navy font-semibold text-sm hover:text-cw-gold transition-colors"
+          >
+            <span className="text-cw-gold">☎</span> (972) 945-1610
+          </a>
         </div>
       </header>
 
-      <div className="flex-1 flex flex-col items-center justify-center py-10 sm:py-16">
+      <div className="flex-1 flex flex-col items-center py-10 sm:py-16">
         <div className="cw-container">
-          <div className="w-full max-w-lg mx-auto">
+          <div className="w-full max-w-2xl mx-auto">
+
+            {/* Page heading */}
+            <div className="text-center mb-10">
+              <p className="cw-eyebrow mb-3">Free Case Review</p>
+              <h1 className="font-display text-cw-navy text-4xl sm:text-5xl font-semibold leading-tight mb-3">
+                Tell Us About Your Situation
+              </h1>
+              <div className="w-12 h-[2px] bg-cw-gold mx-auto mb-4" aria-hidden="true" />
+              <p className="text-cw-ink-soft text-base max-w-md mx-auto leading-relaxed">
+                A few quick questions so we can determine if we&apos;re the right fit — and get
+                you to the right attorney faster.
+              </p>
+            </div>
 
             {/* Step indicator */}
             <div className="flex items-center mb-10">
               {STEPS.map((s, i) => (
                 <div key={s} className="flex items-center flex-1 last:flex-none">
-                  <div className={`flex items-center gap-2.5 ${i <= step ? 'opacity-100' : 'opacity-30'}`}>
-                    <div className={`w-6 h-6 flex items-center justify-center text-xs font-mono border shrink-0
-                      ${i < step  ? 'bg-cw-gold border-cw-gold text-cw-black' : ''}
-                      ${i === step ? 'border-cw-gold text-cw-gold' : ''}
-                      ${i > step  ? 'border-cw-border text-cw-muted' : ''}`}>
+                  <div className={`flex items-center gap-3 ${i <= step ? 'opacity-100' : 'opacity-50'}`}>
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold shrink-0 transition-all
+                      ${i < step  ? 'bg-cw-gold text-white' : ''}
+                      ${i === step ? 'bg-cw-navy text-white' : ''}
+                      ${i > step  ? 'bg-white border border-cw-line text-cw-ink-mute' : ''}`}>
                       {i < step ? '✓' : i + 1}
                     </div>
-                    <span className="font-mono text-[10px] uppercase tracking-widest text-cw-muted hidden sm:block">{s}</span>
+                    <span className={`font-sans text-xs sm:text-sm font-medium hidden sm:block ${i <= step ? 'text-cw-navy' : 'text-cw-ink-mute'}`}>
+                      {s}
+                    </span>
                   </div>
                   {i < STEPS.length - 1 && (
-                    <div className={`flex-1 h-px mx-3 ${i < step ? 'bg-cw-gold' : 'bg-cw-border'}`} />
+                    <div className={`flex-1 h-[2px] mx-3 transition-colors ${i < step ? 'bg-cw-gold' : 'bg-cw-line'}`} />
                   )}
                 </div>
               ))}
@@ -110,13 +141,15 @@ export default function QualifyPage() {
             {/* ── Step 0: Contact ── */}
             {step === 0 && (
               <div className="cw-panel p-8 sm:p-10">
-                <div className="mb-8 pb-6 border-b border-cw-border">
-                  <h2 className="font-display text-4xl text-cw-white">Contact Information</h2>
-                  <p className="text-cw-muted text-sm mt-2">All information is kept strictly confidential.</p>
+                <div className="mb-8 pb-6 border-b border-cw-line">
+                  <h2 className="font-display text-3xl text-cw-navy font-semibold">Contact Information</h2>
+                  <p className="text-cw-ink-soft text-sm mt-2 leading-relaxed">
+                    All information is kept strictly confidential. We&apos;ll only use it to follow up about your matter.
+                  </p>
                 </div>
 
-                <div className="space-y-8">
-                  <div className="grid grid-cols-2 gap-6">
+                <div className="space-y-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
                       <label className="cw-label">First Name</label>
                       <input className="cw-input" value={form.firstName} onChange={e => set('firstName', e.target.value)} placeholder="First" autoFocus />
@@ -141,30 +174,34 @@ export default function QualifyPage() {
             {/* ── Step 1: Case Details ── */}
             {step === 1 && (
               <div className="cw-panel p-8 sm:p-10">
-                <div className="mb-8 pb-6 border-b border-cw-border">
-                  <h2 className="font-display text-4xl text-cw-white">Case Details</h2>
-                  <p className="text-cw-muted text-sm mt-2">Help us understand your legal situation.</p>
+                <div className="mb-8 pb-6 border-b border-cw-line">
+                  <h2 className="font-display text-3xl text-cw-navy font-semibold">Case Details</h2>
+                  <p className="text-cw-ink-soft text-sm mt-2 leading-relaxed">
+                    Help us understand your legal situation so we can prepare the right attorney.
+                  </p>
                 </div>
 
                 <div className="space-y-8">
-                  {/* Practice area — clean list */}
+                  {/* Practice area */}
                   <div>
                     <label className="cw-label">Practice Area</label>
-                    <div className="mt-2 border border-cw-border divide-y divide-cw-border">
+                    <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2">
                       {PRACTICE_AREAS.map(p => (
                         <button
                           key={p.value}
                           type="button"
                           onClick={() => set('practiceArea', p.value as PracticeArea)}
-                          className={`w-full flex items-center justify-between px-4 py-3.5 text-left transition-colors ${
-                            form.practiceArea === p.value ? 'bg-cw-dark' : 'bg-transparent hover:bg-cw-dark'
+                          className={`flex items-center justify-between px-4 py-3 text-left rounded border transition-all ${
+                            form.practiceArea === p.value
+                              ? 'border-cw-gold bg-cw-gold/[0.08] shadow-sm'
+                              : 'border-cw-line bg-white hover:border-cw-gold/60 hover:bg-cw-gold/[0.04]'
                           }`}
                         >
-                          <span className={`text-sm ${form.practiceArea === p.value ? 'text-cw-white font-medium' : 'text-cw-muted'}`}>
+                          <span className={`text-sm ${form.practiceArea === p.value ? 'text-cw-navy font-semibold' : 'text-cw-ink-soft'}`}>
                             {p.label}
                           </span>
                           {form.practiceArea === p.value && (
-                            <span className="text-cw-gold text-sm">✓</span>
+                            <span className="text-cw-gold text-sm font-semibold">✓</span>
                           )}
                         </button>
                       ))}
@@ -185,40 +222,42 @@ export default function QualifyPage() {
                     <label className="cw-label">Describe Your Situation</label>
                     <textarea
                       className="cw-input resize-none"
-                      rows={4}
+                      rows={5}
                       value={form.description}
                       onChange={e => set('description', e.target.value)}
                       placeholder="Brief description of your legal matter..."
                     />
                     <div className="flex justify-between mt-2">
-                      <span className="font-mono text-[10px] text-cw-muted">Min. 20 characters</span>
-                      <span className={`font-mono text-[10px] ${form.description.length >= 20 ? 'text-cw-success' : 'text-cw-muted'}`}>
+                      <span className="text-xs text-cw-ink-mute">Min. 20 characters</span>
+                      <span className={`text-xs font-semibold ${form.description.length >= 20 ? 'text-cw-success' : 'text-cw-ink-mute'}`}>
                         {form.description.length} / 20
                       </span>
                     </div>
                   </div>
 
-                  {/* Urgency — clean list */}
+                  {/* Urgency */}
                   <div>
                     <label className="cw-label">How Urgent Is Your Need?</label>
-                    <div className="mt-2 border border-cw-border divide-y divide-cw-border">
+                    <div className="mt-3 space-y-2">
                       {URGENCY_OPTIONS.map(u => (
                         <button
                           key={u.value}
                           type="button"
                           onClick={() => set('urgency', u.value)}
-                          className={`w-full flex items-center justify-between px-4 py-3.5 text-left transition-colors ${
-                            form.urgency === u.value ? 'bg-cw-dark' : 'bg-transparent hover:bg-cw-dark'
+                          className={`w-full flex items-center justify-between px-4 py-3.5 text-left rounded border transition-all ${
+                            form.urgency === u.value
+                              ? 'border-cw-gold bg-cw-gold/[0.08]'
+                              : 'border-cw-line bg-white hover:border-cw-gold/60 hover:bg-cw-gold/[0.04]'
                           }`}
                         >
-                          <div>
-                            <span className={`text-sm ${form.urgency === u.value ? 'text-cw-white font-medium' : 'text-cw-muted'}`}>
+                          <div className="flex flex-col sm:flex-row sm:items-baseline sm:gap-3">
+                            <span className={`text-sm ${form.urgency === u.value ? 'text-cw-navy font-semibold' : 'text-cw-ink-soft'}`}>
                               {u.label}
                             </span>
-                            <span className="text-cw-muted text-xs ml-3">{u.sub}</span>
+                            <span className="text-cw-ink-mute text-xs">{u.sub}</span>
                           </div>
                           {form.urgency === u.value && (
-                            <span className="text-cw-gold text-sm shrink-0 ml-4">✓</span>
+                            <span className="text-cw-gold text-sm shrink-0 ml-4 font-semibold">✓</span>
                           )}
                         </button>
                       ))}
@@ -231,12 +270,14 @@ export default function QualifyPage() {
             {/* ── Step 2: Review ── */}
             {step === 2 && (
               <div className="cw-panel p-8 sm:p-10">
-                <div className="mb-8 pb-6 border-b border-cw-border">
-                  <h2 className="font-display text-4xl text-cw-white">Review & Submit</h2>
-                  <p className="text-cw-muted text-sm mt-2">Confirm your information before we proceed.</p>
+                <div className="mb-8 pb-6 border-b border-cw-line">
+                  <h2 className="font-display text-3xl text-cw-navy font-semibold">Review &amp; Submit</h2>
+                  <p className="text-cw-ink-soft text-sm mt-2 leading-relaxed">
+                    Confirm your information before we proceed.
+                  </p>
                 </div>
 
-                <div className="border border-cw-border divide-y divide-cw-border mb-8">
+                <div className="border border-cw-line rounded divide-y divide-cw-line mb-8 bg-white">
                   {[
                     ['Name',          `${form.firstName} ${form.lastName}`],
                     ['Email',         form.email],
@@ -246,29 +287,29 @@ export default function QualifyPage() {
                     ['Urgency',       form.urgency.replace(/_/g, ' ')],
                   ].map(([label, value]) => (
                     <div key={label} className="flex gap-4 px-4 py-3.5">
-                      <span className="font-mono text-[10px] text-cw-muted uppercase tracking-widest w-24 shrink-0 pt-0.5">{label}</span>
-                      <span className="text-cw-white text-sm">{value}</span>
+                      <span className="text-xs text-cw-ink-mute uppercase tracking-wider font-semibold w-28 shrink-0 pt-0.5">{label}</span>
+                      <span className="text-cw-navy text-sm font-medium">{value}</span>
                     </div>
                   ))}
                 </div>
 
-                <div className="space-y-5 mb-6">
+                <div className="space-y-4 mb-6">
                   <label className="flex items-start gap-3 cursor-pointer">
-                    <input type="checkbox" checked={form.consentToContact} onChange={e => set('consentToContact', e.target.checked)} className="mt-0.5 accent-amber-500 shrink-0" />
-                    <span className="text-cw-muted text-sm leading-relaxed">
-                      I consent to be contacted by Crain & Wooley via phone, email, or SMS regarding my legal inquiry.
+                    <input type="checkbox" checked={form.consentToContact} onChange={e => set('consentToContact', e.target.checked)} className="mt-1 accent-cw-gold shrink-0 w-4 h-4" />
+                    <span className="text-cw-ink-soft text-sm leading-relaxed">
+                      I consent to be contacted by Crain &amp; Wooley via phone, email, or SMS regarding my legal inquiry.
                     </span>
                   </label>
                   <label className="flex items-start gap-3 cursor-pointer">
-                    <input type="checkbox" checked={form.consentToTerms} onChange={e => set('consentToTerms', e.target.checked)} className="mt-0.5 accent-amber-500 shrink-0" />
-                    <span className="text-cw-muted text-sm leading-relaxed">
+                    <input type="checkbox" checked={form.consentToTerms} onChange={e => set('consentToTerms', e.target.checked)} className="mt-1 accent-cw-gold shrink-0 w-4 h-4" />
+                    <span className="text-cw-ink-soft text-sm leading-relaxed">
                       I understand submission does not create an attorney-client relationship and the $300 consultation fee is required to schedule.
                     </span>
                   </label>
                 </div>
 
                 {error && (
-                  <div className="text-sm text-red-400 border border-red-900 bg-red-900/10 px-4 py-3 mb-2">
+                  <div className="text-sm text-cw-danger border border-cw-danger/30 bg-cw-danger/[0.06] px-4 py-3 rounded mb-2">
                     {error}
                   </div>
                 )}
@@ -276,7 +317,7 @@ export default function QualifyPage() {
             )}
 
             {/* Navigation */}
-            <div className="flex gap-3 mt-4">
+            <div className="flex gap-3 mt-6">
               {step > 0 && (
                 <button className="cw-btn-ghost" onClick={() => setStep(s => s - 1)}>← Back</button>
               )}
@@ -285,11 +326,16 @@ export default function QualifyPage() {
                   Continue →
                 </button>
               ) : (
-                <button className="cw-btn-primary flex-1 py-4" disabled={!canProceed() || loading} onClick={handleSubmit}>
+                <button className="cw-btn-primary flex-1 !py-4" disabled={!canProceed() || loading} onClick={handleSubmit}>
                   {loading ? 'Submitting...' : 'Submit Intake →'}
                 </button>
               )}
             </div>
+
+            {/* Trust footer */}
+            <p className="text-center text-xs text-cw-ink-mute mt-8 leading-relaxed">
+              <span className="text-cw-gold">✦</span> Licensed Texas Attorneys &nbsp;·&nbsp; <span className="text-cw-gold">✦</span> Client Privacy Guaranteed &nbsp;·&nbsp; <span className="text-cw-gold">✦</span> Takes About 3 Minutes
+            </p>
 
           </div>
         </div>

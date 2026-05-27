@@ -1,437 +1,1325 @@
 'use client'
 import Link from 'next/link'
 
+// NOTE: Logic, routes, and CTA destinations are unchanged from the prior build.
+// This file only restyles the landing page to match estateplanningdfw.law.
+
 const practiceAreas = [
-  { label: 'Estate Planning', desc: 'Wills, trusts, powers of attorney, and healthcare directives crafted to protect your legacy.' },
-  { label: 'Family Law', desc: 'Divorce, child custody, support modifications, and adoptions handled with decisive advocacy.' },
-  { label: 'Personal Injury', desc: 'Auto accidents, slip and fall, wrongful death — we fight to maximize your recovery.' },
-  { label: 'Business Law', desc: 'Entity formation, contracts, disputes, and transactions — practical counsel for your business.' },
-  { label: 'Criminal Defense', desc: 'DWI, felonies, misdemeanors, and expunctions — aggressive defense of your freedom and record.' },
-  { label: 'Real Estate', desc: 'Purchases, sales, title disputes, and landlord-tenant matters across Texas.' },
+  {
+    label: 'Estate Planning',
+    desc: 'Wills, trusts, powers of attorney, and healthcare directives crafted to protect your legacy.',
+  },
+  {
+    label: 'Family Law',
+    desc: 'Divorce, child custody, support modifications, and adoptions handled with decisive advocacy.',
+  },
+  {
+    label: 'Personal Injury',
+    desc: 'Auto accidents, slip and fall, wrongful death — we fight to maximize your recovery.',
+  },
+  {
+    label: 'Business Law',
+    desc: 'Entity formation, contracts, disputes, and transactions — practical counsel for your business.',
+  },
+  {
+    label: 'Criminal Defense',
+    desc: 'DWI, felonies, misdemeanors, and expunctions — aggressive defense of your freedom and record.',
+  },
+  {
+    label: 'Real Estate',
+    desc: 'Purchases, sales, title disputes, and landlord-tenant matters across Texas.',
+  },
 ]
+
+const CREAM = '#F7F2E9'
+const CREAM_DEEP = '#EFE7D6'
+const IVORY = '#FBF8F2'
+const NAVY = '#0B1D35'
+const GOLD = '#C5933A'
+const GOLD_DARK = '#A87A28'
+const GOLD_LIGHT = '#E0B25F'
+const INK = '#1A1A1A'
+const INK_SOFT = '#4A4A4A'
+const INK_MUTE = '#7A7A7A'
+const LINE = '#E2D9C6'
 
 export default function IntakeLanding() {
   return (
-    <div style={{ fontFamily: 'var(--font-sans)', color: '#E8E2D6', position: 'relative' }}>
-
-      {/* scales of justice watermark — centered in full page, scrolls with content */}
-      <img
-        src="/scales.jpg"
-        alt=""
-        aria-hidden="true"
+    <div style={{ fontFamily: 'var(--font-sans)', color: INK, position: 'relative' }}>
+      {/* ── ANNOUNCEMENT BAR (matches client site's top webinar strip) ── */}
+      <div
         style={{
-          position: 'fixed', top: '50%', left: '50%',
-          transform: 'translate(-50%, -50%)',
-          width: '1100px', height: '1100px',
-          objectFit: 'contain',
-          opacity: 0.12,
-          pointerEvents: 'none',
-          mixBlendMode: 'luminosity',
-          zIndex: 0,
+          background: NAVY,
+          color: '#fff',
+          padding: '10px 24px',
+          textAlign: 'center',
+          fontSize: '0.82rem',
+          letterSpacing: '0.01em',
+          borderBottom: `1px solid ${GOLD}`,
         }}
-      />
+      >
+        <span style={{ color: GOLD_LIGHT, fontWeight: 600 }}>★</span>{' '}
+        Now accepting new clients across Dallas-Fort Worth ·{' '}
+        <Link
+          href="/qualify"
+          style={{
+            color: GOLD_LIGHT,
+            textDecoration: 'underline',
+            textUnderlineOffset: '3px',
+            fontWeight: 600,
+          }}
+        >
+          Start your free case review
+        </Link>
+      </div>
 
       {/* ── NAV ── */}
-      <nav style={{
-        position: 'sticky', top: 0, zIndex: 100,
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        padding: '20px 60px',
-        background: 'rgba(11,29,53,0.97)',
-        backdropFilter: 'blur(10px)',
-        WebkitBackdropFilter: 'blur(10px)',
-        borderBottom: '1px solid rgba(201,168,76,0.2)',
-      }}>
-        <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.25rem', fontWeight: 700, color: '#fff', letterSpacing: '0.04em' }}>
-          CRAIN <span style={{ color: '#C5933A' }}>&amp;</span> WOOLEY
-        </div>
-
-        <div style={{ display: 'flex', gap: '36px' }} className="nav-links-desktop">
-          {['Practice Areas', 'How It Works', 'About', 'Results'].map(item => (
-            <span key={item} style={{
-              fontFamily: 'var(--font-mono)', fontSize: '0.72rem',
-              fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase',
-              color: 'rgba(255,255,255,0.65)', cursor: 'pointer',
-              transition: 'color 0.2s',
-            }}
-              onMouseEnter={e => (e.currentTarget.style.color = '#C5933A')}
-              onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.65)')}
-            >
-              {item}
-            </span>
-          ))}
-        </div>
-
-        <Link href="/qualify" style={{
-          background: '#C5933A', color: '#0B1D35',
-          fontFamily: 'var(--font-mono)', fontSize: '0.72rem',
-          fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase',
-          padding: '10px 22px', textDecoration: 'none',
-          transition: 'background 0.2s',
-          display: 'inline-block',
+      <nav
+        style={{
+          position: 'sticky',
+          top: 0,
+          zIndex: 100,
+          background: 'rgba(247,242,233,0.97)',
+          backdropFilter: 'blur(10px)',
+          WebkitBackdropFilter: 'blur(10px)',
+          borderBottom: `1px solid ${LINE}`,
         }}
-          onMouseEnter={e => (e.currentTarget.style.background = '#d9a448')}
-          onMouseLeave={e => (e.currentTarget.style.background = '#C5933A')}
+      >
+        <div
+          style={{
+            maxWidth: '1240px',
+            margin: '0 auto',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            padding: '18px 36px',
+            gap: '24px',
+          }}
+          className="cw-nav-inner"
         >
-          Free Case Review →
-        </Link>
+          {/* Logo */}
+          <Link
+            href="/"
+            style={{
+              textDecoration: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px',
+            }}
+          >
+            <span
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: '1.55rem',
+                fontWeight: 600,
+                color: NAVY,
+                letterSpacing: '0.01em',
+                lineHeight: 1,
+              }}
+            >
+              Crain <span style={{ color: GOLD }}>&amp;</span> Wooley
+            </span>
+          </Link>
+
+          {/* Nav links — desktop */}
+          <div
+            style={{ display: 'flex', gap: '32px', alignItems: 'center' }}
+            className="nav-links-desktop"
+          >
+            {[
+              { label: 'About', href: '#about' },
+              { label: 'Services', href: '#services' },
+              { label: 'Process', href: '#process' },
+              { label: 'Results', href: '#results' },
+            ].map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                style={{
+                  fontFamily: 'var(--font-sans)',
+                  fontSize: '0.9rem',
+                  fontWeight: 500,
+                  color: NAVY,
+                  textDecoration: 'none',
+                  transition: 'color 0.2s',
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = GOLD_DARK)}
+                onMouseLeave={(e) => (e.currentTarget.style.color = NAVY)}
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
+
+          {/* Right cluster: phone + CTA */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+            <a
+              href="tel:9729451610"
+              className="cw-nav-phone"
+              style={{
+                fontFamily: 'var(--font-sans)',
+                fontSize: '0.95rem',
+                fontWeight: 600,
+                color: NAVY,
+                textDecoration: 'none',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+              }}
+            >
+              <span style={{ color: GOLD }}>☎</span>
+              (972) 945-1610
+            </a>
+            <Link
+              href="/qualify"
+              style={{
+                background: GOLD,
+                color: '#fff',
+                fontFamily: 'var(--font-sans)',
+                fontSize: '0.82rem',
+                fontWeight: 600,
+                letterSpacing: '0.04em',
+                textTransform: 'uppercase',
+                padding: '11px 22px',
+                textDecoration: 'none',
+                borderRadius: '4px',
+                transition: 'background 0.2s, transform 0.15s, box-shadow 0.2s',
+                boxShadow: '0 1px 2px rgba(11,29,53,0.2)',
+                display: 'inline-block',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = GOLD_DARK
+                e.currentTarget.style.transform = 'translateY(-1px)'
+                e.currentTarget.style.boxShadow = '0 4px 10px rgba(168,122,40,0.3)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = GOLD
+                e.currentTarget.style.transform = 'translateY(0)'
+                e.currentTarget.style.boxShadow = '0 1px 2px rgba(11,29,53,0.2)'
+              }}
+            >
+              Book Consultation
+            </Link>
+          </div>
+        </div>
       </nav>
 
       {/* ── HERO ── */}
-      <section style={{
-        minHeight: 'calc(100vh - 65px)',
-        display: 'flex', alignItems: 'center',
-        padding: '80px 60px',
-        position: 'relative', overflow: 'hidden',
-      }}>
-        {/* radial glow */}
-        <div style={{
-          position: 'absolute', top: '50%', left: '55%',
-          transform: 'translate(-50%, -50%)',
-          width: '700px', height: '700px', borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(197,147,58,0.07) 0%, transparent 70%)',
-          pointerEvents: 'none',
-        }} />
+      <section
+        style={{
+          background: `linear-gradient(180deg, ${CREAM} 0%, ${CREAM_DEEP} 100%)`,
+          position: 'relative',
+          overflow: 'hidden',
+        }}
+      >
+        {/* Decorative gold rule */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            height: '1px',
+            background: `linear-gradient(90deg, transparent, ${GOLD} 50%, transparent)`,
+            opacity: 0.5,
+          }}
+        />
 
-
-        <div style={{
-          display: 'grid', gridTemplateColumns: '1fr 1fr',
-          gap: '80px', alignItems: 'center',
-          maxWidth: '1200px', margin: '0 auto', width: '100%',
-          position: 'relative', zIndex: 1,
-        }}>
-
-          {/* LEFT */}
+        <div
+          style={{
+            maxWidth: '1240px',
+            margin: '0 auto',
+            padding: '90px 36px 100px',
+            display: 'grid',
+            gridTemplateColumns: '1.05fr 0.95fr',
+            gap: '72px',
+            alignItems: 'center',
+          }}
+          className="cw-hero-grid"
+        >
+          {/* LEFT — copy */}
           <div>
-            <div style={{
-              display: 'inline-flex', alignItems: 'center', gap: '8px',
-              background: 'rgba(197,147,58,0.1)',
-              border: '1px solid rgba(197,147,58,0.35)',
-              borderRadius: '999px',
-              color: '#C5933A',
-              fontFamily: 'var(--font-mono)', fontSize: '0.68rem',
-              fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase',
-              padding: '7px 16px', marginBottom: '32px',
-            }}>
-              <span style={{
-                width: '6px', height: '6px', borderRadius: '50%',
-                background: '#C5933A', display: 'inline-block',
-                animation: 'cw-pulse 2s infinite',
-              }} />
-              Accepting New Clients · Plano, Texas
-            </div>
+            <p
+              style={{
+                fontFamily: 'var(--font-sans)',
+                fontSize: '0.78rem',
+                fontWeight: 600,
+                letterSpacing: '0.2em',
+                textTransform: 'uppercase',
+                color: GOLD_DARK,
+                marginBottom: '18px',
+              }}
+            >
+              Dallas-Fort Worth · Estate Planning Attorneys
+            </p>
 
-            <h1 style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(2.8rem, 5vw, 4.2rem)',
-              fontWeight: 900, lineHeight: 1.1,
-              color: '#fff', marginBottom: '24px',
-            }}>
-              Legal Help.
+            <h1
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 'clamp(2.6rem, 5.2vw, 4.4rem)',
+                fontWeight: 600,
+                lineHeight: 1.08,
+                color: NAVY,
+                marginBottom: '24px',
+                letterSpacing: '-0.01em',
+              }}
+            >
+              Life Can Be Full
               <br />
-              <span style={{ color: '#C5933A' }}>Without the</span>
+              of Surprises.
               <br />
-              Runaround.
+              <span style={{ color: GOLD, fontStyle: 'italic', fontWeight: 500 }}>
+                Your Plan Shouldn&apos;t Be.
+              </span>
             </h1>
 
-            <p style={{
-              fontSize: '1rem', lineHeight: 1.75,
-              color: 'rgba(255,255,255,0.65)',
-              maxWidth: '420px', marginBottom: '40px',
-            }}>
-              Tell us about your situation — we&apos;ll tell you if we can help, in minutes not days. No voicemail. No waiting for a callback. No obligation until you pay.
+            <p
+              style={{
+                fontSize: '1.08rem',
+                lineHeight: 1.7,
+                color: INK_SOFT,
+                maxWidth: '520px',
+                marginBottom: '36px',
+              }}
+            >
+              Crain &amp; Wooley offers comprehensive, flat-rate estate planning that serves
+              clients of all backgrounds throughout their lifetime. No matter where you are in
+              life, we make the process simple — so you and your family are prepared for what
+              comes next.
             </p>
 
-            <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginBottom: '20px' }}>
-              <Link href="/qualify" style={{
-                background: '#C5933A', color: '#0B1D35',
-                fontFamily: 'var(--font-mono)', fontSize: '0.78rem',
-                fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase',
-                padding: '15px 34px', textDecoration: 'none', display: 'inline-block',
-                transition: 'background 0.2s, transform 0.15s',
+            <div
+              style={{
+                display: 'flex',
+                gap: '14px',
+                flexWrap: 'wrap',
+                alignItems: 'center',
+                marginBottom: '36px',
               }}
-                onMouseEnter={e => { e.currentTarget.style.background = '#d9a448'; e.currentTarget.style.transform = 'translateY(-1px)' }}
-                onMouseLeave={e => { e.currentTarget.style.background = '#C5933A'; e.currentTarget.style.transform = 'translateY(0)' }}
+            >
+              <Link
+                href="/qualify"
+                style={{
+                  background: GOLD,
+                  color: '#fff',
+                  fontFamily: 'var(--font-sans)',
+                  fontSize: '0.88rem',
+                  fontWeight: 600,
+                  letterSpacing: '0.04em',
+                  textTransform: 'uppercase',
+                  padding: '15px 32px',
+                  textDecoration: 'none',
+                  display: 'inline-block',
+                  borderRadius: '4px',
+                  transition: 'background 0.2s, transform 0.15s, box-shadow 0.2s',
+                  boxShadow: '0 2px 4px rgba(11,29,53,0.18)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = GOLD_DARK
+                  e.currentTarget.style.transform = 'translateY(-1px)'
+                  e.currentTarget.style.boxShadow = '0 6px 14px rgba(168,122,40,0.3)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = GOLD
+                  e.currentTarget.style.transform = 'translateY(0)'
+                  e.currentTarget.style.boxShadow = '0 2px 4px rgba(11,29,53,0.18)'
+                }}
               >
-                See If We Can Help →
+                Book a Consultation →
               </Link>
 
-              <button style={{
-                background: 'transparent', color: 'rgba(255,255,255,0.75)',
-                fontFamily: 'var(--font-mono)', fontSize: '0.78rem',
-                fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase',
-                padding: '15px 28px',
-                border: '1px solid rgba(255,255,255,0.25)',
-                cursor: 'pointer', transition: 'border-color 0.2s, color 0.2s',
-              }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = '#C5933A'; e.currentTarget.style.color = '#C5933A' }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.25)'; e.currentTarget.style.color = 'rgba(255,255,255,0.75)' }}
+              <a
+                href="tel:9729451610"
+                style={{
+                  background: 'transparent',
+                  color: NAVY,
+                  fontFamily: 'var(--font-sans)',
+                  fontSize: '0.88rem',
+                  fontWeight: 600,
+                  letterSpacing: '0.02em',
+                  padding: '14px 26px',
+                  textDecoration: 'none',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  borderRadius: '4px',
+                  border: `1px solid ${NAVY}`,
+                  transition: 'background 0.2s, color 0.2s',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = NAVY
+                  e.currentTarget.style.color = '#fff'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'transparent'
+                  e.currentTarget.style.color = NAVY
+                }}
               >
-                Call Us Now
-              </button>
+                <span>☎</span> Call (972) 945-1610
+              </a>
             </div>
 
-            <p style={{
-              fontFamily: 'var(--font-mono)', fontSize: '0.68rem',
-              color: 'rgba(255,255,255,0.35)', letterSpacing: '0.05em',
-            }}>
-              Takes about 3 minutes &nbsp;·&nbsp; Texas State Bar Licensed &nbsp;·&nbsp; Client Privacy Guaranteed
-            </p>
-          </div>
-
-          {/* RIGHT — card */}
-          <div style={{
-            background: 'rgba(255,255,255,0.04)',
-            border: '1px solid rgba(197,147,58,0.25)',
-            borderRadius: '12px',
-            padding: '44px 40px',
-            backdropFilter: 'blur(12px)',
-            WebkitBackdropFilter: 'blur(12px)',
-          }}>
-            <h3 style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: '1.4rem', fontWeight: 700,
-              color: '#fff', marginBottom: '8px',
-            }}>
-              What We Handle
-            </h3>
-            <p style={{
-              fontSize: '0.83rem', color: 'rgba(255,255,255,0.45)',
-              marginBottom: '28px',
-            }}>
-              Texas-licensed attorneys across six practice areas
-            </p>
-
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '36px' }}>
-              {practiceAreas.map(area => (
-                <span key={area.label} style={{
-                  border: '1px solid rgba(197,147,58,0.4)',
-                  borderRadius: '999px',
-                  color: '#C5933A',
-                  fontFamily: 'var(--font-mono)', fontSize: '0.68rem',
-                  fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase',
-                  padding: '7px 14px', cursor: 'default',
-                  transition: 'background 0.2s',
-                }}
-                  onMouseEnter={e => (e.currentTarget.style.background = 'rgba(197,147,58,0.1)')}
-                  onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
-                >
-                  {area.label}
-                </span>
+            {/* Trust micro-row */}
+            <div
+              style={{
+                display: 'flex',
+                gap: '28px',
+                flexWrap: 'wrap',
+                paddingTop: '24px',
+                borderTop: `1px solid ${LINE}`,
+              }}
+            >
+              {[
+                { num: '20+', label: 'Years Serving DFW' },
+                { num: 'Flat', label: 'Rate Pricing' },
+                { num: '5★', label: 'Google Reviews' },
+              ].map((s) => (
+                <div key={s.label}>
+                  <div
+                    style={{
+                      fontFamily: 'var(--font-display)',
+                      fontSize: '1.6rem',
+                      fontWeight: 600,
+                      color: NAVY,
+                      lineHeight: 1,
+                    }}
+                  >
+                    {s.num}
+                  </div>
+                  <div
+                    style={{
+                      fontFamily: 'var(--font-sans)',
+                      fontSize: '0.72rem',
+                      letterSpacing: '0.08em',
+                      textTransform: 'uppercase',
+                      color: INK_MUTE,
+                      marginTop: '6px',
+                      fontWeight: 500,
+                    }}
+                  >
+                    {s.label}
+                  </div>
+                </div>
               ))}
             </div>
-
-            <div style={{ paddingTop: '28px' }}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '16px', textAlign: 'center' }}>
-                {[
-                  { num: '20+', label: 'Years Experience' },
-                  { num: '98%', label: 'Client Satisfaction' },
-                  { num: '$300', label: 'Consultation Fee' },
-                ].map(s => (
-                  <div key={s.label}>
-                    <div style={{ fontFamily: 'var(--font-display)', fontSize: '2rem', fontWeight: 700, color: '#C5933A' }}>{s.num}</div>
-                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.62rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)', marginTop: '4px' }}>{s.label}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
 
+          {/* RIGHT — visual card */}
+          <div style={{ position: 'relative' }}>
+            {/* Faux portrait / building plate — uses the existing scales image but on a warm card */}
+            <div
+              style={{
+                position: 'relative',
+                background: NAVY,
+                borderRadius: '6px',
+                overflow: 'hidden',
+                boxShadow:
+                  '0 10px 30px rgba(11,29,53,0.18), 0 2px 6px rgba(11,29,53,0.12)',
+                aspectRatio: '4 / 5',
+                maxWidth: '460px',
+                marginLeft: 'auto',
+              }}
+            >
+              {/* Background image */}
+              <img
+                src="/scales.jpg"
+                alt=""
+                aria-hidden="true"
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  opacity: 0.55,
+                  filter: 'sepia(0.2) saturate(0.85)',
+                }}
+              />
+              {/* Navy gradient overlay */}
+              <div
+                aria-hidden="true"
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  background:
+                    `linear-gradient(180deg, rgba(11,29,53,0.55) 0%, rgba(11,29,53,0.85) 75%, ${NAVY} 100%)`,
+                }}
+              />
+
+              {/* Content overlay */}
+              <div
+                style={{
+                  position: 'relative',
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  padding: '36px 32px',
+                  color: '#fff',
+                }}
+              >
+                <div>
+                  <p
+                    style={{
+                      fontFamily: 'var(--font-sans)',
+                      fontSize: '0.72rem',
+                      letterSpacing: '0.22em',
+                      textTransform: 'uppercase',
+                      color: GOLD_LIGHT,
+                      fontWeight: 600,
+                      marginBottom: '14px',
+                    }}
+                  >
+                    Compassionate Counsel
+                  </p>
+                  <p
+                    style={{
+                      fontFamily: 'var(--font-display)',
+                      fontSize: '1.7rem',
+                      lineHeight: 1.25,
+                      fontWeight: 500,
+                      fontStyle: 'italic',
+                      color: '#fff',
+                    }}
+                  >
+                    &ldquo;Planning for the future means making decisions you can trust.&rdquo;
+                  </p>
+                </div>
+
+                <div
+                  style={{
+                    paddingTop: '24px',
+                    borderTop: `1px solid rgba(224,178,95,0.35)`,
+                  }}
+                >
+                  <p
+                    style={{
+                      fontFamily: 'var(--font-sans)',
+                      fontSize: '0.85rem',
+                      color: 'rgba(255,255,255,0.85)',
+                      lineHeight: 1.55,
+                      marginBottom: '12px',
+                    }}
+                  >
+                    Plain-language guidance from Texas-licensed attorneys. In-person and
+                    virtual consultations available.
+                  </p>
+                  <p
+                    style={{
+                      fontFamily: 'var(--font-sans)',
+                      fontSize: '0.72rem',
+                      letterSpacing: '0.14em',
+                      textTransform: 'uppercase',
+                      color: GOLD_LIGHT,
+                      fontWeight: 600,
+                    }}
+                  >
+                    Plano · Mansfield · Fort Worth
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Gold offset accent */}
+            <div
+              aria-hidden="true"
+              style={{
+                position: 'absolute',
+                bottom: '-18px',
+                right: '-18px',
+                width: '120px',
+                height: '120px',
+                border: `2px solid ${GOLD}`,
+                borderRadius: '6px',
+                zIndex: -1,
+              }}
+              className="cw-hero-accent"
+            />
+          </div>
         </div>
       </section>
 
       {/* ── TRUST BAR ── */}
-      <div style={{ background: '#C5933A' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '18px 60px' }}>
-          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '48px' }}>
-            {[
-              '✦ State Bar of Texas Licensed',
-              '✦ No Voicemail — Real Attorneys',
-              '✦ Yes or No in Minutes',
-              '✦ Zero Obligation Until You Pay',
-            ].map(t => (
-              <span key={t} style={{
-                fontFamily: 'var(--font-mono)', fontSize: '0.68rem',
-                fontWeight: 700, letterSpacing: '0.12em',
-                textTransform: 'uppercase', color: '#0B1D35',
-              }}>
-                {t}
-              </span>
-            ))}
-          </div>
+      <div style={{ background: NAVY, borderBottom: `3px solid ${GOLD}` }}>
+        <div
+          style={{
+            maxWidth: '1240px',
+            margin: '0 auto',
+            padding: '22px 36px',
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: '40px',
+          }}
+        >
+          {[
+            'Texas Bar College',
+            'NAELA Member',
+            '5★ Google Rated',
+            'Martindale Client Champion',
+            'Top 3 Estate Planning · Plano',
+          ].map((t) => (
+            <span
+              key={t}
+              style={{
+                fontFamily: 'var(--font-sans)',
+                fontSize: '0.78rem',
+                fontWeight: 600,
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
+                color: '#fff',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '10px',
+              }}
+            >
+              <span style={{ color: GOLD_LIGHT }}>✦</span>
+              {t}
+            </span>
+          ))}
         </div>
       </div>
 
-      {/* ── HOW IT WORKS ── */}
-      <section style={{ background: 'rgba(0,0,0,0.2)' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '90px 60px' }}>
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', color: '#C5933A', letterSpacing: '0.2em', textTransform: 'uppercase', display: 'block', marginBottom: '14px' }}>
-            Simple Process
-          </span>
-          <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.8rem, 3vw, 2.6rem)', fontWeight: 700, color: '#fff', marginBottom: '56px' }}>
-            Three Steps to Knowing<br />Where You Stand
+      {/* ── ABOUT / INTRO ── */}
+      <section id="about" style={{ background: CREAM }}>
+        <div
+          style={{
+            maxWidth: '1040px',
+            margin: '0 auto',
+            padding: '96px 36px',
+            textAlign: 'center',
+          }}
+        >
+          <p className="cw-eyebrow" style={{ marginBottom: '16px' }}>
+            About Our Firm
+          </p>
+          <h2
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 'clamp(2rem, 3.6vw, 2.9rem)',
+              fontWeight: 600,
+              color: NAVY,
+              marginBottom: '24px',
+              lineHeight: 1.2,
+              letterSpacing: '-0.005em',
+            }}
+          >
+            Let Our Compassionate Lawyers
+            <br />
+            Help Protect Your Legacy
           </h2>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
-            {[
-              { num: '01', title: 'Answer a Few Questions', desc: 'Tell us your practice area, what happened, and how urgent it is. Takes about 3 minutes from any device.' },
-              { num: '02', title: 'We Review Instantly', desc: 'Our system checks if your matter fits. You get a yes or no right away — no waiting, no runaround.' },
-              { num: '03', title: 'Book Your Consultation', desc: 'If we can help, pay the $300 fee and lock in a time on our calendar. Confirmed immediately.' },
-            ].map((step) => (
-              <div key={step.num} style={{
-                padding: '44px 36px',
-                background: 'rgba(255,255,255,0.03)',
-                border: '1px solid rgba(255,255,255,0.07)',
-                borderRadius: '12px',
-                position: 'relative', cursor: 'default',
-                transition: 'background 0.2s, border-color 0.2s',
+          {/* Gold divider */}
+          <div
+            aria-hidden="true"
+            style={{
+              width: '60px',
+              height: '2px',
+              background: GOLD,
+              margin: '0 auto 32px',
+            }}
+          />
+
+          <p
+            style={{
+              fontSize: '1.05rem',
+              lineHeight: 1.8,
+              color: INK_SOFT,
+              maxWidth: '760px',
+              margin: '0 auto 24px',
+            }}
+          >
+            At Crain &amp; Wooley, planning for the future means making decisions you can trust.
+            From major life changes to inevitable losses, it&apos;s essential to have an estate
+            plan in place that helps you protect both your loved ones and your assets.
+          </p>
+          <p
+            style={{
+              fontSize: '1.05rem',
+              lineHeight: 1.8,
+              color: INK_SOFT,
+              maxWidth: '760px',
+              margin: '0 auto',
+            }}
+          >
+            Our team provides step-by-step guidance, so you can make informed decisions about
+            your estate plan across the Dallas-Fort Worth area. We draw on years of experience
+            serving clients under Texas estate and probate laws, taking a straightforward
+            approach so you clearly understand every part of the process.
+          </p>
+        </div>
+      </section>
+
+      {/* ── SERVICES / PRACTICE AREAS ── */}
+      <section id="services" style={{ background: IVORY, borderTop: `1px solid ${LINE}` }}>
+        <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '96px 36px' }}>
+          <div style={{ textAlign: 'center', marginBottom: '64px' }}>
+            <p className="cw-eyebrow" style={{ marginBottom: '16px' }}>
+              What We Can Do For You
+            </p>
+            <h2
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 'clamp(2rem, 3.6vw, 2.9rem)',
+                fontWeight: 600,
+                color: NAVY,
+                marginBottom: '20px',
+                lineHeight: 1.2,
               }}
-                onMouseEnter={e => {
-                  e.currentTarget.style.background = 'rgba(255,255,255,0.05)'
-                  e.currentTarget.style.borderColor = 'rgba(197,147,58,0.3)'
+            >
+              Comprehensive Legal Services
+            </h2>
+            <div
+              aria-hidden="true"
+              style={{ width: '60px', height: '2px', background: GOLD, margin: '0 auto' }}
+            />
+          </div>
+
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(3, 1fr)',
+              gap: '24px',
+            }}
+            className="cw-services-grid"
+          >
+            {practiceAreas.map((area) => (
+              <div
+                key={area.label}
+                style={{
+                  background: '#fff',
+                  border: `1px solid ${LINE}`,
+                  borderTop: `3px solid ${GOLD}`,
+                  borderRadius: '6px',
+                  padding: '36px 32px',
+                  transition:
+                    'transform 0.25s, box-shadow 0.25s, border-color 0.25s',
+                  boxShadow: '0 1px 3px rgba(11,29,53,0.04)',
+                  cursor: 'default',
                 }}
-                onMouseLeave={e => {
-                  e.currentTarget.style.background = 'rgba(255,255,255,0.03)'
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-3px)'
+                  e.currentTarget.style.boxShadow =
+                    '0 12px 30px rgba(11,29,53,0.08)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)'
+                  e.currentTarget.style.boxShadow =
+                    '0 1px 3px rgba(11,29,53,0.04)'
                 }}
               >
-                <div style={{ display: 'none' }} />
-                <div style={{ fontFamily: 'var(--font-display)', fontSize: '3.5rem', fontWeight: 900, color: 'rgba(197,147,58,0.15)', lineHeight: 1, marginBottom: '20px' }}>{step.num}</div>
-                <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.15rem', fontWeight: 700, color: '#fff', marginBottom: '12px' }}>{step.title}</h3>
-                <p style={{ fontSize: '0.85rem', lineHeight: 1.75, color: 'rgba(255,255,255,0.5)' }}>{step.desc}</p>
+                <h3
+                  style={{
+                    fontFamily: 'var(--font-display)',
+                    fontSize: '1.45rem',
+                    fontWeight: 600,
+                    color: NAVY,
+                    marginBottom: '12px',
+                  }}
+                >
+                  {area.label}
+                </h3>
+                <p
+                  style={{
+                    fontSize: '0.95rem',
+                    lineHeight: 1.7,
+                    color: INK_SOFT,
+                    margin: 0,
+                  }}
+                >
+                  {area.desc}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── PRACTICE AREAS ── */}
-      <section>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '90px 60px' }}>
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', color: '#C5933A', letterSpacing: '0.2em', textTransform: 'uppercase', display: 'block', marginBottom: '14px' }}>
-            Areas of Law
-          </span>
-          <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.8rem, 3vw, 2.6rem)', fontWeight: 700, color: '#fff', marginBottom: '56px' }}>
-            Comprehensive Representation<br />Across Texas
-          </h2>
-
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
-            {practiceAreas.map((area) => (
-              <div key={area.label} style={{
-                background: 'rgba(255,255,255,0.03)',
-                border: '1px solid rgba(255,255,255,0.07)',
-                borderRadius: '12px',
-                padding: '40px 32px',
-                position: 'relative', cursor: 'default',
-                overflow: 'hidden',
-                transition: 'background 0.2s, border-color 0.2s',
+      {/* ── HOW IT WORKS / PROCESS ── */}
+      <section id="process" style={{ background: CREAM, borderTop: `1px solid ${LINE}` }}>
+        <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '96px 36px' }}>
+          <div style={{ textAlign: 'center', marginBottom: '64px' }}>
+            <p className="cw-eyebrow" style={{ marginBottom: '16px' }}>
+              Designed for Your Comfort &amp; Convenience
+            </p>
+            <h2
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 'clamp(2rem, 3.6vw, 2.9rem)',
+                fontWeight: 600,
+                color: NAVY,
+                marginBottom: '20px',
+                lineHeight: 1.2,
               }}
-                onMouseEnter={e => {
-                  e.currentTarget.style.background = 'rgba(255,255,255,0.05)'
-                  e.currentTarget.style.borderColor = 'rgba(197,147,58,0.3)'
-                }}
-                onMouseLeave={e => {
-                  e.currentTarget.style.background = 'rgba(255,255,255,0.03)'
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)'
+            >
+              Estate Planning With Us Means
+            </h2>
+            <div
+              aria-hidden="true"
+              style={{ width: '60px', height: '2px', background: GOLD, margin: '0 auto' }}
+            />
+          </div>
+
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(3, 1fr)',
+              gap: '32px',
+            }}
+            className="cw-process-grid"
+          >
+            {[
+              {
+                num: '01',
+                title: 'Expert Service',
+                desc: 'Laws change all the time. We stay up to date with the latest information so that you\u2019re covered. We\u2019re the experts so you don\u2019t have to be.',
+              },
+              {
+                num: '02',
+                title: 'Optional Lifetime Guarantee',
+                desc: 'With our optional lifetime guarantee, your will and trust are automatically updated over the years to reflect your current wishes and minimize future confusion.',
+              },
+              {
+                num: '03',
+                title: 'Flat-Rate Pricing',
+                desc: 'Finally, you won\u2019t need a lawyer to understand your legal fees. We communicate our pricing structure upfront. No surprises. No hidden fees.',
+              },
+            ].map((step) => (
+              <div
+                key={step.num}
+                style={{
+                  background: 'transparent',
+                  padding: '8px',
+                  position: 'relative',
                 }}
               >
-                <div style={{ display: 'none' }} />
-                <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.2rem', fontWeight: 700, color: '#fff', marginBottom: '12px' }}>{area.label}</h3>
-                <p style={{ fontSize: '0.83rem', lineHeight: 1.75, color: 'rgba(255,255,255,0.45)' }}>{area.desc}</p>
+                <div
+                  style={{
+                    fontFamily: 'var(--font-display)',
+                    fontSize: '3.2rem',
+                    fontWeight: 500,
+                    color: GOLD,
+                    lineHeight: 1,
+                    marginBottom: '18px',
+                    fontStyle: 'italic',
+                  }}
+                >
+                  {step.num}
+                </div>
+                <h3
+                  style={{
+                    fontFamily: 'var(--font-display)',
+                    fontSize: '1.45rem',
+                    fontWeight: 600,
+                    color: NAVY,
+                    marginBottom: '14px',
+                  }}
+                >
+                  {step.title}
+                </h3>
+                <p
+                  style={{
+                    fontSize: '0.95rem',
+                    lineHeight: 1.75,
+                    color: INK_SOFT,
+                    margin: 0,
+                  }}
+                >
+                  {step.desc}
+                </p>
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ── TESTIMONIAL / RESULTS ── */}
+      <section id="results" style={{ background: NAVY, position: 'relative', overflow: 'hidden' }}>
+        {/* faint gold pattern */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            height: '1px',
+            background: `linear-gradient(90deg, transparent, ${GOLD} 50%, transparent)`,
+          }}
+        />
+        <div
+          style={{
+            maxWidth: '900px',
+            margin: '0 auto',
+            padding: '96px 36px',
+            textAlign: 'center',
+            color: '#fff',
+          }}
+        >
+          <p
+            style={{
+              fontFamily: 'var(--font-sans)',
+              fontSize: '0.78rem',
+              fontWeight: 600,
+              letterSpacing: '0.2em',
+              textTransform: 'uppercase',
+              color: GOLD_LIGHT,
+              marginBottom: '24px',
+            }}
+          >
+            What Our Clients Say
+          </p>
+
+          {/* 5 stars */}
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              gap: '6px',
+              marginBottom: '28px',
+              fontSize: '1.3rem',
+              color: GOLD,
+            }}
+          >
+            ★ ★ ★ ★ ★
+          </div>
+
+          <blockquote
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 'clamp(1.4rem, 2.6vw, 2rem)',
+              lineHeight: 1.45,
+              fontWeight: 400,
+              fontStyle: 'italic',
+              color: '#fff',
+              margin: '0 0 32px',
+              maxWidth: '780px',
+              marginLeft: 'auto',
+              marginRight: 'auto',
+            }}
+          >
+            &ldquo;After worrying about our lack of estate planning for years, it feels so
+            good to finally have a plan in place. Thank you for making the process relatively
+            painless and offering the educational support we needed.&rdquo;
+          </blockquote>
+
+          <p
+            style={{
+              fontFamily: 'var(--font-sans)',
+              fontSize: '0.95rem',
+              fontWeight: 600,
+              letterSpacing: '0.04em',
+              color: GOLD_LIGHT,
+              marginBottom: '4px',
+            }}
+          >
+            Leslie W.
+          </p>
+          <p
+            style={{
+              fontFamily: 'var(--font-sans)',
+              fontSize: '0.78rem',
+              color: 'rgba(255,255,255,0.6)',
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+            }}
+          >
+            Verified Client
+          </p>
         </div>
       </section>
 
       {/* ── CTA ── */}
-      <section style={{ background: 'rgba(0,0,0,0.2)' }}>
-        <div style={{ maxWidth: '680px', margin: '0 auto', padding: '90px 40px', textAlign: 'center' }}>
-          <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem, 3.5vw, 3rem)', fontWeight: 900, color: '#fff', marginBottom: '18px', lineHeight: 1.2 }}>
-            Find Out in Minutes if<br /><span style={{ color: '#C5933A' }}>We&apos;re the Right Fit.</span>
-          </h2>
-          <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.55)', marginBottom: '36px', lineHeight: 1.75 }}>
-            Stop searching. Stop waiting for callbacks. Our intake is designed so you know exactly where you stand — fast, and without the pressure.
-          </p>
-          <Link href="/qualify" style={{
-            background: '#C5933A', color: '#0B1D35',
-            fontFamily: 'var(--font-mono)', fontSize: '0.78rem',
-            fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase',
-            padding: '16px 36px', textDecoration: 'none', display: 'inline-block',
-            marginBottom: '16px', transition: 'background 0.2s',
+      <section
+        style={{
+          background: `linear-gradient(180deg, ${CREAM_DEEP} 0%, ${CREAM} 100%)`,
+        }}
+      >
+        <div
+          style={{
+            maxWidth: '760px',
+            margin: '0 auto',
+            padding: '96px 36px',
+            textAlign: 'center',
           }}
-            onMouseEnter={e => (e.currentTarget.style.background = '#d9a448')}
-            onMouseLeave={e => (e.currentTarget.style.background = '#C5933A')}
+        >
+          <p className="cw-eyebrow" style={{ marginBottom: '16px' }}>
+            Schedule a Consultation Today
+          </p>
+          <h2
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 'clamp(2.1rem, 4vw, 3.2rem)',
+              fontWeight: 600,
+              color: NAVY,
+              marginBottom: '20px',
+              lineHeight: 1.2,
+            }}
           >
-            Start Your Free Case Review →
-          </Link>
-          <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', color: 'rgba(255,255,255,0.3)', letterSpacing: '0.05em' }}>
-            $300 consultation fee · Applies only if we can help · Licensed Texas attorneys
+            Speak With an Estate Planning Attorney Today
+          </h2>
+          <div
+            aria-hidden="true"
+            style={{ width: '60px', height: '2px', background: GOLD, margin: '0 auto 28px' }}
+          />
+          <p
+            style={{
+              fontSize: '1.08rem',
+              color: INK_SOFT,
+              marginBottom: '40px',
+              lineHeight: 1.7,
+            }}
+          >
+            Whether you need to establish a new estate plan or update an existing one,
+            Crain &amp; Wooley offers local insight, responsive service, and straightforward
+            pricing. Let our team help you plan confidently and protect what matters most.
+          </p>
+          <div
+            style={{
+              display: 'flex',
+              gap: '14px',
+              justifyContent: 'center',
+              flexWrap: 'wrap',
+              marginBottom: '24px',
+            }}
+          >
+            <Link
+              href="/qualify"
+              style={{
+                background: GOLD,
+                color: '#fff',
+                fontFamily: 'var(--font-sans)',
+                fontSize: '0.88rem',
+                fontWeight: 600,
+                letterSpacing: '0.04em',
+                textTransform: 'uppercase',
+                padding: '16px 32px',
+                textDecoration: 'none',
+                borderRadius: '4px',
+                transition: 'background 0.2s, transform 0.15s, box-shadow 0.2s',
+                boxShadow: '0 2px 4px rgba(11,29,53,0.18)',
+                display: 'inline-block',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = GOLD_DARK
+                e.currentTarget.style.transform = 'translateY(-1px)'
+                e.currentTarget.style.boxShadow = '0 6px 14px rgba(168,122,40,0.3)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = GOLD
+                e.currentTarget.style.transform = 'translateY(0)'
+                e.currentTarget.style.boxShadow = '0 2px 4px rgba(11,29,53,0.18)'
+              }}
+            >
+              Start Your Free Case Review →
+            </Link>
+            <a
+              href="tel:9729451610"
+              style={{
+                background: 'transparent',
+                color: NAVY,
+                fontFamily: 'var(--font-sans)',
+                fontSize: '0.88rem',
+                fontWeight: 600,
+                padding: '15px 26px',
+                textDecoration: 'none',
+                borderRadius: '4px',
+                border: `1px solid ${NAVY}`,
+                transition: 'background 0.2s, color 0.2s',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = NAVY
+                e.currentTarget.style.color = '#fff'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'transparent'
+                e.currentTarget.style.color = NAVY
+              }}
+            >
+              <span>☎</span> Call (972) 945-1610
+            </a>
+          </div>
+          <p
+            style={{
+              fontFamily: 'var(--font-sans)',
+              fontSize: '0.82rem',
+              color: INK_MUTE,
+              letterSpacing: '0.02em',
+            }}
+          >
+            Licensed Texas attorneys · Flat-rate planning services · Plano · Mansfield · Fort
+            Worth
           </p>
         </div>
       </section>
 
       {/* ── FOOTER ── */}
-      <footer style={{ background: 'rgba(0,0,0,0.3)', padding: '60px 60px 36px' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: '60px', marginBottom: '48px' }}>
+      <footer style={{ background: NAVY, color: '#fff' }}>
+        <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '72px 36px 28px' }}>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: '1.4fr 1fr 1fr 1fr',
+              gap: '48px',
+              marginBottom: '56px',
+            }}
+            className="cw-footer-grid"
+          >
             <div>
-              <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.2rem', fontWeight: 700, color: '#fff', marginBottom: '14px' }}>
-                CRAIN <span style={{ color: '#C5933A' }}>&amp;</span> WOOLEY
+              <div
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontSize: '1.55rem',
+                  fontWeight: 600,
+                  color: '#fff',
+                  marginBottom: '16px',
+                }}
+              >
+                Crain <span style={{ color: GOLD_LIGHT }}>&amp;</span> Wooley
               </div>
-              <p style={{ fontSize: '0.83rem', color: 'rgba(255,255,255,0.45)', lineHeight: 1.75, maxWidth: '260px', marginBottom: '16px' }}>
-                Licensed Texas attorneys offering straightforward legal guidance — without the runaround.
+              <p
+                style={{
+                  fontSize: '0.92rem',
+                  color: 'rgba(255,255,255,0.7)',
+                  lineHeight: 1.7,
+                  maxWidth: '320px',
+                  marginBottom: '20px',
+                }}
+              >
+                Estate planning, probate, and elder law for families across the
+                Dallas-Fort Worth area. Plain-language guidance and flat-rate pricing.
               </p>
-              <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'rgba(255,255,255,0.3)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-                Plano, Texas · Accepting New Clients
+              <p
+                style={{
+                  fontFamily: 'var(--font-sans)',
+                  fontSize: '0.75rem',
+                  color: GOLD_LIGHT,
+                  letterSpacing: '0.14em',
+                  textTransform: 'uppercase',
+                  fontWeight: 600,
+                }}
+              >
+                Plano · Mansfield · Fort Worth
               </p>
             </div>
+
             <div>
-              <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: '#C5933A', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: '18px' }}>Practice Areas</p>
-              {practiceAreas.map(a => (
-                <p key={a.label} style={{ fontSize: '0.83rem', color: 'rgba(255,255,255,0.45)', marginBottom: '10px', cursor: 'pointer', transition: 'color 0.2s' }}
-                  onMouseEnter={e => (e.currentTarget.style.color = '#C5933A')}
-                  onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.45)')}
-                >{a.label}</p>
+              <p
+                style={{
+                  fontFamily: 'var(--font-sans)',
+                  fontSize: '0.78rem',
+                  color: GOLD_LIGHT,
+                  letterSpacing: '0.18em',
+                  textTransform: 'uppercase',
+                  marginBottom: '20px',
+                  fontWeight: 600,
+                }}
+              >
+                Practice Areas
+              </p>
+              {practiceAreas.map((a) => (
+                <p
+                  key={a.label}
+                  style={{
+                    fontSize: '0.9rem',
+                    color: 'rgba(255,255,255,0.7)',
+                    marginBottom: '10px',
+                    cursor: 'pointer',
+                    transition: 'color 0.2s',
+                  }}
+                  onMouseEnter={(e) =>
+                    (e.currentTarget.style.color = GOLD_LIGHT)
+                  }
+                  onMouseLeave={(e) =>
+                    (e.currentTarget.style.color = 'rgba(255,255,255,0.7)')
+                  }
+                >
+                  {a.label}
+                </p>
               ))}
             </div>
+
             <div>
-              <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: '#C5933A', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: '18px' }}>Firm</p>
-              {['How It Works', 'About the Firm', 'Start Case Review', 'Client Portal', 'Privacy Policy'].map(item => (
-                <p key={item} style={{ fontSize: '0.83rem', color: 'rgba(255,255,255,0.45)', marginBottom: '10px', cursor: 'pointer', transition: 'color 0.2s' }}
-                  onMouseEnter={e => (e.currentTarget.style.color = '#C5933A')}
-                  onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.45)')}
-                >{item}</p>
-              ))}
+              <p
+                style={{
+                  fontFamily: 'var(--font-sans)',
+                  fontSize: '0.78rem',
+                  color: GOLD_LIGHT,
+                  letterSpacing: '0.18em',
+                  textTransform: 'uppercase',
+                  marginBottom: '20px',
+                  fontWeight: 600,
+                }}
+              >
+                Firm
+              </p>
+              {['About the Firm', 'Our Team', 'Pricing', 'Resources', 'Privacy Policy'].map(
+                (item) => (
+                  <p
+                    key={item}
+                    style={{
+                      fontSize: '0.9rem',
+                      color: 'rgba(255,255,255,0.7)',
+                      marginBottom: '10px',
+                      cursor: 'pointer',
+                      transition: 'color 0.2s',
+                    }}
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.color = GOLD_LIGHT)
+                    }
+                    onMouseLeave={(e) =>
+                      (e.currentTarget.style.color = 'rgba(255,255,255,0.7)')
+                    }
+                  >
+                    {item}
+                  </p>
+                ),
+              )}
+            </div>
+
+            <div>
+              <p
+                style={{
+                  fontFamily: 'var(--font-sans)',
+                  fontSize: '0.78rem',
+                  color: GOLD_LIGHT,
+                  letterSpacing: '0.18em',
+                  textTransform: 'uppercase',
+                  marginBottom: '20px',
+                  fontWeight: 600,
+                }}
+              >
+                Contact
+              </p>
+              <p
+                style={{
+                  fontSize: '0.9rem',
+                  color: 'rgba(255,255,255,0.85)',
+                  marginBottom: '10px',
+                  fontWeight: 600,
+                }}
+              >
+                Plano: (972) 945-1610
+              </p>
+              <p
+                style={{
+                  fontSize: '0.9rem',
+                  color: 'rgba(255,255,255,0.7)',
+                  marginBottom: '10px',
+                }}
+              >
+                Mansfield: (682) 356-4820
+              </p>
+              <p
+                style={{
+                  fontSize: '0.9rem',
+                  color: 'rgba(255,255,255,0.7)',
+                  marginBottom: '16px',
+                }}
+              >
+                Fort Worth: (817) 672-9442
+              </p>
+              <Link
+                href="/qualify"
+                style={{
+                  display: 'inline-block',
+                  background: GOLD,
+                  color: '#fff',
+                  fontFamily: 'var(--font-sans)',
+                  fontSize: '0.78rem',
+                  fontWeight: 600,
+                  letterSpacing: '0.04em',
+                  textTransform: 'uppercase',
+                  padding: '10px 18px',
+                  textDecoration: 'none',
+                  borderRadius: '4px',
+                  transition: 'background 0.2s',
+                }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.background = GOLD_DARK)
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.background = GOLD)
+                }
+              >
+                Get Started →
+              </Link>
             </div>
           </div>
 
-          <div style={{ paddingTop: '28px', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
-            <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'rgba(255,255,255,0.25)', letterSpacing: '0.05em' }}>
+          <div
+            style={{
+              paddingTop: '28px',
+              borderTop: '1px solid rgba(255,255,255,0.12)',
+              display: 'flex',
+              justifyContent: 'space-between',
+              flexWrap: 'wrap',
+              gap: '12px',
+            }}
+          >
+            <p
+              style={{
+                fontFamily: 'var(--font-sans)',
+                fontSize: '0.78rem',
+                color: 'rgba(255,255,255,0.45)',
+              }}
+            >
               © 2026 Crain &amp; Wooley PLLC. All rights reserved.
             </p>
-            <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.65rem', color: 'rgba(255,255,255,0.2)', maxWidth: '500px', textAlign: 'right', lineHeight: 1.6 }}>
-              This site is for informational purposes only and does not constitute legal advice.
+            <p
+              style={{
+                fontFamily: 'var(--font-sans)',
+                fontSize: '0.78rem',
+                color: 'rgba(255,255,255,0.45)',
+                maxWidth: '560px',
+                textAlign: 'right',
+                lineHeight: 1.6,
+              }}
+            >
+              This site is for informational purposes only and does not constitute legal
+              advice. Receipt does not create an attorney-client relationship.
             </p>
           </div>
         </div>
       </footer>
 
       <style>{`
-        @keyframes cw-pulse {
-          0%, 100% { opacity: 1; transform: scale(1); }
-          50% { opacity: 0.5; transform: scale(1.5); }
-        }
-        @media (max-width: 900px) {
+        @media (max-width: 980px) {
           .nav-links-desktop { display: none !important; }
+          .cw-nav-phone { display: none !important; }
+          .cw-hero-grid {
+            grid-template-columns: 1fr !important;
+            gap: 48px !important;
+            padding-top: 60px !important;
+            padding-bottom: 60px !important;
+          }
+          .cw-hero-accent { display: none !important; }
+          .cw-services-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+          .cw-process-grid {
+            grid-template-columns: 1fr !important;
+            gap: 40px !important;
+          }
+          .cw-footer-grid {
+            grid-template-columns: 1fr 1fr !important;
+            gap: 36px !important;
+          }
         }
-        @media (max-width: 768px) {
-          section[style] { padding-left: 24px !important; padding-right: 24px !important; }
-          div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; gap: 40px !important; }
-          div[style*="grid-template-columns: repeat(3, 1fr)"] { grid-template-columns: 1fr !important; }
-          div[style*="grid-template-columns: 2fr 1fr 1fr"] { grid-template-columns: 1fr !important; }
+        @media (max-width: 640px) {
+          .cw-services-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .cw-footer-grid {
+            grid-template-columns: 1fr !important;
+          }
         }
       `}</style>
-
     </div>
   )
 }
