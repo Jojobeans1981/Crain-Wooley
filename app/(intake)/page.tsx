@@ -173,20 +173,11 @@ export default function IntakeLanding() {
                 padding: '11px 22px',
                 textDecoration: 'none',
                 borderRadius: '4px',
-                transition: 'background 0.2s, transform 0.15s, box-shadow 0.2s',
-                boxShadow: '0 1px 2px rgba(11,29,53,0.2)',
+                transition: 'background 0.2s',
                 display: 'inline-block',
               }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = GOLD_DARK
-                e.currentTarget.style.transform = 'translateY(-1px)'
-                e.currentTarget.style.boxShadow = '0 4px 10px rgba(122,99,66,0.3)'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = GOLD
-                e.currentTarget.style.transform = 'translateY(0)'
-                e.currentTarget.style.boxShadow = '0 1px 2px rgba(11,29,53,0.2)'
-              }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = GOLD_DARK)}
+              onMouseLeave={(e) => (e.currentTarget.style.background = GOLD)}
             >
               Book Consultation
             </Link>
@@ -218,359 +209,123 @@ export default function IntakeLanding() {
 
         <div
           style={{
-            maxWidth: '1240px',
+            maxWidth: '960px',
             margin: '0 auto',
-            padding: '90px 36px 100px',
-            display: 'grid',
-            gridTemplateColumns: '1.05fr 0.95fr',
-            gap: '72px',
-            alignItems: 'center',
+            padding: '88px 36px 96px',
+            textAlign: 'center',
           }}
-          className="cw-hero-grid"
         >
-          {/* LEFT — copy */}
-          <div>
-            <p
+          <p
+            style={{
+              fontFamily: 'var(--font-sans)',
+              fontSize: '0.78rem',
+              fontWeight: 600,
+              letterSpacing: '0.2em',
+              textTransform: 'uppercase',
+              color: GOLD_DARK,
+              marginBottom: '22px',
+            }}
+          >
+            Dallas-Fort Worth · Estate Planning Attorneys
+          </p>
+
+          <h1
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 'clamp(2.2rem, 4.4vw, 3.7rem)',
+              fontWeight: 600,
+              lineHeight: 1.12,
+              color: NAVY,
+              marginBottom: '28px',
+              letterSpacing: '-0.005em',
+            }}
+          >
+            Life Can Be Full of Surprises.
+            <br />
+            The Cost of Planning for Your Future{' '}
+            <span style={{ color: GOLD, fontStyle: 'italic', fontWeight: 500 }}>
+              Shouldn&apos;t Be One of Them.
+            </span>
+          </h1>
+
+          <p
+            style={{
+              fontSize: '1.1rem',
+              lineHeight: 1.7,
+              color: INK_SOFT,
+              maxWidth: '720px',
+              margin: '0 auto 40px',
+            }}
+          >
+            Crain &amp; Wooley offers comprehensive, flat-rate services that serve clients of
+            all backgrounds throughout their lifetime. No matter where you are in life, we
+            make estate planning simple to better prepare you and your family for the future.
+          </p>
+
+          <div
+            style={{
+              display: 'flex',
+              gap: '14px',
+              flexWrap: 'wrap',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Link
+              href="/qualify"
               style={{
+                background: GOLD,
+                color: '#fff',
                 fontFamily: 'var(--font-sans)',
-                fontSize: '0.78rem',
+                fontSize: '0.88rem',
                 fontWeight: 600,
-                letterSpacing: '0.2em',
+                letterSpacing: '0.04em',
                 textTransform: 'uppercase',
-                color: GOLD_DARK,
-                marginBottom: '18px',
+                padding: '15px 32px',
+                textDecoration: 'none',
+                display: 'inline-block',
+                borderRadius: '4px',
+                transition: 'background 0.2s',
               }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = GOLD_DARK)}
+              onMouseLeave={(e) => (e.currentTarget.style.background = GOLD)}
             >
-              Dallas-Fort Worth · Estate Planning Attorneys
-            </p>
+              Book a Consultation
+            </Link>
 
-            <h1
+            <a
+              href="tel:9729451610"
               style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: 'clamp(2.4rem, 4.6vw, 3.9rem)',
-                fontWeight: 600,
-                lineHeight: 1.1,
+                background: 'transparent',
                 color: NAVY,
-                marginBottom: '24px',
-                letterSpacing: '-0.005em',
-              }}
-            >
-              Life Can Be Full of Surprises.
-              <br />
-              <span style={{ color: NAVY }}>
-                The Cost of Planning for Your Future{' '}
-              </span>
-              <span style={{ color: GOLD, fontStyle: 'italic', fontWeight: 500 }}>
-                Shouldn&apos;t Be One of Them.
-              </span>
-            </h1>
-
-            <p
-              style={{
-                fontSize: '1.08rem',
-                lineHeight: 1.7,
-                color: INK_SOFT,
-                maxWidth: '560px',
-                marginBottom: '36px',
-              }}
-            >
-              Crain &amp; Wooley offers comprehensive, flat-rate services that serve clients of
-              all backgrounds throughout their lifetime. No matter where you are in life, we
-              make estate planning simple to better prepare you and your family for the future.
-            </p>
-
-            <div
-              style={{
-                display: 'flex',
-                gap: '14px',
-                flexWrap: 'wrap',
+                fontFamily: 'var(--font-sans)',
+                fontSize: '0.88rem',
+                fontWeight: 600,
+                letterSpacing: '0.02em',
+                padding: '14px 26px',
+                textDecoration: 'none',
+                display: 'inline-flex',
                 alignItems: 'center',
-                marginBottom: '36px',
+                gap: '8px',
+                borderRadius: '4px',
+                border: `1px solid ${NAVY}`,
+                transition: 'background 0.2s, color 0.2s',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = NAVY
+                e.currentTarget.style.color = '#fff'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'transparent'
+                e.currentTarget.style.color = NAVY
               }}
             >
-              <Link
-                href="/qualify"
-                style={{
-                  background: GOLD,
-                  color: '#fff',
-                  fontFamily: 'var(--font-sans)',
-                  fontSize: '0.88rem',
-                  fontWeight: 600,
-                  letterSpacing: '0.04em',
-                  textTransform: 'uppercase',
-                  padding: '15px 32px',
-                  textDecoration: 'none',
-                  display: 'inline-block',
-                  borderRadius: '4px',
-                  transition: 'background 0.2s, transform 0.15s, box-shadow 0.2s',
-                  boxShadow: '0 2px 4px rgba(11,29,53,0.18)',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = GOLD_DARK
-                  e.currentTarget.style.transform = 'translateY(-1px)'
-                  e.currentTarget.style.boxShadow = '0 6px 14px rgba(122,99,66,0.3)'
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = GOLD
-                  e.currentTarget.style.transform = 'translateY(0)'
-                  e.currentTarget.style.boxShadow = '0 2px 4px rgba(11,29,53,0.18)'
-                }}
-              >
-                Book a Consultation
-              </Link>
-
-              <a
-                href="tel:9729451610"
-                style={{
-                  background: 'transparent',
-                  color: NAVY,
-                  fontFamily: 'var(--font-sans)',
-                  fontSize: '0.88rem',
-                  fontWeight: 600,
-                  letterSpacing: '0.02em',
-                  padding: '14px 26px',
-                  textDecoration: 'none',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  borderRadius: '4px',
-                  border: `1px solid ${NAVY}`,
-                  transition: 'background 0.2s, color 0.2s',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = NAVY
-                  e.currentTarget.style.color = '#fff'
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'transparent'
-                  e.currentTarget.style.color = NAVY
-                }}
-              >
-                <span>☎</span> Call (972) 945-1610
-              </a>
-            </div>
-
-            {/* Trust micro-row */}
-            <div
-              style={{
-                display: 'flex',
-                gap: '28px',
-                flexWrap: 'wrap',
-                paddingTop: '24px',
-                borderTop: `1px solid ${LINE}`,
-              }}
-            >
-              {[
-                { num: '20+', label: 'Years Serving DFW' },
-                { num: 'Flat', label: 'Rate Pricing' },
-                { num: '5★', label: 'Google Reviews' },
-              ].map((s) => (
-                <div key={s.label}>
-                  <div
-                    style={{
-                      fontFamily: 'var(--font-display)',
-                      fontSize: '1.6rem',
-                      fontWeight: 600,
-                      color: NAVY,
-                      lineHeight: 1,
-                    }}
-                  >
-                    {s.num}
-                  </div>
-                  <div
-                    style={{
-                      fontFamily: 'var(--font-sans)',
-                      fontSize: '0.72rem',
-                      letterSpacing: '0.08em',
-                      textTransform: 'uppercase',
-                      color: INK_MUTE,
-                      marginTop: '6px',
-                      fontWeight: 500,
-                    }}
-                  >
-                    {s.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* RIGHT — visual card */}
-          <div style={{ position: 'relative' }}>
-            {/* Faux portrait / building plate — uses the existing scales image but on a warm card */}
-            <div
-              style={{
-                position: 'relative',
-                background: NAVY,
-                borderRadius: '6px',
-                overflow: 'hidden',
-                boxShadow:
-                  '0 10px 30px rgba(11,29,53,0.18), 0 2px 6px rgba(11,29,53,0.12)',
-                aspectRatio: '4 / 5',
-                maxWidth: '460px',
-                marginLeft: 'auto',
-              }}
-            >
-              {/* Background image */}
-              <img
-                src="/scales.jpg"
-                alt=""
-                aria-hidden="true"
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  opacity: 0.55,
-                  filter: 'sepia(0.2) saturate(0.85)',
-                }}
-              />
-              {/* Navy gradient overlay */}
-              <div
-                aria-hidden="true"
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  background:
-                    `linear-gradient(180deg, rgba(11,29,53,0.55) 0%, rgba(11,29,53,0.85) 75%, ${NAVY} 100%)`,
-                }}
-              />
-
-              {/* Content overlay */}
-              <div
-                style={{
-                  position: 'relative',
-                  height: '100%',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  padding: '36px 32px',
-                  color: '#fff',
-                }}
-              >
-                <div>
-                  <p
-                    style={{
-                      fontFamily: 'var(--font-sans)',
-                      fontSize: '0.72rem',
-                      letterSpacing: '0.22em',
-                      textTransform: 'uppercase',
-                      color: GOLD_LIGHT,
-                      fontWeight: 600,
-                      marginBottom: '14px',
-                    }}
-                  >
-                    Compassionate Counsel
-                  </p>
-                  <p
-                    style={{
-                      fontFamily: 'var(--font-display)',
-                      fontSize: '1.7rem',
-                      lineHeight: 1.25,
-                      fontWeight: 500,
-                      fontStyle: 'italic',
-                      color: '#fff',
-                    }}
-                  >
-                    &ldquo;Planning for the future means making decisions you can trust.&rdquo;
-                  </p>
-                </div>
-
-                <div
-                  style={{
-                    paddingTop: '24px',
-                    borderTop: `1px solid rgba(224,178,95,0.35)`,
-                  }}
-                >
-                  <p
-                    style={{
-                      fontFamily: 'var(--font-sans)',
-                      fontSize: '0.85rem',
-                      color: 'rgba(255,255,255,0.85)',
-                      lineHeight: 1.55,
-                      marginBottom: '12px',
-                    }}
-                  >
-                    Plain-language guidance from Texas-licensed attorneys. In-person and
-                    virtual consultations available.
-                  </p>
-                  <p
-                    style={{
-                      fontFamily: 'var(--font-sans)',
-                      fontSize: '0.72rem',
-                      letterSpacing: '0.14em',
-                      textTransform: 'uppercase',
-                      color: GOLD_LIGHT,
-                      fontWeight: 600,
-                    }}
-                  >
-                    Plano · Mansfield · Fort Worth
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Gold offset accent */}
-            <div
-              aria-hidden="true"
-              style={{
-                position: 'absolute',
-                bottom: '-18px',
-                right: '-18px',
-                width: '120px',
-                height: '120px',
-                border: `2px solid ${GOLD}`,
-                borderRadius: '6px',
-                zIndex: -1,
-              }}
-              className="cw-hero-accent"
-            />
+              <span>☎</span> Call (972) 945-1610
+            </a>
           </div>
         </div>
       </section>
 
-      {/* ── TRUST BAR ── */}
-      <div style={{ background: NAVY, borderBottom: `3px solid ${GOLD}` }}>
-        <div
-          style={{
-            maxWidth: '1240px',
-            margin: '0 auto',
-            padding: '22px 36px',
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-            alignItems: 'center',
-            gap: '40px',
-          }}
-        >
-          {[
-            'Texas Bar College',
-            'NAELA Member',
-            '5★ Google Rated',
-            'Martindale Client Champion',
-            'Top 3 Estate Planning · Plano',
-          ].map((t) => (
-            <span
-              key={t}
-              style={{
-                fontFamily: 'var(--font-sans)',
-                fontSize: '0.78rem',
-                fontWeight: 600,
-                letterSpacing: '0.12em',
-                textTransform: 'uppercase',
-                color: '#fff',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '10px',
-              }}
-            >
-              <span style={{ color: GOLD_LIGHT }}>✦</span>
-              {t}
-            </span>
-          ))}
-        </div>
-      </div>
 
       {/* ── ABOUT / INTRO ── */}
       <section id="about" style={{ background: CREAM }}>
@@ -578,7 +333,7 @@ export default function IntakeLanding() {
           style={{
             maxWidth: '1040px',
             margin: '0 auto',
-            padding: '96px 36px',
+            padding: '88px 36px',
             textAlign: 'center',
           }}
         >
@@ -644,7 +399,7 @@ export default function IntakeLanding() {
 
       {/* ── SERVICES / PRACTICE AREAS ── */}
       <section id="services" style={{ background: IVORY, borderTop: `1px solid ${LINE}` }}>
-        <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '96px 36px' }}>
+        <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '88px 36px' }}>
           <div style={{ textAlign: 'center', marginBottom: '64px' }}>
             <p className="cw-eyebrow" style={{ marginBottom: '16px' }}>
               What We Can Do For You
@@ -684,20 +439,15 @@ export default function IntakeLanding() {
                   borderTop: `3px solid ${GOLD}`,
                   borderRadius: '6px',
                   padding: '36px 32px',
-                  transition:
-                    'transform 0.25s, box-shadow 0.25s, border-color 0.25s',
+                  transition: 'border-color 0.25s, box-shadow 0.25s',
                   boxShadow: '0 1px 3px rgba(11,29,53,0.04)',
                   cursor: 'default',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-3px)'
-                  e.currentTarget.style.boxShadow =
-                    '0 12px 30px rgba(11,29,53,0.08)'
+                  e.currentTarget.style.boxShadow = '0 4px 14px rgba(11,29,53,0.06)'
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)'
-                  e.currentTarget.style.boxShadow =
-                    '0 1px 3px rgba(11,29,53,0.04)'
+                  e.currentTarget.style.boxShadow = '0 1px 3px rgba(11,29,53,0.04)'
                 }}
               >
                 <h3
@@ -727,12 +477,12 @@ export default function IntakeLanding() {
         </div>
       </section>
 
-      {/* ── HOW IT WORKS / PROCESS ── */}
+      {/* ── WHAT TO EXPECT ── */}
       <section id="process" style={{ background: CREAM, borderTop: `1px solid ${LINE}` }}>
-        <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '96px 36px' }}>
-          <div style={{ textAlign: 'center', marginBottom: '64px' }}>
+        <div style={{ maxWidth: '820px', margin: '0 auto', padding: '88px 36px' }}>
+          <div style={{ textAlign: 'center', marginBottom: '40px' }}>
             <p className="cw-eyebrow" style={{ marginBottom: '16px' }}>
-              Designed for Your Comfort &amp; Convenience
+              What to Expect
             </p>
             <h2
               style={{
@@ -744,7 +494,7 @@ export default function IntakeLanding() {
                 lineHeight: 1.2,
               }}
             >
-              Estate Planning With Us Means
+              The Estate Planning Process
             </h2>
             <div
               aria-hidden="true"
@@ -752,82 +502,29 @@ export default function IntakeLanding() {
             />
           </div>
 
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(3, 1fr)',
-              gap: '32px',
-            }}
-            className="cw-process-grid"
-          >
-            {[
-              {
-                num: '01',
-                title: 'Expert Service',
-                desc: 'Laws change all the time. We stay up to date with the latest information so that you\u2019re covered. We\u2019re the experts so you don\u2019t have to be.',
-              },
-              {
-                num: '02',
-                title: 'Optional Lifetime Guarantee',
-                desc: 'With our optional lifetime guarantee, your will and trust are automatically updated over the years to reflect your current wishes and minimize future confusion.',
-              },
-              {
-                num: '03',
-                title: 'Flat-Rate Pricing',
-                desc: 'Finally, you won\u2019t need a lawyer to understand your legal fees. We communicate our pricing structure upfront. No surprises. No hidden fees.',
-              },
-            ].map((step) => (
-              <div
-                key={step.num}
-                style={{
-                  background: 'transparent',
-                  padding: '8px',
-                  position: 'relative',
-                }}
-              >
-                <div
-                  style={{
-                    fontFamily: 'var(--font-display)',
-                    fontSize: '3.2rem',
-                    fontWeight: 500,
-                    color: GOLD,
-                    lineHeight: 1,
-                    marginBottom: '18px',
-                    fontStyle: 'italic',
-                  }}
-                >
-                  {step.num}
-                </div>
-                <h3
-                  style={{
-                    fontFamily: 'var(--font-display)',
-                    fontSize: '1.45rem',
-                    fontWeight: 600,
-                    color: NAVY,
-                    marginBottom: '14px',
-                  }}
-                >
-                  {step.title}
-                </h3>
-                <p
-                  style={{
-                    fontSize: '0.95rem',
-                    lineHeight: 1.75,
-                    color: INK_SOFT,
-                    margin: 0,
-                  }}
-                >
-                  {step.desc}
-                </p>
-              </div>
-            ))}
-          </div>
+          <p style={{ fontSize: '1.05rem', lineHeight: 1.85, color: INK_SOFT, marginBottom: '20px' }}>
+            When you begin working on an estate plan with Crain &amp; Wooley, expect a detailed
+            review of your assets, your family situation, and your long-term wishes. We start
+            with a confidential consultation \u2014 in person at one of our offices or virtually \u2014
+            so we can understand what matters most before we put pen to paper.
+          </p>
+          <p style={{ fontSize: '1.05rem', lineHeight: 1.85, color: INK_SOFT, marginBottom: '20px' }}>
+            From there, we outline the options available under Texas law \u2014 wills, trusts,
+            powers of attorney, healthcare directives \u2014 and explain how Dallas, Tarrant, and
+            Collin County probate courts may affect your plan. You leave the meeting with a
+            clear recommendation and a flat-rate quote. No hourly meter. No surprises.
+          </p>
+          <p style={{ fontSize: '1.05rem', lineHeight: 1.85, color: INK_SOFT, margin: 0 }}>
+            Once you decide to proceed, we draft your documents, walk you through every
+            provision in plain language, and execute everything properly so it holds up when
+            your family needs it most.
+          </p>
         </div>
       </section>
 
       {/* ── FAQ ── */}
       <section id="faq" style={{ background: IVORY, borderTop: `1px solid ${LINE}` }}>
-        <div style={{ maxWidth: '960px', margin: '0 auto', padding: '96px 36px' }}>
+        <div style={{ maxWidth: '960px', margin: '0 auto', padding: '88px 36px' }}>
           <div style={{ textAlign: 'center', marginBottom: '56px' }}>
             <p className="cw-eyebrow" style={{ marginBottom: '16px' }}>
               Common Questions
@@ -938,7 +635,7 @@ export default function IntakeLanding() {
           style={{
             maxWidth: '1100px',
             margin: '0 auto',
-            padding: '96px 36px',
+            padding: '88px 36px',
             textAlign: 'center',
           }}
         >
@@ -1006,15 +703,13 @@ export default function IntakeLanding() {
                   borderRadius: '6px',
                   padding: '36px 28px',
                   textAlign: 'left',
-                  transition: 'transform 0.25s, box-shadow 0.25s',
+                  transition: 'box-shadow 0.25s',
                   boxShadow: '0 1px 3px rgba(11,29,53,0.04)',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-3px)'
-                  e.currentTarget.style.boxShadow = '0 12px 30px rgba(11,29,53,0.08)'
+                  e.currentTarget.style.boxShadow = '0 4px 14px rgba(11,29,53,0.06)'
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)'
                   e.currentTarget.style.boxShadow = '0 1px 3px rgba(11,29,53,0.04)'
                 }}
               >
@@ -1349,19 +1044,8 @@ export default function IntakeLanding() {
         @media (max-width: 980px) {
           .nav-links-desktop { display: none !important; }
           .cw-nav-phone { display: none !important; }
-          .cw-hero-grid {
-            grid-template-columns: 1fr !important;
-            gap: 48px !important;
-            padding-top: 60px !important;
-            padding-bottom: 60px !important;
-          }
-          .cw-hero-accent { display: none !important; }
           .cw-services-grid {
             grid-template-columns: repeat(2, 1fr) !important;
-          }
-          .cw-process-grid {
-            grid-template-columns: 1fr !important;
-            gap: 40px !important;
           }
           .cw-footer-grid {
             grid-template-columns: 1fr 1fr !important;

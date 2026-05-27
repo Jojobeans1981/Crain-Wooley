@@ -7,21 +7,6 @@ export default function IntakeLayout({ children }: { children: React.ReactNode }
         position: 'relative',
       }}
     >
-      {/* Subtle gold accent bar at very top — a thin nod to traditional law-firm letterhead */}
-      <div
-        aria-hidden="true"
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          height: '3px',
-          background: 'linear-gradient(90deg, #9B8059 0%, #B89E78 50%, #9B8059 100%)',
-          zIndex: 200,
-          pointerEvents: 'none',
-        }}
-      />
-
       {/* Very faint scales-of-justice watermark, centered and pinned. */}
       <svg
         viewBox="0 0 260 300"
