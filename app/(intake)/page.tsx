@@ -245,20 +245,21 @@ export default function IntakeLanding() {
             <h1
               style={{
                 fontFamily: 'var(--font-display)',
-                fontSize: 'clamp(2.6rem, 5.2vw, 4.4rem)',
+                fontSize: 'clamp(2.4rem, 4.6vw, 3.9rem)',
                 fontWeight: 600,
-                lineHeight: 1.08,
+                lineHeight: 1.1,
                 color: NAVY,
                 marginBottom: '24px',
-                letterSpacing: '-0.01em',
+                letterSpacing: '-0.005em',
               }}
             >
-              Life Can Be Full
+              Life Can Be Full of Surprises.
               <br />
-              of Surprises.
-              <br />
+              <span style={{ color: NAVY }}>
+                The Cost of Planning for Your Future{' '}
+              </span>
               <span style={{ color: GOLD, fontStyle: 'italic', fontWeight: 500 }}>
-                Your Plan Shouldn&apos;t Be.
+                Shouldn&apos;t Be One of Them.
               </span>
             </h1>
 
@@ -267,14 +268,13 @@ export default function IntakeLanding() {
                 fontSize: '1.08rem',
                 lineHeight: 1.7,
                 color: INK_SOFT,
-                maxWidth: '520px',
+                maxWidth: '560px',
                 marginBottom: '36px',
               }}
             >
-              Crain &amp; Wooley offers comprehensive, flat-rate estate planning that serves
-              clients of all backgrounds throughout their lifetime. No matter where you are in
-              life, we make the process simple — so you and your family are prepared for what
-              comes next.
+              Crain &amp; Wooley offers comprehensive, flat-rate services that serve clients of
+              all backgrounds throughout their lifetime. No matter where you are in life, we
+              make estate planning simple to better prepare you and your family for the future.
             </p>
 
             <div
@@ -314,7 +314,7 @@ export default function IntakeLanding() {
                   e.currentTarget.style.boxShadow = '0 2px 4px rgba(11,29,53,0.18)'
                 }}
               >
-                Book a Consultation →
+                Book a Consultation
               </Link>
 
               <a
@@ -823,103 +823,110 @@ export default function IntakeLanding() {
         </div>
       </section>
 
-      {/* ── TESTIMONIAL / RESULTS ── */}
-      <section id="results" style={{ background: NAVY, position: 'relative', overflow: 'hidden' }}>
-        {/* faint gold pattern */}
-        <div
-          aria-hidden="true"
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            height: '1px',
-            background: `linear-gradient(90deg, transparent, ${GOLD} 50%, transparent)`,
-          }}
-        />
-        <div
-          style={{
-            maxWidth: '900px',
-            margin: '0 auto',
-            padding: '96px 36px',
-            textAlign: 'center',
-            color: '#fff',
-          }}
-        >
-          <p
-            style={{
-              fontFamily: 'var(--font-sans)',
-              fontSize: '0.78rem',
-              fontWeight: 600,
-              letterSpacing: '0.2em',
-              textTransform: 'uppercase',
-              color: GOLD_LIGHT,
-              marginBottom: '24px',
-            }}
-          >
-            What Our Clients Say
-          </p>
-
-          {/* 5 stars */}
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              gap: '6px',
-              marginBottom: '28px',
-              fontSize: '1.3rem',
-              color: GOLD,
-            }}
-          >
-            ★ ★ ★ ★ ★
+      {/* ── FAQ ── */}
+      <section id="faq" style={{ background: IVORY, borderTop: `1px solid ${LINE}` }}>
+        <div style={{ maxWidth: '960px', margin: '0 auto', padding: '96px 36px' }}>
+          <div style={{ textAlign: 'center', marginBottom: '56px' }}>
+            <p className="cw-eyebrow" style={{ marginBottom: '16px' }}>
+              Common Questions
+            </p>
+            <h2
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 'clamp(2rem, 3.6vw, 2.9rem)',
+                fontWeight: 600,
+                color: NAVY,
+                marginBottom: '20px',
+                lineHeight: 1.2,
+              }}
+            >
+              Frequently Asked Questions
+            </h2>
+            <div
+              aria-hidden="true"
+              style={{ width: '60px', height: '2px', background: GOLD, margin: '0 auto' }}
+            />
           </div>
 
-          <blockquote
-            style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(1.4rem, 2.6vw, 2rem)',
-              lineHeight: 1.45,
-              fontWeight: 400,
-              fontStyle: 'italic',
-              color: '#fff',
-              margin: '0 0 32px',
-              maxWidth: '780px',
-              marginLeft: 'auto',
-              marginRight: 'auto',
-            }}
-          >
-            &ldquo;After worrying about our lack of estate planning for years, it feels so
-            good to finally have a plan in place. Thank you for making the process relatively
-            painless and offering the educational support we needed.&rdquo;
-          </blockquote>
-
-          <p
-            style={{
-              fontFamily: 'var(--font-sans)',
-              fontSize: '0.95rem',
-              fontWeight: 600,
-              letterSpacing: '0.04em',
-              color: GOLD_LIGHT,
-              marginBottom: '4px',
-            }}
-          >
-            Leslie W.
-          </p>
-          <p
-            style={{
-              fontFamily: 'var(--font-sans)',
-              fontSize: '0.78rem',
-              color: 'rgba(255,255,255,0.6)',
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
-            }}
-          >
-            Verified Client
-          </p>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+            {[
+              {
+                q: 'What is the difference between a will and a trust in Texas?',
+                a: 'A will states how your assets pass after your death and usually goes through probate in your home county, such as Tarrant or Dallas. A trust creates a private arrangement that can help your heirs avoid probate court, enable a faster transfer of assets, and give you more control over how property gets distributed.',
+              },
+              {
+                q: 'How often should I update my estate plan?',
+                a: 'We recommend reviewing your estate plan every three to five years, or sooner if you experience a major life event — marriage, divorce, the birth of a child, a significant change in assets, or a move to or from Texas.',
+              },
+              {
+                q: 'Do I need an estate plan if I do not own much property?',
+                a: 'Yes. An estate plan also designates guardians for minor children, names healthcare and financial agents, and controls how even modest assets pass to the people you love — all without leaving those decisions to a Texas court.',
+              },
+              {
+                q: 'What happens if I die without a will in Texas?',
+                a: 'Texas intestacy law decides who inherits your assets, and the rules may not match your wishes. Without a will, the process often takes longer, costs more, and removes your ability to choose guardians for minor children or to provide for unmarried partners or stepchildren.',
+              },
+              {
+                q: 'What is a medical power of attorney?',
+                a: 'A medical power of attorney lets you name a trusted person to make healthcare decisions for you if you cannot speak for yourself. It is a core part of every estate plan we build, alongside a will or trust and a durable financial power of attorney.',
+              },
+            ].map((item, idx) => (
+              <details
+                key={idx}
+                style={{
+                  borderTop: idx === 0 ? `1px solid ${LINE}` : 'none',
+                  borderBottom: `1px solid ${LINE}`,
+                  padding: '24px 0',
+                }}
+              >
+                <summary
+                  style={{
+                    fontFamily: 'var(--font-display)',
+                    fontSize: '1.2rem',
+                    fontWeight: 600,
+                    color: NAVY,
+                    cursor: 'pointer',
+                    listStyle: 'none',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    gap: '16px',
+                  }}
+                >
+                  <span>{item.q}</span>
+                  <span
+                    aria-hidden="true"
+                    style={{
+                      color: GOLD,
+                      fontFamily: 'var(--font-sans)',
+                      fontSize: '1.5rem',
+                      fontWeight: 400,
+                      lineHeight: 1,
+                      flexShrink: 0,
+                    }}
+                  >
+                    +
+                  </span>
+                </summary>
+                <p
+                  style={{
+                    fontSize: '1rem',
+                    lineHeight: 1.7,
+                    color: INK_SOFT,
+                    marginTop: '16px',
+                    marginBottom: 0,
+                    paddingRight: '40px',
+                  }}
+                >
+                  {item.a}
+                </p>
+              </details>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* ── CTA ── */}
+      {/* ── LOCATIONS / FINAL CTA ── */}
       <section
         style={{
           background: `linear-gradient(180deg, ${CREAM_DEEP} 0%, ${CREAM} 100%)`,
@@ -927,7 +934,7 @@ export default function IntakeLanding() {
       >
         <div
           style={{
-            maxWidth: '760px',
+            maxWidth: '1100px',
             margin: '0 auto',
             padding: '96px 36px',
             textAlign: 'center',
@@ -942,96 +949,159 @@ export default function IntakeLanding() {
               fontSize: 'clamp(2.1rem, 4vw, 3.2rem)',
               fontWeight: 600,
               color: NAVY,
-              marginBottom: '20px',
+              marginBottom: '16px',
               lineHeight: 1.2,
             }}
           >
-            Speak With an Estate Planning Attorney Today
+            Start By Selecting a Convenient Location
           </h2>
           <div
             aria-hidden="true"
-            style={{ width: '60px', height: '2px', background: GOLD, margin: '0 auto 28px' }}
+            style={{ width: '60px', height: '2px', background: GOLD, margin: '0 auto 48px' }}
           />
-          <p
-            style={{
-              fontSize: '1.08rem',
-              color: INK_SOFT,
-              marginBottom: '40px',
-              lineHeight: 1.7,
-            }}
-          >
-            Whether you need to establish a new estate plan or update an existing one,
-            Crain &amp; Wooley offers local insight, responsive service, and straightforward
-            pricing. Let our team help you plan confidently and protect what matters most.
-          </p>
+
           <div
             style={{
-              display: 'flex',
-              gap: '14px',
-              justifyContent: 'center',
-              flexWrap: 'wrap',
-              marginBottom: '24px',
+              display: 'grid',
+              gridTemplateColumns: 'repeat(3, 1fr)',
+              gap: '24px',
+              marginBottom: '40px',
             }}
+            className="cw-services-grid"
           >
-            <Link
-              href="/qualify"
-              style={{
-                background: GOLD,
-                color: '#fff',
-                fontFamily: 'var(--font-sans)',
-                fontSize: '0.88rem',
-                fontWeight: 600,
-                letterSpacing: '0.04em',
-                textTransform: 'uppercase',
-                padding: '16px 32px',
-                textDecoration: 'none',
-                borderRadius: '4px',
-                transition: 'background 0.2s, transform 0.15s, box-shadow 0.2s',
-                boxShadow: '0 2px 4px rgba(11,29,53,0.18)',
-                display: 'inline-block',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = GOLD_DARK
-                e.currentTarget.style.transform = 'translateY(-1px)'
-                e.currentTarget.style.boxShadow = '0 6px 14px rgba(122,99,66,0.3)'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = GOLD
-                e.currentTarget.style.transform = 'translateY(0)'
-                e.currentTarget.style.boxShadow = '0 2px 4px rgba(11,29,53,0.18)'
-              }}
-            >
-              Start Your Free Case Review →
-            </Link>
-            <a
-              href="tel:9729451610"
-              style={{
-                background: 'transparent',
-                color: NAVY,
-                fontFamily: 'var(--font-sans)',
-                fontSize: '0.88rem',
-                fontWeight: 600,
-                padding: '15px 26px',
-                textDecoration: 'none',
-                borderRadius: '4px',
-                border: `1px solid ${NAVY}`,
-                transition: 'background 0.2s, color 0.2s',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = NAVY
-                e.currentTarget.style.color = '#fff'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'transparent'
-                e.currentTarget.style.color = NAVY
-              }}
-            >
-              <span>☎</span> Call (972) 945-1610
-            </a>
+            {[
+              {
+                city: 'Plano',
+                label: 'Principal Location',
+                address: '2805 Dallas Parkway, Suite 400',
+                cityLine: 'Plano, TX 75093',
+                phone: '(972) 945-1610',
+                tel: '9729451610',
+              },
+              {
+                city: 'Mansfield',
+                label: 'Mansfield Office',
+                address: '1671 E Broad St, Suite 102',
+                cityLine: 'Mansfield, TX 76063',
+                phone: '(682) 356-4820',
+                tel: '6823564820',
+              },
+              {
+                city: 'Fort Worth',
+                label: 'Fort Worth Office',
+                address: '420 Throckmorton St, Suite 200',
+                cityLine: 'Fort Worth, TX 76102',
+                phone: '(817) 672-9442',
+                tel: '8176729442',
+              },
+            ].map((loc) => (
+              <div
+                key={loc.city}
+                style={{
+                  background: '#fff',
+                  border: `1px solid ${LINE}`,
+                  borderTop: `3px solid ${GOLD}`,
+                  borderRadius: '6px',
+                  padding: '36px 28px',
+                  textAlign: 'left',
+                  transition: 'transform 0.25s, box-shadow 0.25s',
+                  boxShadow: '0 1px 3px rgba(11,29,53,0.04)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-3px)'
+                  e.currentTarget.style.boxShadow = '0 12px 30px rgba(11,29,53,0.08)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)'
+                  e.currentTarget.style.boxShadow = '0 1px 3px rgba(11,29,53,0.04)'
+                }}
+              >
+                <p
+                  style={{
+                    fontFamily: 'var(--font-sans)',
+                    fontSize: '0.72rem',
+                    letterSpacing: '0.18em',
+                    textTransform: 'uppercase',
+                    color: GOLD_DARK,
+                    fontWeight: 600,
+                    marginBottom: '8px',
+                  }}
+                >
+                  {loc.label}
+                </p>
+                <h3
+                  style={{
+                    fontFamily: 'var(--font-display)',
+                    fontSize: '1.6rem',
+                    fontWeight: 600,
+                    color: NAVY,
+                    marginBottom: '14px',
+                    lineHeight: 1.1,
+                  }}
+                >
+                  {loc.city}
+                </h3>
+                <p
+                  style={{
+                    fontSize: '0.92rem',
+                    color: INK_SOFT,
+                    lineHeight: 1.6,
+                    marginBottom: '6px',
+                  }}
+                >
+                  {loc.address}
+                </p>
+                <p
+                  style={{
+                    fontSize: '0.92rem',
+                    color: INK_SOFT,
+                    lineHeight: 1.6,
+                    marginBottom: '20px',
+                  }}
+                >
+                  {loc.cityLine}
+                </p>
+                <a
+                  href={`tel:${loc.tel}`}
+                  style={{
+                    display: 'block',
+                    fontFamily: 'var(--font-sans)',
+                    fontSize: '0.95rem',
+                    fontWeight: 600,
+                    color: NAVY,
+                    textDecoration: 'none',
+                    marginBottom: '20px',
+                  }}
+                >
+                  {loc.phone}
+                </a>
+                <Link
+                  href="/qualify"
+                  style={{
+                    display: 'inline-block',
+                    background: GOLD,
+                    color: '#fff',
+                    fontFamily: 'var(--font-sans)',
+                    fontSize: '0.78rem',
+                    fontWeight: 600,
+                    letterSpacing: '0.04em',
+                    textTransform: 'uppercase',
+                    padding: '12px 22px',
+                    textDecoration: 'none',
+                    borderRadius: '4px',
+                    transition: 'background 0.2s',
+                  }}
+                  onMouseEnter={(e) =>
+                    (e.currentTarget.style.background = GOLD_DARK)
+                  }
+                  onMouseLeave={(e) => (e.currentTarget.style.background = GOLD)}
+                >
+                  Contact Us
+                </Link>
+              </div>
+            ))}
           </div>
+
           <p
             style={{
               fontFamily: 'var(--font-sans)',
@@ -1157,7 +1227,7 @@ export default function IntakeLanding() {
               >
                 Firm
               </p>
-              {['About the Firm', 'Our Team', 'Pricing', 'Resources', 'Privacy Policy'].map(
+              {['About Us', 'Our Team', 'Pricing', 'Resources', 'Blog', 'Contact Us'].map(
                 (item) => (
                   <p
                     key={item}
@@ -1193,61 +1263,47 @@ export default function IntakeLanding() {
                   fontWeight: 600,
                 }}
               >
-                Contact
+                Locations
               </p>
-              <p
-                style={{
-                  fontSize: '0.9rem',
-                  color: 'rgba(255,255,255,0.85)',
-                  marginBottom: '10px',
-                  fontWeight: 600,
-                }}
-              >
-                Plano: (972) 945-1610
-              </p>
-              <p
-                style={{
-                  fontSize: '0.9rem',
-                  color: 'rgba(255,255,255,0.7)',
-                  marginBottom: '10px',
-                }}
-              >
-                Mansfield: (682) 356-4820
-              </p>
-              <p
-                style={{
-                  fontSize: '0.9rem',
-                  color: 'rgba(255,255,255,0.7)',
-                  marginBottom: '16px',
-                }}
-              >
-                Fort Worth: (817) 672-9442
-              </p>
-              <Link
-                href="/qualify"
-                style={{
-                  display: 'inline-block',
-                  background: GOLD,
-                  color: '#fff',
-                  fontFamily: 'var(--font-sans)',
-                  fontSize: '0.78rem',
-                  fontWeight: 600,
-                  letterSpacing: '0.04em',
-                  textTransform: 'uppercase',
-                  padding: '10px 18px',
-                  textDecoration: 'none',
-                  borderRadius: '4px',
-                  transition: 'background 0.2s',
-                }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.background = GOLD_DARK)
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.background = GOLD)
-                }
-              >
-                Get Started →
-              </Link>
+              {[
+                { city: 'Plano', addr: '2805 Dallas Pkwy, Ste 400', phone: '(972) 945-1610', tel: '9729451610' },
+                { city: 'Mansfield', addr: '1671 E Broad St, Ste 102', phone: '(682) 356-4820', tel: '6823564820' },
+                { city: 'Fort Worth', addr: '420 Throckmorton St, Ste 200', phone: '(817) 672-9442', tel: '8176729442' },
+              ].map((loc) => (
+                <div key={loc.city} style={{ marginBottom: '18px' }}>
+                  <p
+                    style={{
+                      fontSize: '0.9rem',
+                      color: '#fff',
+                      fontWeight: 600,
+                      marginBottom: '2px',
+                    }}
+                  >
+                    {loc.city}
+                  </p>
+                  <p
+                    style={{
+                      fontSize: '0.82rem',
+                      color: 'rgba(255,255,255,0.6)',
+                      marginBottom: '2px',
+                      lineHeight: 1.4,
+                    }}
+                  >
+                    {loc.addr}
+                  </p>
+                  <a
+                    href={`tel:${loc.tel}`}
+                    style={{
+                      fontSize: '0.85rem',
+                      color: GOLD_LIGHT,
+                      textDecoration: 'none',
+                      fontWeight: 500,
+                    }}
+                  >
+                    {loc.phone}
+                  </a>
+                </div>
+              ))}
             </div>
           </div>
 
