@@ -10,7 +10,7 @@
   :root { color-scheme: light; }
 
   body {
-    background-color: #F7F2E9;     /* cream */
+    background-color: #F7F7F7;     /* off-white — matches estateplanningdfw.law body bg */
     color: #1A1A1A;                /* ink */
     font-family: var(--font-sans);
     text-rendering: optimizeLegibility;
@@ -33,7 +33,7 @@
   }
 
   ::selection {
-    background: rgba(197, 147, 58, 0.28);
+    background: rgba(155, 128, 89, 0.28);
   }
 
   html { scroll-behavior: smooth; }
@@ -45,10 +45,10 @@
   .bg-cw-dark    { background-color: #143157; }
   .bg-cw-panel   { background-color: #FBF8F2; }
   .text-cw-white { color: #0B1D35; }
-  .text-cw-gold  { color: #C5933A; }
+  .text-cw-gold  { color: #9B8059; }
   .text-cw-muted { color: #7A7A7A; }
   .border-cw     { border-color: #E2D9C6; }
-  .border-cw-gold{ border-color: #C5933A; }
+  .border-cw-gold{ border-color: #9B8059; }
 
   /* ── Layout ── */
   .cw-container {
@@ -86,8 +86,8 @@
 
   .cw-panel-gold {
     background: #FBF8F2;
-    border: 1px solid #C5933A;
-    border-top: 3px solid #C5933A;
+    border: 1px solid #9B8059;
+    border-top: 3px solid #9B8059;
     border-radius: 6px;
     box-shadow: 0 1px 3px rgba(11,29,53,0.05), 0 8px 24px rgba(11,29,53,0.04);
   }
@@ -95,7 +95,7 @@
   /* ── Buttons ── */
   .cw-btn-primary,
   .cw-button {
-    background: #C5933A;
+    background: #9B8059;
     color: #FFFFFF;
     font-family: var(--font-sans);
     font-weight: 600;
@@ -113,9 +113,9 @@
   }
   .cw-btn-primary:hover,
   .cw-button:hover {
-    background: #A87A28;
+    background: #7A6342;
     transform: translateY(-1px);
-    box-shadow: 0 4px 10px rgba(168,122,40,0.28);
+    box-shadow: 0 4px 10px rgba(122,99,66,0.28);
   }
   .cw-btn-primary:active,
   .cw-button:active {
@@ -131,7 +131,7 @@
   .cw-btn-primary:focus-visible,
   .cw-button:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(197, 147, 58, 0.4);
+    box-shadow: 0 0 0 3px rgba(155, 128, 89, 0.4);
   }
 
   .cw-btn-ghost {
@@ -170,11 +170,11 @@
     outline: none;
     border-radius: 4px;
     transition: border-color 200ms, box-shadow 200ms;
-    caret-color: #C5933A;
+    caret-color: #9B8059;
   }
   .cw-input:focus {
-    border-color: #C5933A;
-    box-shadow: 0 0 0 3px rgba(197, 147, 58, 0.15);
+    border-color: #9B8059;
+    box-shadow: 0 0 0 3px rgba(155, 128, 89, 0.15);
   }
   .cw-input::placeholder { color: #B8B0A0; }
 
@@ -204,8 +204,8 @@
     border-radius: 4px;
   }
   .cw-select:focus {
-    border-color: #C5933A;
-    box-shadow: 0 0 0 3px rgba(197, 147, 58, 0.15);
+    border-color: #9B8059;
+    box-shadow: 0 0 0 3px rgba(155, 128, 89, 0.15);
   }
 
   /* ── Eyebrow / kicker text ── */
@@ -215,7 +215,7 @@
     font-weight: 600;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #C5933A;
+    color: #9B8059;
   }
 
   /* ── Divider ── */

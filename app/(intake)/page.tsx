@@ -7,27 +7,15 @@ import Link from 'next/link'
 const practiceAreas = [
   {
     label: 'Estate Planning',
-    desc: 'Wills, trusts, powers of attorney, and healthcare directives crafted to protect your legacy.',
+    desc: 'Wills, trusts, and powers of attorney — built to protect your family, your assets, and your wishes when it matters most.',
   },
   {
-    label: 'Family Law',
-    desc: 'Divorce, child custody, support modifications, and adoptions handled with decisive advocacy.',
-  },
-  {
-    label: 'Personal Injury',
-    desc: 'Auto accidents, slip and fall, wrongful death — we fight to maximize your recovery.',
+    label: 'Probate',
+    desc: 'Independent administration, muniment of title, and full probate — guiding executors and heirs through Texas probate court.',
   },
   {
     label: 'Business Law',
-    desc: 'Entity formation, contracts, disputes, and transactions — practical counsel for your business.',
-  },
-  {
-    label: 'Criminal Defense',
-    desc: 'DWI, felonies, misdemeanors, and expunctions — aggressive defense of your freedom and record.',
-  },
-  {
-    label: 'Real Estate',
-    desc: 'Purchases, sales, title disputes, and landlord-tenant matters across Texas.',
+    desc: 'Entity formation, operating agreements, contracts, and transactions — practical counsel for closely held businesses and professionals.',
   },
 ]
 
@@ -35,9 +23,9 @@ const CREAM = '#F7F2E9'
 const CREAM_DEEP = '#EFE7D6'
 const IVORY = '#FBF8F2'
 const NAVY = '#0B1D35'
-const GOLD = '#C5933A'
-const GOLD_DARK = '#A87A28'
-const GOLD_LIGHT = '#E0B25F'
+const GOLD = '#9B8059'
+const GOLD_DARK = '#7A6342'
+const GOLD_LIGHT = '#B89E78'
 const INK = '#1A1A1A'
 const INK_SOFT = '#4A4A4A'
 const INK_MUTE = '#7A7A7A'
@@ -190,7 +178,7 @@ export default function IntakeLanding() {
               onMouseEnter={(e) => {
                 e.currentTarget.style.background = GOLD_DARK
                 e.currentTarget.style.transform = 'translateY(-1px)'
-                e.currentTarget.style.boxShadow = '0 4px 10px rgba(168,122,40,0.3)'
+                e.currentTarget.style.boxShadow = '0 4px 10px rgba(122,99,66,0.3)'
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.background = GOLD
@@ -318,7 +306,7 @@ export default function IntakeLanding() {
                 onMouseEnter={(e) => {
                   e.currentTarget.style.background = GOLD_DARK
                   e.currentTarget.style.transform = 'translateY(-1px)'
-                  e.currentTarget.style.boxShadow = '0 6px 14px rgba(168,122,40,0.3)'
+                  e.currentTarget.style.boxShadow = '0 6px 14px rgba(122,99,66,0.3)'
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.background = GOLD
@@ -1005,7 +993,7 @@ export default function IntakeLanding() {
               onMouseEnter={(e) => {
                 e.currentTarget.style.background = GOLD_DARK
                 e.currentTarget.style.transform = 'translateY(-1px)'
-                e.currentTarget.style.boxShadow = '0 6px 14px rgba(168,122,40,0.3)'
+                e.currentTarget.style.boxShadow = '0 6px 14px rgba(122,99,66,0.3)'
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.background = GOLD
@@ -1071,13 +1059,24 @@ export default function IntakeLanding() {
             className="cw-footer-grid"
           >
             <div>
+              <img
+                src="/cw-logo.png"
+                alt="Crain & Wooley"
+                style={{
+                  height: '64px',
+                  width: 'auto',
+                  marginBottom: '20px',
+                  display: 'block',
+                }}
+              />
               <div
                 style={{
                   fontFamily: 'var(--font-display)',
-                  fontSize: '1.55rem',
+                  fontSize: '1.25rem',
                   fontWeight: 600,
                   color: '#fff',
                   marginBottom: '16px',
+                  letterSpacing: '0.01em',
                 }}
               >
                 Crain <span style={{ color: GOLD_LIGHT }}>&amp;</span> Wooley

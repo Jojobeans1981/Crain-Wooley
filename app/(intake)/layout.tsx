@@ -2,7 +2,7 @@ export default function IntakeLayout({ children }: { children: React.ReactNode }
   return (
     <div
       style={{
-        background: '#F7F2E9',
+        background: '#F7F7F7',
         minHeight: '100vh',
         position: 'relative',
       }}
@@ -16,7 +16,7 @@ export default function IntakeLayout({ children }: { children: React.ReactNode }
           left: 0,
           right: 0,
           height: '3px',
-          background: 'linear-gradient(90deg, #C5933A 0%, #E0B25F 50%, #C5933A 100%)',
+          background: 'linear-gradient(90deg, #9B8059 0%, #B89E78 50%, #9B8059 100%)',
           zIndex: 200,
           pointerEvents: 'none',
         }}

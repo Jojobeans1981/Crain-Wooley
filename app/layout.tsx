@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Cormorant_Garamond, Inter } from 'next/font/google'
+import { Cormorant_Garamond, Montserrat } from 'next/font/google'
 import './globals.css'
 
 const display = Cormorant_Garamond({
@@ -8,15 +8,13 @@ const display = Cormorant_Garamond({
   variable: '--font-display',
 })
 
-const sans = Inter({
+const sans = Montserrat({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600', '700'],
   variable: '--font-sans',
 })
 
-// `--font-mono` is kept as an alias so legacy refs keep working.
-// It points at the same sans stack — there is no monospace in the new design.
-const mono = Inter({
+const mono = Montserrat({
   subsets: ['latin'],
   weight: ['400', '500', '600'],
   variable: '--font-mono',
@@ -56,7 +54,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>
-      <body className="min-h-screen bg-cw-cream text-cw-ink antialiased font-sans">
+      <body className="min-h-screen bg-[#F7F7F7] text-cw-ink antialiased font-sans">
         {isDemo && (
           <div className="bg-cw-navy text-white py-1.5 px-4 text-center font-sans text-[11px] uppercase tracking-[0.18em] sticky top-0 w-full z-[100] font-semibold border-b border-cw-gold">
             Interactive Demo Mode — External APIs Simulated
