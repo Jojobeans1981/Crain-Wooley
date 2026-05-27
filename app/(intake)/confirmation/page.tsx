@@ -13,7 +13,7 @@ function ConfirmationContent() {
 
   if (disqualified) {
     return (
-      <main className="cw-page flex flex-col">
+      <main className="cw-page"><div className="cw-shell">
         <header className="cw-header">
           <div className="cw-container py-5 flex items-center justify-between">
             <Link href="/" className="no-underline flex items-center gap-3" aria-label="Crain & Wooley — Home">
@@ -52,12 +52,12 @@ function ConfirmationContent() {
             </div>
           </div>
         </div>
-      </main>
+      </div></main>
     )
   }
 
   return (
-    <main className="cw-page flex flex-col">
+    <main className="cw-page"><div className="cw-shell">
       <header className="cw-header">
         <div className="cw-container py-5 flex items-center justify-between">
           <Link href="/" className="no-underline flex items-center gap-3" aria-label="Crain & Wooley — Home">
@@ -121,7 +121,7 @@ function ConfirmationContent() {
           </div>
         </div>
       </div>
-    </main>
+    </div></main>
   )
 }
 

@@ -54,7 +54,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>
-      <body className="min-h-screen bg-[#F7F7F7] text-cw-ink antialiased font-sans">
+      <body className="min-h-screen bg-[#EFE7D6] text-cw-ink antialiased font-sans">
         {isDemo && (
           <div className="bg-cw-navy text-white py-1.5 px-4 text-center font-sans text-[11px] uppercase tracking-[0.18em] sticky top-0 w-full z-[100] font-semibold border-b border-cw-gold">
             Interactive Demo Mode — External APIs Simulated

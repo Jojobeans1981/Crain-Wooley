@@ -56,7 +56,7 @@ export default async function TrackerPage({ params }: TrackerPageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-[#F7F7F7] text-cw-ink font-sans">
+    <div className="min-h-screen text-cw-ink font-sans"><div className="cw-shell">
       {/* Header */}
       <header className="cw-header">
         <div className="cw-container py-5 flex items-center justify-between">
@@ -185,6 +185,7 @@ export default async function TrackerPage({ params }: TrackerPageProps) {
             </p>
           </footer>
         </div>
+      </div>
       </div>
     </div>
   )

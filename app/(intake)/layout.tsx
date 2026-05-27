@@ -2,7 +2,7 @@ export default function IntakeLayout({ children }: { children: React.ReactNode }
   return (
     <div
       style={{
-        background: '#F7F7F7',
+        background: 'transparent',
         minHeight: '100vh',
         position: 'relative',
       }}
@@ -46,6 +46,38 @@ export default function IntakeLayout({ children }: { children: React.ReactNode }
       </svg>
 
       <div style={{ position: 'relative', zIndex: 1 }}>{children}</div>
+
+      {/* Reveal-on-scroll observer — adds .in to .reveal / .reveal-stagger when 25% visible */}
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+            (function(){
+              if (typeof window === 'undefined' || !('IntersectionObserver' in window)) return;
+              var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+              if (reduce) {
+                document.querySelectorAll('.reveal, .reveal-stagger').forEach(function(el){ el.classList.add('in'); });
+                return;
+              }
+              var io = new IntersectionObserver(function(entries){
+                entries.forEach(function(e){
+                  if (e.isIntersecting) {
+                    e.target.classList.add('in');
+                    io.unobserve(e.target);
+                  }
+                });
+              }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+              function bind(){
+                document.querySelectorAll('.reveal:not(.in), .reveal-stagger:not(.in)').forEach(function(el){ io.observe(el); });
+              }
+              if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', bind);
+              } else {
+                bind();
+              }
+            })();
+          `,
+        }}
+      />
     </div>
   )
 }

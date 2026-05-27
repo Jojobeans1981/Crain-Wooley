@@ -47,10 +47,7 @@ export default async function UnsubscribePage({
   }
 
   return (
-    <main
-      className="min-h-screen flex items-center justify-center px-4 py-12"
-      style={{ backgroundColor: '#F7F7F7' }}
-    >
+    <main className="min-h-screen flex items-center justify-center px-4 py-12">
       <div
         className="border p-10 sm:p-12 max-w-md w-full rounded-md"
         style={{

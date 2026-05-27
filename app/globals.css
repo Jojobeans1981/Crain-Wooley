@@ -10,7 +10,7 @@
   :root { color-scheme: light; }
 
   body {
-    background-color: #F7F7F7;     /* off-white — matches estateplanningdfw.law body bg */
+    background-color: #EFE7D6;     /* cream-deep — warm body so the white shell on funnel pages visibly floats */
     color: #1A1A1A;                /* ink */
     font-family: var(--font-sans);
     text-rendering: optimizeLegibility;
@@ -92,46 +92,58 @@
     box-shadow: 0 1px 3px rgba(16,35,66,0.06), 0 12px 32px rgba(16,35,66,0.05);
   }
 
-  /* ── Buttons ── */
+  /* ── Buttons (pill bronze gradient — FDN-derived) ── */
   .cw-btn-primary,
   .cw-button {
-    background: #9B8059;
+    background: linear-gradient(180deg, #AC9268 0%, #9B8059 55%, #7A6342 100%);
     color: #FFFFFF;
     font-family: var(--font-sans);
     font-weight: 600;
-    font-size: 0.875rem;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    padding: 0.85rem 1.75rem;
+    font-size: 0.95rem;
+    letter-spacing: 0.005em;
+    padding: 0.85rem 1.85rem;
     border: none;
-    border-radius: 4px;
+    border-radius: 999px;
     cursor: pointer;
-    transition: background-color 200ms, transform 150ms, box-shadow 200ms;
+    transition: transform 160ms cubic-bezier(0.2, 0.7, 0.2, 1),
+                box-shadow 240ms cubic-bezier(0.2, 0.7, 0.2, 1),
+                filter 160ms cubic-bezier(0.2, 0.7, 0.2, 1);
     display: inline-block;
     text-decoration: none;
-    box-shadow: 0 1px 2px rgba(16,35,66,0.18);
+    text-align: center;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.28),
+      0 1px 2px rgba(122,99,66,0.22),
+      0 6px 16px rgba(155,128,89,0.30);
   }
   .cw-btn-primary:hover,
   .cw-button:hover {
-    background: #7A6342;
     transform: translateY(-1px);
-    box-shadow: 0 4px 10px rgba(122,99,66,0.28);
+    filter: brightness(1.06);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.32),
+      0 2px 4px rgba(122,99,66,0.26),
+      0 10px 24px rgba(155,128,89,0.38);
   }
   .cw-btn-primary:active,
   .cw-button:active {
     transform: translateY(0);
+    filter: brightness(0.97);
   }
   .cw-btn-primary:disabled,
   .cw-button:disabled {
     opacity: 0.45;
     cursor: not-allowed;
     transform: none;
-    box-shadow: none;
+    filter: none;
+    box-shadow: 0 1px 2px rgba(122,99,66,0.18);
   }
   .cw-btn-primary:focus-visible,
   .cw-button:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(155, 128, 89, 0.4);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.28),
+      0 0 0 3px rgba(155, 128, 89, 0.4);
   }
 
   .cw-btn-ghost {
@@ -139,14 +151,17 @@
     color: #102342;
     font-family: var(--font-sans);
     font-weight: 500;
-    font-size: 0.875rem;
-    letter-spacing: 0.02em;
-    text-transform: none;
-    padding: 0.85rem 1.5rem;
+    font-size: 0.95rem;
+    letter-spacing: 0.005em;
+    padding: 0.85rem 1.65rem;
     border: 1px solid #102342;
-    border-radius: 4px;
+    border-radius: 999px;
     cursor: pointer;
-    transition: background 200ms, color 200ms;
+    transition: background 200ms cubic-bezier(0.2, 0.7, 0.2, 1),
+                color 200ms cubic-bezier(0.2, 0.7, 0.2, 1);
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
   }
   .cw-btn-ghost:hover {
     background: #102342;
@@ -155,6 +170,103 @@
   .cw-btn-ghost:focus-visible {
     outline: none;
     box-shadow: 0 0 0 3px rgba(16, 35, 66, 0.25);
+  }
+
+  /* ── Numbered step cards (FDN-derived) ── */
+  .cw-stepcards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid #E5DAC1;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #FBF8F2;
+  }
+  .cw-stepcard {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 18px;
+    transition: background 200ms cubic-bezier(0.2, 0.7, 0.2, 1);
+    border-right: 1px solid #E5DAC1;
+    position: relative;
+  }
+  .cw-stepcard:last-child { border-right: none; }
+  .cw-stepcard-badge {
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 600;
+    flex-shrink: 0;
+    transition: background 200ms, color 200ms, border-color 200ms;
+  }
+  .cw-stepcard-meta { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+  .cw-stepcard-kicker {
+    font-family: var(--font-sans);
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #9C9281;
+    line-height: 1.2;
+  }
+  .cw-stepcard-label {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #102342;
+    line-height: 1.2;
+  }
+  /* States */
+  .cw-stepcard-current { background: #FFFFFF; }
+  .cw-stepcard-current .cw-stepcard-badge { background: #102342; color: #FFFFFF; }
+  .cw-stepcard-current .cw-stepcard-kicker { color: #9B8059; }
+
+  .cw-stepcard-done { background: rgba(155,128,89,0.06); }
+  .cw-stepcard-done .cw-stepcard-badge { background: #9B8059; color: #FFFFFF; }
+  .cw-stepcard-done .cw-stepcard-kicker { color: #9B8059; }
+
+  .cw-stepcard-upcoming .cw-stepcard-badge {
+    background: #FFFFFF;
+    color: #B8AB91;
+    border: 1px solid #D5C7B0;
+  }
+  .cw-stepcard-upcoming .cw-stepcard-label { color: #8A8175; }
+
+  @media (max-width: 640px) {
+    .cw-stepcards { grid-template-columns: 1fr; }
+    .cw-stepcard { border-right: none; border-bottom: 1px solid #E5DAC1; }
+    .cw-stepcard:last-child { border-bottom: none; }
+  }
+
+  /* ── Shell (funnel pages only — landing stays full-bleed) ── */
+  .cw-shell {
+    max-width: 1080px;
+    margin: 28px auto;
+    background: #FFFFFF;
+    border: 1px solid #D5C7B0;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow:
+      0 1px 2px rgba(16,35,66,0.04),
+      0 18px 48px rgba(16,35,66,0.10),
+      0 4px 12px rgba(16,35,66,0.06);
+  }
+  /* When a cw-panel is nested inside cw-shell, drop its own chrome so we don't double-card */
+  .cw-shell .cw-panel,
+  .cw-shell .cw-panel-gold {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .cw-shell .cw-panel-gold {
+    border-top: 3px solid #9B8059;
   }
 
   /* ── Inputs (underline-only — editorial, no boxy chrome) ── */
@@ -265,4 +377,59 @@
     to   { opacity: 1; transform: translateY(0); }
   }
   .animate-fade-up { animation: fade-up 0.5s ease both; }
+
+  /* ── Reveal-on-scroll (FDN-derived) ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 420ms cubic-bezier(0.2, 0.7, 0.2, 1),
+                transform 420ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .reveal.in { opacity: 1; transform: none; }
+
+  .reveal-stagger > * {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 420ms cubic-bezier(0.2, 0.7, 0.2, 1),
+                transform 420ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .reveal-stagger.in > * { opacity: 1; transform: none; }
+  .reveal-stagger.in > *:nth-child(1) { transition-delay: 60ms; }
+  .reveal-stagger.in > *:nth-child(2) { transition-delay: 130ms; }
+  .reveal-stagger.in > *:nth-child(3) { transition-delay: 200ms; }
+  .reveal-stagger.in > *:nth-child(4) { transition-delay: 270ms; }
+  .reveal-stagger.in > *:nth-child(5) { transition-delay: 340ms; }
+  .reveal-stagger.in > *:nth-child(6) { transition-delay: 410ms; }
+
+  /* ── Hero entrance choreography (landing only) ── */
+  .cw-hero-anim .cw-hero-eyebrow,
+  .cw-hero-anim .cw-hero-title,
+  .cw-hero-anim .cw-hero-sub,
+  .cw-hero-anim .cw-hero-ctas {
+    opacity: 0;
+    animation: cwHeroEnter 560ms cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  }
+  .cw-hero-anim .cw-hero-eyebrow { animation-delay: 80ms; }
+  .cw-hero-anim .cw-hero-title   { animation-delay: 180ms; }
+  .cw-hero-anim .cw-hero-sub     { animation-delay: 320ms; }
+  .cw-hero-anim .cw-hero-ctas    { animation-delay: 460ms; }
+  @keyframes cwHeroEnter {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .reveal-stagger > * {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+    .cw-hero-anim .cw-hero-eyebrow,
+    .cw-hero-anim .cw-hero-title,
+    .cw-hero-anim .cw-hero-sub,
+    .cw-hero-anim .cw-hero-ctas {
+      opacity: 1;
+      animation: none;
+    }
+  }
 }

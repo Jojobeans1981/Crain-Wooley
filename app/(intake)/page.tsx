@@ -228,25 +228,7 @@ export default function IntakeLanding() {
               <span style={{ color: GOLD }}>☎</span>
               (972) 945-1610
             </a>
-            <Link
-              href="/qualify"
-              style={{
-                background: GOLD,
-                color: '#fff',
-                fontFamily: 'var(--font-sans)',
-                fontSize: '0.82rem',
-                fontWeight: 600,
-                letterSpacing: '0.04em',
-                textTransform: 'uppercase',
-                padding: '11px 22px',
-                textDecoration: 'none',
-                borderRadius: '4px',
-                transition: 'background 0.2s',
-                display: 'inline-block',
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.background = GOLD_DARK)}
-              onMouseLeave={(e) => (e.currentTarget.style.background = GOLD)}
-            >
+            <Link href="/qualify" className="cw-btn-primary !py-2.5 !px-5 !text-sm">
               Book Consultation
             </Link>
           </div>
@@ -255,6 +237,7 @@ export default function IntakeLanding() {
 
       {/* ── HERO ── */}
       <section
+        className="cw-hero-anim"
         style={{
           background: `linear-gradient(180deg, ${CREAM} 0%, ${CREAM_DEEP} 100%)`,
           position: 'relative',
@@ -284,6 +267,7 @@ export default function IntakeLanding() {
           }}
         >
           <p
+            className="cw-hero-eyebrow"
             style={{
               fontFamily: 'var(--font-sans)',
               fontSize: '0.78rem',
@@ -298,6 +282,7 @@ export default function IntakeLanding() {
           </p>
 
           <h1
+            className="cw-hero-title"
             style={{
               fontFamily: 'var(--font-display)',
               fontSize: 'clamp(2.2rem, 4.4vw, 3.7rem)',
@@ -317,6 +302,7 @@ export default function IntakeLanding() {
           </h1>
 
           <p
+            className="cw-hero-sub"
             style={{
               fontSize: '1.1rem',
               lineHeight: 1.7,
@@ -331,6 +317,7 @@ export default function IntakeLanding() {
           </p>
 
           <div
+            className="cw-hero-ctas"
             style={{
               display: 'flex',
               gap: '14px',
@@ -339,54 +326,13 @@ export default function IntakeLanding() {
               justifyContent: 'center',
             }}
           >
-            <Link
-              href="/qualify"
-              style={{
-                background: GOLD,
-                color: '#fff',
-                fontFamily: 'var(--font-sans)',
-                fontSize: '0.88rem',
-                fontWeight: 600,
-                letterSpacing: '0.04em',
-                textTransform: 'uppercase',
-                padding: '15px 32px',
-                textDecoration: 'none',
-                display: 'inline-block',
-                borderRadius: '4px',
-                transition: 'background 0.2s',
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.background = GOLD_DARK)}
-              onMouseLeave={(e) => (e.currentTarget.style.background = GOLD)}
-            >
+            <Link href="/qualify" className="cw-btn-primary">
               Book a Consultation
             </Link>
 
             <a
               href="tel:9729451610"
-              style={{
-                background: 'transparent',
-                color: NAVY,
-                fontFamily: 'var(--font-sans)',
-                fontSize: '0.88rem',
-                fontWeight: 600,
-                letterSpacing: '0.02em',
-                padding: '14px 26px',
-                textDecoration: 'none',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                borderRadius: '4px',
-                border: `1px solid ${NAVY}`,
-                transition: 'background 0.2s, color 0.2s',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = NAVY
-                e.currentTarget.style.color = '#fff'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'transparent'
-                e.currentTarget.style.color = NAVY
-              }}
+              className="cw-btn-ghost inline-flex items-center gap-2"
             >
               <span>☎</span> Call (972) 945-1610
             </a>
@@ -396,7 +342,7 @@ export default function IntakeLanding() {
 
 
       {/* ── ABOUT / INTRO ── */}
-      <section id="about" style={{ background: CREAM }}>
+      <section id="about" className="reveal" style={{ background: CREAM }}>
         <div
           style={{
             maxWidth: '1040px',
@@ -466,7 +412,7 @@ export default function IntakeLanding() {
       </section>
 
       {/* ── SERVICES / PRACTICE AREAS ── */}
-      <section id="services" style={{ background: IVORY, borderTop: `1px solid ${LINE}` }}>
+      <section id="services" className="reveal" style={{ background: IVORY, borderTop: `1px solid ${LINE}` }}>
         <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '88px 36px' }}>
           <div style={{ textAlign: 'center', marginBottom: '64px' }}>
             <p className="cw-eyebrow" style={{ marginBottom: '16px' }}>
@@ -496,7 +442,7 @@ export default function IntakeLanding() {
               gridTemplateColumns: 'repeat(3, 1fr)',
               gap: '24px',
             }}
-            className="cw-services-grid"
+            className="cw-services-grid reveal-stagger"
           >
             {practiceAreas.map((area) => (
               <div
@@ -546,7 +492,7 @@ export default function IntakeLanding() {
       </section>
 
       {/* ── WHAT TO EXPECT ── */}
-      <section id="process" style={{ background: CREAM, borderTop: `1px solid ${LINE}` }}>
+      <section id="process" className="reveal" style={{ background: CREAM, borderTop: `1px solid ${LINE}` }}>
         <div style={{ maxWidth: '820px', margin: '0 auto', padding: '88px 36px' }}>
           <div style={{ textAlign: 'center', marginBottom: '40px' }}>
             <p className="cw-eyebrow" style={{ marginBottom: '16px' }}>
@@ -591,7 +537,7 @@ export default function IntakeLanding() {
       </section>
 
       {/* ── FAQ ── */}
-      <section id="faq" style={{ background: IVORY, borderTop: `1px solid ${LINE}` }}>
+      <section id="faq" className="reveal" style={{ background: IVORY, borderTop: `1px solid ${LINE}` }}>
         <div style={{ maxWidth: '960px', margin: '0 auto', padding: '88px 36px' }}>
           <div style={{ textAlign: 'center', marginBottom: '56px' }}>
             <p className="cw-eyebrow" style={{ marginBottom: '16px' }}>
@@ -734,7 +680,7 @@ export default function IntakeLanding() {
               gap: '24px',
               marginBottom: '40px',
             }}
-            className="cw-services-grid"
+            className="cw-services-grid reveal-stagger"
           >
             {[
               {
@@ -840,27 +786,7 @@ export default function IntakeLanding() {
                 >
                   {loc.phone}
                 </a>
-                <Link
-                  href="/qualify"
-                  style={{
-                    display: 'inline-block',
-                    background: GOLD,
-                    color: '#fff',
-                    fontFamily: 'var(--font-sans)',
-                    fontSize: '0.78rem',
-                    fontWeight: 600,
-                    letterSpacing: '0.04em',
-                    textTransform: 'uppercase',
-                    padding: '12px 22px',
-                    textDecoration: 'none',
-                    borderRadius: '4px',
-                    transition: 'background 0.2s',
-                  }}
-                  onMouseEnter={(e) =>
-                    (e.currentTarget.style.background = GOLD_DARK)
-                  }
-                  onMouseLeave={(e) => (e.currentTarget.style.background = GOLD)}
-                >
+                <Link href="/qualify" className="cw-btn-primary !text-sm !py-2.5 !px-5">
                   Contact Us
                 </Link>
               </div>
@@ -878,6 +804,88 @@ export default function IntakeLanding() {
             Licensed Texas attorneys · Flat-rate planning services · Plano · Mansfield · Fort
             Worth
           </p>
+        </div>
+      </section>
+
+      {/* ── CTA BAND (final call before footer) ── */}
+      <section
+        className="reveal"
+        style={{
+          background: NAVY,
+          borderTop: `3px solid ${GOLD}`,
+          color: '#fff',
+        }}
+      >
+        <div
+          style={{
+            maxWidth: '1240px',
+            margin: '0 auto',
+            padding: '40px 36px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '32px',
+            flexWrap: 'wrap',
+          }}
+          className="cw-ctaband-inner"
+        >
+          <div style={{ minWidth: '280px', flex: '1 1 auto' }}>
+            <h2
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 'clamp(1.5rem, 2.4vw, 2rem)',
+                fontWeight: 600,
+                color: '#fff',
+                lineHeight: 1.2,
+                marginBottom: '8px',
+              }}
+            >
+              Ready to start your estate plan?
+            </h2>
+            <p
+              style={{
+                fontFamily: 'var(--font-sans)',
+                fontSize: '0.98rem',
+                color: 'rgba(255,255,255,0.78)',
+                lineHeight: 1.5,
+                margin: 0,
+              }}
+            >
+              Plain-language guidance, flat-rate pricing, and three Dallas-Fort Worth offices.
+            </p>
+          </div>
+          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
+            <Link href="/qualify" className="cw-btn-primary">
+              Book a Consultation
+            </Link>
+            <a
+              href="tel:9729451610"
+              style={{
+                color: '#fff',
+                fontFamily: 'var(--font-sans)',
+                fontSize: '0.95rem',
+                fontWeight: 600,
+                textDecoration: 'none',
+                padding: '0.85rem 1.4rem',
+                border: '1px solid rgba(255,255,255,0.35)',
+                borderRadius: '999px',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                transition: 'background 200ms, border-color 200ms',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'rgba(255,255,255,0.08)'
+                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.6)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'transparent'
+                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.35)'
+              }}
+            >
+              <span style={{ color: GOLD_LIGHT }}>☎</span> (972) 945-1610
+            </a>
+          </div>
         </div>
       </section>
 

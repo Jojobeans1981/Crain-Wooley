@@ -77,27 +77,27 @@ export default function QualifyPage() {
   }
 
   return (
-    <main className="cw-page flex flex-col">
-      {/* Header */}
-      <header className="cw-header">
-        <div className="cw-container py-5 flex items-center justify-between">
-          <Link href="/" className="no-underline flex items-center gap-3" aria-label="Crain & Wooley — Home">
-            <span role="img" aria-label="Crain & Wooley emblem" className="cw-emblem" />
-            <span className="font-display text-2xl sm:text-3xl font-semibold text-cw-navy">
-              Crain <span className="text-cw-gold">&amp;</span> Wooley
-            </span>
-          </Link>
-          <a
-            href="tel:9729451610"
-            className="hidden sm:inline-flex items-center gap-2 text-cw-navy font-semibold text-sm hover:text-cw-gold transition-colors"
-          >
-            <span className="text-cw-gold">☎</span> (972) 945-1610
-          </a>
-        </div>
-      </header>
+    <main className="cw-page">
+      <div className="cw-shell">
+        {/* Header */}
+        <header className="cw-header">
+          <div className="px-6 sm:px-10 py-5 flex items-center justify-between">
+            <Link href="/" className="no-underline flex items-center gap-3" aria-label="Crain & Wooley — Home">
+              <span role="img" aria-label="Crain & Wooley emblem" className="cw-emblem" />
+              <span className="font-display text-2xl sm:text-3xl font-semibold text-cw-navy">
+                Crain <span className="text-cw-gold">&amp;</span> Wooley
+              </span>
+            </Link>
+            <a
+              href="tel:9729451610"
+              className="hidden sm:inline-flex items-center gap-2 text-cw-navy font-semibold text-sm hover:text-cw-gold transition-colors"
+            >
+              <span className="text-cw-gold">☎</span> (972) 945-1610
+            </a>
+          </div>
+        </header>
 
-      <div className="flex-1 flex flex-col items-center py-10 sm:py-16">
-        <div className="cw-container">
+        <div className="px-6 sm:px-10 py-10 sm:py-14">
           <div className="w-full max-w-xl mx-auto">
 
             {/* Page heading */}
@@ -113,25 +113,26 @@ export default function QualifyPage() {
               </p>
             </div>
 
-            {/* Step indicator */}
-            <div className="flex items-center justify-center gap-2 mb-8" role="status" aria-label={`Step ${step + 1} of ${STEPS.length}: ${STEPS[step]}`}>
-              <span className="font-sans text-[11px] text-cw-ink-mute tracking-[0.18em] uppercase font-semibold">
-                Step {step + 1} of {STEPS.length}
-              </span>
-              <span className="text-cw-ink-mute">·</span>
-              <span className="font-sans text-[11px] text-cw-navy tracking-[0.18em] uppercase font-semibold">
-                {STEPS[step]}
-              </span>
-            </div>
-            <div className="flex items-center gap-2 mb-10" aria-hidden="true">
-              {STEPS.map((_, i) => (
-                <div
-                  key={i}
-                  className={`flex-1 h-[3px] rounded-full transition-colors ${
-                    i < step ? 'bg-cw-gold' : i === step ? 'bg-cw-navy' : 'bg-cw-line'
-                  }`}
-                />
-              ))}
+            {/* Step cards */}
+            <div
+              className="cw-stepcards mb-10"
+              role="status"
+              aria-label={`Step ${step + 1} of ${STEPS.length}: ${STEPS[step]}`}
+            >
+              {STEPS.map((label, i) => {
+                const state = i < step ? 'done' : i === step ? 'current' : 'upcoming'
+                return (
+                  <div key={label} className={`cw-stepcard cw-stepcard-${state}`}>
+                    <div className="cw-stepcard-badge" aria-hidden="true">
+                      {i < step ? '✓' : i + 1}
+                    </div>
+                    <div className="cw-stepcard-meta">
+                      <span className="cw-stepcard-kicker">Step {i + 1}</span>
+                      <span className="cw-stepcard-label">{label}</span>
+                    </div>
+                  </div>
+                )
+              })}
             </div>
 
             {/* ── Step 0: Contact ── */}
