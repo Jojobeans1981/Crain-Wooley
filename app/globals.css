@@ -21,7 +21,7 @@
   h1, h2, h3, h4 {
     font-family: var(--font-display);
     letter-spacing: 0;
-    color: #0B1D35;
+    color: #102342;
     font-weight: 600;
   }
 
@@ -41,10 +41,10 @@
 
 @layer utilities {
   /* ── Color aliases ── */
-  .bg-cw-black   { background-color: #0B1D35; }
+  .bg-cw-black   { background-color: #102342; }
   .bg-cw-dark    { background-color: #143157; }
   .bg-cw-panel   { background-color: #FBF8F2; }
-  .text-cw-white { color: #0B1D35; }
+  .text-cw-white { color: #102342; }
   .text-cw-gold  { color: #9B8059; }
   .text-cw-muted { color: #7A7A7A; }
   .border-cw     { border-color: #E2D9C6; }
@@ -81,7 +81,7 @@
     background: #FBF8F2;
     border: 1px solid #E2D9C6;
     border-radius: 6px;
-    box-shadow: 0 1px 3px rgba(11,29,53,0.05), 0 8px 24px rgba(11,29,53,0.04);
+    box-shadow: 0 1px 3px rgba(16,35,66,0.05), 0 8px 24px rgba(16,35,66,0.04);
   }
 
   .cw-panel-gold {
@@ -89,7 +89,7 @@
     border: 1px solid #9B8059;
     border-top: 3px solid #9B8059;
     border-radius: 6px;
-    box-shadow: 0 1px 3px rgba(11,29,53,0.05), 0 8px 24px rgba(11,29,53,0.04);
+    box-shadow: 0 1px 3px rgba(16,35,66,0.05), 0 8px 24px rgba(16,35,66,0.04);
   }
 
   /* ── Buttons ── */
@@ -109,7 +109,7 @@
     transition: background-color 200ms, transform 150ms, box-shadow 200ms;
     display: inline-block;
     text-decoration: none;
-    box-shadow: 0 1px 2px rgba(11,29,53,0.18);
+    box-shadow: 0 1px 2px rgba(16,35,66,0.18);
   }
   .cw-btn-primary:hover,
   .cw-button:hover {
@@ -136,25 +136,25 @@
 
   .cw-btn-ghost {
     background: transparent;
-    color: #0B1D35;
+    color: #102342;
     font-family: var(--font-sans);
     font-weight: 500;
     font-size: 0.875rem;
     letter-spacing: 0.02em;
     text-transform: none;
     padding: 0.85rem 1.5rem;
-    border: 1px solid #0B1D35;
+    border: 1px solid #102342;
     border-radius: 4px;
     cursor: pointer;
     transition: background 200ms, color 200ms;
   }
   .cw-btn-ghost:hover {
-    background: #0B1D35;
+    background: #102342;
     color: #FFFFFF;
   }
   .cw-btn-ghost:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(11, 29, 53, 0.25);
+    box-shadow: 0 0 0 3px rgba(16, 35, 66, 0.25);
   }
 
   /* ── Inputs ── */
@@ -183,7 +183,7 @@
     font-size: 0.8rem;
     letter-spacing: 0.02em;
     text-transform: none;
-    color: #0B1D35;
+    color: #102342;
     font-weight: 600;
     display: block;
     margin-bottom: 0.4rem;
@@ -230,7 +230,7 @@
     width: 44px;
     height: 36px;
     flex-shrink: 0;
-    background-color: #0B1D35;
+    background-color: #102342;
     -webkit-mask-image: url(/cw-logo.png);
     -webkit-mask-repeat: no-repeat;
     -webkit-mask-position: center;

@@ -22,7 +22,7 @@ const practiceAreas = [
 const CREAM = '#F7F2E9'
 const CREAM_DEEP = '#EFE7D6'
 const IVORY = '#FBF8F2'
-const NAVY = '#0B1D35'
+const NAVY = '#102342'
 const GOLD = '#9B8059'
 const GOLD_DARK = '#7A6342'
 const GOLD_LIGHT = '#B89E78'
@@ -34,24 +34,91 @@ const LINE = '#E2D9C6'
 export default function IntakeLanding() {
   return (
     <div style={{ fontFamily: 'var(--font-sans)', color: INK, position: 'relative' }}>
-      {/* ── ANNOUNCEMENT BAR (matches client site's top webinar strip) ── */}
+      {/* ── UTILITY BAR (3 office phones — matches live site's top phone strip) ── */}
       <div
         style={{
           background: NAVY,
           color: '#fff',
-          padding: '10px 24px',
-          textAlign: 'center',
-          fontSize: '0.82rem',
+          fontSize: '0.78rem',
           letterSpacing: '0.01em',
-          borderBottom: `1px solid ${GOLD}`,
         }}
       >
-        <span style={{ color: GOLD_LIGHT, fontWeight: 600 }}>★</span>{' '}
+        <div
+          style={{
+            maxWidth: '1240px',
+            margin: '0 auto',
+            padding: '9px 36px',
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            gap: '14px',
+          }}
+          className="cw-utility-inner"
+        >
+          <span
+            style={{
+              fontFamily: 'var(--font-sans)',
+              fontSize: '0.72rem',
+              fontWeight: 600,
+              letterSpacing: '0.14em',
+              textTransform: 'uppercase',
+              color: GOLD_LIGHT,
+            }}
+          >
+            Call Us Today
+          </span>
+          <div
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: '22px',
+              alignItems: 'center',
+            }}
+          >
+            {[
+              { city: 'Plano',      phone: '(972) 945-1610', tel: '9729451610' },
+              { city: 'Mansfield',  phone: '(682) 356-4820', tel: '6823564820' },
+              { city: 'Fort Worth', phone: '(817) 672-9442', tel: '8176729442' },
+            ].map((loc) => (
+              <a
+                key={loc.city}
+                href={`tel:${loc.tel}`}
+                style={{
+                  color: '#fff',
+                  textDecoration: 'none',
+                  fontFamily: 'var(--font-sans)',
+                  fontSize: '0.78rem',
+                  fontWeight: 500,
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                }}
+              >
+                <span style={{ color: GOLD_LIGHT, fontWeight: 600 }}>{loc.city}:</span>
+                <span>{loc.phone}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ── PROMO STRIP (webinar / first-time client message) ── */}
+      <div
+        style={{
+          background: CREAM_DEEP,
+          color: NAVY,
+          padding: '9px 24px',
+          textAlign: 'center',
+          fontSize: '0.82rem',
+          borderBottom: `1px solid ${LINE}`,
+        }}
+      >
         Now accepting new clients across Dallas-Fort Worth ·{' '}
         <Link
           href="/qualify"
           style={{
-            color: GOLD_LIGHT,
+            color: GOLD_DARK,
             textDecoration: 'underline',
             textUnderlineOffset: '3px',
             fontWeight: 600,
@@ -118,9 +185,10 @@ export default function IntakeLanding() {
           >
             {[
               { label: 'About', href: '#about' },
-              { label: 'Services', href: '#services' },
-              { label: 'Process', href: '#process' },
-              { label: 'Results', href: '#results' },
+              { label: 'Estate Planning', href: '#services' },
+              { label: 'Probate', href: '#services' },
+              { label: 'Business Law', href: '#services' },
+              { label: 'FAQ', href: '#faq' },
             ].map((item) => (
               <a
                 key={item.label}
@@ -440,14 +508,14 @@ export default function IntakeLanding() {
                   borderRadius: '6px',
                   padding: '36px 32px',
                   transition: 'border-color 0.25s, box-shadow 0.25s',
-                  boxShadow: '0 1px 3px rgba(11,29,53,0.04)',
+                  boxShadow: '0 1px 3px rgba(16,35,66,0.04)',
                   cursor: 'default',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.boxShadow = '0 4px 14px rgba(11,29,53,0.06)'
+                  e.currentTarget.style.boxShadow = '0 4px 14px rgba(16,35,66,0.06)'
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.boxShadow = '0 1px 3px rgba(11,29,53,0.04)'
+                  e.currentTarget.style.boxShadow = '0 1px 3px rgba(16,35,66,0.04)'
                 }}
               >
                 <h3
@@ -704,13 +772,13 @@ export default function IntakeLanding() {
                   padding: '36px 28px',
                   textAlign: 'left',
                   transition: 'box-shadow 0.25s',
-                  boxShadow: '0 1px 3px rgba(11,29,53,0.04)',
+                  boxShadow: '0 1px 3px rgba(16,35,66,0.04)',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.boxShadow = '0 4px 14px rgba(11,29,53,0.06)'
+                  e.currentTarget.style.boxShadow = '0 4px 14px rgba(16,35,66,0.06)'
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.boxShadow = '0 1px 3px rgba(11,29,53,0.04)'
+                  e.currentTarget.style.boxShadow = '0 1px 3px rgba(16,35,66,0.04)'
                 }}
               >
                 <p

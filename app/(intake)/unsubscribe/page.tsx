@@ -57,14 +57,14 @@ export default async function UnsubscribePage({
           borderColor: '#E2D9C6',
           backgroundColor: '#FBF8F2',
           borderTop: '3px solid #9B8059',
-          boxShadow: '0 1px 3px rgba(11,29,53,0.05), 0 8px 24px rgba(11,29,53,0.04)',
+          boxShadow: '0 1px 3px rgba(16,35,66,0.05), 0 8px 24px rgba(16,35,66,0.04)',
         }}
       >
         <div className="flex items-center gap-3 mb-6">
           <span role="img" aria-label="Crain & Wooley emblem" className="cw-emblem" />
           <div
             className="font-display text-2xl"
-            style={{ color: '#0B1D35', fontWeight: 600 }}
+            style={{ color: '#102342', fontWeight: 600 }}
           >
             Crain <span style={{ color: '#9B8059' }}>&amp;</span> Wooley
           </div>
@@ -86,7 +86,7 @@ export default async function UnsubscribePage({
           <>
             <div
               className="text-xs uppercase tracking-widest mb-3 font-semibold"
-              style={{ color: '#0B1D35' }}
+              style={{ color: '#102342' }}
             >
               Already Unsubscribed
             </div>

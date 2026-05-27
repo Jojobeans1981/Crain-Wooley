@@ -22,7 +22,7 @@ export default function IntakeLayout({ children }: { children: React.ReactNode }
           height: 'min(720px, 70vw)',
           opacity: 0.05,
           pointerEvents: 'none',
-          color: '#0B1D35',
+          color: '#102342',
           zIndex: 0,
         }}
       >

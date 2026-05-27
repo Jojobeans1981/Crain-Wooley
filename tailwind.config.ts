@@ -15,7 +15,7 @@ const config: Config = {
         // declared so utilities like bg-cw-navy and bg-cw/navy both resolve
         // depending on Tailwind version and prior class usage in the codebase.
         cw: {
-          navy: '#0B1D35',
+          navy: '#102342',
           'navy-light': '#143157',
           'navy-dark': '#06121F',
           gold: '#9B8059',
@@ -33,7 +33,7 @@ const config: Config = {
           danger: '#B23A2A',
         },
         // ── Flat aliases (used as bg-cw-navy, text-cw-ink, etc.) ──
-        'cw-navy': '#0B1D35',
+        'cw-navy': '#102342',
         'cw-navy-light': '#143157',
         'cw-navy-dark': '#06121F',
         'cw-gold': '#9B8059',
@@ -51,11 +51,11 @@ const config: Config = {
         'cw-success': '#3A7D5A',
         'cw-danger': '#B23A2A',
         // ── Legacy back-compat aliases (so the old class names still work) ──
-        'cw-black': '#0B1D35',
+        'cw-black': '#102342',
         'cw-dark': '#143157',
         'cw-panel': '#FBF8F2',
         'cw-border': '#E2D9C6',
-        'cw-white': '#0B1D35',   // “white” text on light bg → navy ink
+        'cw-white': '#102342',   // “white” text on light bg → navy ink
         'cw-muted': '#7A7A7A',
         'cw-accent': '#EFE7D6',
         // Legacy vault namespace (tracker code used this before) → mapped to new
@@ -91,9 +91,9 @@ const config: Config = {
         DEFAULT: 'cubic-bezier(0.4, 0, 0.2, 1)',
       },
       boxShadow: {
-        'cw-card': '0 1px 3px rgba(11,29,53,0.06), 0 8px 24px rgba(11,29,53,0.04)',
-        'cw-card-hover': '0 4px 10px rgba(11,29,53,0.08), 0 16px 40px rgba(11,29,53,0.08)',
-        'cw-button': '0 1px 2px rgba(11,29,53,0.18)',
+        'cw-card': '0 1px 3px rgba(16,35,66,0.06), 0 8px 24px rgba(16,35,66,0.04)',
+        'cw-card-hover': '0 4px 10px rgba(16,35,66,0.08), 0 16px 40px rgba(16,35,66,0.08)',
+        'cw-button': '0 1px 2px rgba(16,35,66,0.18)',
       },
     },
   },
