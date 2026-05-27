@@ -1,7 +1,7 @@
 export const dynamic = 'force-dynamic'
 
 import { NextRequest, NextResponse } from 'next/server'
-import { requireRole } from '@/lib/auth/requireRole'
+import { requireRole } from '@/src/lib/auth/requireRole'
 
 export async function GET(req: NextRequest) {
   const auth = await requireRole(req, 'ADMIN')
