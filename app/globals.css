@@ -257,16 +257,15 @@
       0 18px 48px rgba(16,35,66,0.10),
       0 4px 12px rgba(16,35,66,0.06);
   }
-  /* When a cw-panel is nested inside cw-shell, drop its own chrome so we don't double-card */
+  /* When a cw-panel is nested inside cw-shell, drop its own chrome so we don't
+     double-card. The gold accent on cw-panel-gold also goes here — inside the
+     shell it would span the full panel width and read as a banner stripe. */
   .cw-shell .cw-panel,
   .cw-shell .cw-panel-gold {
     background: transparent;
     border: none;
     border-radius: 0;
     box-shadow: none;
-  }
-  .cw-shell .cw-panel-gold {
-    border-top: 3px solid #9B8059;
   }
 
   /* ── Inputs (underline-only — editorial, no boxy chrome) ── */
@@ -347,23 +346,23 @@
     border-top: 1px solid #E2D9C6;
   }
 
-  /* ── Brand emblem (white logo PNG rendered in navy via CSS mask) ── */
+  /* ── Brand emblem (logo PNG already contains "CRAIN & WOOLEY" wordmark; render as full brand lockup) ── */
   .cw-emblem {
     display: inline-block;
-    width: 44px;
-    height: 36px;
+    width: 88px;
+    height: 64px;
     flex-shrink: 0;
     background-color: #102342;
     -webkit-mask-image: url(/cw-logo.png);
     -webkit-mask-repeat: no-repeat;
-    -webkit-mask-position: center;
+    -webkit-mask-position: left center;
     -webkit-mask-size: contain;
     mask-image: url(/cw-logo.png);
     mask-repeat: no-repeat;
-    mask-position: center;
+    mask-position: left center;
     mask-size: contain;
   }
-  .cw-emblem-sm { width: 38px; height: 30px; }
+  .cw-emblem-sm { width: 72px; height: 52px; }
 
   /* ── Animations ── */
   @keyframes pulse-gold {

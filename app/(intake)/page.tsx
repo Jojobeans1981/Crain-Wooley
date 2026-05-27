@@ -163,19 +163,7 @@ export default function IntakeLanding() {
             }}
             aria-label="Crain & Wooley — Home"
           >
-            <span role="img" aria-label="Crain & Wooley emblem" className="cw-emblem" />
-            <span
-              style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: '1.55rem',
-                fontWeight: 600,
-                color: NAVY,
-                letterSpacing: '0.01em',
-                lineHeight: 1,
-              }}
-            >
-              Crain <span style={{ color: GOLD }}>&amp;</span> Wooley
-            </span>
+            <span role="img" aria-label="Crain & Wooley" className="cw-emblem" />
           </Link>
 
           {/* Nav links — desktop */}

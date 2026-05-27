@@ -83,14 +83,11 @@ export default function QualifyPage() {
         <header className="cw-header">
           <div className="px-6 sm:px-10 py-5 flex items-center justify-between">
             <Link href="/" className="no-underline flex items-center gap-3" aria-label="Crain & Wooley — Home">
-              <span role="img" aria-label="Crain & Wooley emblem" className="cw-emblem" />
-              <span className="font-display text-2xl sm:text-3xl font-semibold text-cw-navy">
-                Crain <span className="text-cw-gold">&amp;</span> Wooley
-              </span>
+              <span role="img" aria-label="Crain & Wooley" className="cw-emblem" />
             </Link>
             <a
               href="tel:9729451610"
-              className="hidden sm:inline-flex items-center gap-2 text-cw-navy font-semibold text-sm hover:text-cw-gold transition-colors"
+              className="inline-flex items-center text-cw-navy font-semibold text-sm hover:text-cw-gold transition-colors"
             >
               <span className="text-cw-gold">☎</span> (972) 945-1610
             </a>
@@ -317,7 +314,7 @@ export default function QualifyPage() {
                   Continue
                 </button>
               ) : (
-                <button className="cw-btn-primary flex-1 !py-4" disabled={!canProceed() || loading} onClick={handleSubmit}>
+                <button className="cw-btn-primary flex-1" disabled={!canProceed() || loading} onClick={handleSubmit}>
                   {loading ? 'Submitting…' : 'Submit Intake'}
                 </button>
               )}

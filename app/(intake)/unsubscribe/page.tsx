@@ -47,24 +47,29 @@ export default async function UnsubscribePage({
   }
 
   return (
-    <main className="min-h-screen flex items-center justify-center px-4 py-12">
+    <main
+      style={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '48px 16px',
+      }}
+    >
       <div
-        className="border p-10 sm:p-12 max-w-md w-full rounded-md"
         style={{
-          borderColor: '#E2D9C6',
-          backgroundColor: '#FBF8F2',
+          width: '100%',
+          maxWidth: '448px',
+          padding: '40px 32px',
+          borderRadius: '12px',
+          border: '1px solid #D5C7B0',
           borderTop: '3px solid #9B8059',
-          boxShadow: '0 1px 3px rgba(16,35,66,0.05), 0 8px 24px rgba(16,35,66,0.04)',
+          backgroundColor: '#FFFFFF',
+          boxShadow: '0 1px 3px rgba(16,35,66,0.06), 0 12px 32px rgba(16,35,66,0.06)',
         }}
       >
-        <div className="flex items-center gap-3 mb-6">
-          <span role="img" aria-label="Crain & Wooley emblem" className="cw-emblem" />
-          <div
-            className="font-display text-2xl"
-            style={{ color: '#102342', fontWeight: 600 }}
-          >
-            Crain <span style={{ color: '#9B8059' }}>&amp;</span> Wooley
-          </div>
+        <div className="mb-6">
+          <span role="img" aria-label="Crain & Wooley" className="cw-emblem" />
         </div>
 
         {!token || (!done && !already) ? (

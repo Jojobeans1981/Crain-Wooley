@@ -35,11 +35,41 @@ function ScheduleContent() {
 
   if (checking) {
     return (
-      <div className="cw-page flex items-center justify-center">
-        <div className="text-sm text-cw-gold animate-pulse uppercase tracking-widest font-semibold">
-          Verifying payment...
+      <main className="cw-page"><div className="cw-shell">
+        <header className="cw-header">
+          <div className="cw-container py-5 flex items-center justify-between">
+            <Link href="/" className="no-underline flex items-center gap-3" aria-label="Crain & Wooley — Home">
+              <span role="img" aria-label="Crain & Wooley" className="cw-emblem" />
+            </Link>
+            <a
+              href="tel:9729451610"
+              className="inline-flex items-center text-cw-navy font-semibold text-sm hover:text-cw-gold transition-colors"
+            >
+              <span className="text-cw-gold">☎</span> (972) 945-1610
+            </a>
+          </div>
+        </header>
+        <div style={{ padding: '96px 24px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '14px' }}>
+          <div
+            aria-hidden="true"
+            style={{
+              width: '36px',
+              height: '36px',
+              border: '2px solid #E2D9C6',
+              borderTop: '2px solid #9B8059',
+              borderRadius: '999px',
+              animation: 'cw-spin 700ms linear infinite',
+            }}
+          />
+          <style>{`@keyframes cw-spin { to { transform: rotate(360deg); } }`}</style>
+          <p style={{ fontFamily: 'var(--font-sans)', fontSize: '0.72rem', color: '#9B8059', letterSpacing: '0.18em', textTransform: 'uppercase', fontWeight: 600, margin: 0 }}>
+            Verifying payment…
+          </p>
+          <p style={{ fontFamily: 'var(--font-sans)', fontSize: '0.9rem', color: '#7A7A7A', margin: 0, textAlign: 'center', maxWidth: '320px' }}>
+            One moment while we confirm your retainer with Stripe.
+          </p>
         </div>
-      </div>
+      </div></main>
     )
   }
 
@@ -49,14 +79,11 @@ function ScheduleContent() {
         <header className="cw-header">
           <div className="cw-container py-5 flex items-center justify-between">
             <Link href="/" className="no-underline flex items-center gap-3" aria-label="Crain & Wooley — Home">
-              <span role="img" aria-label="Crain & Wooley emblem" className="cw-emblem" />
-              <span className="font-display text-2xl sm:text-3xl font-semibold text-cw-navy">
-                Crain <span className="text-cw-gold">&amp;</span> Wooley
-              </span>
+              <span role="img" aria-label="Crain & Wooley" className="cw-emblem" />
             </Link>
             <a
               href="tel:9729451610"
-              className="hidden sm:inline-flex items-center gap-2 text-cw-navy font-semibold text-sm hover:text-cw-gold transition-colors"
+              className="inline-flex items-center text-cw-navy font-semibold text-sm hover:text-cw-gold transition-colors"
             >
               <span className="text-cw-gold">☎</span> (972) 945-1610
             </a>
@@ -85,10 +112,7 @@ function ScheduleContent() {
       <header className="cw-header">
         <div className="cw-container py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <Link href="/" className="no-underline flex items-center gap-3" aria-label="Crain & Wooley — Home">
-            <span role="img" aria-label="Crain & Wooley emblem" className="cw-emblem" />
-            <span className="font-display text-2xl sm:text-3xl font-semibold text-cw-navy">
-              Crain <span className="text-cw-gold">&amp;</span> Wooley
-            </span>
+            <span role="img" aria-label="Crain & Wooley" className="cw-emblem" />
           </Link>
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 bg-cw-success rounded-full animate-pulse inline-block" />
