@@ -60,11 +60,14 @@ export default async function UnsubscribePage({
           boxShadow: '0 1px 3px rgba(11,29,53,0.05), 0 8px 24px rgba(11,29,53,0.04)',
         }}
       >
-        <div
-          className="font-display text-2xl mb-6"
-          style={{ color: '#0B1D35', fontWeight: 600 }}
-        >
-          Crain <span style={{ color: '#9B8059' }}>&amp;</span> Wooley
+        <div className="flex items-center gap-3 mb-6">
+          <span role="img" aria-label="Crain & Wooley emblem" className="cw-emblem" />
+          <div
+            className="font-display text-2xl"
+            style={{ color: '#0B1D35', fontWeight: 600 }}
+          >
+            Crain <span style={{ color: '#9B8059' }}>&amp;</span> Wooley
+          </div>
         </div>
 
         {!token || (!done && !already) ? (

@@ -94,7 +94,9 @@ export default function IntakeLanding() {
               alignItems: 'center',
               gap: '12px',
             }}
+            aria-label="Crain & Wooley — Home"
           >
+            <span role="img" aria-label="Crain & Wooley emblem" className="cw-emblem" />
             <span
               style={{
                 fontFamily: 'var(--font-display)',

@@ -60,7 +60,8 @@ export default async function TrackerPage({ params }: TrackerPageProps) {
       {/* Header */}
       <header className="cw-header">
         <div className="cw-container py-5 flex items-center justify-between">
-          <Link href="/" className="no-underline">
+          <Link href="/" className="no-underline flex items-center gap-3" aria-label="Crain & Wooley — Home">
+            <span role="img" aria-label="Crain & Wooley emblem" className="cw-emblem" />
             <span className="font-display text-2xl sm:text-3xl font-semibold text-cw-navy">
               Crain <span className="text-cw-gold">&amp;</span> Wooley
             </span>

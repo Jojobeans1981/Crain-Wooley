@@ -224,6 +224,24 @@
     border-top: 1px solid #E2D9C6;
   }
 
+  /* ── Brand emblem (white logo PNG rendered in navy via CSS mask) ── */
+  .cw-emblem {
+    display: inline-block;
+    width: 44px;
+    height: 36px;
+    flex-shrink: 0;
+    background-color: #0B1D35;
+    -webkit-mask-image: url(/cw-logo.png);
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: contain;
+    mask-image: url(/cw-logo.png);
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+  }
+  .cw-emblem-sm { width: 38px; height: 30px; }
+
   /* ── Animations ── */
   @keyframes pulse-gold {
     0%, 100% { opacity: 1; transform: scale(1); }
