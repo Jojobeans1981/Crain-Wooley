@@ -11,13 +11,9 @@ import type { IntakeFormData, PracticeArea, Urgency } from '@/types'
 const STEPS = ['Contact', 'Case Details', 'Review & Submit']
 
 const PRACTICE_AREAS: { value: PracticeArea; label: string }[] = [
-  { value: 'ESTATE_PLANNING',  label: 'Estate Planning' },
-  { value: 'FAMILY_LAW',       label: 'Family Law' },
-  { value: 'PERSONAL_INJURY',  label: 'Personal Injury' },
-  { value: 'BUSINESS_LAW',     label: 'Business Law' },
-  { value: 'CRIMINAL_DEFENSE', label: 'Criminal Defense' },
-  { value: 'REAL_ESTATE',      label: 'Real Estate' },
-  { value: 'OTHER',            label: 'Other' },
+  { value: 'ESTATE_PLANNING', label: 'Estate Planning' },
+  { value: 'BUSINESS_LAW',    label: 'Business Law' },
+  { value: 'OTHER',           label: 'Other' },
 ]
 
 const URGENCY_OPTIONS: { value: Urgency; label: string; sub: string }[] = [
@@ -107,13 +103,13 @@ export default function QualifyPage() {
             {/* Page heading */}
             <div className="text-center mb-10">
               <p className="cw-eyebrow mb-3">Free Case Review</p>
-              <h1 className="font-display text-cw-navy text-4xl sm:text-5xl font-semibold leading-tight mb-3">
+              <h1 className="font-display text-cw-navy text-3xl sm:text-4xl font-semibold leading-[1.15] mb-3">
                 Tell Us About Your Situation
               </h1>
-              <div className="w-12 h-[2px] bg-cw-gold mx-auto mb-4" aria-hidden="true" />
+              <div className="w-12 h-[2px] bg-cw-gold mx-auto mb-5" aria-hidden="true" />
               <p className="text-cw-ink-soft text-base max-w-md mx-auto leading-relaxed">
-                A few quick questions so we can determine if we&apos;re the right fit — and get
-                you to the right attorney faster.
+                A few short questions so we can prepare the right attorney before your call.
+                Takes about three minutes.
               </p>
             </div>
 
@@ -201,9 +197,6 @@ export default function QualifyPage() {
                           <span className={`text-sm ${form.practiceArea === p.value ? 'text-cw-navy font-semibold' : 'text-cw-ink-soft'}`}>
                             {p.label}
                           </span>
-                          {form.practiceArea === p.value && (
-                            <span className="text-cw-gold text-sm font-semibold">✓</span>
-                          )}
                         </button>
                       ))}
                     </div>
@@ -215,7 +208,7 @@ export default function QualifyPage() {
                       className="cw-input"
                       value={form.caseType}
                       onChange={e => set('caseType', e.target.value)}
-                      placeholder="e.g. Will setup, divorce filing, injury claim..."
+                      placeholder="e.g. New will, trust setup, probate of an estate, LLC formation"
                     />
                   </div>
 
@@ -226,7 +219,7 @@ export default function QualifyPage() {
                       rows={5}
                       value={form.description}
                       onChange={e => set('description', e.target.value)}
-                      placeholder="Brief description of your legal matter..."
+                      placeholder="A few sentences about your situation — family makeup, assets involved, what's prompting you to plan now."
                     />
                     <div className="flex justify-between mt-2">
                       <span className="text-xs text-cw-ink-mute">Min. 20 characters</span>
@@ -257,9 +250,6 @@ export default function QualifyPage() {
                             </span>
                             <span className="text-cw-ink-mute text-xs">{u.sub}</span>
                           </div>
-                          {form.urgency === u.value && (
-                            <span className="text-cw-gold text-sm shrink-0 ml-4 font-semibold">✓</span>
-                          )}
                         </button>
                       ))}
                     </div>
@@ -283,9 +273,9 @@ export default function QualifyPage() {
                     ['Name',          `${form.firstName} ${form.lastName}`],
                     ['Email',         form.email],
                     ['Phone',         form.phone],
-                    ['Practice Area', form.practiceArea.replace(/_/g, ' ')],
+                    ['Practice Area', PRACTICE_AREAS.find(p => p.value === form.practiceArea)?.label ?? form.practiceArea],
                     ['Case Type',     form.caseType],
-                    ['Urgency',       form.urgency.replace(/_/g, ' ')],
+                    ['Urgency',       URGENCY_OPTIONS.find(u => u.value === form.urgency)?.label ?? form.urgency],
                   ].map(([label, value]) => (
                     <div key={label} className="flex gap-4 px-4 py-3.5">
                       <span className="text-xs text-cw-ink-mute uppercase tracking-wider font-semibold w-28 shrink-0 pt-0.5">{label}</span>
@@ -320,22 +310,22 @@ export default function QualifyPage() {
             {/* Navigation */}
             <div className="flex gap-3 mt-6">
               {step > 0 && (
-                <button className="cw-btn-ghost" onClick={() => setStep(s => s - 1)}>← Back</button>
+                <button className="cw-btn-ghost" onClick={() => setStep(s => s - 1)}>Back</button>
               )}
               {step < STEPS.length - 1 ? (
                 <button className="cw-btn-primary flex-1" disabled={!canProceed()} onClick={() => setStep(s => s + 1)}>
-                  Continue →
+                  Continue
                 </button>
               ) : (
                 <button className="cw-btn-primary flex-1 !py-4" disabled={!canProceed() || loading} onClick={handleSubmit}>
-                  {loading ? 'Submitting...' : 'Submit Intake →'}
+                  {loading ? 'Submitting…' : 'Submit Intake'}
                 </button>
               )}
             </div>
 
             {/* Trust footer */}
-            <p className="text-center text-xs text-cw-ink-mute mt-8 leading-relaxed">
-              <span className="text-cw-gold">✦</span> Licensed Texas Attorneys &nbsp;·&nbsp; <span className="text-cw-gold">✦</span> Client Privacy Guaranteed &nbsp;·&nbsp; <span className="text-cw-gold">✦</span> Takes About 3 Minutes
+            <p className="text-center text-xs text-cw-ink-mute mt-8 leading-relaxed tracking-wide">
+              Licensed Texas attorneys &nbsp;·&nbsp; Confidential review &nbsp;·&nbsp; About three minutes
             </p>
 
           </div>
