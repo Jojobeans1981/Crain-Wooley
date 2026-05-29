@@ -244,6 +244,225 @@
     .cw-stepcard:last-child { border-bottom: none; }
   }
 
+  /* ── Form section (progressive disclosure shells on /qualify) ── */
+  .cw-formsection {
+    padding: 36px 0 28px;
+    border-top: 1px solid #E5DAC1;
+  }
+  .cw-formsection:first-of-type { border-top: none; padding-top: 8px; }
+  .cw-formsection-reveal {
+    animation: cw-section-in 420ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  @keyframes cw-section-in {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cw-formsection-reveal { animation: none; }
+  }
+  .cw-formsection-header {
+    margin-bottom: 24px;
+  }
+  .cw-formsection-kicker {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #9B8059;
+    margin: 0 0 6px;
+  }
+  .cw-formsection-help {
+    font-family: var(--font-sans);
+    font-size: 0.92rem;
+    color: #6B6253;
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  .cw-formsection-subblock {
+    background: rgba(155,128,89,0.05);
+    border: 1px solid #E5DAC1;
+    border-radius: 10px;
+    padding: 24px 22px;
+  }
+  .cw-formsection-subblock-header { margin-bottom: 22px; }
+
+  .cw-label-aux {
+    font-family: var(--font-sans);
+    font-size: 0.66rem;
+    letter-spacing: 0.04em;
+    text-transform: none;
+    color: #9C9281;
+    font-weight: 500;
+  }
+
+  .cw-section-continue {
+    margin-top: 28px;
+    padding-top: 18px;
+    border-top: 1px dashed #D5C7B0;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .cw-continue-link {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #9B8059;
+    background: transparent;
+    border: none;
+    padding: 8px 4px;
+    cursor: pointer;
+    transition: color 200ms;
+  }
+  .cw-continue-link::after {
+    content: ' ↓';
+    display: inline-block;
+    margin-left: 4px;
+    transition: transform 200ms;
+  }
+  .cw-continue-link:hover:not(:disabled) { color: #7A6342; }
+  .cw-continue-link:hover:not(:disabled)::after { transform: translateY(2px); }
+  .cw-continue-link:disabled {
+    color: #B8AB91;
+    cursor: not-allowed;
+  }
+
+  /* ── Radio / checkbox rows ── */
+  .cw-radio-row, .cw-checkbox-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 14px;
+    border: 1px solid #E5DAC1;
+    border-radius: 8px;
+    background: #FFFFFF;
+    cursor: pointer;
+    transition: border-color 160ms, background-color 160ms;
+  }
+  .cw-radio-row:hover, .cw-checkbox-row:hover {
+    border-color: #C9BB9F;
+    background: rgba(155,128,89,0.03);
+  }
+  .cw-radio-row-selected, .cw-checkbox-row-selected {
+    border-color: #9B8059;
+    background: rgba(155,128,89,0.08);
+  }
+  .cw-radio-row-inline {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 18px;
+    min-width: 88px;
+  }
+
+  .cw-radio-input, .cw-checkbox-input {
+    flex-shrink: 0;
+    margin-top: 2px;
+    accent-color: #9B8059;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+  }
+  .cw-radio-label {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    color: #1A1A1A;
+    line-height: 1.45;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .cw-radio-row-selected .cw-radio-label {
+    color: #102342;
+    font-weight: 600;
+  }
+  .cw-radio-sub {
+    font-size: 0.78rem;
+    color: #6B6253;
+    font-weight: 400;
+  }
+
+  /* ── Disabled file-upload button (demo placeholder) ── */
+  .cw-fileupload-disabled {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    background: rgba(0,0,0,0.02);
+    border: 1px dashed #D5C7B0;
+    border-radius: 8px;
+    color: #8A8175;
+    font-family: var(--font-sans);
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: not-allowed;
+  }
+  .cw-fileupload-icon { font-size: 1.05rem; opacity: 0.5; }
+  .cw-fileupload-status {
+    margin-left: auto;
+    padding-left: 10px;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #B8AB91;
+    font-weight: 600;
+  }
+  .cw-fileupload-help {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    color: #8A8175;
+    margin: 6px 0 0;
+    font-style: italic;
+  }
+
+  /* ── Review summary (Section 3) ── */
+  .cw-review-summary {
+    background: #FFFFFF;
+    border: 1px solid #E5DAC1;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .cw-review-row {
+    display: flex;
+    gap: 16px;
+    padding: 12px 18px;
+    border-top: 1px solid #F1E8D4;
+    align-items: flex-start;
+  }
+  .cw-review-row:first-child { border-top: none; }
+  .cw-review-label {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    color: #9C9281;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+    flex-shrink: 0;
+    min-width: 120px;
+    padding-top: 2px;
+  }
+  .cw-review-value {
+    font-family: var(--font-sans);
+    font-size: 0.92rem;
+    color: #102342;
+    font-weight: 500;
+    line-height: 1.5;
+    word-break: break-word;
+  }
+  .cw-review-section-break {
+    background: rgba(155,128,89,0.08);
+    padding: 8px 18px;
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    color: #9B8059;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 700;
+    border-top: 1px solid #E5DAC1;
+  }
+
   /* ── Shell (funnel pages only — landing stays full-bleed) ── */
   .cw-shell {
     max-width: 1080px;
