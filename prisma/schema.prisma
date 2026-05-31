@@ -23,6 +23,82 @@ model Lead {
   qualified       Boolean       @default(false)
   disqualifyReason String?
 
+  // ── Full estate intake (Wills & Trust / Probate questionnaire) ──
+  // All nullable + additive so the migration is safe on existing rows.
+  intakeType        IntakeType?
+  zip               String?
+  dob               String?
+  source            String?
+  notes             String?
+  preferredOffice   String?
+  consultationFormat String?
+  preferredContactTime String?
+  clientLivesInTexas Boolean?
+  // Family
+  maritalStatus     String?
+  hasChildren       Boolean?
+  childrenCount     String?
+  hasMinorChildren  Boolean?
+  hasSpecialNeedsDependent Boolean?
+  spouseName        String?
+  spouseDob         String?
+  spouseEmail       String?
+  spousePhone       String?
+  dateOfMarriage    String?
+  spouseChildrenSeparate String?
+  // Estate
+  assetRange        String?
+  debtRange         String?
+  ownsRealEstate    Boolean?
+  realEstateCount   String?
+  ownsBusiness      Boolean?
+  businessType      String?
+  businessHasSuccession Boolean?
+  hasExistingPlan   Boolean?
+  existingPlanYear  String?
+  deedAddresses     String?
+  companyInfo       String?
+  ownsOutOfState    Boolean?
+  // Wishes / additional
+  topConcerns       String?
+  worstCaseFear     String?
+  specialGifts      String?
+  remoteContingentBeneficiaries String?
+  organDonationNotes String?
+  livingWillYou     Boolean?
+  livingWillSpouse  Boolean?
+  receivesGovBenefits Boolean?
+  hasDivorcePayments Boolean?
+  hasMarriageContract Boolean?
+  hasFiledGiftTaxReturns Boolean?
+  hasPriorEstatePlan Boolean?
+  childrenHaveSpecialNeedsExtended Boolean?
+  childrenReceiveGovBenefits Boolean?
+  supportsAdultDependents Boolean?
+  // Services chosen (comma-joined for quick filtering)
+  services          String?
+  // Probate
+  decedentName      String?
+  decedentDateOfDeath String?
+  decedentRelationship String?
+  decedentRelationshipOther String?
+  decedentCounty    String?
+  decedentTexasResident Boolean?
+  decedentHadTrust  Boolean?
+  willExists        String?
+  willHasOriginal   String?
+  willYear          String?
+  probateCourtFiled String?
+  probateCountyFiled String?
+  probateExecutorAppointed Boolean?
+  heirDisputes      String?
+  // Repeating groups stored as JSON (sqlite TEXT)
+  childrenDetails       Json?
+  realEstateProperties  Json?
+  primaryBeneficiaries  Json?
+  fiduciaries           Json?
+  attachments           Json?
+
   status          LeadStatus    @default(NEW)
 
   paymentStatus   PaymentStatus @default(UNPAID)
@@ -92,12 +168,18 @@ model AuditEvent {
 
 enum PracticeArea {
   ESTATE_PLANNING
+  PROBATE
   FAMILY_LAW
   PERSONAL_INJURY
   BUSINESS_LAW
   CRIMINAL_DEFENSE
   REAL_ESTATE
   OTHER
+}
+
+enum IntakeType {
+  WILLS
+  PROBATE
 }
 
 enum Urgency {

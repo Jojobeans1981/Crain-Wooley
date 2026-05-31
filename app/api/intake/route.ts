@@ -3,31 +3,20 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/db/prisma'
 import { qualifyLead } from '@/lib/qualify'
 import { buildSequenceJobsFromTemplates } from '@/lib/ghost/sequences'
-import type { IntakeFormData } from '@/types'
+import type { IntakeForm } from '@/lib/intake/schema'
+import { deriveGateInput, buildLeadData, mapPracticeArea, mapUrgency } from '@/lib/intake/derive'
 import { auditEvent } from '@/lib/audit'
 
 export async function POST(req: NextRequest) {
   try {
-    const body: IntakeFormData = await req.json()
+    const form: IntakeForm = await req.json()
 
-    // Run qualification logic
-    const { qualified, reason } = qualifyLead(body)
+    // Derive the gate fields from the rich estate questionnaire, then qualify.
+    const { qualified, reason } = qualifyLead(deriveGateInput(form))
 
-    // Create lead record
+    // Create lead record (typed columns + JSON bundles for repeating groups).
     const lead = await prisma.lead.create({
-      data: {
-        firstName: body.firstName,
-        lastName: body.lastName,
-        email: body.email,
-        phone: body.phone,
-        practiceArea: body.practiceArea,
-        caseType: body.caseType,
-        description: body.description,
-        urgency: body.urgency,
-        qualified,
-        disqualifyReason: reason,
-        status: qualified ? 'QUALIFIED' : 'DISQUALIFIED',
-      },
+      data: buildLeadData(form, { qualified, reason }),
     })
 
     await auditEvent({
@@ -35,8 +24,9 @@ export async function POST(req: NextRequest) {
       leadId: lead.id,
       meta: {
         qualified,
-        practiceArea: body.practiceArea,
-        urgency: body.urgency,
+        intakeType: form.intakeType,
+        practiceArea: mapPracticeArea(form),
+        urgency: mapUrgency(form),
       },
     })
 
@@ -46,8 +36,8 @@ export async function POST(req: NextRequest) {
       const paymentLink = `${appUrl}/payment?leadId=${lead.id}`
 
       const jobs = await buildSequenceJobsFromTemplates(lead.id, {
-        firstName: body.firstName,
-        practiceArea: body.practiceArea.replace(/_/g, ' '),
+        firstName: form.firstName,
+        practiceArea: mapPracticeArea(form).replace(/_/g, ' '),
         paymentLink,
       })
 

@@ -1,11 +1,14 @@
 export type PracticeArea =
   | 'ESTATE_PLANNING'
+  | 'PROBATE'
   | 'FAMILY_LAW'
   | 'PERSONAL_INJURY'
   | 'BUSINESS_LAW'
   | 'CRIMINAL_DEFENSE'
   | 'REAL_ESTATE'
   | 'OTHER'
+
+export type IntakeType = 'WILLS' | 'PROBATE'
 
 export type Urgency =
   | 'IMMEDIATE'
