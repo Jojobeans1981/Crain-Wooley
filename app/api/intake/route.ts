@@ -54,13 +54,7 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     console.error('[INTAKE ERROR]', error)
     return NextResponse.json(
-      {
-        success: false,
-        error: 'Intake submission failed.',
-        // TEMP diagnostic — surface the underlying error to locate the prod
-        // failure; reverted once the root cause is fixed.
-        detail: error instanceof Error ? error.message : String(error),
-      },
+      { success: false, error: 'Intake submission failed.' },
       { status: 500 }
     )
   }
