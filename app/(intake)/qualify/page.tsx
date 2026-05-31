@@ -1,7 +1,9 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
-import Link from 'next/link'
+import { cf } from '@/lib/cf'
+import { IntakeScaffold } from '@/components/intake/IntakeScaffold'
+import { PrivacyShield } from '@/components/intake/PrivacyShield'
 
 // Demo-only build. The form collects fields that the production API doesn't
 // know about (qualifyingFactors and the probate block). On submit, DEMO mode
@@ -83,7 +85,10 @@ export default function QualifyPage() {
   const section2Ref = useRef<HTMLDivElement>(null)
   const section3Ref = useRef<HTMLDivElement>(null)
 
-  // localStorage restore (one-shot)
+  // localStorage restore (one-shot, on mount). This is a deliberate sync from
+  // an external system (localStorage) that isn't available during SSR, so the
+  // synchronous setState here is intentional.
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY)
@@ -101,6 +106,7 @@ export default function QualifyPage() {
     }
     setHydrated(true)
   }, [])
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   // localStorage save (only after hydration so we don't wipe restored state)
   useEffect(() => {
@@ -188,63 +194,63 @@ export default function QualifyPage() {
 
   const isProbate = form.practiceArea === 'PROBATE'
 
-  const stepState = (n: number) =>
-    n < revealedSections ? 'done' : n === revealedSections ? 'current' : 'upcoming'
+  const progressPct = ((revealedSections - 1) / (STEPS.length - 1)) * 100
 
   return (
-    <main className="cw-page">
-      <div className="cw-shell">
-        <header className="cw-header">
-          <div className="px-6 sm:px-10 py-5 flex items-center justify-between">
-            <Link href="/" className="no-underline flex items-center gap-3" aria-label="Crain & Wooley — Home">
-              <span role="img" aria-label="Crain & Wooley" className="cw-emblem" />
-            </Link>
-            <a
-              href="tel:9729451610"
-              className="inline-flex items-center text-cw-navy font-semibold text-sm hover:text-cw-gold transition-colors"
+    <IntakeScaffold>
+      {/* Top — section indicator + autosave */}
+      <div
+        className="cw-intake-pad"
+        style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, paddingTop: 24 }}
+      >
+        <span style={{ display: 'flex', alignItems: 'center', gap: 14, flexWrap: 'wrap', fontFamily: cf.mono, fontSize: 10.5, letterSpacing: '0.22em', textTransform: 'uppercase', color: cf.textMute }}>
+          <span>Section {revealedSections} of {STEPS.length}</span>
+          <span style={{ color: cf.brass }}>· Free Case Review</span>
+        </span>
+        {hydrated && (
+          <span style={{ display: 'flex', alignItems: 'center', gap: 8, fontFamily: cf.mono, fontSize: 10.5, letterSpacing: '0.16em', textTransform: 'uppercase', color: cf.textMute }}>
+            <span style={{ width: 6, height: 6, borderRadius: '50%', background: cf.brass, display: 'inline-block' }} />
+            Saved
+          </span>
+        )}
+      </div>
+
+      {/* Progress rail */}
+      <div className="cw-intake-pad" style={{ paddingTop: 12 }}>
+        <div style={{ height: 2, background: cf.ruleSoft, position: 'relative' }}>
+          <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: `${progressPct}%`, background: cf.brass, transition: 'width .35s cubic-bezier(.4,0,.2,1)' }} />
+        </div>
+        <div className="cw-intake-deskonly-grid" style={{ gridTemplateColumns: `repeat(${STEPS.length}, minmax(0, 1fr))`, gap: 12, marginTop: 10 }}>
+          {STEPS.map((s, i) => (
+            <span
+              key={s.num}
+              style={{
+                fontFamily: cf.sans, fontSize: 11, letterSpacing: '0.02em',
+                color: i < revealedSections ? cf.ink : cf.textMute,
+                fontWeight: i === revealedSections - 1 ? 600 : 400,
+                textAlign: i === 0 ? 'left' : i === STEPS.length - 1 ? 'right' : 'center',
+                whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', minWidth: 0,
+              }}
             >
-              <span className="text-cw-gold">☎</span> (972) 945-1610
-            </a>
+              {s.label}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* Body */}
+      <div className="cw-intake-pad" style={{ flex: 1, overflow: 'auto', paddingTop: 32, paddingBottom: 32 }}>
+        <div style={{ maxWidth: 760 }}>
+
+          {/* Heading */}
+          <div style={{ marginBottom: 28 }}>
+            <h1 className="font-display" style={{ margin: 0, color: cf.ink, fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.01em', fontSize: 'clamp(30px, 4vw, 40px)' }}>
+              Tell us about your situation
+            </h1>
+            <p style={{ fontFamily: cf.sans, fontSize: 14.5, color: cf.textMute, margin: '8px 0 0', lineHeight: 1.5 }}>
+              A few short questions so we can prepare the right attorney before your call. About three minutes — your answers save automatically.
+            </p>
           </div>
-        </header>
-
-        <div className="px-6 sm:px-10 py-10 sm:py-14">
-          <div className="w-full max-w-xl mx-auto">
-
-            {/* Page heading */}
-            <div className="text-center mb-8">
-              <p className="cw-eyebrow mb-3">Free Case Review</p>
-              <h1 className="font-display text-cw-navy text-3xl sm:text-4xl font-semibold leading-[1.15] mb-3">
-                Tell Us About Your Situation
-              </h1>
-              <div className="w-12 h-[2px] bg-cw-gold mx-auto mb-5" aria-hidden="true" />
-              <p className="text-cw-ink-soft text-base max-w-md mx-auto leading-relaxed">
-                A few short questions so we can prepare the right attorney before your call.
-                Takes about three minutes. Your answers save automatically.
-              </p>
-            </div>
-
-            {/* Step cards — always visible, mirror revealedSections state */}
-            <div
-              className="cw-stepcards mb-12"
-              role="status"
-              aria-label={`Section ${revealedSections} of 3`}
-            >
-              {STEPS.map(s => {
-                const state = stepState(s.num)
-                return (
-                  <div key={s.num} className={`cw-stepcard cw-stepcard-${state}`}>
-                    <div className="cw-stepcard-badge" aria-hidden="true">
-                      {state === 'done' ? '✓' : s.num}
-                    </div>
-                    <div className="cw-stepcard-meta">
-                      <span className="cw-stepcard-kicker">Step {s.num}</span>
-                      <span className="cw-stepcard-label">{s.label}</span>
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
 
             {/* ── Section 1: Contact ── */}
             <section className="cw-formsection">
@@ -697,14 +703,14 @@ export default function QualifyPage() {
               </section>
             )}
 
-            <p className="text-center text-xs text-cw-ink-mute mt-12 leading-relaxed tracking-wide">
-              Licensed Texas attorneys &nbsp;·&nbsp; Confidential review &nbsp;·&nbsp; About three minutes
+            <p className="mt-12" style={{ fontFamily: cf.sans, fontSize: 11.5, color: cf.textMute, display: 'flex', alignItems: 'center', gap: 8, lineHeight: 1.5 }}>
+              <PrivacyShield color={cf.brass} size={12} />
+              Licensed Texas attorneys · Confidential review · About three minutes
             </p>
 
-          </div>
         </div>
       </div>
-    </main>
+    </IntakeScaffold>
   )
 }
 

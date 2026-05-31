@@ -1,5 +1,16 @@
 import type { Config } from 'tailwindcss'
 
+/**
+ * Palette + type repointed to the approved intake design
+ * (wemovenewyork/crain-wooley-intake · the `cf` token set). See lib/cf.ts.
+ *
+ * Warm editorial-classic: slate ink #2E414F, brass #9A825E, cream #faf5ea,
+ * navy-tinted ink text #1a2230. Square corners, border-as-elevation, flat
+ * ink/brass buttons. arno-pro (Typekit) / Inter / JetBrains Mono.
+ *
+ * All historical class names (cw-navy, cw-gold, cw-ink, vault-*, etc.) are
+ * preserved and remapped onto the cf values so existing markup keeps working.
+ */
 const config: Config = {
   content: [
     './app/**/*.{js,ts,jsx,tsx,mdx}',
@@ -10,90 +21,112 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // ── New brand palette (matches estateplanningdfw.law) ──
-        // Both the nested `cw.*` namespace and the flat `cw-*` aliases are
-        // declared so utilities like bg-cw-navy and bg-cw/navy both resolve
-        // depending on Tailwind version and prior class usage in the codebase.
-        cw: {
-          navy: '#102342',
-          'navy-light': '#143157',
-          'navy-dark': '#06121F',
-          gold: '#9B8059',
-          'gold-dark': '#7A6342',
-          'gold-light': '#B89E78',
-          cream: '#F7F2E9',
-          'cream-deep': '#EFE7D6',
-          ivory: '#FBF8F2',
-          ink: '#1A1A1A',
-          'ink-soft': '#4A4A4A',
-          'ink-mute': '#7A7A7A',
-          line: '#E2D9C6',
-          'line-soft': '#EFE7D6',
-          success: '#3A7D5A',
-          danger: '#B23A2A',
+        // ── Intake design palette (cf.*) ──
+        cf: {
+          ink: '#2E414F',
+          'ink-soft': '#3F576B',
+          ivory: '#f6f1e7',
+          'ivory-warm': '#ede5d3',
+          cream: '#faf5ea',
+          brass: '#9A825E',
+          'brass-light': '#D5C0A2',
+          'brass-dark': '#7A6444',
+          rule: 'rgba(26,34,48,0.14)',
+          'rule-soft': 'rgba(26,34,48,0.08)',
+          text: '#1a2230',
+          'text-mute': '#6b6356',
+          danger: '#a23a2a',
         },
-        // ── Flat aliases (used as bg-cw-navy, text-cw-ink, etc.) ──
-        'cw-navy': '#102342',
-        'cw-navy-light': '#143157',
-        'cw-navy-dark': '#06121F',
-        'cw-gold': '#9B8059',
-        'cw-gold-dark': '#7A6342',
-        'cw-gold-light': '#B89E78',
-        'cw-gold-dim': '#7A6342', // legacy
-        'cw-cream': '#F7F2E9',
-        'cw-cream-deep': '#EFE7D6',
-        'cw-ivory': '#FBF8F2',
-        'cw-ink': '#1A1A1A',
-        'cw-ink-soft': '#4A4A4A',
-        'cw-ink-mute': '#7A7A7A',
-        'cw-line': '#E2D9C6',
-        'cw-line-soft': '#EFE7D6',
+        // ── cw.* namespace (remapped onto cf) ──
+        cw: {
+          navy: '#2E414F',         // cf.ink
+          'navy-light': '#3F576B', // cf.inkSoft
+          'navy-dark': '#21303B',  // darker slate (derived from cf.ink)
+          gold: '#9A825E',         // cf.brass
+          'gold-dark': '#7A6444',  // cf.brassDark
+          'gold-light': '#D5C0A2', // cf.brassLight
+          cream: '#faf5ea',        // cf.cream
+          'cream-deep': '#ede5d3', // cf.ivoryWarm
+          ivory: '#f6f1e7',        // cf.ivory
+          ink: '#1a2230',          // cf.text
+          'ink-soft': '#3F576B',   // cf.inkSoft
+          'ink-mute': '#6b6356',   // cf.textMute
+          line: 'rgba(26,34,48,0.14)',        // cf.rule
+          'line-soft': 'rgba(26,34,48,0.08)', // cf.ruleSoft
+          success: '#3A7D5A',
+          danger: '#a23a2a',       // cf.danger
+        },
+        // ── Flat aliases (bg-cw-navy, text-cw-ink, etc.) ──
+        'cw-navy': '#2E414F',
+        'cw-navy-light': '#3F576B',
+        'cw-navy-dark': '#21303B',
+        'cw-gold': '#9A825E',
+        'cw-gold-dark': '#7A6444',
+        'cw-gold-light': '#D5C0A2',
+        'cw-gold-dim': '#7A6444', // legacy
+        'cw-cream': '#faf5ea',
+        'cw-cream-deep': '#ede5d3',
+        'cw-ivory': '#f6f1e7',
+        'cw-ink': '#1a2230',
+        'cw-ink-soft': '#3F576B',
+        'cw-ink-mute': '#6b6356',
+        'cw-line': 'rgba(26,34,48,0.14)',
+        'cw-line-soft': 'rgba(26,34,48,0.08)',
         'cw-success': '#3A7D5A',
-        'cw-danger': '#B23A2A',
-        // ── Legacy back-compat aliases (so the old class names still work) ──
-        'cw-black': '#102342',
-        'cw-dark': '#143157',
-        'cw-panel': '#FBF8F2',
-        'cw-border': '#E2D9C6',
-        'cw-white': '#102342',   // “white” text on light bg → navy ink
-        'cw-muted': '#7A7A7A',
-        'cw-accent': '#EFE7D6',
-        // Legacy vault namespace (tracker code used this before) → mapped to new
+        'cw-danger': '#a23a2a',
+        // ── Legacy back-compat aliases (old class names still resolve) ──
+        'cw-black': '#2E414F',  // cf.ink
+        'cw-dark': '#3F576B',   // cf.inkSoft
+        'cw-panel': '#f6f1e7',  // cf.ivory
+        'cw-border': 'rgba(26,34,48,0.14)',
+        'cw-white': '#2E414F',  // “white” text on light bg → ink
+        'cw-muted': '#6b6356',  // cf.textMute
+        'cw-accent': '#ede5d3', // cf.ivoryWarm
+        // Legacy vault namespace → mapped onto the warm palette
         vault: {
-          void: '#F7F2E9',
-          chamber: '#FBF8F2',
-          wall: '#EFE7D6',
-          border: '#E2D9C6',
-          steel: '#7A7A7A',
-          parchment: '#1A1A1A',
-          gold: '#9B8059',
-          goldmute: '#7A6342',
-          warn: '#B23A2A',
+          void: '#faf5ea',       // cf.cream
+          chamber: '#f6f1e7',    // cf.ivory
+          wall: '#ede5d3',       // cf.ivoryWarm
+          border: 'rgba(26,34,48,0.14)',
+          steel: '#6b6356',      // cf.textMute
+          parchment: '#1a2230',  // cf.text
+          gold: '#9A825E',       // cf.brass
+          goldmute: '#7A6444',   // cf.brassDark
+          warn: '#a23a2a',       // cf.danger
           safe: '#3A7D5A',
         },
       },
       fontFamily: {
-        display: ['Cormorant Garamond', 'Georgia', 'serif'],
-        mono: ['Montserrat', 'system-ui', 'sans-serif'],
-        sans: ['Montserrat', 'system-ui', 'sans-serif'],
+        // Mirrors cf.serif / cf.sans / cf.mono (see lib/cf.ts).
+        display: ['arno-pro', 'Cormorant Garamond', 'Hoefler Text', 'Times New Roman', 'serif'],
+        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
+        mono: ['JetBrains Mono', 'ui-monospace', 'Menlo', 'monospace'],
       },
       borderRadius: {
-        DEFAULT: '4px',
+        // Source design is square-cornered (borderRadius: 0). Keep tiny radii
+        // for the rare softened element; `full` stays for radio dots / pills.
+        DEFAULT: '0px',
+        none: '0px',
         sm: '2px',
-        md: '6px',
-        lg: '10px',
+        md: '2px',
+        lg: '2px',
+        xl: '2px',
+        '2xl': '2px',
+        full: '9999px',
       },
       transitionDuration: {
-        DEFAULT: '200ms',
-        slow: '350ms',
+        DEFAULT: '150ms',
+        slow: '300ms',
       },
       transitionTimingFunction: {
         DEFAULT: 'cubic-bezier(0.4, 0, 0.2, 1)',
       },
       boxShadow: {
-        'cw-card': '0 1px 3px rgba(16,35,66,0.06), 0 8px 24px rgba(16,35,66,0.04)',
-        'cw-card-hover': '0 4px 10px rgba(16,35,66,0.08), 0 16px 40px rgba(16,35,66,0.08)',
-        'cw-button': '0 1px 2px rgba(16,35,66,0.18)',
+        // Source uses borders for elevation, not drop-shadows. Keep keys so
+        // existing `shadow-cw-*` utilities resolve, but flatten them.
+        'cw-card': 'none',
+        'cw-card-hover': 'none',
+        'cw-button': 'none',
       },
     },
   },

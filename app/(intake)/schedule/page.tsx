@@ -55,17 +55,17 @@ function ScheduleContent() {
             style={{
               width: '36px',
               height: '36px',
-              border: '2px solid #E2D9C6',
-              borderTop: '2px solid #9B8059',
+              border: '2px solid rgba(26,34,48,0.14)',
+              borderTop: '2px solid #9A825E',
               borderRadius: '999px',
               animation: 'cw-spin 700ms linear infinite',
             }}
           />
           <style>{`@keyframes cw-spin { to { transform: rotate(360deg); } }`}</style>
-          <p style={{ fontFamily: 'var(--font-sans)', fontSize: '0.72rem', color: '#9B8059', letterSpacing: '0.18em', textTransform: 'uppercase', fontWeight: 600, margin: 0 }}>
+          <p style={{ fontFamily: 'var(--font-sans)', fontSize: '0.72rem', color: '#9A825E', letterSpacing: '0.18em', textTransform: 'uppercase', fontWeight: 600, margin: 0 }}>
             Verifying payment…
           </p>
-          <p style={{ fontFamily: 'var(--font-sans)', fontSize: '0.9rem', color: '#7A7A7A', margin: 0, textAlign: 'center', maxWidth: '320px' }}>
+          <p style={{ fontFamily: 'var(--font-sans)', fontSize: '0.9rem', color: '#6b6356', margin: 0, textAlign: 'center', maxWidth: '320px' }}>
             One moment while we confirm your retainer with Stripe.
           </p>
         </div>

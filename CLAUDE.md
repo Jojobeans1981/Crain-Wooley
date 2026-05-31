@@ -10,40 +10,49 @@ qualification, payment, scheduling, nurture, and onboarding.
 Tech Stack
 LayerTechnologyFrameworkNext.js 15 (App Router)LanguageTypeScript (strict mode)StylingTailwind CSS — vault-dark custom themeDatabaseSupabase (PostgreSQL)ORMPrismaAuthSupabase Auth (admin only — magic link)PaymentsStripeSMSTwilioEmailResendSchedulingClio Grow APICRMClio Manage APIJob QueueUpstash QStashDeploymentVercel
 
-Design System — Vault Dark
-All UI must use the vault-dark theme. No exceptions.
-Tailwind Colors (vault-*)
-vault-void:      #0B0D11   — page background
-vault-chamber:   #111318   — card / surface background
-vault-wall:      #1A1D24   — elevated surface / drawer
-vault-border:    #2A2D35   — all borders (1px, never 0.5px in components)
-vault-steel:     #6B7B8E   — muted text, secondary labels
-vault-parchment: #E8E2D6   — primary text on dark
-vault-gold:      #C5933A   — CTA, active states, focus rings, accent
-vault-goldmute:  #8A6422   — gold hover state
-vault-warn:      #D95D39   — error, failed, disqualified
-vault-safe:      #3A7D5A   — success, qualified, sent
+Design System — Warm Editorial (cf)
+The app matches the approved intake design (wemovenewyork/crain-wooley-intake ·
+option-counsel-final). Tokens live in lib/cf.ts and are mirrored into
+tailwind.config.ts (the cw-*, cf.*, and legacy vault-* aliases all resolve to
+these values) and app/globals.css. NOTE: the historical vault-dark theme has
+been fully retired — the vault-* class names still exist but now map onto the
+warm palette below, so old markup keeps working.
+
+Color tokens (cf)
+ink:        #2E414F   — primary slate (dark panel bg, primary buttons, headings)
+ink-soft:   #3F576B   — button hover, secondary slate
+text:       #1a2230   — body text (navy-tinted)
+text-mute:  #6b6356   — muted/secondary text, labels
+cream:      #faf5ea   — page background
+ivory:      #f6f1e7   — card / surface
+ivory-warm: #ede5d3   — accent blocks (with brass left edge)
+brass:      #9A825E   — accent, kickers, focus rings, active progress
+brass-dark: #7A6444   — brass hover
+brass-light:#D5C0A2
+rule:       rgba(26,34,48,0.14) — borders (elevation is border, not shadow)
+rule-soft:  rgba(26,34,48,0.08) — faint dividers / progress track
+danger:     #a23a2a   — errors / disqualified
+success:    #3A7D5A   — success / qualified
+
 Typography
-font-display  — Cormorant Garamond (headings, firm name)
-font-mono     — IBM Plex Mono (ALL labels, tags, timestamps, data)
-font-sans     — IBM Plex Sans (body copy, descriptions)
+font-display — arno-pro (Adobe Typekit kit zjv2lcl, loaded in app/layout.tsx),
+               Cormorant Garamond bundled via next/font as fallback. Headings + firm name.
+font-sans   — Inter (body, UI, labels)
+font-mono   — JetBrains Mono (kickers, section counters, data)
+
 Hard Rules
 
-rounded-none on ALL buttons, inputs, and interactive elements. Zero exceptions.
-Inputs use border-b only (bottom border underline style). No box/outline style.
-Input focus state: border switches to vault-gold.
-No gradients on UI chrome — only allowed on page background texture.
-No drop-shadow — use border for elevation.
-No Inter, Roboto, or system-ui for headings.
-Step indicators: square dots only, never circles or rounded progress bars.
-Status dots: 8x8 square, not circle.
-Panel grid pattern: gap-[1px] bg-vault-border with bg-vault-chamber children.
-
-Background Texture (apply to body or page wrapper)
-cssbackground-color: #0B0D11;
-background-image:
-  repeating-linear-gradient(0deg, transparent, transparent 39px, #1A1D24 39px, #1A1D24 40px),
-  repeating-linear-gradient(90deg, transparent, transparent 39px, #1A1D24 39px, #1A1D24 40px);
+Square corners (border-radius 0) on buttons, inputs, cards. `full` reserved for radio dots.
+Inputs are BOXED: white #fff bg, 1px solid rule border, brass focus ring (0 0 0 3px brass@13%).
+Primary button: flat ink fill, cream text, uppercase 0.1em (NO gradient, NO pill).
+Secondary button: transparent, 1px rule border, ink text.
+Elevation via borders, never drop-shadow (shadow-cw-* keys are flattened to none).
+Accent blocks: ivory-warm bg with a 2px brass left border.
+Intake split-screen scaffold = components/intake/IntakeScaffold + IntakePanel.
+  Layout (grid split, panel sticky, desktop-only blocks) is driven by the
+  .cw-intake-* CSS classes in globals.css, NOT Tailwind arbitrary utilities —
+  Tailwind v4 here does not reliably generate arbitrary responsive utilities.
+Shared intake primitives + tokens: lib/cf.ts, components/intake/.
 
 Architecture — What's Built
 Public Intake Flow

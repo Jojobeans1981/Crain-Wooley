@@ -39,7 +39,7 @@ function ConfirmationContent() {
                   style={{
                     fontFamily: 'var(--font-sans)',
                     fontSize: '0.72rem',
-                    color: '#9B8059',
+                    color: '#9A825E',
                     letterSpacing: '0.18em',
                     textTransform: 'uppercase',
                     fontWeight: 600,
@@ -62,8 +62,8 @@ function ConfirmationContent() {
                 <div
                   style={{
                     padding: '20px 22px',
-                    background: 'rgba(155,128,89,0.06)',
-                    border: '1px solid #E5DAC1',
+                    background: 'rgba(154,130,94,0.06)',
+                    border: '1px solid rgba(26,34,48,0.14)',
                     borderRadius: '8px',
                   }}
                 >
@@ -125,13 +125,13 @@ function ConfirmationContent() {
                   style={{
                     width: '48px',
                     height: '48px',
-                    border: '2px solid #9B8059',
+                    border: '2px solid #9A825E',
                     borderRadius: '999px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     flexShrink: 0,
-                    background: 'rgba(155,128,89,0.08)',
+                    background: 'rgba(154,130,94,0.08)',
                   }}
                 >
                   <span className="text-lg text-cw-gold font-bold">✓</span>
@@ -177,7 +177,7 @@ function ConfirmationContent() {
                     style={{
                       fontFamily: 'var(--font-sans)',
                       fontSize: '0.75rem',
-                      color: '#9B8059',
+                      color: '#9A825E',
                       fontWeight: 700,
                       letterSpacing: '0.08em',
                       flexShrink: 0,

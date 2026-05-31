@@ -2,16 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Fonts are configured in app/layout.tsx via next/font. */
+/*
+ * Crain & Wooley — design system.
+ * Repointed to the approved intake design (crain-wooley-intake · the `cf` tokens,
+ * see lib/cf.ts). Warm editorial-classic: slate ink #2E414F, brass #9A825E,
+ * cream #faf5ea, navy-tinted ink text #1a2230. Boxed white inputs, square
+ * corners, flat ink/brass buttons, borders for elevation (no drop-shadows).
+ *
+ * Fonts: arno-pro (Typekit, --font-display primary) with Cormorant Garamond
+ * (next/font, --font-display-fallback) as the bundled fallback; Inter
+ * (--font-sans); JetBrains Mono (--font-mono). Configured in app/layout.tsx.
+ */
 
 @layer base {
+  :root {
+    color-scheme: light;
+    /* cf.serif — arno-pro first, then the bundled Cormorant fallback. */
+    --font-display: "arno-pro", var(--font-display-fallback), "Hoefler Text", "Times New Roman", serif;
+  }
+
   *, *::before, *::after { box-sizing: border-box; }
 
-  :root { color-scheme: light; }
-
   body {
-    background-color: #EFE7D6;     /* cream-deep — warm body so the white shell on funnel pages visibly floats */
-    color: #1A1A1A;                /* ink */
+    background-color: #faf5ea;     /* cf.cream */
+    color: #1a2230;                /* cf.text */
     font-family: var(--font-sans);
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -20,20 +34,20 @@
 
   h1, h2, h3, h4 {
     font-family: var(--font-display);
-    letter-spacing: 0;
-    color: #102342;
-    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: #2e414f;                /* cf.ink */
+    font-weight: 700;
   }
 
-  code, pre, .mono { font-family: var(--font-sans); }
+  code, pre, .mono { font-family: var(--font-mono); }
 
   select option {
-    background-color: #FBF8F2;
-    color: #1A1A1A;
+    background-color: #fff;
+    color: #1a2230;
   }
 
   ::selection {
-    background: rgba(155, 128, 89, 0.28);
+    background: rgba(154, 130, 94, 0.30);   /* cf.brass @ 0.3 */
   }
 
   html { scroll-behavior: smooth; }
@@ -41,14 +55,50 @@
 
 @layer utilities {
   /* ── Color aliases ── */
-  .bg-cw-black   { background-color: #102342; }
-  .bg-cw-dark    { background-color: #143157; }
-  .bg-cw-panel   { background-color: #FBF8F2; }
-  .text-cw-white { color: #102342; }
-  .text-cw-gold  { color: #9B8059; }
-  .text-cw-muted { color: #7A7A7A; }
-  .border-cw     { border-color: #E2D9C6; }
-  .border-cw-gold{ border-color: #9B8059; }
+  .bg-cw-black   { background-color: #2E414F; }
+  .bg-cw-dark    { background-color: #3F576B; }
+  .bg-cw-panel   { background-color: #f6f1e7; }
+  .text-cw-white { color: #2E414F; }
+  .text-cw-gold  { color: #9A825E; }
+  .text-cw-muted { color: #6b6356; }
+  .border-cw     { border-color: rgba(26,34,48,0.14); }
+  .border-cw-gold{ border-color: #9A825E; }
+
+  /* ── Intake split-screen scaffold (plain CSS — not Tailwind utilities, so it
+        is independent of arbitrary-value generation) ── */
+  .cw-intake-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    min-height: 100vh;
+  }
+  .cw-intake-panel {
+    padding: 22px;
+    gap: 0;
+    justify-content: flex-start;
+  }
+  /* desktop-only blocks inside the panel + progress rail */
+  .cw-intake-deskonly { display: none !important; }
+  .cw-intake-deskonly-block { display: none !important; }
+  .cw-intake-deskonly-grid { display: none !important; }
+  /* horizontal padding for the right column (top bar / rail / body) */
+  .cw-intake-pad { padding-left: 22px; padding-right: 22px; }
+
+  @media (min-width: 768px) {
+    .cw-intake-grid { grid-template-columns: 460px 1fr; }
+    .cw-intake-panel {
+      padding: 40px 44px;
+      gap: 32px;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      min-height: 720px;
+    }
+    .cw-intake-deskonly { display: flex !important; }
+    .cw-intake-deskonly-block { display: block !important; }
+    .cw-intake-deskonly-grid { display: grid !important; }
+    .cw-intake-pad { padding-left: 56px; padding-right: 56px; }
+  }
 
   /* ── Layout ── */
   .cw-container {
@@ -70,117 +120,103 @@
 
   /* ── Header ── */
   .cw-header {
-    border-bottom: 1px solid #E2D9C6;
-    background: rgba(247, 242, 233, 0.96);
+    border-bottom: 1px solid rgba(26,34,48,0.14);
+    background: rgba(250, 245, 234, 0.96);   /* cf.cream */
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
   }
 
-  /* ── Panels (cards) ── */
+  /* ── Panels (cards) — white surface, rule border, square, no shadow ── */
   .cw-panel {
-    background: #FFFFFF;
-    border: 1px solid #D5C7B0;
-    border-radius: 6px;
-    box-shadow: 0 1px 3px rgba(16,35,66,0.06), 0 12px 32px rgba(16,35,66,0.05);
+    background: #ffffff;
+    border: 1px solid rgba(26,34,48,0.14);   /* cf.rule */
+    border-radius: 0;
   }
 
+  /* Accent panel — ivory block with a brass left edge (source's emphasis block) */
   .cw-panel-gold {
-    background: #FFFFFF;
-    border: 1px solid #D5C7B0;
-    border-top: 3px solid #9B8059;
-    border-radius: 6px;
-    box-shadow: 0 1px 3px rgba(16,35,66,0.06), 0 12px 32px rgba(16,35,66,0.05);
+    background: #ede5d3;                      /* cf.ivoryWarm */
+    border: none;
+    border-left: 2px solid #9A825E;          /* cf.brass */
+    border-radius: 0;
   }
 
-  /* ── Buttons (pill bronze gradient — FDN-derived) ── */
+  /* ── Buttons (flat ink fill — source primary) ── */
   .cw-btn-primary,
   .cw-button {
-    background: linear-gradient(180deg, #AC9268 0%, #9B8059 55%, #7A6342 100%);
-    color: #FFFFFF;
+    background: #2E414F;                      /* cf.ink */
+    color: #faf5ea;                           /* cf.cream */
     font-family: var(--font-sans);
     font-weight: 600;
-    font-size: 0.95rem;
-    letter-spacing: 0.005em;
-    padding: 0.85rem 1.85rem;
-    border: none;
-    border-radius: 999px;
+    font-size: 0.8125rem;                     /* 13px */
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.875rem 1.75rem;
+    border: 1px solid #2E414F;
+    border-radius: 0;
     cursor: pointer;
-    transition: transform 160ms cubic-bezier(0.2, 0.7, 0.2, 1),
-                box-shadow 240ms cubic-bezier(0.2, 0.7, 0.2, 1),
-                filter 160ms cubic-bezier(0.2, 0.7, 0.2, 1);
-    display: inline-block;
+    transition: background-color 150ms;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
     text-decoration: none;
     text-align: center;
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,0.28),
-      0 1px 2px rgba(122,99,66,0.22),
-      0 6px 16px rgba(155,128,89,0.30);
   }
   .cw-btn-primary:hover,
   .cw-button:hover {
-    transform: translateY(-1px);
-    filter: brightness(1.06);
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,0.32),
-      0 2px 4px rgba(122,99,66,0.26),
-      0 10px 24px rgba(155,128,89,0.38);
-  }
-  .cw-btn-primary:active,
-  .cw-button:active {
-    transform: translateY(0);
-    filter: brightness(0.97);
+    background: #3F576B;                      /* cf.inkSoft */
   }
   .cw-btn-primary:disabled,
   .cw-button:disabled {
     opacity: 0.45;
     cursor: not-allowed;
-    transform: none;
-    filter: none;
-    box-shadow: 0 1px 2px rgba(122,99,66,0.18);
   }
   .cw-btn-primary:focus-visible,
   .cw-button:focus-visible {
     outline: none;
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,0.28),
-      0 0 0 3px rgba(155, 128, 89, 0.4);
+    box-shadow: 0 0 0 3px rgba(154, 130, 94, 0.40);
   }
 
+  /* Ghost / secondary — transparent, rule border, ink text (source secondary) */
   .cw-btn-ghost {
     background: transparent;
-    color: #102342;
+    color: #1a2230;                           /* cf.text */
     font-family: var(--font-sans);
-    font-weight: 500;
-    font-size: 0.95rem;
-    letter-spacing: 0.005em;
-    padding: 0.85rem 1.65rem;
-    border: 1px solid #102342;
-    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.8125rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.875rem 1.625rem;
+    border: 1px solid rgba(26,34,48,0.14);    /* cf.rule */
+    border-radius: 0;
     cursor: pointer;
-    transition: background 200ms cubic-bezier(0.2, 0.7, 0.2, 1),
-                color 200ms cubic-bezier(0.2, 0.7, 0.2, 1);
-    display: inline-block;
+    transition: border-color 150ms, color 150ms;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
     text-decoration: none;
     text-align: center;
   }
   .cw-btn-ghost:hover {
-    background: #102342;
-    color: #FFFFFF;
+    border-color: #9A825E;                    /* cf.brass */
+    color: #2E414F;                           /* cf.ink */
   }
   .cw-btn-ghost:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(16, 35, 66, 0.25);
+    box-shadow: 0 0 0 3px rgba(154, 130, 94, 0.30);
   }
 
-  /* ── Numbered step cards (FDN-derived) ── */
+  /* ── Numbered step cards ── */
   .cw-stepcards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0;
-    border: 1px solid #E5DAC1;
-    border-radius: 10px;
+    border: 1px solid rgba(26,34,48,0.14);
+    border-radius: 0;
     overflow: hidden;
-    background: #FBF8F2;
+    background: #f6f1e7;                       /* cf.ivory */
   }
   .cw-stepcard {
     display: flex;
@@ -188,7 +224,7 @@
     gap: 14px;
     padding: 18px 18px;
     transition: background 200ms cubic-bezier(0.2, 0.7, 0.2, 1);
-    border-right: 1px solid #E5DAC1;
+    border-right: 1px solid rgba(26,34,48,0.14);
     position: relative;
   }
   .cw-stepcard:last-child { border-right: none; }
@@ -201,53 +237,53 @@
     justify-content: center;
     font-family: var(--font-display);
     font-size: 1.05rem;
-    font-weight: 600;
+    font-weight: 700;
     flex-shrink: 0;
     transition: background 200ms, color 200ms, border-color 200ms;
   }
   .cw-stepcard-meta { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
   .cw-stepcard-kicker {
-    font-family: var(--font-sans);
+    font-family: var(--font-mono);
     font-size: 0.66rem;
     font-weight: 600;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #9C9281;
+    color: #6b6356;                           /* cf.textMute */
     line-height: 1.2;
   }
   .cw-stepcard-label {
     font-family: var(--font-sans);
     font-size: 0.9rem;
     font-weight: 600;
-    color: #102342;
+    color: #2E414F;                           /* cf.ink */
     line-height: 1.2;
   }
   /* States */
-  .cw-stepcard-current { background: #FFFFFF; }
-  .cw-stepcard-current .cw-stepcard-badge { background: #102342; color: #FFFFFF; }
-  .cw-stepcard-current .cw-stepcard-kicker { color: #9B8059; }
+  .cw-stepcard-current { background: #ffffff; }
+  .cw-stepcard-current .cw-stepcard-badge { background: #2E414F; color: #faf5ea; }
+  .cw-stepcard-current .cw-stepcard-kicker { color: #9A825E; }
 
-  .cw-stepcard-done { background: rgba(155,128,89,0.06); }
-  .cw-stepcard-done .cw-stepcard-badge { background: #9B8059; color: #FFFFFF; }
-  .cw-stepcard-done .cw-stepcard-kicker { color: #9B8059; }
+  .cw-stepcard-done { background: rgba(154,130,94,0.06); }
+  .cw-stepcard-done .cw-stepcard-badge { background: #9A825E; color: #fff; }
+  .cw-stepcard-done .cw-stepcard-kicker { color: #9A825E; }
 
   .cw-stepcard-upcoming .cw-stepcard-badge {
-    background: #FFFFFF;
-    color: #B8AB91;
-    border: 1px solid #D5C7B0;
+    background: #ffffff;
+    color: #b3a892;
+    border: 1px solid rgba(26,34,48,0.14);
   }
-  .cw-stepcard-upcoming .cw-stepcard-label { color: #8A8175; }
+  .cw-stepcard-upcoming .cw-stepcard-label { color: #6b6356; }
 
   @media (max-width: 640px) {
     .cw-stepcards { grid-template-columns: 1fr; }
-    .cw-stepcard { border-right: none; border-bottom: 1px solid #E5DAC1; }
+    .cw-stepcard { border-right: none; border-bottom: 1px solid rgba(26,34,48,0.14); }
     .cw-stepcard:last-child { border-bottom: none; }
   }
 
   /* ── Form section (progressive disclosure shells on /qualify) ── */
   .cw-formsection {
     padding: 36px 0 28px;
-    border-top: 1px solid #E5DAC1;
+    border-top: 1px solid rgba(26,34,48,0.14);
   }
   .cw-formsection:first-of-type { border-top: none; padding-top: 8px; }
   .cw-formsection-reveal {
@@ -264,26 +300,27 @@
     margin-bottom: 24px;
   }
   .cw-formsection-kicker {
-    font-family: var(--font-sans);
-    font-size: 0.72rem;
-    font-weight: 700;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #9B8059;
+    color: #9A825E;                           /* cf.brass */
     margin: 0 0 6px;
   }
   .cw-formsection-help {
     font-family: var(--font-sans);
     font-size: 0.92rem;
-    color: #6B6253;
+    color: #6b6356;                           /* cf.textMute */
     margin: 0;
     line-height: 1.55;
   }
 
   .cw-formsection-subblock {
-    background: rgba(155,128,89,0.05);
-    border: 1px solid #E5DAC1;
-    border-radius: 10px;
+    background: #ede5d3;                       /* cf.ivoryWarm */
+    border: none;
+    border-left: 2px solid #9A825E;           /* cf.brass */
+    border-radius: 0;
     padding: 24px 22px;
   }
   .cw-formsection-subblock-header { margin-bottom: 22px; }
@@ -293,24 +330,24 @@
     font-size: 0.66rem;
     letter-spacing: 0.04em;
     text-transform: none;
-    color: #9C9281;
+    color: #8a8275;
     font-weight: 500;
   }
 
   .cw-section-continue {
     margin-top: 28px;
     padding-top: 18px;
-    border-top: 1px dashed #D5C7B0;
+    border-top: 1px dashed rgba(26,34,48,0.14);
     display: flex;
     justify-content: flex-end;
   }
   .cw-continue-link {
-    font-family: var(--font-sans);
-    font-size: 0.85rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
     font-weight: 600;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #9B8059;
+    color: #9A825E;                           /* cf.brass */
     background: transparent;
     border: none;
     padding: 8px 4px;
@@ -323,44 +360,44 @@
     margin-left: 4px;
     transition: transform 200ms;
   }
-  .cw-continue-link:hover:not(:disabled) { color: #7A6342; }
+  .cw-continue-link:hover:not(:disabled) { color: #7A6444; }
   .cw-continue-link:hover:not(:disabled)::after { transform: translateY(2px); }
   .cw-continue-link:disabled {
-    color: #B8AB91;
+    color: #b3a892;
     cursor: not-allowed;
   }
 
-  /* ── Radio / checkbox rows ── */
+  /* ── Radio / checkbox rows (source RadioCard / CheckCard) ── */
   .cw-radio-row, .cw-checkbox-row {
     display: flex;
     align-items: flex-start;
     gap: 12px;
-    padding: 12px 14px;
-    border: 1px solid #E5DAC1;
-    border-radius: 8px;
-    background: #FFFFFF;
+    padding: 14px 16px;
+    border: 1px solid rgba(26,34,48,0.14);    /* cf.rule */
+    border-radius: 0;
+    background: transparent;
     cursor: pointer;
-    transition: border-color 160ms, background-color 160ms;
+    transition: border-color 150ms, background-color 150ms, box-shadow 150ms;
   }
   .cw-radio-row:hover, .cw-checkbox-row:hover {
-    border-color: #C9BB9F;
-    background: rgba(155,128,89,0.03);
+    border-color: #9A825E;
   }
   .cw-radio-row-selected, .cw-checkbox-row-selected {
-    border-color: #9B8059;
-    background: rgba(155,128,89,0.08);
+    border-color: #9A825E;                    /* cf.brass */
+    background: #ffffff;
+    box-shadow: inset 0 0 0 1px #9A825E;
   }
   .cw-radio-row-inline {
     display: inline-flex;
     align-items: center;
-    padding: 10px 18px;
+    padding: 11px 14px;
     min-width: 88px;
   }
 
   .cw-radio-input, .cw-checkbox-input {
     flex-shrink: 0;
     margin-top: 2px;
-    accent-color: #9B8059;
+    accent-color: #9A825E;                    /* cf.brass */
     width: 16px;
     height: 16px;
     cursor: pointer;
@@ -368,74 +405,76 @@
   .cw-radio-label {
     font-family: var(--font-sans);
     font-size: 0.95rem;
-    color: #1A1A1A;
+    color: #1a2230;                           /* cf.text */
     line-height: 1.45;
     display: flex;
     flex-direction: column;
     gap: 2px;
   }
   .cw-radio-row-selected .cw-radio-label {
-    color: #102342;
-    font-weight: 600;
+    color: #2E414F;                           /* cf.ink */
+    font-weight: 500;
   }
   .cw-radio-sub {
     font-size: 0.78rem;
-    color: #6B6253;
+    color: #6b6356;                           /* cf.textMute */
     font-weight: 400;
   }
 
-  /* ── Disabled file-upload button (demo placeholder) ── */
+  /* ── File-upload stub (source FileUploadStub) ── */
   .cw-fileupload-disabled {
     display: inline-flex;
     align-items: center;
     gap: 10px;
     padding: 10px 16px;
-    background: rgba(0,0,0,0.02);
-    border: 1px dashed #D5C7B0;
-    border-radius: 8px;
-    color: #8A8175;
+    background: #ffffff;
+    border: 1px solid rgba(26,34,48,0.14);
+    border-radius: 0;
+    color: #1a2230;
     font-family: var(--font-sans);
-    font-size: 0.88rem;
-    font-weight: 500;
-    cursor: not-allowed;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
   }
-  .cw-fileupload-icon { font-size: 1.05rem; opacity: 0.5; }
+  .cw-fileupload-icon { font-size: 1.05rem; color: #9A825E; }
   .cw-fileupload-status {
     margin-left: auto;
     padding-left: 10px;
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: #B8AB91;
-    font-weight: 600;
+    font-size: 0.78rem;
+    letter-spacing: 0.02em;
+    text-transform: none;
+    color: #6b6356;
+    font-weight: 500;
   }
   .cw-fileupload-help {
     font-family: var(--font-sans);
     font-size: 0.78rem;
-    color: #8A8175;
+    color: #6b6356;
     margin: 6px 0 0;
     font-style: italic;
   }
 
-  /* ── Review summary (Section 3) ── */
+  /* ── Review summary ── */
   .cw-review-summary {
-    background: #FFFFFF;
-    border: 1px solid #E5DAC1;
-    border-radius: 10px;
+    background: #ffffff;
+    border: 1px solid rgba(26,34,48,0.14);
+    border-radius: 0;
     overflow: hidden;
   }
   .cw-review-row {
     display: flex;
     gap: 16px;
     padding: 12px 18px;
-    border-top: 1px solid #F1E8D4;
+    border-top: 1px solid rgba(26,34,48,0.08);
     align-items: flex-start;
   }
   .cw-review-row:first-child { border-top: none; }
   .cw-review-label {
-    font-family: var(--font-sans);
-    font-size: 0.7rem;
-    color: #9C9281;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    color: #6b6356;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     font-weight: 600;
@@ -446,39 +485,32 @@
   .cw-review-value {
     font-family: var(--font-sans);
     font-size: 0.92rem;
-    color: #102342;
+    color: #2E414F;
     font-weight: 500;
     line-height: 1.5;
     word-break: break-word;
   }
   .cw-review-section-break {
-    background: rgba(155,128,89,0.08);
+    background: rgba(154,130,94,0.08);
     padding: 8px 18px;
-    font-family: var(--font-sans);
-    font-size: 0.7rem;
-    color: #9B8059;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    color: #9A825E;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    font-weight: 700;
-    border-top: 1px solid #E5DAC1;
+    font-weight: 600;
+    border-top: 1px solid rgba(26,34,48,0.14);
   }
 
-  /* ── Shell (funnel pages only — landing stays full-bleed) ── */
+  /* ── Shell (funnel pages) — flat surface, rule border, square ── */
   .cw-shell {
     max-width: 1080px;
     margin: 28px auto;
-    background: #FFFFFF;
-    border: 1px solid #D5C7B0;
-    border-radius: 14px;
+    background: #ffffff;
+    border: 1px solid rgba(26,34,48,0.14);
+    border-radius: 0;
     overflow: hidden;
-    box-shadow:
-      0 1px 2px rgba(16,35,66,0.04),
-      0 18px 48px rgba(16,35,66,0.10),
-      0 4px 12px rgba(16,35,66,0.06);
   }
-  /* When a cw-panel is nested inside cw-shell, drop its own chrome so we don't
-     double-card. The gold accent on cw-panel-gold also goes here — inside the
-     shell it would span the full panel width and read as a banner stripe. */
   .cw-shell .cw-panel,
   .cw-shell .cw-panel-gold {
     background: transparent;
@@ -487,91 +519,86 @@
     box-shadow: none;
   }
 
-  /* ── Inputs (underline-only — editorial, no boxy chrome) ── */
+  /* ── Inputs (boxed white — source Input) ── */
   .cw-input {
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid #C9BB9F;
-    color: #1A1A1A;
+    background: #ffffff;
+    border: 1px solid rgba(26,34,48,0.14);    /* cf.rule */
+    color: #1a2230;                           /* cf.text */
     font-family: var(--font-sans);
     font-size: 1rem;
     line-height: 1.5;
-    padding: 0.55rem 0;
+    padding: 12px 14px;
     width: 100%;
     outline: none;
     border-radius: 0;
-    transition: border-color 200ms, box-shadow 200ms;
-    caret-color: #9B8059;
+    transition: border-color 150ms, box-shadow 150ms;
+    caret-color: #9A825E;
   }
-  .cw-input:hover { border-bottom-color: #9B8059; }
   .cw-input:focus {
-    border-bottom-color: #9B8059;
-    box-shadow: inset 0 -1px 0 0 #9B8059;
+    border-color: #9A825E;                    /* cf.brass */
+    box-shadow: 0 0 0 3px rgba(154,130,94,0.13);
   }
-  .cw-input::placeholder { color: #B8AB91; font-weight: 400; }
+  .cw-input::placeholder { color: #b3a892; font-weight: 400; }
 
-  /* Textareas keep the underline look — paper-like, single rule beneath */
-  textarea.cw-input { line-height: 1.65; min-height: 5.5rem; resize: vertical; }
+  textarea.cw-input { line-height: 1.55; min-height: 5.5rem; resize: vertical; }
 
   .cw-label {
     font-family: var(--font-sans);
-    font-size: 0.72rem;
+    font-size: 0.6875rem;                     /* 11px */
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #6B6253;
+    color: #6b6356;                           /* cf.textMute */
     font-weight: 600;
     display: block;
     margin-bottom: 0.5rem;
   }
 
   .cw-select {
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid #C9BB9F;
-    color: #1A1A1A;
+    background: #ffffff;
+    border: 1px solid rgba(26,34,48,0.14);
+    color: #1a2230;
     font-family: var(--font-sans);
     font-size: 1rem;
     line-height: 1.5;
-    padding: 0.55rem 1.4rem 0.55rem 0;
+    padding: 12px 36px 12px 14px;
     width: 100%;
     outline: none;
     appearance: none;
     cursor: pointer;
     border-radius: 0;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' stroke='%239B8059' stroke-width='1.5' fill='none' stroke-linecap='round'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path d='M0 0l5 6 5-6z' fill='%231a2230'/></svg>");
     background-repeat: no-repeat;
-    background-position: right 0 center;
-    transition: border-color 200ms, box-shadow 200ms;
+    background-position: right 14px center;
+    transition: border-color 150ms, box-shadow 150ms;
   }
-  .cw-select:hover { border-bottom-color: #9B8059; }
   .cw-select:focus {
-    border-bottom-color: #9B8059;
-    box-shadow: inset 0 -1px 0 0 #9B8059;
+    border-color: #9A825E;
+    box-shadow: 0 0 0 3px rgba(154,130,94,0.13);
   }
 
-  /* ── Eyebrow / kicker text ── */
+  /* ── Eyebrow / kicker text (source mono kicker) ── */
   .cw-eyebrow {
-    font-family: var(--font-sans);
-    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
     font-weight: 600;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #9B8059;
+    color: #9A825E;                           /* cf.brass */
   }
 
   /* ── Divider ── */
   .cw-divider {
     border: none;
-    border-top: 1px solid #E2D9C6;
+    border-top: 1px solid rgba(26,34,48,0.14);
   }
 
-  /* ── Brand emblem (logo PNG already contains "CRAIN & WOOLEY" wordmark; render as full brand lockup) ── */
+  /* ── Brand emblem (logo wordmark mask) ── */
   .cw-emblem {
     display: inline-block;
     width: 88px;
     height: 64px;
     flex-shrink: 0;
-    background-color: #102342;
+    background-color: #2E414F;                /* cf.ink */
     -webkit-mask-image: url(/cw-logo.png);
     -webkit-mask-repeat: no-repeat;
     -webkit-mask-position: left center;
@@ -596,7 +623,7 @@
   }
   .animate-fade-up { animation: fade-up 0.5s ease both; }
 
-  /* ── Reveal-on-scroll (FDN-derived) ── */
+  /* ── Reveal-on-scroll ── */
   .reveal {
     opacity: 0;
     transform: translateY(14px);

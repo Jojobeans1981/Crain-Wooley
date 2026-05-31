@@ -19,17 +19,17 @@ const practiceAreas = [
   },
 ]
 
-const CREAM = '#F7F2E9'
-const CREAM_DEEP = '#EFE7D6'
-const IVORY = '#FBF8F2'
-const NAVY = '#102342'
-const GOLD = '#9B8059'
-const GOLD_DARK = '#7A6342'
-const GOLD_LIGHT = '#B89E78'
-const INK = '#1A1A1A'
-const INK_SOFT = '#4A4A4A'
-const INK_MUTE = '#7A7A7A'
-const LINE = '#E2D9C6'
+const CREAM = '#faf5ea'
+const CREAM_DEEP = '#ede5d3'
+const IVORY = '#f6f1e7'
+const NAVY = '#2E414F'
+const GOLD = '#9A825E'
+const GOLD_DARK = '#7A6444'
+const GOLD_LIGHT = '#D5C0A2'
+const INK = '#1a2230'
+const INK_SOFT = '#6b6356'
+const INK_MUTE = '#6b6356'
+const LINE = 'rgba(26,34,48,0.14)'
 
 export default function IntakeLanding() {
   return (
@@ -134,7 +134,7 @@ export default function IntakeLanding() {
           position: 'sticky',
           top: 0,
           zIndex: 100,
-          background: 'rgba(247,242,233,0.97)',
+          background: 'rgba(250,245,234,0.97)',
           backdropFilter: 'blur(10px)',
           WebkitBackdropFilter: 'blur(10px)',
           borderBottom: `1px solid ${LINE}`,
@@ -442,14 +442,14 @@ export default function IntakeLanding() {
                   borderRadius: '6px',
                   padding: '36px 32px',
                   transition: 'border-color 0.25s, box-shadow 0.25s',
-                  boxShadow: '0 1px 3px rgba(16,35,66,0.04)',
+                  boxShadow: '0 1px 3px rgba(46,65,79,0.04)',
                   cursor: 'default',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.boxShadow = '0 4px 14px rgba(16,35,66,0.06)'
+                  e.currentTarget.style.boxShadow = '0 4px 14px rgba(46,65,79,0.06)'
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.boxShadow = '0 1px 3px rgba(16,35,66,0.04)'
+                  e.currentTarget.style.boxShadow = '0 1px 3px rgba(46,65,79,0.04)'
                 }}
               >
                 <h3
@@ -706,13 +706,13 @@ export default function IntakeLanding() {
                   padding: '36px 28px',
                   textAlign: 'left',
                   transition: 'box-shadow 0.25s',
-                  boxShadow: '0 1px 3px rgba(16,35,66,0.04)',
+                  boxShadow: '0 1px 3px rgba(46,65,79,0.04)',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.boxShadow = '0 4px 14px rgba(16,35,66,0.06)'
+                  e.currentTarget.style.boxShadow = '0 4px 14px rgba(46,65,79,0.06)'
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.boxShadow = '0 1px 3px rgba(16,35,66,0.04)'
+                  e.currentTarget.style.boxShadow = '0 1px 3px rgba(46,65,79,0.04)'
                 }}
               >
                 <p

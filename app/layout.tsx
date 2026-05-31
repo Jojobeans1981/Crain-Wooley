@@ -1,23 +1,28 @@
 import type { Metadata } from 'next'
-import { Cormorant_Garamond, Montserrat } from 'next/font/google'
+import { Inter, JetBrains_Mono, Cormorant_Garamond } from 'next/font/google'
 import './globals.css'
 
-const display = Cormorant_Garamond({
+// Body + UI sans — cf.sans
+const sans = Inter({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
-  variable: '--font-display',
-})
-
-const sans = Montserrat({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
   variable: '--font-sans',
 })
 
-const mono = Montserrat({
+// Labels / data / kickers — cf.mono
+const mono = JetBrains_Mono({
   subsets: ['latin'],
   weight: ['400', '500', '600'],
   variable: '--font-mono',
+})
+
+// Serif fallback for arno-pro (loaded via Typekit in <head>). cf.serif lists
+// "arno-pro" first, then Cormorant Garamond — we bundle that fallback so heads
+// stay styled even if the Typekit kit fails to load on a given domain.
+const displayFallback = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-display-fallback',
 })
 
 export const metadata: Metadata = {
@@ -50,13 +55,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const isDemo = process.env.NEXT_PUBLIC_DEMO_MODE === 'true'
 
   return (
-    <html lang="en" className={`${display.variable} ${sans.variable} ${mono.variable}`}>
+    <html
+      lang="en"
+      className={`${displayFallback.variable} ${sans.variable} ${mono.variable}`}
+    >
       <head>
+        {/* arno-pro (display serif) — Adobe Typekit, matches the approved intake design */}
+        <link rel="preconnect" href="https://use.typekit.net" crossOrigin="" />
+        <link rel="stylesheet" href="https://use.typekit.net/zjv2lcl.css" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>
-      <body className="min-h-screen bg-[#EFE7D6] text-cw-ink antialiased font-sans">
+      <body className="min-h-screen bg-cw-cream text-cw-ink antialiased font-sans">
         {isDemo && (
-          <div className="bg-cw-navy text-white py-1.5 px-4 text-center font-sans text-[11px] uppercase tracking-[0.18em] sticky top-0 w-full z-[100] font-semibold border-b border-cw-gold">
+          <div className="bg-cw-navy text-cw-cream py-1.5 px-4 text-center font-mono text-[11px] uppercase tracking-[0.18em] sticky top-0 w-full z-[100] font-semibold border-b border-cw-gold">
             Interactive Demo Mode — External APIs Simulated
           </div>
         )}

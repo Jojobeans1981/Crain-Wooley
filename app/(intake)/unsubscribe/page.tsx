@@ -62,10 +62,10 @@ export default async function UnsubscribePage({
           maxWidth: '448px',
           padding: '40px 32px',
           borderRadius: '12px',
-          border: '1px solid #D5C7B0',
-          borderTop: '3px solid #9B8059',
+          border: '1px solid rgba(26,34,48,0.14)',
+          borderTop: '3px solid #9A825E',
           backgroundColor: '#FFFFFF',
-          boxShadow: '0 1px 3px rgba(16,35,66,0.06), 0 12px 32px rgba(16,35,66,0.06)',
+          boxShadow: '0 1px 3px rgba(46,65,79,0.06), 0 12px 32px rgba(46,65,79,0.06)',
         }}
       >
         <div className="mb-6">
@@ -76,11 +76,11 @@ export default async function UnsubscribePage({
           <>
             <div
               className="text-xs uppercase tracking-widest mb-3 font-semibold"
-              style={{ color: '#B23A2A' }}
+              style={{ color: '#a23a2a' }}
             >
               Invalid Link
             </div>
-            <p className="text-sm leading-relaxed" style={{ color: '#4A4A4A' }}>
+            <p className="text-sm leading-relaxed" style={{ color: '#6b6356' }}>
               This unsubscribe link is invalid or has expired.
             </p>
           </>
@@ -88,11 +88,11 @@ export default async function UnsubscribePage({
           <>
             <div
               className="text-xs uppercase tracking-widest mb-3 font-semibold"
-              style={{ color: '#102342' }}
+              style={{ color: '#2E414F' }}
             >
               Already Unsubscribed
             </div>
-            <p className="text-sm leading-relaxed" style={{ color: '#4A4A4A' }}>
+            <p className="text-sm leading-relaxed" style={{ color: '#6b6356' }}>
               You are already unsubscribed from messages from Crain &amp; Wooley.
             </p>
           </>
@@ -104,10 +104,10 @@ export default async function UnsubscribePage({
             >
               Unsubscribed
             </div>
-            <p className="text-sm leading-relaxed" style={{ color: '#4A4A4A' }}>
+            <p className="text-sm leading-relaxed" style={{ color: '#6b6356' }}>
               You have been removed from all future messages from Crain &amp; Wooley.
             </p>
-            <p className="text-xs mt-4" style={{ color: '#7A7A7A' }}>
+            <p className="text-xs mt-4" style={{ color: '#6b6356' }}>
               Reply START to any SMS to re-subscribe, or contact us directly.
             </p>
           </>
