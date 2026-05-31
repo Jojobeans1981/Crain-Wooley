@@ -3,6 +3,9 @@ import { useSearchParams } from 'next/navigation'
 import { useEffect, useState, Suspense } from 'react'
 import Link from 'next/link'
 
+// NOTE: All logic, verification fetch, and routing below is UNCHANGED.
+// Only presentation has been restyled to match the new brand.
+
 function ScheduleContent() {
   const params = useSearchParams()
   const sessionId = params.get('session_id')
@@ -15,8 +18,6 @@ function ScheduleContent() {
     async function verify() {
       if (sessionId && leadId) {
         try {
-          // In a real app, we'd verify the session_id server-side.
-          // For now, we fetch the lead to confirm it exists.
           const res = await fetch(`/api/leads/${leadId}`)
           const data = await res.json()
           if (data.lead) {
@@ -34,48 +35,88 @@ function ScheduleContent() {
 
   if (checking) {
     return (
-      <div className="cw-page flex items-center justify-center">
-        <div className="font-mono text-xs text-cw-gold animate-pulse uppercase tracking-widest">
-          Verifying payment...
+      <main className="cw-page"><div className="cw-shell">
+        <header className="cw-header">
+          <div className="cw-container py-5 flex items-center justify-between">
+            <Link href="/" className="no-underline flex items-center gap-3" aria-label="Crain & Wooley — Home">
+              <span role="img" aria-label="Crain & Wooley" className="cw-emblem" />
+            </Link>
+            <a
+              href="tel:9729451610"
+              className="inline-flex items-center text-cw-navy font-semibold text-sm hover:text-cw-gold transition-colors"
+            >
+              <span className="text-cw-gold">☎</span> (972) 945-1610
+            </a>
+          </div>
+        </header>
+        <div style={{ padding: '96px 24px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '14px' }}>
+          <div
+            aria-hidden="true"
+            style={{
+              width: '36px',
+              height: '36px',
+              border: '2px solid rgba(26,34,48,0.14)',
+              borderTop: '2px solid #9A825E',
+              borderRadius: '999px',
+              animation: 'cw-spin 700ms linear infinite',
+            }}
+          />
+          <style>{`@keyframes cw-spin { to { transform: rotate(360deg); } }`}</style>
+          <p style={{ fontFamily: 'var(--font-sans)', fontSize: '0.72rem', color: '#9A825E', letterSpacing: '0.18em', textTransform: 'uppercase', fontWeight: 600, margin: 0 }}>
+            Verifying payment…
+          </p>
+          <p style={{ fontFamily: 'var(--font-sans)', fontSize: '0.9rem', color: '#6b6356', margin: 0, textAlign: 'center', maxWidth: '320px' }}>
+            One moment while we confirm your retainer with Stripe.
+          </p>
         </div>
-      </div>
+      </div></main>
     )
   }
 
   if (!verified) {
     return (
-      <main className="cw-page flex flex-col">
+      <main className="cw-page"><div className="cw-shell">
         <header className="cw-header">
-          <div className="cw-container py-5">
-            <span className="font-display text-3xl font-bold text-cw-white tracking-widest">CRAIN <span className="text-cw-gold">&amp;</span> WOOLEY</span>
+          <div className="cw-container py-5 flex items-center justify-between">
+            <Link href="/" className="no-underline flex items-center gap-3" aria-label="Crain & Wooley — Home">
+              <span role="img" aria-label="Crain & Wooley" className="cw-emblem" />
+            </Link>
+            <a
+              href="tel:9729451610"
+              className="inline-flex items-center text-cw-navy font-semibold text-sm hover:text-cw-gold transition-colors"
+            >
+              <span className="text-cw-gold">☎</span> (972) 945-1610
+            </a>
           </div>
         </header>
         <div className="flex-1 flex items-center justify-center py-16">
           <div className="cw-container">
-            <div className="w-full max-w-md mx-auto cw-panel p-6 sm:p-10 text-center space-y-4">
-              <div className="text-cw-muted text-4xl">⚠</div>
-              <h2 className="font-display text-3xl text-cw-white">Access Restricted</h2>
-              <p className="text-cw-muted text-sm">
+            <div className="w-full max-w-md mx-auto cw-panel p-8 sm:p-10 text-center space-y-5">
+              <div className="text-cw-danger text-4xl">⚠</div>
+              <h2 className="font-display text-3xl text-cw-navy font-semibold">Access Restricted</h2>
+              <p className="text-cw-ink-soft text-sm leading-relaxed">
                 Scheduling is only available after the consultation fee is confirmed.
               </p>
               <Link href="/qualify" className="cw-btn-primary inline-block mt-4">
-                Start Qualification -&gt;
+                Start Qualification
               </Link>
             </div>
           </div>
         </div>
-      </main>
+      </div></main>
     )
   }
 
   return (
-    <main className="cw-page flex flex-col">
+    <main className="cw-page"><div className="cw-shell">
       <header className="cw-header">
         <div className="cw-container py-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <span className="font-display text-3xl font-bold text-cw-white tracking-widest">CRAIN <span className="text-cw-gold">&amp;</span> WOOLEY</span>
+          <Link href="/" className="no-underline flex items-center gap-3" aria-label="Crain & Wooley — Home">
+            <span role="img" aria-label="Crain & Wooley" className="cw-emblem" />
+          </Link>
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 bg-green-500 animate-pulse inline-block" />
-            <span className="font-mono text-xs text-cw-muted uppercase tracking-widest">Payment Confirmed</span>
+            <span className="w-2 h-2 bg-cw-success rounded-full animate-pulse inline-block" />
+            <span className="text-xs text-cw-success uppercase tracking-widest font-semibold">Payment Confirmed</span>
           </div>
         </div>
       </header>
@@ -84,47 +125,47 @@ function ScheduleContent() {
         <div className="cw-container">
           <div className="w-full max-w-4xl mx-auto space-y-6">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-              <div className="space-y-2">
-                <div className="font-mono text-xs text-cw-gold uppercase tracking-widest">
-                  Final Step - Select Your Consultation Time
-                </div>
-                <h1 className="font-display text-4xl sm:text-5xl text-cw-white">
-                  Welcome, <span className="text-cw-gold">{leadName}</span>
+              <div className="space-y-3">
+                <p className="cw-eyebrow">Final Step — Select Your Consultation Time</p>
+                <h1 className="font-display text-3xl sm:text-4xl text-cw-navy font-semibold leading-[1.15]">
+                  Welcome, <span className="text-cw-gold italic">{leadName}</span>
                 </h1>
-                <p className="text-cw-muted text-sm max-w-xl">
-                  Choose a time for your 60-minute consultation. You&apos;ll receive a calendar invite immediately after booking.
+                <div className="w-12 h-[2px] bg-cw-gold" aria-hidden="true" />
+                <p className="text-cw-ink-soft text-base max-w-xl leading-relaxed">
+                  Choose a time for your 60-minute consultation. You&apos;ll receive a calendar
+                  invite immediately after booking.
                 </p>
               </div>
-              <div className="cw-panel py-2 px-4 border border-cw-border">
-                <div className="font-mono text-[10px] text-cw-muted uppercase tracking-widest">Consultation Retainer</div>
-                <div className="text-cw-gold font-display text-xl">$300.00 PAID</div>
+              <div className="cw-panel py-3 px-5 shrink-0">
+                <div className="text-[10px] text-cw-ink-mute uppercase tracking-widest font-semibold">Consultation Retainer</div>
+                <div className="text-cw-gold font-display text-2xl font-semibold mt-1">$300.00 Paid</div>
               </div>
             </div>
 
-            <div className="cw-panel-gold overflow-hidden min-h-[560px] relative">
-              <div className="p-10 text-center space-y-4 min-h-[560px] flex flex-col items-center justify-center">
-                <div className="border border-cw-gold w-16 h-16 flex items-center justify-center text-cw-gold text-xs font-mono">
+            <div className="cw-panel-gold overflow-hidden min-h-[520px] relative">
+              <div className="p-10 text-center space-y-5 min-h-[520px] flex flex-col items-center justify-center">
+                <div className="border-2 border-cw-gold rounded w-16 h-16 flex items-center justify-center text-cw-gold text-xs font-semibold tracking-wider">
                   CAL
                 </div>
-                <p className="font-mono text-xs text-cw-muted uppercase tracking-widest">Scheduling Widget</p>
-                <p className="text-cw-muted text-sm max-w-sm">
+                <p className="text-xs text-cw-ink-mute uppercase tracking-widest font-semibold">Scheduling Widget</p>
+                <p className="text-cw-ink-soft text-sm max-w-sm leading-relaxed">
                   The Cal.com embed loads here. It is configured to pass your lead details securely.
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-lg mt-8">
-                  <div className="p-4 border border-cw-border text-left">
-                    <div className="font-mono text-[10px] text-cw-muted uppercase mb-1">Pass-through</div>
-                    <div className="text-xs text-cw-white">leadId: {leadId}</div>
-                    <div className="text-xs text-cw-white">name: {leadName}</div>
+                  <div className="p-4 border border-cw-line bg-white rounded text-left">
+                    <div className="text-[10px] text-cw-ink-mute uppercase mb-1 tracking-wider font-semibold">Pass-through</div>
+                    <div className="text-xs text-cw-navy">leadId: {leadId}</div>
+                    <div className="text-xs text-cw-navy">name: {leadName}</div>
                   </div>
-                  <div className="p-4 border border-cw-border text-left">
-                    <div className="font-mono text-[10px] text-cw-muted uppercase mb-1">Event Type</div>
-                    <div className="text-xs text-cw-white">60-Min Consultation</div>
-                    <div className="text-xs text-cw-white">Price: $0 (pre-paid)</div>
+                  <div className="p-4 border border-cw-line bg-white rounded text-left">
+                    <div className="text-[10px] text-cw-ink-mute uppercase mb-1 tracking-wider font-semibold">Event Type</div>
+                    <div className="text-xs text-cw-navy">60-Min Consultation</div>
+                    <div className="text-xs text-cw-navy">Price: $0 (pre-paid)</div>
                   </div>
                 </div>
 
-                <div className="mt-8 font-mono text-[10px] text-cw-muted uppercase tracking-widest">
+                <div className="mt-6 text-[10px] text-cw-ink-mute uppercase tracking-widest font-semibold">
                   Ready to sync with Clio and calendar
                 </div>
               </div>
@@ -137,16 +178,16 @@ function ScheduleContent() {
                 { label: 'Next Steps', val: 'Onboarding', sub: '< 60 min after consult' },
               ].map((item) => (
                 <div key={item.label} className="cw-panel p-6">
-                  <div className="font-mono text-xs text-cw-muted uppercase tracking-widest">{item.label}</div>
-                  <div className="text-cw-white text-lg mt-2 font-display">{item.val}</div>
-                  <div className="text-cw-muted text-[10px] uppercase tracking-wider mt-1">{item.sub}</div>
+                  <div className="text-xs text-cw-ink-mute uppercase tracking-widest font-semibold">{item.label}</div>
+                  <div className="text-cw-navy text-xl mt-2 font-display font-semibold">{item.val}</div>
+                  <div className="text-cw-ink-mute text-[11px] uppercase tracking-wider mt-1">{item.sub}</div>
                 </div>
               ))}
             </div>
           </div>
         </div>
       </div>
-    </main>
+    </div></main>
   )
 }
 

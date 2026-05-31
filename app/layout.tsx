@@ -1,44 +1,50 @@
 import type { Metadata } from 'next'
-import { Cormorant_Garamond, IBM_Plex_Mono, IBM_Plex_Sans } from 'next/font/google'
+import { Inter, JetBrains_Mono, Cormorant_Garamond } from 'next/font/google'
 import './globals.css'
 
-const display = Cormorant_Garamond({
+// Body + UI sans — cf.sans
+const sans = Inter({
   subsets: ['latin'],
-  weight: ['400', '600'],
-  variable: '--font-display',
-})
-
-const mono = IBM_Plex_Mono({
-  subsets: ['latin'],
-  weight: ['400', '500'],
-  variable: '--font-mono',
-})
-
-const sans = IBM_Plex_Sans({
-  subsets: ['latin'],
-  weight: ['400', '500'],
+  weight: ['400', '500', '600', '700'],
   variable: '--font-sans',
 })
 
+// Labels / data / kickers — cf.mono
+const mono = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-mono',
+})
+
+// Serif fallback for arno-pro (loaded via Typekit in <head>). cf.serif lists
+// "arno-pro" first, then Cormorant Garamond — we bundle that fallback so heads
+// stay styled even if the Typekit kit fails to load on a given domain.
+const displayFallback = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-display-fallback',
+})
+
 export const metadata: Metadata = {
-  title: 'Crain & Wooley — Attorneys at Law | Plano, TX',
+  title: 'Crain & Wooley — Estate Planning Attorneys | Dallas-Fort Worth, TX',
   description:
-    'Get clear legal answers fast. Crain & Wooley offers confidential consultations in estate planning, family law, personal injury, criminal defense, and more. Serving Plano, TX and surrounding areas.',
+    'Protect your assets with our qualified Dallas-Fort Worth estate planning attorneys. We build customized wills and trusts. Schedule a confidential consultation today.',
 }
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LegalService',
   name: 'Crain & Wooley',
-  description: 'Professional legal services specializing in Estate Planning and Family Law.',
-  url: 'https://crainwooley.com', // Placeholder
-  telephone: '+1-555-000-0000', // Placeholder
+  description:
+    'Estate planning, wills, trusts, probate, and elder law services for clients across the Dallas-Fort Worth area.',
+  url: 'https://www.estateplanningdfw.law',
+  telephone: '+1-972-945-1610',
   address: {
     '@type': 'PostalAddress',
-    streetAddress: '123 Law Lane', // Placeholder
+    streetAddress: '2805 Dallas Parkway, Suite 400',
     addressLocality: 'Plano',
     addressRegion: 'TX',
-    postalCode: '75024',
+    postalCode: '75093',
     addressCountry: 'US',
   },
   openingHours: 'Mo-Fr 09:00-17:00',
@@ -49,14 +55,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const isDemo = process.env.NEXT_PUBLIC_DEMO_MODE === 'true'
 
   return (
-    <html lang="en" className={`${display.variable} ${mono.variable} ${sans.variable}`}>
+    <html
+      lang="en"
+      className={`${displayFallback.variable} ${sans.variable} ${mono.variable}`}
+    >
       <head>
+        {/* arno-pro (display serif) — Adobe Typekit, matches the approved intake design */}
+        <link rel="preconnect" href="https://use.typekit.net" crossOrigin="" />
+        <link rel="stylesheet" href="https://use.typekit.net/zjv2lcl.css" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>
-      <body className="min-h-screen bg-vault-void text-vault-parchment antialiased font-sans">
+      <body className="min-h-screen bg-cw-cream text-cw-ink antialiased font-sans">
         {isDemo && (
-          <div className="bg-vault-gold text-vault-void py-1 px-4 text-center font-mono text-[10px] uppercase tracking-[0.2em] sticky top-0 w-full z-[100] font-bold border-b border-vault-border">
-            Interactive Demo Mode Active — External APIs Simulated
+          <div className="bg-cw-navy text-cw-cream py-1.5 px-4 text-center font-mono text-[11px] uppercase tracking-[0.18em] sticky top-0 w-full z-[100] font-semibold border-b border-cw-gold">
+            Interactive Demo Mode — External APIs Simulated
           </div>
         )}
         {children}
@@ -64,4 +76,3 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   )
 }
-

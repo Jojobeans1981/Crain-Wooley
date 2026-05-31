@@ -1,6 +1,9 @@
 import { prisma } from '@/lib/db/prisma'
 import { auditEvent } from '@/lib/audit'
 
+// NOTE: All server logic (token verification, opt-out write, audit log) below
+// is UNCHANGED. Only presentation has been restyled to match the new brand.
+
 export default async function UnsubscribePage({
   searchParams,
 }: {
@@ -45,51 +48,66 @@ export default async function UnsubscribePage({
 
   return (
     <main
-      className="min-h-screen flex items-center justify-center"
       style={{
-        backgroundColor: '#0B0D11',
-        backgroundImage:
-          'repeating-linear-gradient(0deg, transparent, transparent 39px, #1A1D24 39px, #1A1D24 40px), repeating-linear-gradient(90deg, transparent, transparent 39px, #1A1D24 39px, #1A1D24 40px)',
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '48px 16px',
       }}
     >
       <div
-        className="border p-12 max-w-md w-full mx-4"
-        style={{ borderColor: '#2A2D35', backgroundColor: '#111318' }}
+        style={{
+          width: '100%',
+          maxWidth: '448px',
+          padding: '40px 32px',
+          borderRadius: '12px',
+          border: '1px solid rgba(26,34,48,0.14)',
+          borderTop: '3px solid #9A825E',
+          backgroundColor: '#FFFFFF',
+          boxShadow: '0 1px 3px rgba(46,65,79,0.06), 0 12px 32px rgba(46,65,79,0.06)',
+        }}
       >
-        <div
-          className="font-display text-2xl mb-6 tracking-widest"
-          style={{ color: '#C5933A' }}
-        >
-          CRAIN & WOOLEY
+        <div className="mb-6">
+          <span role="img" aria-label="Crain & Wooley" className="cw-emblem" />
         </div>
 
         {!token || (!done && !already) ? (
           <>
-            <div className="font-mono text-xs uppercase tracking-widest mb-3" style={{ color: '#D95D39' }}>
+            <div
+              className="text-xs uppercase tracking-widest mb-3 font-semibold"
+              style={{ color: '#a23a2a' }}
+            >
               Invalid Link
             </div>
-            <p className="text-sm" style={{ color: '#6B7B8E' }}>
+            <p className="text-sm leading-relaxed" style={{ color: '#6b6356' }}>
               This unsubscribe link is invalid or has expired.
             </p>
           </>
         ) : already ? (
           <>
-            <div className="font-mono text-xs uppercase tracking-widest mb-3" style={{ color: '#E8E2D6' }}>
+            <div
+              className="text-xs uppercase tracking-widest mb-3 font-semibold"
+              style={{ color: '#2E414F' }}
+            >
               Already Unsubscribed
             </div>
-            <p className="text-sm" style={{ color: '#6B7B8E' }}>
-              You are already unsubscribed from messages from Crain & Wooley.
+            <p className="text-sm leading-relaxed" style={{ color: '#6b6356' }}>
+              You are already unsubscribed from messages from Crain &amp; Wooley.
             </p>
           </>
         ) : (
           <>
-            <div className="font-mono text-xs uppercase tracking-widest mb-3" style={{ color: '#3A7D5A' }}>
+            <div
+              className="text-xs uppercase tracking-widest mb-3 font-semibold"
+              style={{ color: '#3A7D5A' }}
+            >
               Unsubscribed
             </div>
-            <p className="text-sm leading-relaxed" style={{ color: '#6B7B8E' }}>
-              You have been removed from all future messages from Crain & Wooley.
+            <p className="text-sm leading-relaxed" style={{ color: '#6b6356' }}>
+              You have been removed from all future messages from Crain &amp; Wooley.
             </p>
-            <p className="font-mono text-xs mt-4" style={{ color: '#6B7B8E' }}>
+            <p className="text-xs mt-4" style={{ color: '#6b6356' }}>
               Reply START to any SMS to re-subscribe, or contact us directly.
             </p>
           </>
