@@ -3,7 +3,10 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
+  // Connection URLs live in prisma.config.ts (Prisma 7 no longer allows url/
+  // directUrl here). Runtime uses the PrismaPg adapter in lib/db/prisma.ts
+  // (pooled DATABASE_URL); `prisma migrate` uses DIRECT_URL via the config.
 }
 
 model Lead {
