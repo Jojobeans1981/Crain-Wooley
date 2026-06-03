@@ -12,6 +12,7 @@ import {
   EMPTY_BENEFICIARY,
   formatPhone,
   resizeList,
+  buildIntakeSummary,
 } from '@/lib/intake/schema'
 import type { IntakeForm } from '@/lib/intake/schema'
 import { PrivacyShield } from '@/components/intake/PrivacyShield'
@@ -180,7 +181,7 @@ export function CounselFinalStep({
               <Input value={form.childrenCount} onChange={e => {
                 const raw = e.target.value.replace(/\D/g,'').slice(0,2)
                 const n = raw === '' ? 0 : Math.min(parseInt(raw, 10), 12)
-                update({ childrenCount: raw, childrenDetails: resizeList(form.childrenDetails, n, () => ({ fullName: '', dob: '', address: '' })) })
+                update({ childrenCount: raw, childrenDetails: resizeList(form.childrenDetails, n, () => ({ fullName: '', dob: '', address: '', sex: '' })) })
               }} placeholder="0" maxWidth={120} />
             </Field>
           )}
@@ -222,6 +223,17 @@ export function CounselFinalStep({
                     )}
                   </Field>
                 </div>
+                <Field label="Sex">
+                  <TriOption
+                    options={[['Male', 'male'], ['Female', 'female']]}
+                    value={child.sex || ''}
+                    onChange={v => {
+                      const next = childrenDetails.slice()
+                      next[i] = { ...next[i], sex: v }
+                      update({ childrenDetails: next as unknown as IntakeForm['childrenDetails'] })
+                    }}
+                    maxWidth={240} />
+                </Field>
                 <Field label="Address" hint="Use “lives with us” for minors or dependents in the home.">
                   <Input value={child.address || ''}
                     onChange={e => {
@@ -826,7 +838,6 @@ export function CounselFinalStep({
   }
 
   if (stepId === 'review') {
-    const findLabel = (arr: ReadonlyArray<{ id: string; label: string }>, id: string) => (arr.find(x => x.id === id) || { label: '' }).label || ''
     const Section = ({ title, rows, onEdit }: { title: React.ReactNode; rows: [React.ReactNode, React.ReactNode][]; onEdit: () => void }) => (
       <div style={{ paddingBottom: 18, borderBottom: `1px solid ${cf.ruleSoft}`, marginBottom: 18 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 10 }}>
@@ -844,132 +855,16 @@ export function CounselFinalStep({
         ))}
       </div>
     )
-    const isPartnered = ['married','partnered'].includes(form.maritalStatus)
-    const formats: Record<string, string> = { inperson: 'In person', video: 'Video', phone: 'Phone' }
-    const times: Record<string, string> = { morning: 'Mornings (8am–12pm)', afternoon: 'Afternoons (12pm–5pm)', anytime: 'Any time' }
-    const triLabel: Record<string, string> = { yes: 'Yes', no: 'No', unsure: 'Not sure', elsewhere: 'Someone else has it', possible: 'Possible' }
-    const isProbate = form.intakeType === 'probate'
-    const trim = (s: string, n = 90) => s && s.length > n ? s.slice(0, n - 3) + '…' : s
-    const realEstateProperties = form.realEstateProperties as unknown as string[]
-    const aboutSection = (
-      <Section title="About You" onEdit={() => update({ __jumpTo: 'about' })} rows={[
-        ['Name',  `${form.firstName} ${form.lastName}`.trim()],
-        ['Email', form.email],
-        ['Phone', form.phone],
-        ['ZIP',   form.zip],
-        form.dob && ['Date of birth', form.dob],
-        isProbate && form.clientLivesInTexas !== null && ['Lives in Texas', form.clientLivesInTexas ? 'Yes' : 'No'],
-        !isProbate && form.topConcerns && ['Top concerns', trim(form.topConcerns)],
-        !isProbate && form.worstCaseFear && ['Worst-case fear', trim(form.worstCaseFear)],
-        ['Source', form.source],
-      ].filter(Boolean) as [React.ReactNode, React.ReactNode][]} />
-    )
-    const scheduleSection = (
-      <Section title="Schedule" onEdit={() => update({ __jumpTo: 'schedule' })} rows={[
-        ['Office',   findLabel(OFFICE_OPTIONS, form.preferredOffice)],
-        ['Format',   formats[form.consultationFormat]],
-        ['Best time', times[form.preferredContactTime]],
-        ['Timeline', findLabel(URGENCY_OPTIONS, form.urgency)],
-        form.notes && ['Notes', form.notes],
-      ].filter(Boolean) as [React.ReactNode, React.ReactNode][]} />
-    )
+    const sections = buildIntakeSummary(form)
     return (
       <div>
         <p style={{ fontFamily: cf.sans, fontSize: 14, color: cf.textMute, lineHeight: 1.6, margin: '0 0 26px', maxWidth: 560 }}>
           A final review before we route your intake to the attorney best suited to your matter.
           You can edit any section.
         </p>
-        {aboutSection}
-        {isProbate ? (
-          <>
-            <Section title="Your Loved One" onEdit={() => update({ __jumpTo: 'decedent' })} rows={[
-              ['Name', form.decedentName],
-              form.decedentDateOfDeath && ['Date of death', form.decedentDateOfDeath],
-              ['Relationship', form.decedentRelationship === 'other'
-                ? (form.decedentRelationshipOther || 'Other')
-                : (form.decedentRelationship && form.decedentRelationship[0].toUpperCase() + form.decedentRelationship.slice(1))],
-              form.decedentCounty && ['County of residence', form.decedentCounty],
-              ['Texas resident', form.decedentTexasResident === null ? '' : (form.decedentTexasResident ? 'Yes' : 'No')],
-              ['Had a trust',    form.decedentHadTrust === null ? '' : (form.decedentHadTrust ? 'Yes' : 'No')],
-            ].filter(Boolean) as [React.ReactNode, React.ReactNode][]} />
-            <Section title="The Estate" onEdit={() => update({ __jumpTo: 'probate-estate' })} rows={[
-              ['Total assets', findLabel(ASSET_OPTIONS, form.assetRange)],
-              ['Total debts',  findLabel(ASSET_OPTIONS, form.debtRange)],
-              ['Real estate',  form.ownsRealEstate === null ? '' : (form.ownsRealEstate ? `Yes${realEstateProperties.length ? ` — ${realEstateProperties.filter(Boolean).join(', ')}` : ''}` : 'No')],
-              ['Business',     form.ownsBusiness === null ? '' : (form.ownsBusiness ? `Yes — ${form.businessType || '—'}` : 'No')],
-              ['Out-of-state', form.ownsOutOfState === null ? '' : (form.ownsOutOfState ? 'Yes' : 'No')],
-            ] as [React.ReactNode, React.ReactNode][]} />
-            <Section title="Will & Court" onEdit={() => update({ __jumpTo: 'will-filings' })} rows={[
-              ['Will signed',    triLabel[form.willExists]],
-              form.willExists === 'yes' && form.willHasOriginal && ['Original document', triLabel[form.willHasOriginal] || form.willHasOriginal],
-              form.willExists === 'yes' && form.willYear && ['Year drafted', form.willYear],
-              ['Filed in court', triLabel[form.probateCourtFiled]],
-              form.probateCourtFiled === 'yes' && form.probateCountyFiled && ['County', form.probateCountyFiled],
-              form.probateCourtFiled === 'yes' && form.probateExecutorAppointed !== null && ['Executor appointed', form.probateExecutorAppointed ? 'Yes' : 'No'],
-              form.heirDisputes && ['Heir disputes', triLabel[form.heirDisputes] || form.heirDisputes],
-            ].filter(Boolean) as [React.ReactNode, React.ReactNode][]} />
-          </>
-        ) : (
-          <>
-            <Section title="Your Family" onEdit={() => update({ __jumpTo: 'family' })} rows={[
-              ['Status', form.maritalStatus && form.maritalStatus[0].toUpperCase() + form.maritalStatus.slice(1)],
-              isPartnered && ['Spouse / partner', [form.spouseName, form.spouseDob && `DOB ${form.spouseDob}`].filter(Boolean).join(' · ')],
-              isPartnered && form.dateOfMarriage && ['Date of marriage', form.dateOfMarriage],
-              ['Children', form.hasChildren ? (form.childrenCount || 'Yes') : 'No'],
-              form.hasMinorChildren !== null && ['Children under 18', form.hasMinorChildren ? 'Yes' : 'No'],
-              form.spouseChildrenSeparate && ['Spouse\'s separate children', form.spouseChildrenSeparate],
-              form.hasSpecialNeedsDependent !== null && ['Special needs dependent', form.hasSpecialNeedsDependent ? 'Yes' : 'No'],
-            ].filter(Boolean) as [React.ReactNode, React.ReactNode][]} />
-            <Section title="Your Estate" onEdit={() => update({ __jumpTo: 'estate' })} rows={[
-              ['Approx. value', findLabel(WILLS_ASSET_OPTIONS, form.assetRange)],
-              ['Real estate', form.ownsRealEstate === null ? '' : (form.ownsRealEstate ? `Yes${form.realEstateCount ? ` (${form.realEstateCount})` : ''}` : 'No')],
-              form.deedAddresses && ['Deed info', form.deedAddresses.split('\n').filter(Boolean).join(' · ')],
-              form.deedAttachmentName && ['Deed attached', form.deedAttachmentName],
-              ['Business',    form.ownsBusiness === null ? '' : (form.ownsBusiness ? `Yes — ${form.businessType}${form.businessHasSuccession !== null ? ` (succession plan: ${form.businessHasSuccession ? 'yes' : 'no'})` : ''}` : 'No')],
-              form.companyInfo && ['Company info', form.companyInfo.split('\n').filter(Boolean).join(' · ')],
-              form.companyAttachmentName && ['Company doc attached', form.companyAttachmentName],
-              ['Existing plan', form.hasExistingPlan === null ? '' : (form.hasExistingPlan ? `Yes (${form.existingPlanYear})` : 'No')],
-            ].filter(Boolean) as [React.ReactNode, React.ReactNode][]} />
-            <Section title="Key People" onEdit={() => update({ __jumpTo: 'key-people' })} rows={[
-              ['Primary beneficiaries', form.primaryBeneficiaries.length
-                ? form.primaryBeneficiaries.map(b => `${b.name || '—'}${b.relationship ? ` (${b.relationship})` : ''}${b.percentage ? ` · ${b.percentage}%` : ''}`).join('; ')
-                : '—'],
-              ['Trustee / Executor', form.trusteeExecutor.name || '—'],
-              form.trusteeExecutorBackup.name && ['Backup trustee', form.trusteeExecutorBackup.name],
-              ['Financial POA (you)', form.financialPoaYou.name || '—'],
-              form.financialPoaYouBackup.name && ['Backup financial POA', form.financialPoaYouBackup.name],
-              isPartnered && form.financialPoaSpouse.name && ['Financial POA (spouse)', form.financialPoaSpouse.name],
-              isPartnered && form.financialPoaSpouseBackup.name && ['Backup financial POA (spouse)', form.financialPoaSpouseBackup.name],
-              ['Medical POA (you)', form.medicalPoaYou.name || '—'],
-              form.medicalPoaYouAlternate.name && ['Alternate medical POA', form.medicalPoaYouAlternate.name],
-              isPartnered && form.medicalPoaSpouse.name && ['Medical POA (spouse)', form.medicalPoaSpouse.name],
-              isPartnered && form.medicalPoaSpouseAlternate.name && ['Alternate medical POA (spouse)', form.medicalPoaSpouseAlternate.name],
-            ].filter(Boolean) as [React.ReactNode, React.ReactNode][]} />
-            <Section title="Final Wishes" onEdit={() => update({ __jumpTo: 'wishes' })} rows={[
-              form.specialGifts && ['Special gifts', form.specialGifts.length > 90 ? form.specialGifts.slice(0, 87) + '…' : form.specialGifts],
-              form.remoteContingentBeneficiaries && ['Remote contingents', form.remoteContingentBeneficiaries.length > 90 ? form.remoteContingentBeneficiaries.slice(0, 87) + '…' : form.remoteContingentBeneficiaries],
-              form.livingWillYou !== null && ['Living Will (you)', form.livingWillYou ? 'Yes' : 'No'],
-              isPartnered && form.livingWillSpouse !== null && ['Living Will (spouse)', form.livingWillSpouse ? 'Yes' : 'No'],
-              form.organDonationNotes && ['Organ donation', form.organDonationNotes],
-            ].filter(Boolean) as [React.ReactNode, React.ReactNode][]} />
-            <Section title="Additional Info" onEdit={() => update({ __jumpTo: 'additional' })} rows={[
-              form.receivesGovBenefits !== null && ['Gov benefits', form.receivesGovBenefits ? 'Yes' : 'No'],
-              form.hasDivorcePayments !== null && ['Divorce / settlement payments', form.hasDivorcePayments ? 'Yes' : 'No'],
-              form.hasMarriageContract !== null && ['Pre / post-marriage contract', form.hasMarriageContract ? 'Yes' : 'No'],
-              form.hasFiledGiftTaxReturns !== null && ['Gift tax returns', form.hasFiledGiftTaxReturns ? 'Yes' : 'No'],
-              form.hasPriorEstatePlan !== null && ['Prior estate plan', form.hasPriorEstatePlan ? 'Yes' : 'No'],
-              form.childrenHaveSpecialNeedsExtended !== null && ['Children with special needs', form.childrenHaveSpecialNeedsExtended ? 'Yes' : 'No'],
-              form.childrenReceiveGovBenefits !== null && ['Children receiving gov benefits', form.childrenReceiveGovBenefits ? 'Yes' : 'No'],
-              form.supportsAdultDependents !== null && ['Supports adult dependents', form.supportsAdultDependents ? 'Yes' : 'No'],
-              form.additionalAttachmentName && ['Attached', form.additionalAttachmentName],
-            ].filter(Boolean) as [React.ReactNode, React.ReactNode][]} />
-            <Section title="Services" onEdit={() => update({ __jumpTo: 'services' })} rows={[
-              ['Selected', form.services.map(id => findLabel(SERVICE_OPTIONS, id)).join(', ')],
-              form.services.includes('probate') && ['Probate context', `${form.decedentRelationship}${form.decedentDateOfDeath ? ` · ${form.decedentDateOfDeath}` : ''}`],
-            ].filter(Boolean) as [React.ReactNode, React.ReactNode][]} />
-          </>
-        )}
-        {scheduleSection}
+        {sections.map(s => (
+          <Section key={s.id} title={s.title} onEdit={() => update({ __jumpTo: s.id })} rows={s.rows} />
+        ))}
       </div>
     )
   }

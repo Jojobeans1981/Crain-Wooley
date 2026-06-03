@@ -6,12 +6,66 @@ import { IntakeScaffold } from './IntakeScaffold'
 import { PrivacyShield } from './PrivacyShield'
 import { CounselFinalStep, IntakeChooser, CounselWelcome } from './steps'
 import {
-  INITIAL_FORM, stepsFor, counselValidate,
+  INITIAL_FORM, stepsFor, counselValidate, buildIntakeSummary,
   type IntakeForm, type IntakeType,
 } from '@/lib/intake/schema'
 
 type Phase = 'welcome' | 'choose' | 'form'
 type UpdatePatch = Partial<IntakeForm> & { __jumpTo?: string }
+
+const escapeHtml = (s: string) =>
+  s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c] as string))
+
+/**
+ * Self-contained, print- and download-ready HTML summary of the completed intake.
+ * Drives both the "Print summary" (opens + prints) and "Save summary" (downloads
+ * an .html file the client can keep or save as PDF) actions on the Review step.
+ */
+function buildSummaryHtml(form: IntakeForm): string {
+  const sections = buildIntakeSummary(form)
+  const client = `${form.firstName} ${form.lastName}`.trim() || 'New Client'
+  const matter = form.intakeType === 'probate' ? 'Probate' : 'Wills & Trust'
+  const dateStr = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+  const body = sections.map(s => `
+    <section>
+      <h2>${escapeHtml(s.title)}</h2>
+      <table>
+        ${s.rows.map(([k, v]) => `<tr><th>${escapeHtml(k)}</th><td>${escapeHtml(v)}</td></tr>`).join('')}
+      </table>
+    </section>`).join('')
+  return `<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crain &amp; Wooley — Intake Summary — ${escapeHtml(client)}</title>
+<style>
+  :root { --ink:#1a2230; --brass:#9c6f3f; --mute:#6a6358; --rule:#e4ddd1; }
+  * { box-sizing: border-box; }
+  body { font-family: Georgia, 'Times New Roman', serif; color: var(--ink); margin: 0; background: #fff; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 48px 40px 64px; }
+  header { border-bottom: 2px solid var(--ink); padding-bottom: 20px; margin-bottom: 28px; }
+  .brand { font-size: 26px; font-weight: 700; letter-spacing: -0.01em; }
+  .sub { font-family: Arial, Helvetica, sans-serif; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-top: 4px; }
+  h1 { font-size: 20px; font-weight: 700; margin: 22px 0 6px; }
+  .meta { font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: var(--mute); letter-spacing: 0.04em; }
+  section { margin-bottom: 22px; page-break-inside: avoid; }
+  h2 { font-size: 16px; font-weight: 700; margin: 0 0 8px; padding-bottom: 6px; border-bottom: 1px solid var(--rule); }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { text-align: left; vertical-align: top; padding: 5px 0; font-family: Arial, Helvetica, sans-serif; }
+  th { width: 42%; font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mute); font-weight: 600; padding-right: 16px; }
+  td { font-size: 13px; color: var(--ink); font-weight: 500; }
+  footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--rule); font-family: Arial, Helvetica, sans-serif; font-size: 11px; color: var(--mute); line-height: 1.5; }
+  @media print { .wrap { padding: 0; max-width: none; } @page { margin: 18mm; } }
+</style></head>
+<body><div class="wrap">
+  <header>
+    <div class="brand">Crain &amp; Wooley</div>
+    <div class="sub">Attorneys &amp; Counselors at Law</div>
+    <h1>New Client Intake Summary</h1>
+    <div class="meta">${escapeHtml(client)} &nbsp;·&nbsp; ${escapeHtml(matter)} &nbsp;·&nbsp; ${escapeHtml(dateStr)}</div>
+  </header>
+  ${body}
+  <footer>This summary was generated from your intake form before submission. It is provided for your records. Submitting this intake does not create an attorney-client relationship.</footer>
+</div></body></html>`
+}
 
 /**
  * Estate intake orchestrator — the welcome → Wills/Probate chooser → branched
@@ -90,6 +144,33 @@ export function IntakeFlow() {
       setSubmitError('Submission failed. Please try again.')
       setSubmitting(false)
     }
+  }
+
+  const printSummary = () => {
+    const w = window.open('', '_blank', 'width=820,height=900')
+    if (!w) {
+      setSubmitError('Please allow pop-ups to print your summary.')
+      return
+    }
+    w.document.write(buildSummaryHtml(form))
+    w.document.close()
+    w.focus()
+    // Let the new document paint before invoking the print dialog.
+    setTimeout(() => w.print(), 250)
+  }
+
+  const saveSummary = () => {
+    const blob = new Blob([buildSummaryHtml(form)], { type: 'text/html;charset=utf-8' })
+    const url = URL.createObjectURL(blob)
+    const slug = (form.lastName || form.firstName || 'summary')
+      .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'summary'
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `crain-wooley-intake-${slug}.html`
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    setTimeout(() => URL.revokeObjectURL(url), 1000)
   }
 
   const next = () => {
@@ -225,9 +306,31 @@ export function IntakeFlow() {
 
           <CounselFinalStep stepId={currentId} form={form} errors={errors} update={update} isMobile={isMobile} />
 
-          {/* Consent gate (review step only) */}
+          {/* Print / save the summary + consent gate (review step only) */}
           {currentId === 'review' && (
             <div style={{ marginTop: 28, display: 'flex', flexDirection: 'column', gap: 12 }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 10, paddingBottom: 16, marginBottom: 4, borderBottom: `1px solid ${cf.ruleSoft}` }}>
+                <span style={{ fontFamily: cf.mono, fontSize: 10.5, letterSpacing: '0.16em', textTransform: 'uppercase', color: cf.textMute, marginRight: 4 }}>
+                  Keep a copy
+                </span>
+                {([['Print summary', printSummary], ['Save summary', saveSummary]] as [string, () => void][]).map(([label, handler]) => (
+                  <button
+                    key={label}
+                    type="button"
+                    onClick={handler}
+                    style={{
+                      fontFamily: cf.sans, fontSize: 12, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase',
+                      color: cf.ink, background: 'transparent', border: `1px solid ${cf.rule}`, padding: '10px 18px',
+                      cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 8, transition: 'border-color .15s, background .15s',
+                    }}
+                    onMouseEnter={e => { e.currentTarget.style.borderColor = cf.brass; e.currentTarget.style.background = cf.ivoryWarm }}
+                    onMouseLeave={e => { e.currentTarget.style.borderColor = cf.rule; e.currentTarget.style.background = 'transparent' }}
+                  >
+                    <span style={{ color: cf.brass, fontSize: 13 }}>{label === 'Print summary' ? '⎙' : '↓'}</span>
+                    {label}
+                  </button>
+                ))}
+              </div>
               <label style={{ display: 'flex', alignItems: 'flex-start', gap: 12, cursor: 'pointer' }}>
                 <input
                   type="checkbox"
