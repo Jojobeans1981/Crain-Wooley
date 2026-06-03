@@ -26,6 +26,7 @@ export interface ChildDetail {
   fullName: string
   dob: string
   address: string
+  sex: string
 }
 export interface RealEstateProperty {
   description: string
@@ -321,4 +322,161 @@ export function counselValidate(form: IntakeForm, stepId: string): string[] {
     if (form.ownsOutOfState === null) errs.push('ownsOutOfState')
   }
   return errs
+}
+
+/** One review/summary card: a section title, the step id to jump to on edit, and its label/value rows. */
+export interface IntakeSummarySection {
+  id: string
+  title: string
+  rows: [string, string][]
+}
+
+const SEX_LABEL: Record<string, string> = { male: 'Male', female: 'Female' }
+
+/**
+ * Pure, presentation-free summary of the completed intake — the single source of
+ * truth for both the on-screen Review step and the printable / downloadable summary.
+ * Mirrors the questionnaire branch (Wills vs Probate) and drops empty rows.
+ */
+export function buildIntakeSummary(form: IntakeForm): IntakeSummarySection[] {
+  const findLabel = (arr: ReadonlyArray<{ id: string; label: string }>, id: string) =>
+    (arr.find(x => x.id === id) || { label: '' }).label || ''
+  const isPartnered = ['married', 'partnered'].includes(form.maritalStatus)
+  const isProbate = form.intakeType === 'probate'
+  const formats: Record<string, string> = { inperson: 'In person', video: 'Video', phone: 'Phone' }
+  const times: Record<string, string> = { morning: 'Mornings (8am–12pm)', afternoon: 'Afternoons (12pm–5pm)', anytime: 'Any time' }
+  const triLabel: Record<string, string> = { yes: 'Yes', no: 'No', unsure: 'Not sure', elsewhere: 'Someone else has it', possible: 'Possible' }
+  const trim = (s: string, n = 90) => (s && s.length > n ? s.slice(0, n - 3) + '…' : s)
+  const realEstateProperties = form.realEstateProperties as unknown as string[]
+  const cap = (s: string) => (s ? s[0].toUpperCase() + s.slice(1) : '')
+
+  // Build a section, coercing each candidate row to a string pair and dropping any with an empty value.
+  const sec = (id: string, title: string, rows: Array<readonly [string, unknown] | boolean | number | '' | null | undefined>): IntakeSummarySection => ({
+    id,
+    title,
+    rows: rows
+      .filter((r): r is readonly [string, unknown] => Boolean(r) && Boolean((r as readonly [string, unknown])[1]))
+      .map(r => [r[0], String(r[1])] as [string, string]),
+  })
+
+  const childList = (form.childrenDetails || []).map((c, i) => {
+    const name = c.fullName || (c as unknown as Record<string, string>).name || `Child ${i + 1}`
+    const sex = SEX_LABEL[c.sex] || ''
+    return [name, sex].filter(Boolean).join(' — ')
+  }).filter(Boolean)
+
+  const about = sec('about', 'About You', [
+    ['Name', `${form.firstName} ${form.lastName}`.trim()],
+    ['Email', form.email],
+    ['Phone', form.phone],
+    ['ZIP', form.zip],
+    form.dob && ['Date of birth', form.dob],
+    isProbate && form.clientLivesInTexas !== null && ['Lives in Texas', form.clientLivesInTexas ? 'Yes' : 'No'],
+    !isProbate && form.topConcerns && ['Top concerns', trim(form.topConcerns)],
+    !isProbate && form.worstCaseFear && ['Worst-case fear', trim(form.worstCaseFear)],
+    ['Source', form.source],
+  ])
+
+  const schedule = sec('schedule', 'Schedule', [
+    ['Office', findLabel(OFFICE_OPTIONS, form.preferredOffice)],
+    ['Format', formats[form.consultationFormat]],
+    ['Best time', times[form.preferredContactTime]],
+    ['Timeline', findLabel(URGENCY_OPTIONS, form.urgency)],
+    form.notes && ['Notes', form.notes],
+  ])
+
+  if (isProbate) {
+    return [
+      about,
+      sec('decedent', 'Your Loved One', [
+        ['Name', form.decedentName],
+        form.decedentDateOfDeath && ['Date of death', form.decedentDateOfDeath],
+        ['Relationship', form.decedentRelationship === 'other'
+          ? (form.decedentRelationshipOther || 'Other')
+          : cap(form.decedentRelationship)],
+        form.decedentCounty && ['County of residence', form.decedentCounty],
+        ['Texas resident', form.decedentTexasResident === null ? '' : (form.decedentTexasResident ? 'Yes' : 'No')],
+        ['Had a trust', form.decedentHadTrust === null ? '' : (form.decedentHadTrust ? 'Yes' : 'No')],
+      ]),
+      sec('probate-estate', 'The Estate', [
+        ['Total assets', findLabel(ASSET_OPTIONS, form.assetRange)],
+        ['Total debts', findLabel(ASSET_OPTIONS, form.debtRange)],
+        ['Real estate', form.ownsRealEstate === null ? '' : (form.ownsRealEstate ? `Yes${realEstateProperties.length ? ` — ${realEstateProperties.filter(Boolean).join(', ')}` : ''}` : 'No')],
+        ['Business', form.ownsBusiness === null ? '' : (form.ownsBusiness ? `Yes — ${form.businessType || '—'}` : 'No')],
+        ['Out-of-state', form.ownsOutOfState === null ? '' : (form.ownsOutOfState ? 'Yes' : 'No')],
+      ]),
+      sec('will-filings', 'Will & Court', [
+        ['Will signed', triLabel[form.willExists]],
+        form.willExists === 'yes' && form.willHasOriginal && ['Original document', triLabel[form.willHasOriginal] || form.willHasOriginal],
+        form.willExists === 'yes' && form.willYear && ['Year drafted', form.willYear],
+        ['Filed in court', triLabel[form.probateCourtFiled]],
+        form.probateCourtFiled === 'yes' && form.probateCountyFiled && ['County', form.probateCountyFiled],
+        form.probateCourtFiled === 'yes' && form.probateExecutorAppointed !== null && ['Executor appointed', form.probateExecutorAppointed ? 'Yes' : 'No'],
+        form.heirDisputes && ['Heir disputes', triLabel[form.heirDisputes] || form.heirDisputes],
+      ]),
+      schedule,
+    ]
+  }
+
+  return [
+    about,
+    sec('family', 'Your Family', [
+      ['Status', cap(form.maritalStatus)],
+      isPartnered && ['Spouse / partner', [form.spouseName, form.spouseDob && `DOB ${form.spouseDob}`].filter(Boolean).join(' · ')],
+      isPartnered && form.dateOfMarriage && ['Date of marriage', form.dateOfMarriage],
+      ['Children', form.hasChildren ? (form.childrenCount || 'Yes') : 'No'],
+      childList.length && ['Children listed', childList.join('; ')],
+      form.hasMinorChildren !== null && ['Children under 18', form.hasMinorChildren ? 'Yes' : 'No'],
+      form.spouseChildrenSeparate && ['Spouse\'s separate children', form.spouseChildrenSeparate],
+      form.hasSpecialNeedsDependent !== null && ['Special needs dependent', form.hasSpecialNeedsDependent ? 'Yes' : 'No'],
+    ]),
+    sec('estate', 'Your Estate', [
+      ['Approx. value', findLabel(WILLS_ASSET_OPTIONS, form.assetRange)],
+      ['Real estate', form.ownsRealEstate === null ? '' : (form.ownsRealEstate ? `Yes${form.realEstateCount ? ` (${form.realEstateCount})` : ''}` : 'No')],
+      form.deedAddresses && ['Deed info', form.deedAddresses.split('\n').filter(Boolean).join(' · ')],
+      form.deedAttachmentName && ['Deed attached', form.deedAttachmentName],
+      ['Business', form.ownsBusiness === null ? '' : (form.ownsBusiness ? `Yes — ${form.businessType}${form.businessHasSuccession !== null ? ` (succession plan: ${form.businessHasSuccession ? 'yes' : 'no'})` : ''}` : 'No')],
+      form.companyInfo && ['Company info', form.companyInfo.split('\n').filter(Boolean).join(' · ')],
+      form.companyAttachmentName && ['Company doc attached', form.companyAttachmentName],
+      ['Existing plan', form.hasExistingPlan === null ? '' : (form.hasExistingPlan ? `Yes (${form.existingPlanYear})` : 'No')],
+    ]),
+    sec('key-people', 'Key People', [
+      ['Primary beneficiaries', form.primaryBeneficiaries.length
+        ? form.primaryBeneficiaries.map(b => `${b.name || '—'}${b.relationship ? ` (${b.relationship})` : ''}${b.percentage ? ` · ${b.percentage}%` : ''}`).join('; ')
+        : '—'],
+      ['Trustee / Executor', form.trusteeExecutor.name || '—'],
+      form.trusteeExecutorBackup.name && ['Backup trustee', form.trusteeExecutorBackup.name],
+      ['Financial POA (you)', form.financialPoaYou.name || '—'],
+      form.financialPoaYouBackup.name && ['Backup financial POA', form.financialPoaYouBackup.name],
+      isPartnered && form.financialPoaSpouse.name && ['Financial POA (spouse)', form.financialPoaSpouse.name],
+      isPartnered && form.financialPoaSpouseBackup.name && ['Backup financial POA (spouse)', form.financialPoaSpouseBackup.name],
+      ['Medical POA (you)', form.medicalPoaYou.name || '—'],
+      form.medicalPoaYouAlternate.name && ['Alternate medical POA', form.medicalPoaYouAlternate.name],
+      isPartnered && form.medicalPoaSpouse.name && ['Medical POA (spouse)', form.medicalPoaSpouse.name],
+      isPartnered && form.medicalPoaSpouseAlternate.name && ['Alternate medical POA (spouse)', form.medicalPoaSpouseAlternate.name],
+    ]),
+    sec('wishes', 'Final Wishes', [
+      form.specialGifts && ['Special gifts', trim(form.specialGifts)],
+      form.remoteContingentBeneficiaries && ['Remote contingents', trim(form.remoteContingentBeneficiaries)],
+      form.livingWillYou !== null && ['Living Will (you)', form.livingWillYou ? 'Yes' : 'No'],
+      isPartnered && form.livingWillSpouse !== null && ['Living Will (spouse)', form.livingWillSpouse ? 'Yes' : 'No'],
+      form.organDonationNotes && ['Organ donation', form.organDonationNotes],
+    ]),
+    sec('additional', 'Additional Info', [
+      form.receivesGovBenefits !== null && ['Gov benefits', form.receivesGovBenefits ? 'Yes' : 'No'],
+      form.hasDivorcePayments !== null && ['Divorce / settlement payments', form.hasDivorcePayments ? 'Yes' : 'No'],
+      form.hasMarriageContract !== null && ['Pre / post-marriage contract', form.hasMarriageContract ? 'Yes' : 'No'],
+      form.hasFiledGiftTaxReturns !== null && ['Gift tax returns', form.hasFiledGiftTaxReturns ? 'Yes' : 'No'],
+      form.hasPriorEstatePlan !== null && ['Prior estate plan', form.hasPriorEstatePlan ? 'Yes' : 'No'],
+      form.childrenHaveSpecialNeedsExtended !== null && ['Children with special needs', form.childrenHaveSpecialNeedsExtended ? 'Yes' : 'No'],
+      form.childrenReceiveGovBenefits !== null && ['Children receiving gov benefits', form.childrenReceiveGovBenefits ? 'Yes' : 'No'],
+      form.supportsAdultDependents !== null && ['Supports adult dependents', form.supportsAdultDependents ? 'Yes' : 'No'],
+      form.additionalAttachmentName && ['Attached', form.additionalAttachmentName],
+    ]),
+    sec('services', 'Services', [
+      ['Selected', form.services.map(id => findLabel(SERVICE_OPTIONS as ReadonlyArray<{ id: string; label: string }>, id)).join(', ')],
+      form.services.includes('probate') && ['Probate context', `${form.decedentRelationship}${form.decedentDateOfDeath ? ` · ${form.decedentDateOfDeath}` : ''}`],
+    ]),
+    schedule,
+  ]
 }
