@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "prisma generate && prisma migrate deploy && next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "predev": "node scripts/build-search-index.mjs",
+    "prebuild": "node scripts/build-search-index.mjs"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
@@ -22,6 +24,7 @@
     "@types/twilio": "^3.19.2",
     "better-sqlite3": "^12.9.0",
     "clsx": "^2.1.1",
+    "fuse.js": "^7.4.1",
     "lucide-react": "^1.14.0",
     "next": "16.2.4",
     "pg": "^8.20.0",
