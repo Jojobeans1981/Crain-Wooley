@@ -78,7 +78,6 @@ export const OFFICE_OPTIONS = [
   { id: 'plano', label: 'Plano', sub: 'Principal office · 2805 Dallas Pkwy' },
   { id: 'mansfield', label: 'Mansfield', sub: '1000 N Walnut Creek Dr' },
   { id: 'fortworth', label: 'Fort Worth', sub: '6040 Camp Bowie Blvd · by appointment' },
-  { id: 'virtual', label: 'Virtual', sub: 'Secure video consultation' },
 ] as const
 
 export const URGENCY_OPTIONS = [
