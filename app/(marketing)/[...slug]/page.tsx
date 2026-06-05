@@ -55,7 +55,7 @@ export default async function LegacyCatchAll({ params }: { params: Promise<Param
   const { slug } = await params
   const path = toPath(slug)
   const page = getLegacyPage(path)
-  if (page) return <LegacyArticle page={page} />
+  if (page) return <LegacyArticle page={page} path={path} />
 
   // Not captured yet — bridge high-value paths to their live guide (temporary).
   const fallback = FALLBACK_REDIRECTS[path]

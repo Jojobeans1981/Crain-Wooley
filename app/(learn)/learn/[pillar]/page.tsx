@@ -42,9 +42,9 @@ export default async function PillarPage({ params }: { params: Promise<Params> }
     <article className="learn-article cw-container">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
 
-      <p className="learn-breadcrumb">
-        <Link href="/learn">Learn</Link> → {meta.title}
-      </p>
+      <nav aria-label="Breadcrumb" className="learn-breadcrumb">
+        <Link href="/learn">Learn</Link> <span aria-hidden="true">→</span> <span aria-current="page">{meta.title}</span>
+      </nav>
       <p className="learn-eyebrow">{guide.eyebrow}</p>
       <h1 className="learn-h1-article">{guide.title}</h1>
       <p className="learn-lede">
@@ -105,7 +105,7 @@ export default async function PillarPage({ params }: { params: Promise<Params> }
           When you are ready to talk it through, Crain &amp; Wooley offers comprehensive, <strong>flat-rate</strong> planning
           across Dallas–Fort Worth — offices in Plano, Mansfield, and Fort Worth, every document explained in plain language.
         </p>
-        <Link href="/qualify" className="cw-btn-primary">Book a consultation →</Link>
+        <Link href="/get-started" className="cw-btn-primary">Book a consultation →</Link>
         <span className="text-cw-ink-mute text-[14px] ml-3">Plano: (972) 945-1610</span>
       </div>
 
