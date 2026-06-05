@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type { LegacyPage } from '@/lib/legacy'
+import { getSectionNav, type SectionNav, type SectionNavItem } from '@/lib/legacy/section-nav'
 import type { ReactNode } from 'react'
 
 /**
@@ -56,12 +57,49 @@ function isBulletBlock(block: string) {
   return lines.length > 0 && lines.every((l) => /^[-*]\s+/.test(l.trim()))
 }
 
-export default function LegacyArticle({ page }: { page: LegacyPage }) {
+function SidebarItem({ item }: { item: SectionNavItem }) {
+  const cls = item.active ? 'is-active' : item.ancestor ? 'is-ancestor' : undefined
+  return (
+    <li>
+      <Link href={item.path} className={cls} aria-current={item.active ? 'page' : undefined}>{item.label}</Link>
+      {item.children.length > 0 && (
+        <ul>
+          {item.children.map((c) => (
+            <li key={c.path}>
+              <Link href={c.path} className={c.active ? 'is-active' : undefined} aria-current={c.active ? 'page' : undefined}>{c.label}</Link>
+            </li>
+          ))}
+        </ul>
+      )}
+    </li>
+  )
+}
+
+// Section / sibling nav — native <details> so the mobile toggle is keyboard-
+// operable with no client JS; CSS forces it open on desktop.
+function SectionSidebar({ nav }: { nav: SectionNav }) {
+  return (
+    <details className="legacy-sidebar">
+      <summary className="legacy-sidebar-toggle">{nav.label}<span aria-hidden="true" className="legacy-sidebar-chevron" /></summary>
+      <nav aria-label="Section" className="legacy-sidebar-body">
+        {nav.landingPath
+          ? <Link href={nav.landingPath} className={`legacy-sidebar-head${nav.landingActive ? ' is-active' : ''}`} aria-current={nav.landingActive ? 'page' : undefined}>{nav.label}</Link>
+          : <span className="legacy-sidebar-head">{nav.label}</span>}
+        <ul>
+          {nav.items.map((item) => <SidebarItem key={item.path} item={item} />)}
+        </ul>
+      </nav>
+    </details>
+  )
+}
+
+export default function LegacyArticle({ page, path }: { page: LegacyPage; path: string }) {
   const h2set = new Set(page.h2s.map((s) => s.trim()))
   const h3set = new Set(page.h3s.map((s) => s.trim()))
   const blocks = page.body.split(/\n\s*\n/).map((b) => b.trim()).filter(Boolean)
   const section = KICKER[page.type] ?? 'Crain & Wooley'
   const title = page.h1 || page.title
+  const nav = getSectionNav(path)
 
   return (
     <div className="cw-article-bg">
@@ -79,7 +117,9 @@ export default function LegacyArticle({ page }: { page: LegacyPage }) {
         </div>
       </header>
 
-      <div className="cw-container legacy-body">
+      <div className={nav ? 'cw-container legacy-shell' : 'cw-container legacy-body'}>
+        {nav && <SectionSidebar nav={nav} />}
+        <div className="legacy-article-col">
         <article className="learn-article">
           {blocks.map((block, i) => {
         // The H1 line sometimes repeats as the first body block — skip it.
@@ -113,6 +153,7 @@ export default function LegacyArticle({ page }: { page: LegacyPage }) {
             The information on this page is for general information purposes only and is not legal advice.
           </p>
         </article>
+        </div>
       </div>
     </div>
   )
