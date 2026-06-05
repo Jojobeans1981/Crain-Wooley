@@ -849,3 +849,12 @@
   .legacy-h3 { font-family: var(--font-display); font-weight: 700; color: #2E414F; font-size: 1.22rem; margin: 1.6rem 0 0.4rem; }
   .legacy-byline { font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.04em; color: #6b6356; margin: 0 0 1.4rem; }
 }
+
+@layer components {
+  .blog-year-group { margin-bottom: 1.6rem; }
+  .blog-year-count { font-family: var(--font-mono); font-size: 0.75rem; color: #9A825E; font-weight: 600; }
+  .blog-row { display: flex; flex-direction: column; gap: 2px; padding: 12px 0; border-bottom: 1px solid rgba(26,34,48,0.14); text-decoration: none; }
+  .blog-row:hover .blog-row-title { color: #9A825E; }
+  .blog-row-date { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: #6b6356; }
+  .blog-row-title { font-family: var(--font-display); font-size: 1.1rem; color: #2E414F; line-height: 1.3; }
+}

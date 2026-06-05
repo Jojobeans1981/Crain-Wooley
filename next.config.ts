@@ -18,6 +18,11 @@ const nextConfig: NextConfig = {
       { source: '/mansfield-fw/probate', destination: '/mansfield/probate', permanent: true },
       { source: '/about-us/our-team', destination: '/staff-profiles', permanent: true },
 
+      // Blog category/tag pages were low-value listing URLs — 301 them to the
+      // blog index (per the 301 map: "301 if dropped"). Individual posts and the
+      // year/month date archives are served as real pages.
+      { source: '/blogs/categories/:slug*', destination: '/blogs', permanent: true },
+
       // NOTE: the ~480 legacy marketing/blog URLs must be RECREATED at their
       // existing paths on this app before DNS cutover (route_manifest.csv is the
       // checklist) — they are not redirects, they must return 200.

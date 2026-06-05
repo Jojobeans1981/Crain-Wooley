@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { PILLAR_SLUGS } from '@/lib/learn/pillars'
 import { allLegacyPaths } from '@/lib/legacy'
+import { years, yearMonths } from '@/lib/legacy/blog-index'
 
 /**
  * XML sitemap for the canonical production host: the public entry points, the
@@ -22,8 +23,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ]
   const pillars = PILLAR_SLUGS.map((s) => `/learn/${s}`)
   const legacy = allLegacyPaths()
+  const blogIndex = ['/blogs', ...years().map((y) => `/blogs/${y}`), ...yearMonths().map(({ year, month }) => `/blogs/${year}/${month}`)]
 
-  const all = [...new Set([...staticRoutes, ...pillars, ...legacy])]
+  const all = [...new Set([...staticRoutes, ...pillars, ...legacy, ...blogIndex])]
 
   return all.map((path) => ({
     url: `${SITE}${path}`,
