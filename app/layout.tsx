@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
-import { Inter, JetBrains_Mono, Cormorant_Garamond } from 'next/font/google'
+import { Montserrat, JetBrains_Mono, Cormorant_Garamond } from 'next/font/google'
 import './globals.css'
 
-// Body + UI sans — cf.sans
-const sans = Inter({
+// Body + UI sans — Stage-1 brand token (matches the live Scorpion site's nav/body).
+const sans = Montserrat({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
   variable: '--font-sans',
