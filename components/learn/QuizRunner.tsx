@@ -73,10 +73,10 @@ export default function QuizRunner({
 
   return (
     <div className="cw-container learn-quiz">
-      <p className="learn-breadcrumb">
+      <nav aria-label="Breadcrumb" className="learn-breadcrumb">
         <Link href="/learn">Learn</Link>
-        {crumbLabel && crumbHref && <> → <Link href={crumbHref}>{crumbLabel}</Link></>} → Quiz
-      </p>
+        {crumbLabel && crumbHref && <> <span aria-hidden="true">→</span> <Link href={crumbHref}>{crumbLabel}</Link></>} <span aria-hidden="true">→</span> <span aria-current="page">Quiz</span>
+      </nav>
 
       {phase !== 'done' && (
         <div className="learn-quiz-progress" aria-hidden="true">
@@ -147,7 +147,7 @@ export default function QuizRunner({
             </>
           )}
           <div className="learn-quiz-result-cta">
-            <Link href="/qualify" className="cw-btn-primary">Book a consultation →</Link>
+            <Link href="/get-started" className="cw-btn-primary">Book a consultation →</Link>
             {showGraded && result?.recommendedPillar
               ? <Link href={pillarHref} className="cw-btn-ghost">Read the guide</Link>
               : <Link href="/learn" className="cw-btn-ghost">Browse the guides</Link>}

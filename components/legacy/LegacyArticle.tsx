@@ -60,13 +60,28 @@ export default function LegacyArticle({ page }: { page: LegacyPage }) {
   const h2set = new Set(page.h2s.map((s) => s.trim()))
   const h3set = new Set(page.h3s.map((s) => s.trim()))
   const blocks = page.body.split(/\n\s*\n/).map((b) => b.trim()).filter(Boolean)
+  const section = KICKER[page.type] ?? 'Crain & Wooley'
+  const title = page.h1 || page.title
 
   return (
-    <article className="learn-article cw-container">
-      <p className="learn-eyebrow">{KICKER[page.type] ?? 'Crain & Wooley'}</p>
-      <h1 className="learn-h1-article">{page.h1 || page.title}</h1>
+    <div className="cw-article-bg">
+      {/* Page-title block — dark slate banner with breadcrumb + H1 (matches live interior) */}
+      <header className="legacy-banner">
+        <div className="cw-container legacy-banner-inner">
+          <nav aria-label="Breadcrumb" className="legacy-crumbs">
+            <ol>
+              <li><Link href="/">Home</Link></li>
+              <li><span>{section}</span></li>
+              <li><span aria-current="page">{title}</span></li>
+            </ol>
+          </nav>
+          <h1 className="legacy-banner-title">{title}</h1>
+        </div>
+      </header>
 
-      {blocks.map((block, i) => {
+      <div className="cw-container legacy-body">
+        <article className="learn-article">
+          {blocks.map((block, i) => {
         // The H1 line sometimes repeats as the first body block — skip it.
         if (i === 0 && page.h1 && block.trim() === page.h1.trim()) return null
         const t = block.trim()
@@ -81,22 +96,24 @@ export default function LegacyArticle({ page }: { page: LegacyPage }) {
             </ul>
           )
         }
-        // collapse soft line breaks within a paragraph into spaces
-        return <p key={i} className="learn-p">{inline(t.replace(/\n+/g, ' '), `p${i}`)}</p>
-      })}
+            // collapse soft line breaks within a paragraph into spaces
+            return <p key={i} className="learn-p">{inline(t.replace(/\n+/g, ' '), `p${i}`)}</p>
+          })}
 
-      <div className="learn-bookcta">
-        <p className="m-0 mb-3.5">
-          Crain &amp; Wooley offers comprehensive, <strong>flat-rate</strong> estate planning across Dallas–Fort Worth —
-          offices in Plano, Mansfield, and Fort Worth, every document explained in plain language.
-        </p>
-        <Link href="/qualify" className="cw-btn-primary">Book a consultation →</Link>
-        <span className="text-cw-ink-mute text-[14px] ml-3">Plano: (972) 945-1610</span>
+          <aside className="learn-bookcta" aria-label="Schedule a consultation">
+            <p className="m-0 mb-3.5">
+              Crain &amp; Wooley offers comprehensive, <strong>flat-rate</strong> estate planning across Dallas–Fort Worth —
+              offices in Plano, Mansfield, and Fort Worth, every document explained in plain language.
+            </p>
+            <Link href="/get-started" className="cw-btn-primary">Book a consultation →</Link>
+            <span className="text-cw-ink-mute text-[14px] ml-3">Plano: (972) 945-1610</span>
+          </aside>
+
+          <p className="learn-disclaimer">
+            The information on this page is for general information purposes only and is not legal advice.
+          </p>
+        </article>
       </div>
-
-      <p className="learn-disclaimer">
-        The information on this page is for general information purposes only and is not legal advice.
-      </p>
-    </article>
+    </div>
   )
 }

@@ -1185,3 +1185,77 @@
     .cw-badge, .cw-service-tint, .cw-news-card { transition: none; }
   }
 }
+
+/* ════════════════════════════════════════════════════════════════════════
+ * STAGE 4 — Scorpion interior-article skin (overrides the warm-editorial
+ * learn-* layer). Applies to the 331 legacy pages, /blogs, and /learn so the
+ * whole interior reads like the homepage. Stage-1 tokens only. Appended last so
+ * these rules win within @layer components.
+ * ════════════════════════════════════════════════════════════════════════ */
+@layer components {
+  /* Light interior page background (replaces warm cream #faf5ea) */
+  .cw-article-bg { background: var(--cw-bg); }
+  .learn-main { background: var(--cw-bg); min-height: 60vh; }
+
+  /* Eyebrow / kicker → Montserrat (was JetBrains mono), gold, uppercase */
+  .learn-eyebrow, .learn-kicker, .learn-card-cta { font-family: var(--font-sans); font-weight: 600; letter-spacing: 0.14em; color: var(--cw-gold); }
+  .learn-eyebrow { font-size: 13px; }
+  .learn-card-cta { letter-spacing: 0.1em; }
+  .learn-num { color: var(--cw-gold); }
+  .learn-eyebrow-light { color: var(--cw-gold-soft); }
+
+  /* ── Legacy title banner (page title block) ── */
+  .legacy-banner { background: var(--cw-slate); padding: 52px 0 48px; }
+  .legacy-banner-inner { text-align: center; }
+  .legacy-banner-title { font-family: var(--font-display); font-weight: 700; font-size: clamp(32px, 5vw, 56px); line-height: 1.05; letter-spacing: -0.012em; color: #fff; margin: 0; }
+  .legacy-crumbs { margin: 0 0 16px; }
+  .legacy-crumbs ol { list-style: none; display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 0; padding: 0; font-family: var(--font-sans); font-size: 13px; }
+  .legacy-crumbs li { display: inline-flex; align-items: center; gap: 8px; color: var(--cw-on-slate-mute); }
+  .legacy-crumbs li + li::before { content: "/"; color: var(--cw-line-on-slate); }
+  .legacy-crumbs a { color: var(--cw-gold-soft); text-decoration: none; }
+  .legacy-crumbs a:hover { color: #fff; }
+  .legacy-crumbs [aria-current] { color: var(--cw-on-slate-mute); }
+
+  /* ── Body column ── */
+  .legacy-body { padding-top: 44px; padding-bottom: 56px; }
+  .learn-article { max-width: 760px; margin-left: auto; margin-right: auto; }
+  .learn-article.cw-container { padding-top: 48px; }
+
+  /* Body type — neutral slate-grey (was warm #2b3026); slate headings */
+  .learn-p, .learn-ul li, .learn-bookcta p, .learn-faq p { color: #3c4751; }
+  .learn-lede { color: var(--cw-slate); }
+  .learn-h1, .learn-h1-article, .learn-h2, .legacy-h2, .legacy-h3 { color: var(--cw-slate); }
+
+  /* Body links — gold, underline-on-hover (Scorpion) */
+  .learn-article a:not([class]) , .learn-p a, .learn-ul a, .learn-readlist a {
+    color: var(--cw-gold); text-decoration: underline; text-decoration-color: rgba(155,128,89,0.35); text-underline-offset: 2px;
+  }
+  .learn-article a:not([class]):hover, .learn-p a:hover, .learn-ul a:hover, .learn-readlist a:hover { text-decoration-color: var(--cw-gold); color: var(--cw-gold); }
+
+  /* Learn-page breadcrumb (pillar / quiz) on light bg */
+  .learn-breadcrumb { font-family: var(--font-sans); font-size: 13px; color: #6a7178; }
+  .learn-breadcrumb a { color: var(--cw-gold); text-decoration: none; }
+  .learn-breadcrumb a:hover { text-decoration: underline; }
+
+  /* Persona callout — override warm cw-panel-gold ivory with a cool light box */
+  .learn-callout { background: #fff; border: 1px solid rgba(48,68,81,0.14); border-left: 3px solid var(--cw-gold); }
+
+  /* Inline consultation CTA — light box, gold left edge + gold button */
+  .learn-bookcta { background: #fff; border: 1px solid rgba(48,68,81,0.14); border-left: 3px solid var(--cw-gold); padding: 26px 28px; margin: 2rem 0 1rem; }
+  .learn-bookcta .cw-btn-primary { background: var(--cw-gold); border-color: var(--cw-gold); color: #fff; }
+  .learn-bookcta .cw-btn-primary:hover { background: #8a7150; }
+
+  /* Quiz / featured band button → gold */
+  .learn-quizband-btn, .learn-quizcta .learn-quizband-btn { background: var(--cw-gold); color: #fff; border-color: var(--cw-gold); }
+  .learn-quizband-btn:hover { background: #8a7150; }
+
+  /* Hub cards hover tint → cool (was warm #fffdf8) */
+  .learn-card:hover { border-color: var(--cw-gold); background: #fff; }
+
+  /* Quiz option focus/selected ring → gold token */
+  .learn-quiz-option.is-selected { border-color: var(--cw-gold); box-shadow: inset 0 0 0 1px var(--cw-gold); }
+  .learn-quiz-option:focus-visible { box-shadow: 0 0 0 3px rgba(155,128,89,0.34); }
+  .learn-quiz-field input:focus { border-color: var(--cw-gold); box-shadow: 0 0 0 3px rgba(155,128,89,0.14); }
+  .learn-quiz-result-cta .cw-btn-primary { background: var(--cw-gold); border-color: var(--cw-gold); color: #fff; }
+  .learn-quiz-result-cta .cw-btn-primary:hover { background: #8a7150; }
+}
