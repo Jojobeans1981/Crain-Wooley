@@ -45,6 +45,10 @@ const config: Config = {
           gold: '#9A825E',         // cf.brass
           'gold-dark': '#7A6444',  // cf.brassDark
           'gold-light': '#D5C0A2', // cf.brassLight
+          // ── A11y Batch A contrast-safe text tokens (mirror globals.css :root) ──
+          'gold-text': '#7A6444',   // gold AS TEXT on light — 5.62:1 white / 5.25:1 #F7F7F7
+          'gold-strong': '#806848', // gold FILL behind white text — white 5.26:1
+          'muted-text': '#5b656e',  // muted text/placeholder on light — 5.95:1 white / 5.55:1 #F7F7F7
           cream: '#faf5ea',        // cf.cream
           'cream-deep': '#ede5d3', // cf.ivoryWarm
           ivory: '#f6f1e7',        // cf.ivory
@@ -64,6 +68,10 @@ const config: Config = {
         'cw-gold-dark': '#7A6444',
         'cw-gold-light': '#D5C0A2',
         'cw-gold-dim': '#7A6444', // legacy
+        // ── A11y Batch A contrast-safe text tokens (mirror globals.css :root) ──
+        'cw-gold-text': '#7A6444',   // gold AS TEXT on light — 5.62:1 white / 5.25:1 #F7F7F7
+        'cw-gold-strong': '#806848', // gold FILL behind white text — white 5.26:1
+        'cw-muted-text': '#5b656e',  // contrast-safe muted text/placeholder on light
         'cw-cream': '#faf5ea',
         'cw-cream-deep': '#ede5d3',
         'cw-ivory': '#f6f1e7',

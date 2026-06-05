@@ -5,42 +5,42 @@
 .form { margin: 0 0 8px; }
 .label {
   display: block; font-family: var(--font-sans); font-size: 12px; font-weight: 600;
-  letter-spacing: 0.1em; text-transform: uppercase; color: var(--cw-gold); margin-bottom: 8px;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--cw-gold-text); margin-bottom: 8px;
 }
 .field { position: relative; display: flex; align-items: center; }
-.icon { position: absolute; left: 16px; color: rgba(48, 68, 81, 0.55); pointer-events: none; }
+.icon { position: absolute; left: 16px; color: var(--cw-muted); pointer-events: none; }
 .input {
   width: 100%; font-family: var(--font-sans); font-size: 17px; color: var(--cw-slate);
   background: #fff; border: 1px solid rgba(48, 68, 81, 0.18); border-radius: 0;
   padding: 16px 46px; outline: none; transition: border-color .15s ease, box-shadow .15s ease;
 }
-.input::placeholder { color: rgba(48, 68, 81, 0.5); }
+.input::placeholder { color: var(--cw-muted); }
 .input:focus-visible { border-color: var(--cw-gold); box-shadow: 0 0 0 3px rgba(155, 128, 89, 0.16); }
 .clear {
   position: absolute; right: 10px; width: 30px; height: 30px; border: none; background: transparent;
-  color: rgba(48, 68, 81, 0.55); font-size: 22px; line-height: 1; cursor: pointer; border-radius: 0;
+  color: var(--cw-muted); font-size: 22px; line-height: 1; cursor: pointer; border-radius: 0;
 }
 .clear:hover { color: var(--cw-slate); }
 .clear:focus-visible { outline: 2px solid var(--cw-gold-soft); outline-offset: 1px; }
 
 .filters { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 14px 0 4px; }
-.filterLabel { font-family: var(--font-sans); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(48, 68, 81, 0.55); margin-right: 4px; }
+.filterLabel { font-family: var(--font-sans); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cw-muted); margin-right: 4px; }
 .chip {
   font-family: var(--font-sans); font-size: 13px; font-weight: 500; color: var(--cw-slate);
   background: #fff; border: 1px solid rgba(48, 68, 81, 0.18); border-radius: 0; padding: 7px 14px; cursor: pointer;
   transition: border-color .12s ease, color .12s ease, background-color .12s ease;
 }
-.chip:hover:not(:disabled) { border-color: var(--cw-gold); color: var(--cw-gold); }
+.chip:hover:not(:disabled) { border-color: var(--cw-gold); color: var(--cw-gold-text); }
 .chip:disabled { opacity: 0.4; cursor: not-allowed; }
 .chipActive { background: var(--cw-slate); border-color: var(--cw-slate); color: #fff; }
 .chipActive:hover { color: #fff; border-color: var(--cw-slate); }
 .chipActive .chipN { color: var(--cw-gold-soft); }
-.chipN { color: rgba(48, 68, 81, 0.5); font-variant-numeric: tabular-nums; }
+.chipN { color: var(--cw-muted); font-variant-numeric: tabular-nums; }
 .chip:focus-visible { outline: 2px solid var(--cw-gold-soft); outline-offset: 2px; }
 
-.count { font-family: var(--font-sans); font-size: 13.5px; color: rgba(48, 68, 81, 0.62); margin: 18px 0 14px; min-height: 1.2em; }
+.count { font-family: var(--font-sans); font-size: 13.5px; color: var(--cw-muted); margin: 18px 0 14px; min-height: 1.2em; }
 .empty { font-family: var(--font-sans); font-size: 16px; line-height: 1.6; color: rgba(48, 68, 81, 0.85); margin: 20px 0; }
-.empty a { color: var(--cw-gold); text-decoration: underline; text-underline-offset: 2px; }
+.empty a { color: var(--cw-gold-text); text-decoration: underline; text-underline-offset: 2px; }
 
 .results { list-style: none; margin: 0; padding: 0; }
 .result {
@@ -50,9 +50,9 @@
 }
 .result:hover { border-color: rgba(48, 68, 81, 0.2); border-left-color: var(--cw-gold); }
 .result:focus-visible { outline: 2px solid var(--cw-gold); outline-offset: 2px; }
-.resultSection { font-family: var(--font-sans); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cw-gold); }
+.resultSection { font-family: var(--font-sans); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cw-gold-text); }
 .resultTitle { font-family: var(--font-display); font-weight: 700; font-size: 1.35rem; line-height: 1.2; color: var(--cw-slate); }
-.resultExcerpt { font-family: var(--font-sans); font-size: 14.5px; line-height: 1.6; color: rgba(48, 68, 81, 0.72); }
+.resultExcerpt { font-family: var(--font-sans); font-size: 14.5px; line-height: 1.6; color: var(--cw-muted); }
 .result mark { background: rgba(155, 128, 89, 0.22); color: inherit; padding: 0 1px; }
 
 @media (prefers-reduced-motion: reduce) {
