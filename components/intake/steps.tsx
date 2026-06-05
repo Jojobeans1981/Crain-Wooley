@@ -126,7 +126,7 @@ export function CounselFinalStep({
         </Field>
         <Reveal open={isPartnered}>
           <div style={{ padding: '18px 20px', background: cf.ivoryWarm, borderLeft: `2px solid ${cf.brass}`, display: 'flex', flexDirection: 'column', gap: 16 }}>
-            <span style={{ fontFamily: cf.mono, fontSize: 10.5, letterSpacing: '0.18em', textTransform: 'uppercase', color: cf.brass, fontWeight: 600 }}>
+            <span style={{ fontFamily: cf.mono, fontSize: 10.5, letterSpacing: '0.18em', textTransform: 'uppercase', color: cf.brassDark, fontWeight: 600 }}>
               {form.maritalStatus === 'married' ? 'Your spouse' : 'Your partner'}
             </span>
             <Field label="Full legal name" required={isPartnered} error={has('spouseName')}
@@ -190,7 +190,7 @@ export function CounselFinalStep({
           <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
             {childrenDetails.map((child, i) => (
               <div key={i} style={{ padding: '18px 20px', background: cf.ivoryWarm, borderLeft: `2px solid ${cf.brass}`, display: 'flex', flexDirection: 'column', gap: 14 }}>
-                <span style={{ fontFamily: cf.mono, fontSize: 10.5, letterSpacing: '0.18em', textTransform: 'uppercase', color: cf.brass, fontWeight: 600 }}>
+                <span style={{ fontFamily: cf.mono, fontSize: 10.5, letterSpacing: '0.18em', textTransform: 'uppercase', color: cf.brassDark, fontWeight: 600 }}>
                   Child {i + 1}
                 </span>
                 <div style={isMobile
@@ -372,8 +372,8 @@ export function CounselFinalStep({
     const RoleSection = ({ eyebrow, title, hint, children }: { eyebrow: React.ReactNode; title: React.ReactNode; hint?: React.ReactNode; children: React.ReactNode }) => (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 14, paddingTop: 4 }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-          <span style={{ fontFamily: cf.mono, fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase', color: cf.brass, fontWeight: 600 }}>{eyebrow}</span>
-          <h3 style={{ fontFamily: cf.serif, fontSize: isMobile ? 22 : 26, color: cf.ink, fontWeight: 700, lineHeight: 1.15, letterSpacing: '-0.005em', margin: 0 }}>{title}</h3>
+          <span style={{ fontFamily: cf.mono, fontSize: 11, letterSpacing: '0.22em', textTransform: 'uppercase', color: cf.brassDark, fontWeight: 600 }}>{eyebrow}</span>
+          <h2 style={{ fontFamily: cf.serif, fontSize: isMobile ? 22 : 26, color: cf.ink, fontWeight: 700, lineHeight: 1.15, letterSpacing: '-0.005em', margin: 0 }}>{title}</h2>
           {hint && <span style={{ fontFamily: cf.sans, fontSize: 13.5, color: cf.textMute, lineHeight: 1.55, marginTop: 2 }}>{hint}</span>}
         </div>
         {children}
@@ -406,7 +406,7 @@ export function CounselFinalStep({
                 padding: '10px 18px', borderRadius: 0,
                 display: 'inline-flex', alignItems: 'center', gap: 8,
               }}>
-              <span style={{ color: cf.brass, fontSize: 14 }}>+</span> Add beneficiary
+              <span aria-hidden="true" style={{ color: cf.brassDark, fontSize: 14 }}>+</span> Add beneficiary
             </button>
           </div>
         </RoleSection>
@@ -842,11 +842,11 @@ export function CounselFinalStep({
     const Section = ({ title, rows, onEdit }: { title: React.ReactNode; rows: [React.ReactNode, React.ReactNode][]; onEdit: () => void }) => (
       <div style={{ paddingBottom: 18, borderBottom: `1px solid ${cf.ruleSoft}`, marginBottom: 18 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 10 }}>
-          <h3 style={{ fontFamily: cf.serif, fontSize: 22, color: cf.ink, margin: 0, fontWeight: 700, letterSpacing: '-0.005em' }}>{title}</h3>
+          <h2 style={{ fontFamily: cf.serif, fontSize: 22, color: cf.ink, margin: 0, fontWeight: 700, letterSpacing: '-0.005em' }}>{title}</h2>
           <button onClick={onEdit}
             aria-label={typeof title === 'string' ? `Edit ${title}` : 'Edit section'}
             style={{
-            background: 'transparent', border: 'none', color: cf.brass, cursor: 'pointer',
+            background: 'transparent', border: 'none', color: cf.brassDark, cursor: 'pointer',
             fontFamily: cf.sans, fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', fontWeight: 600,
             minHeight: 24, padding: '4px 6px',
           }}>Edit</button>
@@ -901,7 +901,7 @@ export function IntakeChooser({
   ]
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: isMobile ? 22 : 28, maxWidth: 620, width: '100%' }}>
-      <span style={{ fontFamily: cf.mono, fontSize: 10.5, letterSpacing: '0.22em', textTransform: 'uppercase', color: cf.brass, fontWeight: 600 }}>
+      <span style={{ fontFamily: cf.mono, fontSize: 10.5, letterSpacing: '0.22em', textTransform: 'uppercase', color: cf.brassDark, fontWeight: 600 }}>
         New Client Intake
       </span>
       <h1 style={{ fontFamily: cf.serif, fontSize: isMobile ? 38 : 56, margin: 0, lineHeight: 1.02, color: cf.ink, fontWeight: 700, letterSpacing: '-0.015em' }}>
@@ -925,7 +925,7 @@ export function IntakeChooser({
             onMouseLeave={e => { e.currentTarget.style.borderColor = cf.rule; e.currentTarget.style.boxShadow = 'none'; }}
           >
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-              <span style={{ fontFamily: cf.mono, fontSize: isMobile ? 13 : 15, letterSpacing: '0.2em', textTransform: 'uppercase', color: cf.brass, fontWeight: 600 }}>
+              <span style={{ fontFamily: cf.mono, fontSize: isMobile ? 13 : 15, letterSpacing: '0.2em', textTransform: 'uppercase', color: cf.brassDark, fontWeight: 600 }}>
                 {c.eyebrow}
               </span>
               <span style={{ fontFamily: cf.serif, fontSize: isMobile ? 34 : 44, lineHeight: 1.04, color: cf.ink, fontWeight: 700, letterSpacing: '-0.012em' }}>
@@ -935,7 +935,7 @@ export function IntakeChooser({
                 {c.body}
               </span>
             </div>
-            <span style={{ fontFamily: cf.serif, fontSize: 28, color: cf.brass, lineHeight: 1, paddingRight: 4 }}>{'→'}</span>
+            <span aria-hidden="true" style={{ fontFamily: cf.serif, fontSize: 28, color: cf.brass, lineHeight: 1, paddingRight: 4 }}>{'→'}</span>
           </button>
         ))}
       </div>
@@ -958,7 +958,7 @@ export function CounselWelcome({
 }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: isMobile ? 20 : 26, maxWidth: 620, width: '100%' }}>
-      <span style={{ fontFamily: cf.mono, fontSize: 10.5, letterSpacing: '0.22em', textTransform: 'uppercase', color: cf.brass, fontWeight: 600 }}>
+      <span style={{ fontFamily: cf.mono, fontSize: 10.5, letterSpacing: '0.22em', textTransform: 'uppercase', color: cf.brassDark, fontWeight: 600 }}>
         New Client Intake
       </span>
       <h1 style={{ fontFamily: cf.serif, fontSize: isMobile ? 40 : 64, margin: 0, lineHeight: 1.02, color: cf.ink, fontWeight: 700, letterSpacing: '-0.015em' }}>
@@ -992,7 +992,7 @@ export function CounselWelcome({
         onMouseEnter={e => e.currentTarget.style.background = cf.inkSoft}
         onMouseLeave={e => e.currentTarget.style.background = cf.ink}>
         Begin intake
-        <span style={{ fontFamily: cf.serif, fontSize: 20, color: cf.brass }}>→</span>
+        <span aria-hidden="true" style={{ fontFamily: cf.serif, fontSize: 20, color: cf.brass }}>→</span>
       </button>
       <p style={{ fontFamily: cf.sans, fontSize: 12, color: cf.textMute, marginTop: 12, display: 'flex', alignItems: 'center', gap: 8 }}>
         <PrivacyShield color={cf.brass} />
