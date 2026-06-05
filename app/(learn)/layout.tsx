@@ -5,7 +5,7 @@ export default function LearnLayout({ children }: { children: React.ReactNode })
   return (
     <div className="cw-page">
       <SiteHeader />
-      <main className="learn-main">{children}</main>
+      <main id="main" tabIndex={-1} className="learn-main">{children}</main>
       <SiteFooter />
       <RevealScript />
     </div>

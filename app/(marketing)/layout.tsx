@@ -10,7 +10,7 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
   return (
     <div className="cw-page">
       <SiteHeader />
-      <main>{children}</main>
+      <main id="main" tabIndex={-1}>{children}</main>
       <SiteFooter />
       <RevealScript />
     </div>

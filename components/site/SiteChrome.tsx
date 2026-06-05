@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 /**
  * Shared public-site header + footer — a literal visual clone of the live
@@ -143,7 +143,7 @@ function Logo({ className, style }: { className?: string; style?: React.CSSPrope
 }
 
 // ── Desktop nav item (label link + caret toggle + flyout) ──
-function DesktopItem({ item, open, active, onToggle }: { item: NavNode; open: boolean; active: boolean; onToggle: () => void }) {
+function DesktopItem({ item, open, active, onToggle, onOpen, onClose }: { item: NavNode; open: boolean; active: boolean; onToggle: () => void; onOpen: () => void; onClose: () => void }) {
   const linkClass = `cw-nav-link${active ? ' cw-current' : ''}`
   const current = active ? 'page' : undefined
   if (!item.children?.length) {
@@ -154,7 +154,14 @@ function DesktopItem({ item, open, active, onToggle }: { item: NavNode; open: bo
     )
   }
   return (
-    <li className="cw-nav-item">
+    // CH-8: the flyout opens via CSS on hover/focus-within; mirror keyboard
+    // focus into the JS open state so the caret's aria-expanded matches what a
+    // keyboard user actually sees.
+    <li
+      className="cw-nav-item"
+      onFocus={onOpen}
+      onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node)) onClose() }}
+    >
       <Link href={item.href} className={linkClass} aria-current={current}>{item.label}</Link>
       <button
         type="button"
@@ -234,6 +241,10 @@ export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState<Record<string, boolean>>({})
   const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
+  const burgerRef = useRef<HTMLButtonElement>(null)
+  const closeRef = useRef<HTMLButtonElement>(null)
+  const drawerRef = useRef<HTMLDivElement>(null)
+  const wasOpen = useRef(false)
 
   // Mark the current top-level section (gold), matching the live site.
   const isActive = (href: string) => {
@@ -265,10 +276,36 @@ export function SiteHeader() {
     return () => window.removeEventListener('keydown', onKey)
   }, [])
 
+  // CH-2: drawer focus management — on open, move focus to the close button;
+  // on close (Escape / overlay / nav / X), return focus to the hamburger.
+  useEffect(() => {
+    if (drawerOpen && !wasOpen.current) {
+      closeRef.current?.focus()
+    } else if (!drawerOpen && wasOpen.current) {
+      burgerRef.current?.focus()
+    }
+    wasOpen.current = drawerOpen
+  }, [drawerOpen])
+
+  // CH-2: trap Tab within the open drawer so focus can't escape to the
+  // (inert) page behind it.
+  const trapTab = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key !== 'Tab' || !drawerRef.current) return
+    const f = drawerRef.current.querySelectorAll<HTMLElement>('a[href], button:not([disabled])')
+    if (!f.length) return
+    const first = f[0], last = f[f.length - 1]
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus() }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus() }
+  }
+
   return (
     <>
-      {/* Announcement bar (gold) */}
-      <div className="cw-anno">
+      {/* CH-5: skip link — first focusable element on every page. */}
+      <a href="#main" className="cw-skip-link">Skip to main content</a>
+
+      {/* Announcement bar (gold) — CH-6: wrapped as a labelled region so its
+          content isn't orphaned outside a landmark. */}
+      <div className="cw-anno" role="region" aria-label="Site announcement">
         Register for our free{' '}
         <Link href="/webinar-registration/">webinar</Link>{' '}
         to compare wills vs trusts and how to avoid probate
@@ -303,6 +340,8 @@ export function SiteHeader() {
                       open={openMenu === item.label}
                       active={isActive(item.href)}
                       onToggle={() => setOpenMenu(openMenu === item.label ? null : item.label)}
+                      onOpen={() => setOpenMenu(item.label)}
+                      onClose={() => setOpenMenu((m) => (m === item.label ? null : m))}
                     />
                   ))}
                 </ul>
@@ -313,6 +352,7 @@ export function SiteHeader() {
 
           {/* Hamburger (below 1280px) */}
           <button
+            ref={burgerRef}
             type="button"
             className="cw-burger"
             aria-label="Open menu"
@@ -332,16 +372,22 @@ export function SiteHeader() {
         aria-hidden="true"
       />
       <div
+        ref={drawerRef}
         id="cw-drawer"
         className={`cw-drawer${drawerOpen ? ' cw-open' : ''}`}
         role="dialog"
         aria-modal="true"
         aria-label="Site menu"
         aria-hidden={!drawerOpen}
+        // CH-1: when closed the drawer is off-screen but in the DOM; `inert`
+        // takes its links out of the tab order and the a11y tree so keyboard /
+        // SR users don't land in invisible nav.
+        inert={!drawerOpen}
+        onKeyDown={trapTab}
       >
         <div className="cw-drawer-head">
           <Logo style={{ height: 48, width: 'auto' }} />
-          <button type="button" className="cw-drawer-close" aria-label="Close menu" onClick={() => setDrawerOpen(false)}>
+          <button ref={closeRef} type="button" className="cw-drawer-close" aria-label="Close menu" onClick={() => setDrawerOpen(false)}>
             &times;
           </button>
         </div>
@@ -455,7 +501,7 @@ export function SiteFooter() {
               <p className="cw-office-name">{o.name}</p>
               <address>
                 {o.lines.map((line) => (<span key={line}>{line}<br /></span>))}
-                <a className="cw-office-map" href={o.map} target="_blank" rel="noopener noreferrer">Map &amp; Directions</a>
+                <a className="cw-office-map" href={o.map} target="_blank" rel="noopener noreferrer" aria-label={`Map & Directions — ${o.name}`}>Map &amp; Directions</a>
               </address>
             </div>
           ))}
