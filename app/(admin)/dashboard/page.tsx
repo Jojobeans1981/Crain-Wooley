@@ -3,6 +3,7 @@ import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import type { Lead, LeadStatus, FunnelMetrics } from '@/types'
 import { SignOutButton } from '@/components/admin/SignOutButton'
+import { ClioOutboxCard } from '@/components/admin/ClioOutboxCard'
 
 type ClioStatus = { connected: boolean; expiresAt?: string; expired?: boolean } | null
 type OnboardingTemplate = {
@@ -258,6 +259,9 @@ export default function DashboardPage() {
             )}
           </div>
         )}
+
+        {/* Clio Sync Outbox (backlog + manual drain) */}
+        <ClioOutboxCard />
 
         {/* Autonomous Onboarding */}
         <div className="border border-cw-border bg-cw-panel">
