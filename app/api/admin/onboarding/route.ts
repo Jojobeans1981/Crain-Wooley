@@ -2,7 +2,8 @@ export const dynamic = 'force-dynamic'
 
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/db/prisma'
-import { ClioService } from '@/lib/clio/ClioService'
+import { enqueueClioSync, drainClioOutbox } from '@/lib/clio/outbox'
+import { isClioConnected } from '@/lib/clio/connection'
 import { requireRole } from '@/src/lib/auth/requireRole'
 
 export async function POST(req: NextRequest) {
@@ -21,68 +22,27 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    // 1. Get or Create Clio Contact
-    let contactId = lead.clioContactId
-
-    if (!contactId) {
-      const existing = await ClioService.getContactByEmail(lead.email)
-      if (existing) {
-        contactId = existing.id
-      } else {
-        const contact = await ClioService.createContact({
-          firstName: lead.firstName,
-          lastName: lead.lastName,
-          email: lead.email,
-          phone: lead.phone,
-        })
-        contactId = contact.id
-      }
-    }
-
-    // 2. Create Clio Matter
-    const matter = await ClioService.createMatter({
-      contactId: contactId,
-      description: lead.description,
-      practiceArea: lead.practiceArea,
-    })
-
-    // 3. Fire onboarding task template
-    await ClioService.triggerOnboardingTemplate(matter.id)
-
-    // 4. Seed intake tasks
-    const dueDate = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString()
-    await ClioService.createTask({
-      matterId: matter.id,
-      name: 'Send retainer agreement',
-      dueAt: dueDate,
-    })
-    await ClioService.createTask({
-      matterId: matter.id,
-      name: 'Request initial documents from client',
-      dueAt: dueDate,
-    })
-    await ClioService.createTask({
-      matterId: matter.id,
-      name: 'Assign lead attorney',
-      dueAt: dueDate,
-    })
-
-    // 5. Update lead record
+    // Persist the Hired transition immediately (works with Clio off), then defer
+    // the contact→matter→template→tasks work to the disconnect-safe outbox.
     await prisma.lead.update({
       where: { id: leadId },
-      data: {
-        status: 'HIRED',
-        hired: true,
-        hiredAt: new Date(),
-        clioContactId: contactId,
-        clioMatterId: matter.id,
-      },
+      data: { status: 'HIRED', hired: true, hiredAt: new Date() },
     })
 
+    await enqueueClioSync('ONBOARD_MATTER', leadId)
+
+    // Fast path: if Clio is connected, sync now so the admin sees parity behavior.
+    if (await isClioConnected()) {
+      await drainClioOutbox().catch((e) => console.error('[ADMIN_ONBOARDING] drain error', e))
+    }
+
+    const synced = await prisma.lead.findUnique({ where: { id: leadId } })
     return NextResponse.json({
       success: true,
-      clioContactId: contactId,
-      clioMatterId: matter.id,
+      queued: true,
+      clioConnected: await isClioConnected(),
+      clioContactId: synced?.clioContactId ?? null,
+      clioMatterId: synced?.clioMatterId ?? null,
     })
   } catch (error) {
     console.error('[ADMIN_ONBOARDING_ERROR]', error)

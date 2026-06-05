@@ -2,7 +2,8 @@ export const dynamic = 'force-dynamic'
 import { NextRequest, NextResponse } from 'next/server'
 import { stripe } from '@/lib/stripe/stripe'
 import { prisma } from '@/lib/db/prisma'
-import { ClioService } from '@/lib/clio/ClioService'
+import { enqueueClioSync, drainClioOutbox } from '@/lib/clio/outbox'
+import { isClioConnected } from '@/lib/clio/connection'
 import { auditEvent } from '@/lib/audit'
 import type Stripe from 'stripe'
 
@@ -46,31 +47,11 @@ export async function POST(req: NextRequest) {
         meta: { stripeSessionId: session.id },
       })
 
-      // Automated Action: Create contact in Clio
-      try {
-        let contactId = lead.clioContactId
-        if (!contactId) {
-          const existing = await ClioService.getContactByEmail(lead.email)
-          if (existing) {
-            contactId = existing.id
-          } else {
-            const clioContact = await ClioService.createContact({
-              firstName: lead.firstName,
-              lastName: lead.lastName,
-              email: lead.email,
-              phone: lead.phone,
-            })
-            contactId = clioContact.id
-          }
-        }
-
-        await prisma.lead.update({
-          where: { id: leadId },
-          data: { clioContactId: contactId },
-        })
-        console.log(`[STRIPE WEBHOOK] Linked Clio contact ${contactId} for lead ${leadId}`)
-      } catch (clioError) {
-        console.error(`[STRIPE WEBHOOK] Failed to link Clio contact for lead ${leadId}:`, clioError)
+      // Disconnect-safe Clio sync: persist the intent, then drain if connected.
+      // When Clio is offline the job stays PENDING and the webhook still succeeds.
+      await enqueueClioSync('UPSERT_CONTACT', leadId)
+      if (await isClioConnected()) {
+        await drainClioOutbox().catch((e) => console.error('[STRIPE WEBHOOK] drain error', e))
       }
 
       await prisma.sequence.updateMany({

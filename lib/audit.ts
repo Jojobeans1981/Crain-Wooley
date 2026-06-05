@@ -26,6 +26,7 @@ export type AuditEventType =
   | 'ONBOARDING_FAILED'
   | 'ONBOARDING_TEMPLATE_UPDATED'
   | 'CLIO_CONNECTED'
+  | 'CLIO_DRAIN'
 
 export async function auditEvent(input: {
   type: AuditEventType

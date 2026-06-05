@@ -2,6 +2,7 @@ export const dynamic = 'force-dynamic'
 
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/db/prisma'
+import { drainClioOutbox } from '@/lib/clio/outbox'
 import { auditEvent } from '@/lib/audit'
 
 export async function GET(req: NextRequest) {
@@ -58,6 +59,13 @@ export async function GET(req: NextRequest) {
       type: 'CLIO_CONNECTED',
       meta: { expiresIn: data.expires_in },
     })
+
+    // Clio just came online — sync any backlog captured while it was disconnected.
+    try {
+      await drainClioOutbox()
+    } catch (drainErr) {
+      console.error('[CLIO CALLBACK] outbox drain after connect failed:', drainErr)
+    }
 
     return NextResponse.redirect(`${base}/dashboard?clio=connected`)
   } catch (err) {
