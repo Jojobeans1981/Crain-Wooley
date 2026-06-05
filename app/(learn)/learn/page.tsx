@@ -29,6 +29,17 @@ export default function LearnHubPage() {
         </div>
       </section>
 
+      {/* Browse by life stage — persona landing pages */}
+      <section className="pb-8" aria-labelledby="lifestage-h">
+        <p className="learn-eyebrow">Browse by life stage</p>
+        <h2 id="lifestage-h" className="learn-h2 mb-4">Find content for your situation</h2>
+        <nav aria-label="Browse by life stage" className="flex flex-wrap gap-2.5">
+          {PERSONA_LIST.map((p) => (
+            <Link key={p.path} href={`/learn/for/${p.path}`} className="cw-btn-ghost">{p.kicker}</Link>
+          ))}
+        </nav>
+      </section>
+
       {/* Persona router */}
       <section className="py-10" aria-labelledby="persona-h">
         <p className="learn-eyebrow">Start where you are</p>

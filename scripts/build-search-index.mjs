@@ -23,6 +23,32 @@ const legacy = read('lib/legacy/legacy-pages.json')
 const blogIndex = read('lib/legacy/blog-index.json')
 const blogTitle = new Map(blogIndex.map((b) => [b.path, b.title]))
 
+// ── Persona tagging ─────────────────────────────────────────────────────────
+// OVERRIDES (the curated source of truth) is read STRAIGHT from personas.ts so it
+// stays single-source — edit it there only. Heuristics are mirrored below (they
+// rarely change; keep in sync with lib/learn/personas.ts §PERSONAS[*].heuristics).
+const personasSrc = readFileSync(join(ROOT, 'lib/learn/personas.ts'), 'utf8')
+const ovMatch = personasSrc.match(/export const OVERRIDES[^=]*=\s*(\{[\s\S]*?\n\})/)
+const OVERRIDES = ovMatch ? new Function(`return ${ovMatch[1]}`)() : {}
+if (!ovMatch) console.warn('⚠ could not read OVERRIDES from personas.ts — persona tags will be auto-only')
+
+const PERSONA_HEURISTICS = {
+  'young-families': ['minor child', 'minor children', 'guardian for', 'guardianship of a minor', 'young children', 'first will', 'new parent', 'naming a guardian'],
+  retirees: ['long-term care', 'long term care', 'medicaid', 'nursing home', 'elder law', 'retirement', 'incapacit', 'aging', 'later life'],
+  'business-owners': ['business succession', 'business owner', 'closely held', 'buy-sell', 'partnership', 'company', 'succession plan'],
+  'blended-families': ['blended', 'remarriage', 'second marriage', 'stepchild', 'step-child', 'prenup', 'postnup', 'pre-postnuptial', 'prior relationship', 'prior marriage'],
+  'high-net-worth': ['estate tax', 'gift tax', 'asset protection', 'high net worth', 'high-net-worth', 'irrevocable trust', 'charitable trust', 'generation-skipping', 'wealth'],
+  'special-needs': ['special needs', 'supplemental needs', 'disability', 'disabled', 'conservatorship', 'adult guardianship', 'snt', 'government benefits'],
+}
+
+/** Personas whose heuristics appear in the record's text. */
+function suggestPersonas(rec) {
+  const text = `${rec.title} ${rec.headings} ${rec.excerpt} ${rec.keywords}`.toLowerCase()
+  return Object.entries(PERSONA_HEURISTICS)
+    .filter(([, hs]) => hs.some((h) => text.includes(h)))
+    .map(([slug]) => slug)
+}
+
 const SMALL = new Set(['of', 'and', 'the', 'for', 'to', 'a', 'in', 'on', 'or', 'with'])
 const humanize = (seg) =>
   seg.split('-').map((w, i) => (i > 0 && SMALL.has(w) ? w : w.charAt(0).toUpperCase() + w.slice(1))).join(' ')
@@ -116,8 +142,29 @@ for (const q of QUIZZES) {
   })
 }
 
+// ── Persona tagging pass (additive): final = OVERRIDES[path] ?? suggested ──
+const report = []
+const personaCounts = {}
+const sourceCounts = { override: 0, auto: 0, none: 0 }
+for (const rec of records) {
+  const override = OVERRIDES[rec.url]
+  const suggested = suggestPersonas(rec)
+  const personas = override ?? suggested
+  const personaSource = override ? 'override' : personas.length ? 'auto' : 'none'
+  rec.personas = personas
+  rec.personaSource = personaSource
+  sourceCounts[personaSource]++
+  for (const p of personas) personaCounts[p] = (personaCounts[p] || 0) + 1
+  report.push({ url: rec.url, type: rec.type, personas, personaSource })
+}
+
 mkdirSync(join(ROOT, 'public'), { recursive: true })
 writeFileSync(join(ROOT, 'public/search-index.json'), JSON.stringify(records))
+writeFileSync(
+  join(ROOT, 'lib/learn/persona-report.json'),
+  JSON.stringify({ generatedFrom: 'scripts/build-search-index.mjs', sourceCounts, personaCounts, pages: report }, null, 2) + '\n',
+)
 
 const counts = records.reduce((a, r) => ((a[r.type] = (a[r.type] || 0) + 1), a), {})
 console.log(`search index → public/search-index.json (${records.length} records)`, counts)
+console.log('persona tagging → lib/learn/persona-report.json | source:', sourceCounts, '| per-persona:', personaCounts)

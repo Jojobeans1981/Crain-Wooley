@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/site-search' },
 }
 
-export default async function SiteSearchPage({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
-  const { q } = await searchParams
-  return <SiteSearch initialQuery={q ?? ''} />
+export default async function SiteSearchPage({ searchParams }: { searchParams: Promise<{ q?: string; persona?: string }> }) {
+  const { q, persona } = await searchParams
+  return <SiteSearch initialQuery={q ?? ''} initialPersona={persona ?? ''} />
 }
