@@ -24,28 +24,20 @@ const blogIndex = read('lib/legacy/blog-index.json')
 const blogTitle = new Map(blogIndex.map((b) => [b.path, b.title]))
 
 // ── Persona tagging ─────────────────────────────────────────────────────────
-// OVERRIDES (the curated source of truth) is read STRAIGHT from personas.ts so it
-// stays single-source — edit it there only. Heuristics are mirrored below (they
-// rarely change; keep in sync with lib/learn/personas.ts §PERSONAS[*].heuristics).
-const personasSrc = readFileSync(join(ROOT, 'lib/learn/personas.ts'), 'utf8')
-const ovMatch = personasSrc.match(/export const OVERRIDES[^=]*=\s*(\{[\s\S]*?\n\})/)
-const OVERRIDES = ovMatch ? new Function(`return ${ovMatch[1]}`)() : {}
-if (!ovMatch) console.warn('⚠ could not read OVERRIDES from personas.ts — persona tags will be auto-only')
+// Single-sourced from lib/learn/persona-data.json (same file lib/learn/personas.ts
+// imports), so heuristics + OVERRIDES are defined exactly once. No .ts import, no
+// mirrored literals.
+const personaData = read('lib/learn/persona-data.json')
+const OVERRIDES = personaData.overrides
+const PERSONA_HEURISTICS = Object.fromEntries(personaData.personas.map((p) => [p.path, p.heuristics]))
 
-const PERSONA_HEURISTICS = {
-  'young-families': ['minor child', 'minor children', 'guardian for', 'guardianship of a minor', 'young children', 'first will', 'new parent', 'naming a guardian'],
-  retirees: ['long-term care', 'long term care', 'medicaid', 'nursing home', 'elder law', 'retirement', 'incapacit', 'aging', 'later life'],
-  'business-owners': ['business succession', 'business owner', 'closely held', 'buy-sell', 'partnership', 'company', 'succession plan'],
-  'blended-families': ['blended', 'remarriage', 'second marriage', 'stepchild', 'step-child', 'prenup', 'postnup', 'pre-postnuptial', 'prior relationship', 'prior marriage'],
-  'high-net-worth': ['estate tax', 'gift tax', 'asset protection', 'high net worth', 'high-net-worth', 'irrevocable trust', 'charitable trust', 'generation-skipping', 'wealth'],
-  'special-needs': ['special needs', 'supplemental needs', 'disability', 'disabled', 'conservatorship', 'adult guardianship', 'snt', 'government benefits'],
-}
-
-/** Personas whose heuristics appear in the record's text. */
+// Precision: an AUTO tag requires >= 2 DISTINCT heuristic phrases from a persona
+// to appear in the page's title + headings + excerpt (a repeated phrase counts
+// once). OVERRIDES still win definitively regardless of signal count.
 function suggestPersonas(rec) {
-  const text = `${rec.title} ${rec.headings} ${rec.excerpt} ${rec.keywords}`.toLowerCase()
+  const text = `${rec.title} ${rec.headings} ${rec.excerpt}`.toLowerCase()
   return Object.entries(PERSONA_HEURISTICS)
-    .filter(([, hs]) => hs.some((h) => text.includes(h)))
+    .filter(([, hs]) => new Set(hs.filter((h) => text.includes(h))).size >= 2)
     .map(([slug]) => slug)
 }
 
