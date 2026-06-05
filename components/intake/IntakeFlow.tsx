@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { cf } from '@/lib/cf'
 import { IntakeScaffold } from './IntakeScaffold'
@@ -85,6 +85,11 @@ export function IntakeFlow() {
   const [consented, setConsented] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState('')
+  // A11y: bumped on each failed Continue so the focus-first-error effect re-runs
+  // even when the same fields fail twice; drives the assertive error summary too.
+  const [errorNonce, setErrorNonce] = useState(0)
+  const bodyRef = useRef<HTMLDivElement>(null)
+  const headingRef = useRef<HTMLHeadingElement>(null)
 
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 767px)')
@@ -108,6 +113,32 @@ export function IntakeFlow() {
     const t = setTimeout(() => setSavedAt(new Date()), 600)
     return () => clearTimeout(t)
   }, [form, phase])
+
+  // A11y G7/R1: on step change (incl. review "Edit" jumps), move focus to the
+  // new step heading so focus isn't lost to <body> and SR reads the new section.
+  // The "Section N of M" text is announced via the polite live region below,
+  // which fires when its derived text changes.
+  useEffect(() => {
+    if (phase !== 'form') return
+    headingRef.current?.focus()
+  }, [stepIdx, phase])
+
+  // A11y G4: after a failed Continue, move focus to the first invalid control
+  // (the input itself, or the first control inside an invalid fieldset) and
+  // bring it into view. Pairs with the assertive error summary below.
+  useEffect(() => {
+    if (!errorNonce) return
+    const root = bodyRef.current
+    if (!root) return
+    const invalid = root.querySelector('[aria-invalid="true"]') as HTMLElement | null
+    if (!invalid) return
+    const focusTarget = invalid.matches('input, select, textarea, button')
+      ? invalid
+      : (invalid.querySelector('input, select, textarea, button') as HTMLElement | null)
+    const el = focusTarget || invalid
+    el.focus?.()
+    el.scrollIntoView?.({ block: 'center' })
+  }, [errorNonce])
 
   const update = (patch: UpdatePatch) => {
     if (patch.__jumpTo) {
@@ -182,6 +213,7 @@ export function IntakeFlow() {
     const errs = counselValidate(form, currentId)
     if (errs.length) {
       setErrors(errs)
+      setErrorNonce((n) => n + 1) // re-trigger focus-to-first-error + re-announce summary
       return
     }
     setErrors([])
@@ -193,6 +225,9 @@ export function IntakeFlow() {
   }
 
   const progressPct = (stepIdx / (totalSteps - 1)) * 100
+  // Derived (not state) so the polite live region re-announces purely on change.
+  const stepAnnounce =
+    phase === 'form' ? `Section ${Math.min(stepIdx + 1, totalSteps)} of ${totalSteps}: ${currentStep.title}` : ''
   const savedLabel =
     savedAt && phase === 'form'
       ? `Saved ${savedAt.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}`
@@ -254,10 +289,10 @@ export function IntakeFlow() {
             </button>
           )}
         </span>
-        <span style={{ display: 'flex', alignItems: 'center', gap: 8, fontFamily: cf.mono, fontSize: 10.5, letterSpacing: '0.16em', textTransform: 'uppercase', color: cf.textMute }}>
+        <span role="status" aria-live="polite" style={{ display: 'flex', alignItems: 'center', gap: 8, fontFamily: cf.mono, fontSize: 10.5, letterSpacing: '0.16em', textTransform: 'uppercase', color: cf.textMute }}>
           {savedLabel && (
             <>
-              <span style={{ width: 6, height: 6, borderRadius: '50%', background: cf.brass, display: 'inline-block' }} />
+              <span aria-hidden="true" style={{ width: 6, height: 6, borderRadius: '50%', background: cf.brass, display: 'inline-block' }} />
               {savedLabel}
             </>
           )}
@@ -266,7 +301,10 @@ export function IntakeFlow() {
 
       {/* Progress rail */}
       <div className="cw-intake-pad" style={{ paddingTop: 12 }}>
-        <div style={{ height: 2, background: cf.ruleSoft, position: 'relative' }}>
+        <div role="progressbar" aria-label="Intake progress"
+          aria-valuemin={1} aria-valuemax={totalSteps} aria-valuenow={Math.min(stepIdx + 1, totalSteps)}
+          aria-valuetext={`Section ${Math.min(stepIdx + 1, totalSteps)} of ${totalSteps}`}
+          style={{ height: 2, background: cf.ruleSoft, position: 'relative' }}>
           <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: `${progressPct}%`, background: cf.brass, transition: 'width .35s cubic-bezier(.4,0,.2,1)' }} />
         </div>
         <div className="cw-intake-deskonly-grid" style={{ gridTemplateColumns: `repeat(${steps.length + 1}, minmax(0, 1fr))`, gap: 12, marginTop: 10 }}>
@@ -276,6 +314,7 @@ export function IntakeFlow() {
               type="button"
               onClick={() => i <= stepIdx && setStepIdx(i)}
               disabled={i > stepIdx}
+              aria-current={i === stepIdx ? 'step' : undefined}
               style={{
                 fontFamily: cf.sans, fontSize: 11, letterSpacing: '0.02em',
                 color: i <= stepIdx ? cf.ink : cf.textMute,
@@ -293,16 +332,32 @@ export function IntakeFlow() {
       </div>
 
       {/* Body */}
-      <div className="cw-intake-pad" style={{ flex: 1, overflow: 'auto', paddingTop: 32, paddingBottom: 24 }}>
+      <div ref={bodyRef} className="cw-intake-pad" style={{ flex: 1, overflow: 'auto', paddingTop: 32, paddingBottom: 24 }}>
+        {/* Polite step-change announcement (visually hidden) */}
+        <div className="cw-sr-only" aria-live="polite" role="status">{stepAnnounce}</div>
+
         <div style={{ maxWidth: 760 }}>
           <div style={{ marginBottom: isMobile ? 22 : 28 }}>
-            <h2 className="font-display" style={{ margin: 0, color: cf.ink, fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.01em', fontSize: 'clamp(30px, 4vw, 40px)' }}>
+            <h2 ref={headingRef} tabIndex={-1} className="font-display" style={{ margin: 0, color: cf.ink, fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.01em', fontSize: 'clamp(30px, 4vw, 40px)', outline: 'none' }}>
               {currentStep.title}
             </h2>
             <p style={{ fontFamily: cf.sans, fontSize: 14.5, color: cf.textMute, margin: '8px 0 0', lineHeight: 1.5 }}>
               {currentStep.hint}
             </p>
           </div>
+
+          {/* A11y G4: assertive error summary, re-mounted on each failed Continue
+              (key=errorNonce) so it re-announces even with the same field count. */}
+          {currentId !== 'review' && errors.length > 0 && (
+            <div key={errorNonce} role="alert"
+              style={{
+                fontFamily: cf.sans, fontSize: 13.5, color: cf.danger, lineHeight: 1.5,
+                border: `1px solid ${cf.danger}`, background: 'rgba(162,58,42,0.06)',
+                padding: '10px 14px', marginBottom: 22,
+              }}>
+              Please review the {errors.length} highlighted {errors.length === 1 ? 'question' : 'questions'} below before continuing.
+            </div>
+          )}
 
           <CounselFinalStep stepId={currentId} form={form} errors={errors} update={update} isMobile={isMobile} />
 
@@ -345,7 +400,7 @@ export function IntakeFlow() {
                 </span>
               </label>
               {submitError && (
-                <div style={{ fontFamily: cf.sans, fontSize: 13, color: cf.danger, border: `1px solid ${cf.danger}`, background: 'rgba(162,58,42,0.06)', padding: '10px 14px' }}>
+                <div role="alert" style={{ fontFamily: cf.sans, fontSize: 13, color: cf.danger, border: `1px solid ${cf.danger}`, background: 'rgba(162,58,42,0.06)', padding: '10px 14px' }}>
                   {submitError}
                 </div>
               )}
@@ -360,6 +415,7 @@ export function IntakeFlow() {
         style={{ borderTop: `1px solid ${cf.rule}`, paddingTop: 18, paddingBottom: 18, display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: cf.cream, position: 'sticky', bottom: 0 }}
       >
         <button
+          type="button"
           onClick={back}
           disabled={stepIdx === 0}
           style={{ fontFamily: cf.sans, fontSize: 13, letterSpacing: '0.04em', color: stepIdx === 0 ? cf.textMute : cf.ink, background: 'transparent', border: 'none', padding: '10px 4px', cursor: stepIdx === 0 ? 'default' : 'pointer', display: 'flex', alignItems: 'center', gap: 8 }}
@@ -371,8 +427,10 @@ export function IntakeFlow() {
             <PrivacyShield color={cf.brass} size={12} /> Confidential
           </span>
           <button
+            type="button"
             onClick={next}
             disabled={submitting || (currentId === 'review' && !consented)}
+            aria-busy={submitting || undefined}
             style={{
               fontFamily: cf.sans, fontSize: 13, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase',
               color: cf.cream, background: cf.ink, border: `1px solid ${cf.ink}`, padding: '14px 28px',
@@ -382,7 +440,7 @@ export function IntakeFlow() {
             }}
           >
             {currentId === 'review' ? (submitting ? 'Submitting…' : 'Submit intake') : 'Continue'}
-            <span style={{ fontFamily: cf.serif, fontSize: 18, color: cf.brass }}>→</span>
+            <span aria-hidden="true" style={{ fontFamily: cf.serif, fontSize: 18, color: cf.brass }}>→</span>
           </button>
         </div>
       </div>

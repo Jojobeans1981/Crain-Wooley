@@ -223,6 +223,7 @@ export default function IntakeLanding() {
         </div>
       </nav>
 
+      <main>
       {/* ── HERO ── */}
       <section
         className="cw-hero-anim"
@@ -876,6 +877,7 @@ export default function IntakeLanding() {
           </div>
         </div>
       </section>
+      </main>
 
       {/* ── FOOTER ── */}
       <footer style={{ background: NAVY, color: '#fff' }}>
