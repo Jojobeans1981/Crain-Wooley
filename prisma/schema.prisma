@@ -116,6 +116,8 @@ model Lead {
 
   clioContactId   String?
   clioMatterId    String?
+  clioSyncedAt    DateTime?
+  clioJobs        ClioSyncJob[]
 
   optedOut        Boolean   @default(false)
   optedOutAt      DateTime?
@@ -262,6 +264,38 @@ model ClioToken {
   expiresAt    DateTime
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+}
+
+/// Disconnect-safe Clio sync outbox. Work is persisted here when Clio may be
+/// offline and drained idempotently when it is connected. idempotencyKey is
+/// `${leadId}:${type}` so the same lead+type is never double-queued.
+model ClioSyncJob {
+  id             String         @id @default(cuid())
+  type           ClioSyncType
+  leadId         String
+  lead           Lead           @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  idempotencyKey String         @unique
+  status         ClioSyncStatus @default(PENDING)
+  attempts       Int            @default(0)
+  lastError      String?
+  nextAttemptAt  DateTime?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  @@index([status, nextAttemptAt])
+  @@index([leadId])
+}
+
+enum ClioSyncType {
+  UPSERT_CONTACT
+  ONBOARD_MATTER
+}
+
+enum ClioSyncStatus {
+  PENDING
+  IN_PROGRESS
+  DONE
+  FAILED
 }
 
 enum AdminRole {
