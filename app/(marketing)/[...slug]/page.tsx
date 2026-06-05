@@ -1,11 +1,40 @@
 import type { Metadata } from 'next'
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import { getLegacyPage, allLegacyPaths } from '@/lib/legacy'
 import LegacyArticle from '@/components/legacy/LegacyArticle'
 
 type Params = { slug: string[] }
 
 const toPath = (slug: string[]) => '/' + slug.join('/')
+
+/**
+ * Self-healing bridge for high-value legacy URLs not yet captured by the crawl.
+ * These pages WILL become real 200s once they're in legacy-pages.json — at which
+ * point getLegacyPage() returns them and this map is never consulted for them.
+ * Until then, a TEMPORARY (307) redirect to the live /learn equivalent beats a
+ * 404 (and is safe because the staging site is noindex). Remove entries here only
+ * if you decide a path should permanently consolidate rather than be recreated.
+ */
+const FALLBACK_REDIRECTS: Record<string, string> = {
+  '/estate-planning': '/learn',
+  '/estate-planning/trusts': '/learn/trusts',
+  '/estate-planning/trusts/trust-administration': '/learn/trusts',
+  '/estate-planning/trusts/trust-litigation': '/learn/trusts',
+  '/estate-planning/revocable-living-trusts': '/learn/trusts',
+  '/estate-planning/irrevocable-trusts': '/learn/trusts',
+  '/estate-planning/charitable-trusts': '/learn/trusts',
+  '/estate-planning/supplemental-needs-trust': '/learn/special-needs',
+  '/estate-planning/conservatorship': '/learn/special-needs',
+  '/estate-planning/inheritance-law': '/learn/family-situations',
+  '/estate-planning/wills': '/learn/wills',
+  '/estate-planning/wills/living-wills': '/learn/powers-of-attorney',
+  '/probate': '/learn/probate',
+  '/probate/probate-administration': '/learn/probate',
+  '/probate/probate-litigation': '/learn/probate',
+  '/probate/probate-for-out-of-state-executors': '/learn/probate',
+  '/business-law': '/learn/business-succession',
+  '/business-law/business-succession-planning': '/learn/business-succession',
+}
 
 export function generateStaticParams() {
   return allLegacyPaths().map((p) => ({ slug: p.replace(/^\//, '').split('/') }))
@@ -26,6 +55,11 @@ export default async function LegacyCatchAll({ params }: { params: Promise<Param
   const { slug } = await params
   const path = toPath(slug)
   const page = getLegacyPage(path)
-  if (!page) notFound()
-  return <LegacyArticle page={page} />
+  if (page) return <LegacyArticle page={page} />
+
+  // Not captured yet — bridge high-value paths to their live guide (temporary).
+  const fallback = FALLBACK_REDIRECTS[path]
+  if (fallback) redirect(fallback)
+
+  notFound()
 }
