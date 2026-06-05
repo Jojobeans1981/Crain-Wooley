@@ -1,8 +1,19 @@
 /**
  * Crain & Wooley — the six personas that are the spine of the Learning Center.
- * Defined once here and imported everywhere (hub router, pillar tagging, future
- * /learn/for/[persona] paths). Keep these slugs stable; other modules key off them.
+ * Defined once and imported everywhere (hub router, pillar tagging,
+ * /learn/for/[persona] paths, persona search filter). Keep these slugs stable;
+ * other modules key off them.
+ *
+ * The data (labels, blurbs, heuristics, OVERRIDES) lives in ./persona-data.json
+ * so it is the SINGLE source of truth shared with scripts/build-search-index.mjs
+ * (a plain-Node build script that can't import this .ts). This file keeps the
+ * public exports/types stable for the UI.
+ *
+ * URL slug for personas is the kebab `path` (e.g. /learn/for/young-families).
+ * `heuristics` are lowercase substrings used by the index build to AUTO-suggest a
+ * persona; the human-owned source of truth is OVERRIDES.
  */
+import data from './persona-data.json'
 
 export const PERSONA_SLUGS = [
   'young_families',
@@ -24,57 +35,29 @@ export interface Persona {
   blurb: string
   /** the pillar slug this persona should start with */
   startPillar: string
+  /** lowercase substrings that auto-suggest this persona (build-time tagging) */
+  heuristics: string[]
 }
 
-export const PERSONAS: Record<PersonaSlug, Persona> = {
-  young_families: {
-    slug: 'young_families',
-    path: 'young-families',
-    kicker: 'Young families',
-    title: 'Protect young children',
-    blurb: 'Guardianship, a first will, and the documents that matter when kids are involved.',
-    startPillar: 'wills',
-  },
-  retirees: {
-    slug: 'retirees',
-    path: 'retirees',
-    kicker: 'Retirees',
-    title: 'Plan for later life',
-    blurb: 'Avoid probate, plan for long-term care, and keep control if your health changes.',
-    startPillar: 'medicaid-long-term-care',
-  },
-  business_owners: {
-    slug: 'business_owners',
-    path: 'business-owners',
-    kicker: 'Business owners',
-    title: 'Keep the business going',
-    blurb: 'Succession, continuity, and shielding what you have built.',
-    startPillar: 'business-succession',
-  },
-  blended_families: {
-    slug: 'blended_families',
-    path: 'blended-families',
-    kicker: 'Blended families',
-    title: 'Balance everyone fairly',
-    blurb: 'Provide for a spouse and children from a prior relationship without conflict.',
-    startPillar: 'family-situations',
-  },
-  high_net_worth: {
-    slug: 'high_net_worth',
-    path: 'high-net-worth',
-    kicker: 'Higher net worth',
-    title: 'Reduce tax, protect assets',
-    blurb: 'Trusts, tax strategy, and charitable giving for larger estates.',
-    startPillar: 'tax-estate-planning',
-  },
-  special_needs: {
-    slug: 'special_needs',
-    path: 'special-needs',
-    kicker: 'Special needs',
-    title: 'Provide for a loved one',
-    blurb: 'Special needs trusts and guardianship that protect benefits.',
-    startPillar: 'special-needs',
-  },
-}
+export const PERSONA_LIST: Persona[] = data.personas as Persona[]
 
-export const PERSONA_LIST: Persona[] = PERSONA_SLUGS.map((s) => PERSONAS[s])
+export const PERSONAS: Record<PersonaSlug, Persona> = Object.fromEntries(
+  PERSONA_LIST.map((p) => [p.slug, p]),
+) as Record<PersonaSlug, Persona>
+
+/** The six kebab URL slugs (for /learn/for/[persona] static params + filters). */
+export const PERSONA_PATHS: string[] = PERSONA_LIST.map((p) => p.path)
+
+/** Look up a persona by its kebab URL slug. */
+export const PERSONA_BY_PATH: Record<string, Persona> = Object.fromEntries(
+  PERSONA_LIST.map((p) => [p.path, p]),
+)
+
+/**
+ * OVERRIDES — the human-owned source of truth for persona tagging, keyed by page
+ * path → persona kebab slugs. A path present here wins over auto-suggested
+ * heuristics, definitively, regardless of signal count. Promote 'auto' tags here
+ * after reviewing lib/learn/persona-report.json. Edit the data in
+ * ./persona-data.json (single source for both this file and the index build).
+ */
+export const OVERRIDES: Record<string, string[]> = data.overrides

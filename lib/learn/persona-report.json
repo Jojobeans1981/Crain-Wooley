@@ -1,0 +1,2195 @@
+{
+  "generatedFrom": "scripts/build-search-index.mjs",
+  "sourceCounts": {
+    "override": 28,
+    "auto": 27,
+    "none": 289
+  },
+  "personaCounts": {
+    "high-net-worth": 15,
+    "retirees": 20,
+    "special-needs": 7,
+    "blended-families": 6,
+    "business-owners": 5,
+    "young-families": 5
+  },
+  "pages": [
+    {
+      "url": "/about-us",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/about-us/pricing",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/about-us/pricing/flat-rate-services",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/about-us/pricing/hourly-service",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/about-us/service-model",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/allen",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/allen/asset-protection",
+      "type": "page",
+      "personas": [
+        "high-net-worth"
+      ],
+      "personaSource": "auto"
+    },
+    {
+      "url": "/allen/guardianship",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/allen/medicaid-planning",
+      "type": "page",
+      "personas": [
+        "retirees"
+      ],
+      "personaSource": "auto"
+    },
+    {
+      "url": "/allen/power-of-attorney",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/allen/probate",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/allen/probate/probate-litigation",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/allen/retirement-planning",
+      "type": "page",
+      "personas": [
+        "retirees"
+      ],
+      "personaSource": "auto"
+    },
+    {
+      "url": "/allen/special-needs-planning",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/allen/special-needs-planning/pooled-special-needs-trusts",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/allen/trusts",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/allen/trusts/minor-trusts",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/allen/trusts/trust-administration",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/allen/trusts/trust-litigation",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/allen/wills",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/arlington",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/arlington/probate",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/arlington/probate/probate-litigation",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2017/december/what-do-digital-assets-have-to-do-with-estate-pl",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2017/october/what-are-529-accounts-and-are-they-really-as-goo",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2017/september/what-if-my-spouse-i-die-together-who-will-care-f",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2018/april/revocable-living-trusts-and-my-taxes-part-1",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2018/august/changes-in-tx-power-of-attorney-laws-what-does-i",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2018/august/do-i-have-to-hire-an-attorney-when-my-loved-one-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2018/august/planning-for-the-long-goodbye",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2018/december/deed-scam-alert",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2018/february/how-will-tax-reform-impact-seniors-and-persons-w",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2018/july/good-estate-planning-terms-to-know",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2018/july/guardian-of-your-galaxy",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2018/july/medicaid-s-maze",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2018/july/what-is-a-pour-over-will-and-do-i-need-one-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2018/july/what-steps-do-i-take-to-hire-the-right-attorney-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2018/november/revocable-living-trusts-rlt-and-my-taxes-part-2",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2018/october/how-do-you-know-if-a-deceased-family-member-had-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2018/october/where-do-my-ideas-go-when-i-die-transferring-int",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2018/september/estate-planning-for-you-your-partner-and-the-fam",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2019/april/client-confidentiality-security-of-your-legal-do",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2019/august/how-do-i-plan-a-celebration-of-life",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2019/august/how-do-i-talk-with-my-loved-ones-about-writing-a",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2019/august/who-should-be-involved-in-crafting-my-estate-pla",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2019/december/2019-estate-code-legislative-updates",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2019/december/2019-year-in-review",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2019/december/community-property-it-s-not-what-you-think",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2019/february/aren-t-rights-of-survivorship-enough-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2019/february/i-didn-t-know-there-was-a-40-tax-for-gifting-to-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2019/february/texas-driver-s-licenses-and-medical-directives",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2019/july/aren-t-online-wills-as-good-as-anything-you-atto",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2019/july/what-s-the-hold-up-the-probate-process-meets-fam",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2019/november/i-m-getting-a-divorce-do-i-need-a-new-estate-pla",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2019/november/will-a-revocable-trust-change-my-tax-status-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2019/october/how-can-i-ensure-my-charity-bequest-is-used-corr",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2019/september/i-m-a-trustee-now-what-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2019/september/i-move-around-a-lot-what-type-of-estate-plan-is-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2020/april/business-continuity-planning-part-i-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2020/april/business-continuity-planning-part-ii-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2020/april/business-continuity-planning-part-iii",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2020/april/wills-vs-trusts-how-to-keep-important-matters-pr",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2020/august/my-dad-remarried-am-i-entitled-to-his-estate-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2020/august/reed-v-reed-women-s-equality-in-estate-administr",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2020/december/3-ways-to-make-sure-they-do-the-right-thing",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2020/december/able-accounts-vs-special-needs-trusts",
+      "type": "blog",
+      "personas": [
+        "special-needs"
+      ],
+      "personaSource": "auto"
+    },
+    {
+      "url": "/blogs/2020/february/i-will-do-it-later-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2020/february/what-does-the-secure-act-really-mean-to-me-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2020/february/what-if-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2020/january/legal-reality-v-movie-fiction",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2020/january/the-end-of-the-stretch-ira-and-more",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2020/january/when-life-tells-you-to-create-an-estate-plan",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2020/july/dnr-vs-directive-to-physicians",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2020/july/trusts-and-taxes-trusts-and-taxes-go-together-li",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2020/june/emoji-wills",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2020/june/your-college-student-adulting",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2020/march/annual-gift-tax-update",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2020/march/crain-wooley-open-to-serve-you-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2020/march/prepared-not-panicked-covid-19-and-mpoa",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2020/march/where-there-s-a-will-there-are-many-ways",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2020/may/only-old-people-need-disability-planning-right-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2020/may/the-increase-in-cognitive-degeneration-diseases",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2020/may/the-role-of-power-of-attorney-documents",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2020/november/disability-documents-in-a-pandemic",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2020/november/why-would-i-revoke-my-will-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2020/october/help-i-have-assets-in-the-u-s-and-outside-of-the",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2020/october/planning-for-a-non-u-s-citizen-spouse",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2020/october/what-is-a-holographic-will-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2020/september/estate-planning-for-single-parents",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2020/september/how-do-i-update-my-trust-when-i-move-to-a-new-st",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2020/september/the-devil-is-in-the-details-transfer-on-death-de",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2020/september/tips-and-tricks-for-refinancing-your-home-titled",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2020/september/work-together-cpas-financial-planners-and-estate",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2021/april/busting-5-myths-about-estate-planning-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2021/april/top-3-mistakes-in-diy-estate-planning",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2021/august/2021-probate-update-this-ain-t-your-momma-s-prob",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2021/august/4-simple-steps-to-estate-planning",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2021/august/does-medicaid-cover-nursing-home-expenses-",
+      "type": "blog",
+      "personas": [
+        "retirees"
+      ],
+      "personaSource": "auto"
+    },
+    {
+      "url": "/blogs/2021/august/estate-planning-and-reverse-mortgages",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2021/august/planning-for-digital-assets-yes-we-all-have-them",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2021/august/what-is-the-step-up-basis-and-why-should-i-care-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2021/december/community-property-laws-how-it-affects-estate-pl",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2021/february/fair-vs-equal",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2021/february/protecting-generational-wealth",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2021/february/the-pros-and-cons-of-inheritance-guidelines",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2021/january/do-you-actually-own-your-house-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2021/january/no-such-thing-as-automatic-spousal-inheritance",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2021/january/what-is-an-s-corporation-and-why-use-one-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2021/july/duties-and-responsibilities-of-a-medical-power-o",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2021/june/top-10-reasons-to-make-plan-updates",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2021/march/-1-bequests-are-a-terrible-idea",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2021/march/be-better-than-larry",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2021/march/can-my-successor-trustee-change-my-trust-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2021/march/have-you-told-your-spouse-everything-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2021/may/are-you-sure-you-re-allowed-to-sell-your-house-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2021/may/duties-and-responsibilities-of-a-financial-power",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2021/may/treat-your-living-trust-like-a-business",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2021/november/a-guide-to-different-types-of-trusts",
+      "type": "blog",
+      "personas": [
+        "high-net-worth"
+      ],
+      "personaSource": "auto"
+    },
+    {
+      "url": "/blogs/2021/november/charitable-giving-lessening-current-and-potentia",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2021/november/who-is-responsible-for-managing-the-probate-proc",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2021/september/3-tips-for-planning-with-generational-land",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2021/september/do-i-need-probate-if-i-have-a-will-in-texas-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2021/september/small-business-owner-to-small-business-owner-pla",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2022/april/estate-planning-tips-for-blended-families",
+      "type": "blog",
+      "personas": [
+        "blended-families"
+      ],
+      "personaSource": "auto"
+    },
+    {
+      "url": "/blogs/2022/april/helping-your-executor-estate-planning-tips-to-ma",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2022/april/secure-act-2-0",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2022/august/common-mistakes-made-with-revocable-living-trust",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2022/august/real-property-fraud-alerts",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2022/december/the-responsibility-of-tomorrow-the-importance-of",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2022/february/estate-planning-for-married-couples-5-key-topics",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2022/february/keeping-estate-planning-documents-safe",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2022/february/planning-for-emotions",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2022/february/should-i-create-my-estate-plan-without-a-lawyer-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2022/february/working-with-your-probate-attorney",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2022/january/the-good-the-bad-and-the-ugly-about-safe-deposit",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2022/july/do-i-need-an-estate-plan-if-i-m-not-wealthy-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2022/july/plan-properly-for-disposal-of-your-remains",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2022/july/your-estate-plan-security-v-convenience",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2022/june/dont-assume-when-it-comes-to-your-estate",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2022/june/estate-planning-checklist-getting-affairs-in-ord",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2022/march/4-tips-to-reduce-or-avoid-estate-taxes",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2022/may/trusts-and-homestead-exemptions",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2022/november/do-probate-records-become-public-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2022/october/undue-influence-what-you-need-to-know",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2022/september/how-do-your-investments-transfer-after-you-pass-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2023/january/5-costly-estate-planning-mistakes-to-avoid",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2023/january/estate-planning-what-to-do-when-you-or-your-love",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2023/july/types-of-wills-in-texas-which-is-best-for-you-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2023/july/what-happens-to-an-irrevocable-trust-when-the-gr",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2023/july/what-to-consider-when-bequeathing-assets-to-mino",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2023/june/no-shortcuts",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2023/march/leveraging-life-insurance-for-estate-planning-pu",
+      "type": "blog",
+      "personas": [
+        "retirees"
+      ],
+      "personaSource": "auto"
+    },
+    {
+      "url": "/blogs/2023/march/paying-for-elder-care-private-financing-vs-medic",
+      "type": "blog",
+      "personas": [
+        "retirees"
+      ],
+      "personaSource": "auto"
+    },
+    {
+      "url": "/blogs/2023/may/when-is-a-good-time-to-update-your-beneficiaries",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2023/november/estate-planning-for-blended-families-navigating-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2023/november/preventing-the-need-for-guardianship-planning-ah",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2023/october/what-is-the-difference-between-an-irrevocable-re",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2023/september/investing-now-in-estate-planning-saves-time-and-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2023/september/maximizing-your-legacy-strategies-for-estate-pla",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2024/august/crain-wooley-celebrates-new-plano-location",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2024/august/do-i-have-to-probate-my-deceased-spouse-s-will-i",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2024/august/how-long-do-i-have-to-probate-a-will-in-texas-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2024/august/protecting-estate-assets-in-hot-weather-a-probat",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2024/december/understanding-probate-a-guide-for-families-durin",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2024/february/essential-questions-to-ask-when-writing-a-last-w",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2024/january/does-everyone-qualify-for-medicaid-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2024/july/estate-sales-and-summertime-clear-outs-maximizin",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2024/july/how-are-debts-handled-during-the-texas-probate-p",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2024/july/tax-implications-in-probate",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2024/july/what-are-the-costs-associated-with-probate-in-te",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2024/may/can-probate-be-avoided-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2024/may/why-is-disability-planning-essential-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2024/november/navigating-the-2026-estate-and-gift-tax-sunset",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2024/november/the-impact-of-winter-weather-on-estate-property-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2024/october/winter-checklist-preparing-your-estate-for-proba",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2024/september/does-texas-require-a-lawyer-to-probate-a-will-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2024/september/how-long-after-probate-can-funds-be-distributed-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2024/september/how-long-does-it-take-to-probate-a-will-in-dalla",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2024/september/probate-vs-non-probate-assets-what-s-the-differe",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2025/april/the-role-of-an-executor-in-probate",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2025/august/how-to-protect-your-vacation-home-through-estate",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2025/august/the-impact-of-texas-medicaid-rules-on-long-term-",
+      "type": "blog",
+      "personas": [
+        "retirees"
+      ],
+      "personaSource": "auto"
+    },
+    {
+      "url": "/blogs/2025/december/understanding-beneficiary-designations-and-why-t",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2025/february/charitable-trusts-leaving-a-legacy-that-matters",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2025/february/the-hidden-costs-of-not-having-a-will-or-trust",
+      "type": "blog",
+      "personas": [
+        "high-net-worth"
+      ],
+      "personaSource": "auto"
+    },
+    {
+      "url": "/blogs/2025/february/understanding-texas-trusts-a-guide-to-revocable-",
+      "type": "blog",
+      "personas": [
+        "high-net-worth"
+      ],
+      "personaSource": "auto"
+    },
+    {
+      "url": "/blogs/2025/january/starting-the-new-year-right-essential-estate-pla",
+      "type": "blog",
+      "personas": [
+        "business-owners"
+      ],
+      "personaSource": "auto"
+    },
+    {
+      "url": "/blogs/2025/july/how-property-taxes-in-texas-impact-your-estate-p",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2025/july/how-texas-inheritance-laws-affect-blended-famili",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2025/june/the-role-of-trusts-in-avoiding-probate",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2025/march/spring-cleaning-your-estate-plan-why-its-time-fo",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2025/march/the-role-of-a-living-will-in-your-estate-plan",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2025/may/how-digital-assets-affect-probate-processes",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2025/november/avoiding-common-estate-planning-mistakes-that-co",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2025/november/estate-planning-for-parents-with-young-children-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2025/november/estate-planning-in-fort-worth-why-local-knowledg",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2025/november/how-to-minimize-taxes-through-strategic-estate-p",
+      "type": "blog",
+      "personas": [
+        "high-net-worth"
+      ],
+      "personaSource": "auto"
+    },
+    {
+      "url": "/blogs/2025/october/preparing-your-estate-plan-for-the-end-of-the-ye",
+      "type": "blog",
+      "personas": [
+        "business-owners"
+      ],
+      "personaSource": "auto"
+    },
+    {
+      "url": "/blogs/2025/october/what-is-probate-and-when-is-it-required-everythi",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2025/september/how-to-protect-your-assets-from-probate-in-texas",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2025/september/understanding-probate-costs-and-how-to-minimize-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2026/april/medicaid-crisis-planning-vs-long-term-care-plann",
+      "type": "blog",
+      "personas": [
+        "retirees"
+      ],
+      "personaSource": "auto"
+    },
+    {
+      "url": "/blogs/2026/april/why-failing-to-plan-for-digital-assets-could-lea",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2026/february/medicaid-planning-for-seniors-what-you-need-to-k",
+      "type": "blog",
+      "personas": [
+        "retirees"
+      ],
+      "personaSource": "auto"
+    },
+    {
+      "url": "/blogs/2026/february/the-role-of-a-power-of-attorney-ensuring-your-wi",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2026/january/estate-planning-for-blended-families-tips-for-ge",
+      "type": "blog",
+      "personas": [
+        "blended-families"
+      ],
+      "personaSource": "auto"
+    },
+    {
+      "url": "/blogs/2026/january/reviewing-your-retirement-accounts-in-your-estat",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2026/march/how-to-plan-for-long-term-care-without-draining-",
+      "type": "blog",
+      "personas": [
+        "retirees"
+      ],
+      "personaSource": "auto"
+    },
+    {
+      "url": "/blogs/2026/march/when-to-review-trusts-and-other-estate-planning-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2026/may/got-a-side-hustle-or-freelance-gig-protect-your-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2026/may/how-to-choose-the-right-person-for-your-power-of",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2026/may/the-role-of-an-executor-in-probate-and-how-to-ch",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/business-law",
+      "type": "page",
+      "personas": [
+        "business-owners"
+      ],
+      "personaSource": "override"
+    },
+    {
+      "url": "/business-law/business-succession-planning",
+      "type": "page",
+      "personas": [
+        "business-owners"
+      ],
+      "personaSource": "override"
+    },
+    {
+      "url": "/contact-us",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/estate-planning",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/estate-planning/adult-guardianship",
+      "type": "page",
+      "personas": [
+        "special-needs",
+        "young-families"
+      ],
+      "personaSource": "override"
+    },
+    {
+      "url": "/estate-planning/adult-medicaid",
+      "type": "page",
+      "personas": [
+        "retirees"
+      ],
+      "personaSource": "override"
+    },
+    {
+      "url": "/estate-planning/asset-protection",
+      "type": "page",
+      "personas": [
+        "high-net-worth"
+      ],
+      "personaSource": "override"
+    },
+    {
+      "url": "/estate-planning/charitable-trusts",
+      "type": "page",
+      "personas": [
+        "high-net-worth"
+      ],
+      "personaSource": "override"
+    },
+    {
+      "url": "/estate-planning/conservatorship",
+      "type": "page",
+      "personas": [
+        "special-needs"
+      ],
+      "personaSource": "override"
+    },
+    {
+      "url": "/estate-planning/disability-planning",
+      "type": "page",
+      "personas": [
+        "special-needs"
+      ],
+      "personaSource": "override"
+    },
+    {
+      "url": "/estate-planning/existing-plan-review-update",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/estate-planning/inheritance-law",
+      "type": "page",
+      "personas": [
+        "blended-families"
+      ],
+      "personaSource": "override"
+    },
+    {
+      "url": "/estate-planning/irrevocable-trusts",
+      "type": "page",
+      "personas": [
+        "high-net-worth"
+      ],
+      "personaSource": "override"
+    },
+    {
+      "url": "/estate-planning/long-term-care-planning",
+      "type": "page",
+      "personas": [
+        "retirees"
+      ],
+      "personaSource": "override"
+    },
+    {
+      "url": "/estate-planning/power-of-attorney",
+      "type": "page",
+      "personas": [
+        "retirees"
+      ],
+      "personaSource": "override"
+    },
+    {
+      "url": "/estate-planning/power-of-attorney/financial-power-of-attorney",
+      "type": "page",
+      "personas": [
+        "retirees"
+      ],
+      "personaSource": "override"
+    },
+    {
+      "url": "/estate-planning/power-of-attorney/medical-power-of-attorney",
+      "type": "page",
+      "personas": [
+        "retirees"
+      ],
+      "personaSource": "override"
+    },
+    {
+      "url": "/estate-planning/pre-postnuptial-agreements",
+      "type": "page",
+      "personas": [
+        "blended-families"
+      ],
+      "personaSource": "override"
+    },
+    {
+      "url": "/estate-planning/retirement-planning",
+      "type": "page",
+      "personas": [
+        "retirees"
+      ],
+      "personaSource": "override"
+    },
+    {
+      "url": "/estate-planning/revocable-living-trusts",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/estate-planning/supplemental-needs-trust",
+      "type": "page",
+      "personas": [
+        "special-needs"
+      ],
+      "personaSource": "override"
+    },
+    {
+      "url": "/estate-planning/tax-planning",
+      "type": "page",
+      "personas": [
+        "high-net-worth"
+      ],
+      "personaSource": "override"
+    },
+    {
+      "url": "/estate-planning/trusts",
+      "type": "page",
+      "personas": [
+        "young-families",
+        "high-net-worth"
+      ],
+      "personaSource": "auto"
+    },
+    {
+      "url": "/estate-planning/trusts/trust-administration",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/estate-planning/trusts/trust-litigation",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/estate-planning/wills",
+      "type": "page",
+      "personas": [
+        "young-families"
+      ],
+      "personaSource": "override"
+    },
+    {
+      "url": "/estate-planning/wills/living-wills",
+      "type": "page",
+      "personas": [
+        "young-families"
+      ],
+      "personaSource": "override"
+    },
+    {
+      "url": "/events",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/garland",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/garland/probate-litigation",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/mansfield-fw/probate",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/mansfield",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/mansfield/business-development",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/mansfield/estate-planning",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/mansfield/estate-planning/asset-protection",
+      "type": "page",
+      "personas": [
+        "high-net-worth"
+      ],
+      "personaSource": "auto"
+    },
+    {
+      "url": "/mansfield/estate-planning/charitable-trusts",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/mansfield/estate-planning/conservatorship",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/mansfield/estate-planning/disability-planning",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/mansfield/estate-planning/irrevocable-trusts",
+      "type": "page",
+      "personas": [
+        "high-net-worth"
+      ],
+      "personaSource": "auto"
+    },
+    {
+      "url": "/mansfield/estate-planning/living-wills",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/mansfield/estate-planning/medicaid-planning",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/mansfield/estate-planning/revocable-living-trusts",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/mansfield/estate-planning/special-needs-planning",
+      "type": "page",
+      "personas": [
+        "special-needs"
+      ],
+      "personaSource": "auto"
+    },
+    {
+      "url": "/mansfield/estate-planning/tax-planning",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/mansfield/estate-planning/trusts",
+      "type": "page",
+      "personas": [
+        "high-net-worth"
+      ],
+      "personaSource": "auto"
+    },
+    {
+      "url": "/mansfield/estate-planning/trusts/special-needs-trust",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/mansfield/estate-planning/trusts/trust-administration",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/mansfield/estate-planning/wills",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/mansfield/existing-plan-review-update",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/mansfield/long-term-care-planning",
+      "type": "page",
+      "personas": [
+        "retirees"
+      ],
+      "personaSource": "auto"
+    },
+    {
+      "url": "/mansfield/power-of-attorney",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/mansfield/pre-postnuptial-agreements",
+      "type": "page",
+      "personas": [
+        "blended-families"
+      ],
+      "personaSource": "auto"
+    },
+    {
+      "url": "/mansfield/probate",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/mansfield/probate/probate-litigation",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/mckinney",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/mckinney/guardianship",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/mckinney/power-of-attorney",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/mckinney/probate",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/mckinney/probate/probate-litigation",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/mckinney/trusts",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/mckinney/trusts/special-needs-trust",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/mckinney/trusts/trust-litigation",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/mckinney/wills",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/media-center",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/media-center/firm-videos",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/media-center/firm-videos/common-probate-surprises",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/media-center/firm-videos/communicate-with-ems-workers-via-your-license",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/media-center/firm-videos/do-wills-require-probate",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/media-center/firm-videos/do-you-really-have-a-trust-",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/media-center/firm-videos/estate-planning-webinar",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/media-center/firm-videos/justin-talks-about-mpoa",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/media-center/firm-videos/medicaid-can-take-assets-after-death",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/media-center/firm-videos/texas-estate-planning-crain-wooley",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/media-center/firm-videos/the-importance-of-business-continuity",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/media-center/firm-videos/the-truth-about-beneficiary-designations-payable",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/media-center/firm-videos/what-is-a-durable-power-of-attorney-",
+      "type": "blog",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/media-center/firm-videos/why-do-you-need-power-of-attorney-documents-",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/media-center/firm-videos/your-homestead-exemption",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/media-center/radio-show",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/media-center/radio-show/business-probate",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/media-center/radio-show/dying-intestate",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/media-center/radio-show/top-3-things-to-do-when-someone-passes-away",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/plano-contact-us",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/plano",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/plano/guardianship",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/plano/long-term-care-planning",
+      "type": "page",
+      "personas": [
+        "retirees"
+      ],
+      "personaSource": "auto"
+    },
+    {
+      "url": "/plano/plano-trusts",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/plano/plano-trusts/special-needs-trust",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/plano/plano-trusts/trust-administration",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/plano/plano-trusts/trust-litigation",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/plano/power-of-attorney",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/plano/probate",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/plano/wills",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/probate",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/probate/probate-administration",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/probate/probate-for-out-of-state-executors",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/probate/probate-litigation",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/resources",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/resources/free-estate-planning-guide",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/resources/leaving-a-legacy-texas-estate-planning",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/resources/probate-quiz-survey",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/resources/white-papers",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/resources/white-papers/don-t-want-to-leave-your-assets-a-mess-for-your-",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/reviews",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/services",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/staff-profiles",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/staff-profiles/brynn-siciliano",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/staff-profiles/connor-martin",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/staff-profiles/jacob-wooley",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/staff-profiles/jeremy-crew",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/staff-profiles/joy-crosby",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/staff-profiles/justin-t-crain",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/staff-profiles/kevin-berber",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/staff-profiles/marcel-williams",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/staff-profiles/mary-hughes",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/staff-profiles/matthew-white",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/wylie",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/wylie/trusts",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/wylie/wills",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/learn",
+      "type": "learn",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/learn/trusts",
+      "type": "learn",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/learn/probate",
+      "type": "learn",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/learn/wills",
+      "type": "learn",
+      "personas": [
+        "young-families"
+      ],
+      "personaSource": "override"
+    },
+    {
+      "url": "/learn/powers-of-attorney",
+      "type": "learn",
+      "personas": [
+        "retirees"
+      ],
+      "personaSource": "override"
+    },
+    {
+      "url": "/learn/medicaid-long-term-care",
+      "type": "learn",
+      "personas": [
+        "retirees"
+      ],
+      "personaSource": "override"
+    },
+    {
+      "url": "/learn/special-needs",
+      "type": "learn",
+      "personas": [
+        "special-needs"
+      ],
+      "personaSource": "override"
+    },
+    {
+      "url": "/learn/business-succession",
+      "type": "learn",
+      "personas": [
+        "business-owners"
+      ],
+      "personaSource": "override"
+    },
+    {
+      "url": "/learn/family-situations",
+      "type": "learn",
+      "personas": [
+        "blended-families"
+      ],
+      "personaSource": "override"
+    },
+    {
+      "url": "/learn/tax-estate-planning",
+      "type": "learn",
+      "personas": [
+        "high-net-worth"
+      ],
+      "personaSource": "override"
+    },
+    {
+      "url": "/learn/quizzes/do-you-need-a-trust",
+      "type": "quiz",
+      "personas": [
+        "high-net-worth",
+        "retirees"
+      ],
+      "personaSource": "override"
+    },
+    {
+      "url": "/learn/quizzes/do-you-need-probate",
+      "type": "quiz",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/learn/quizzes/which-plan-do-i-need",
+      "type": "quiz",
+      "personas": [],
+      "personaSource": "none"
+    }
+  ]
+}
