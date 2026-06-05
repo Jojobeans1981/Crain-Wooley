@@ -678,3 +678,183 @@
     }
   }
 }
+
+/* ============================================================================
+   Learning Center (/learn) styles — APPEND to app/globals.css.
+   Warm-editorial system: cf tokens, square corners, borders-as-elevation,
+   brass accents, arno-pro display. No drop-shadows (matches the app).
+   ============================================================================ */
+@layer components {
+
+  /* kicker / eyebrow — brass mono, uppercase (matches .cw-formsection-kicker) */
+  .learn-eyebrow,
+  .learn-kicker,
+  .learn-num {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #9A825E;                       /* brass */
+  }
+  .learn-eyebrow { font-size: 0.72rem; margin: 0 0 0.85rem; display: block; }
+  .learn-kicker  { font-size: 0.66rem; letter-spacing: 0.12em; }
+  .learn-num     { font-family: var(--font-display); font-size: 0.95rem; letter-spacing: 0; color: #b0976b; }
+  .learn-eyebrow-light { color: #D5C0A2; }
+
+  /* fluid display headings (clamp lives in CSS, not Tailwind arbitrary values) */
+  .learn-h1 { font-family: var(--font-display); font-weight: 700; color: #2E414F; line-height: 1.1; letter-spacing: -0.01em; font-size: clamp(2.4rem, 6vw, 4rem); margin: 0 0 1rem; }
+  .learn-h2 { font-family: var(--font-display); font-weight: 700; color: #2E414F; line-height: 1.12; font-size: clamp(1.6rem, 3.4vw, 2.25rem); margin: 0 0 0.25rem; }
+  .learn-h1-article { font-family: var(--font-display); font-weight: 700; color: #2E414F; line-height: 1.1; letter-spacing: -0.01em; font-size: clamp(2rem, 5vw, 3.2rem); margin: 0 0 1.25rem; }
+
+  /* hub cards — white surface, rule border, square; hover = brass edge */
+  .learn-card {
+    display: block;
+    background: #ffffff;
+    border: 1px solid rgba(26,34,48,0.14);
+    border-radius: 0;
+    padding: 22px;
+    text-decoration: none;
+    color: #1a2230;
+    transition: border-color 150ms, background-color 150ms;
+  }
+  .learn-card:hover { border-color: #9A825E; background: #fffdf8; }
+  .learn-card-cta {
+    display: block;
+    margin-top: 14px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: #9A825E;
+    text-transform: uppercase;
+  }
+
+  /* featured quiz band — ink block, cream text (inverse) */
+  .learn-quizband {
+    background: #2E414F;
+    border-left: 3px solid #9A825E;
+    padding: 38px;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .learn-quizband-btn,
+  .learn-quizcta .learn-quizband-btn {
+    background: #faf5ea;
+    color: #2E414F;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.8125rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.875rem 1.5rem;
+    border: 1px solid #faf5ea;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color 150ms;
+  }
+  .learn-quizband-btn:hover { background: #ede5d3; }
+
+  /* ── Article ── */
+  .learn-article { max-width: 760px; padding-top: 48px; padding-bottom: 40px; }
+  .learn-breadcrumb { font-size: 13px; color: #6b6356; margin-bottom: 16px; }
+  .learn-breadcrumb a { color: #6b6356; }
+  .learn-lede { font-size: 1.3rem; line-height: 1.55; color: #2E414F; margin: 0 0 0.5rem; }
+  .learn-p { font-size: 1.075rem; line-height: 1.7; color: #2b3026; margin: 0 0 1rem; }
+  .learn-ul { margin: 0 0 1rem; padding-left: 1.2rem; }
+  .learn-ul li { font-size: 1.075rem; line-height: 1.6; color: #2b3026; margin-bottom: 0.5rem; }
+  .learn-hr { border: 0; border-top: 1px solid rgba(26,34,48,0.14); margin: 2.4rem 0; }
+
+  .learn-callout { padding: 20px 22px; margin: 1.8rem 0; }
+  .learn-callout > strong { display: block; margin-bottom: 0.25rem; }
+
+  .learn-readlist a {
+    display: block;
+    padding: 11px 0;
+    border-bottom: 1px solid rgba(26,34,48,0.14);
+    color: #2E414F;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .learn-readlist a:hover { color: #9A825E; }
+
+  .learn-quizcta { background: #2E414F; border-left: 3px solid #9A825E; padding: 30px; margin: 2.2rem 0 1.1rem; }
+  .learn-bookcta { background: #ffffff; border: 1px solid rgba(26,34,48,0.14); padding: 26px; margin: 0 0 1rem; }
+  .learn-bookcta p { color: #2b3026; font-size: 1.02rem; line-height: 1.6; }
+
+  .learn-faq summary {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #2E414F;
+    cursor: pointer;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(26,34,48,0.14);
+    list-style: none;
+  }
+  .learn-faq summary::-webkit-details-marker { display: none; }
+  .learn-faq summary::after { content: '+'; float: right; color: #9A825E; font-size: 1.4rem; line-height: 1; }
+  .learn-faq details[open] summary::after { content: '–'; }
+  .learn-faq p { padding: 4px 0 18px; border-bottom: 1px solid rgba(26,34,48,0.14); color: #2b3026; line-height: 1.6; }
+
+  .learn-disclaimer { font-size: 0.85rem; color: #6b6356; font-style: italic; margin-top: 1.9rem; }
+
+  /* reveal-on-scroll (observer in (learn)/layout.tsx toggles .in) */
+  .reveal { opacity: 0; transform: translateY(14px); transition: opacity 520ms ease, transform 520ms cubic-bezier(0.2,0.7,0.2,1); }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+  /* ── Quiz (/learn/quizzes/*) ── */
+  .learn-quiz { max-width: 640px; padding-top: 44px; padding-bottom: 56px; }
+  .learn-quiz-progress { height: 4px; background: rgba(26,34,48,0.08); margin: 8px 0 30px; }
+  .learn-quiz-progress > span { display: block; height: 100%; background: #9A825E; transition: width 250ms ease; }
+  .learn-quiz-prompt { font-family: var(--font-display); font-weight: 700; color: #2E414F; font-size: 1.9rem; line-height: 1.15; margin: 0 0 0.5rem; }
+  .learn-quiz-help { color: #6b6356; font-size: 0.98rem; line-height: 1.5; margin: 0 0 1.5rem; }
+  .learn-quiz-options { display: flex; flex-direction: column; gap: 10px; margin-top: 0.5rem; }
+  .learn-quiz-option {
+    text-align: left; cursor: pointer; background: #fff;
+    border: 1px solid rgba(26,34,48,0.14); border-radius: 0;
+    padding: 16px 18px; font-family: var(--font-sans); font-size: 1rem; color: #1a2230;
+    transition: border-color 150ms, box-shadow 150ms, background-color 150ms;
+  }
+  .learn-quiz-option:hover { border-color: #9A825E; }
+  .learn-quiz-option.is-selected { border-color: #9A825E; box-shadow: inset 0 0 0 1px #9A825E; }
+  .learn-quiz-option:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(154,130,94,0.34); }
+  .learn-quiz-back {
+    margin-top: 22px; background: none; border: none; cursor: pointer;
+    font-family: var(--font-mono); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: #9A825E; padding: 6px 2px;
+  }
+  .learn-quiz-back:hover { color: #7A6444; }
+
+  .learn-quiz-form { display: flex; flex-direction: column; gap: 18px; margin-top: 0.5rem; }
+  .learn-quiz-field { display: flex; flex-direction: column; gap: 6px; }
+  .learn-quiz-field > span { font-family: var(--font-sans); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #6b6356; font-weight: 600; }
+  .learn-quiz-optional { letter-spacing: 0.04em; text-transform: none; color: #8a8275; font-weight: 500; }
+  .learn-quiz-field input {
+    font-family: var(--font-sans); font-size: 16px; color: #1a2230; background: #fff;
+    border: 1px solid rgba(26,34,48,0.14); border-radius: 0; padding: 12px 14px; outline: none;
+    transition: border-color 150ms, box-shadow 150ms;
+  }
+  .learn-quiz-field input:focus { border-color: #9A825E; box-shadow: 0 0 0 3px rgba(154,130,94,0.13); }
+  .learn-quiz-error { color: #a23a2a; font-size: 0.9rem; margin: 0; }
+  .learn-quiz-actions { display: flex; gap: 12px; align-items: center; }
+  .learn-quiz-disclaimer { font-size: 0.82rem; color: #6b6356; font-style: italic; margin: 0.5rem 0 0; }
+  .learn-quiz-result-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 1.6rem; }
+
+  /* ── Legacy (migrated) pages ── */
+  .legacy-h2 { font-family: var(--font-display); font-weight: 700; color: #2E414F; font-size: 1.6rem; line-height: 1.18; margin: 2.2rem 0 0.6rem; }
+  .legacy-h3 { font-family: var(--font-display); font-weight: 700; color: #2E414F; font-size: 1.22rem; margin: 1.6rem 0 0.4rem; }
+  .legacy-byline { font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.04em; color: #6b6356; margin: 0 0 1.4rem; }
+}
+
+@layer components {
+  .blog-year-group { margin-bottom: 1.6rem; }
+  .blog-year-count { font-family: var(--font-mono); font-size: 0.75rem; color: #9A825E; font-weight: 600; }
+  .blog-row { display: flex; flex-direction: column; gap: 2px; padding: 12px 0; border-bottom: 1px solid rgba(26,34,48,0.14); text-decoration: none; }
+  .blog-row:hover .blog-row-title { color: #9A825E; }
+  .blog-row-date { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: #6b6356; }
+  .blog-row-title { font-family: var(--font-display); font-size: 1.1rem; color: #2E414F; line-height: 1.3; }
+}

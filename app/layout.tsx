@@ -25,10 +25,22 @@ const displayFallback = Cormorant_Garamond({
   variable: '--font-display-fallback',
 })
 
+// ── SEO / domain ──
+// Canonical production host. The app will be served at this domain after DNS
+// cutover; until then it lives on the Vercel URL and MUST stay out of search.
+// Set NEXT_PUBLIC_SITE_INDEXABLE=true only in the production (live-domain)
+// environment. While unset/false (Vercel staging), the whole site is noindex.
+const SITE_URL = 'https://www.estateplanningdfw.law'
+const SITE_INDEXABLE = process.env.NEXT_PUBLIC_SITE_INDEXABLE === 'true'
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: 'Crain & Wooley — Estate Planning Attorneys | Dallas-Fort Worth, TX',
   description:
     'Protect your assets with our qualified Dallas-Fort Worth estate planning attorneys. We build customized wills and trusts. Schedule a confidential consultation today.',
+  robots: SITE_INDEXABLE
+    ? { index: true, follow: true }
+    : { index: false, follow: false, nocache: true },
 }
 
 const jsonLd = {
@@ -37,7 +49,7 @@ const jsonLd = {
   name: 'Crain & Wooley',
   description:
     'Estate planning, wills, trusts, probate, and elder law services for clients across the Dallas-Fort Worth area.',
-  url: 'https://www.estateplanningdfw.law',
+  url: SITE_URL,
   telephone: '+1-972-945-1610',
   address: {
     '@type': 'PostalAddress',
