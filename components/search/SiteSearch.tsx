@@ -4,9 +4,13 @@ import Link from 'next/link'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { createFuse } from '@/lib/search/fuse'
 import { TYPE_FILTERS, type FilterKey, type SearchRecord } from '@/lib/search/types'
+import { PERSONA_LIST } from '@/lib/learn/personas'
 import styles from './SiteSearch.module.css'
 
 const escapeRegExp = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+
+const matchType = (m: SearchRecord, f: FilterKey) => f === 'all' || m.type === f
+const matchPersona = (m: SearchRecord, p: string) => !p || (m.personas?.includes(p) ?? false)
 
 /** Wrap query terms (>=2 chars) in <mark> for result highlighting. */
 function highlight(text: string, query: string): React.ReactNode {
@@ -17,10 +21,11 @@ function highlight(text: string, query: string): React.ReactNode {
   return text.split(splitter).map((part, i) => (test.test(part) ? <mark key={i}>{part}</mark> : part))
 }
 
-export function SiteSearch({ initialQuery }: { initialQuery: string }) {
+export function SiteSearch({ initialQuery, initialPersona }: { initialQuery: string; initialPersona: string }) {
   const [query, setQuery] = useState(initialQuery)
   const [debounced, setDebounced] = useState(initialQuery)
   const [filter, setFilter] = useState<FilterKey>('all')
+  const [persona, setPersona] = useState(initialPersona)
   const [records, setRecords] = useState<SearchRecord[] | null>(null)
   const [failed, setFailed] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -41,13 +46,15 @@ export function SiteSearch({ initialQuery }: { initialQuery: string }) {
     return () => clearTimeout(t)
   }, [query])
 
-  // Reflect the debounced query in the URL (?q=) without a navigation.
+  // Reflect the debounced query + persona in the URL (?q=&persona=) without a navigation.
   useEffect(() => {
     const url = new URL(window.location.href)
     if (debounced.trim()) url.searchParams.set('q', debounced.trim())
     else url.searchParams.delete('q')
+    if (persona) url.searchParams.set('persona', persona)
+    else url.searchParams.delete('persona')
     window.history.replaceState(null, '', url.toString())
-  }, [debounced])
+  }, [debounced, persona])
 
   const fuse = useMemo(() => (records ? createFuse(records) : null), [records])
 
@@ -57,18 +64,29 @@ export function SiteSearch({ initialQuery }: { initialQuery: string }) {
     return fuse.search(q).map((r) => r.item)
   }, [fuse, debounced])
 
-  const counts = useMemo(() => {
-    const c: Record<string, number> = { all: allMatches.length }
-    for (const m of allMatches) c[m.type] = (c[m.type] || 0) + 1
+  // Type and persona filters AND together. Each chip row's counts are scoped to
+  // the OTHER active filter so the numbers reflect what a click would yield.
+  const typeCounts = useMemo(() => {
+    const scoped = allMatches.filter((m) => matchPersona(m, persona))
+    const c: Record<string, number> = { all: scoped.length }
+    for (const m of scoped) c[m.type] = (c[m.type] || 0) + 1
     return c
-  }, [allMatches])
+  }, [allMatches, persona])
+
+  const personaCounts = useMemo(() => {
+    const scoped = allMatches.filter((m) => matchType(m, filter))
+    const c: Record<string, number> = {}
+    for (const m of scoped) for (const p of m.personas ?? []) c[p] = (c[p] || 0) + 1
+    return c
+  }, [allMatches, filter])
 
   const results = useMemo(
-    () => (filter === 'all' ? allMatches : allMatches.filter((m) => m.type === filter)),
-    [allMatches, filter],
+    () => allMatches.filter((m) => matchType(m, filter) && matchPersona(m, persona)),
+    [allMatches, filter, persona],
   )
 
   const hasQuery = debounced.trim().length >= 2
+  const personaLabel = persona ? PERSONA_LIST.find((p) => p.path === persona)?.kicker : ''
 
   return (
     <div className="cw-article-bg">
@@ -110,7 +128,7 @@ export function SiteSearch({ initialQuery }: { initialQuery: string }) {
         {hasQuery && allMatches.length > 0 && (
           <div className={styles.filters} role="group" aria-label="Filter results by type">
             {TYPE_FILTERS.map((f) => {
-              const n = counts[f.key] || 0
+              const n = typeCounts[f.key] || 0
               if (f.key !== 'all' && n === 0) return null
               return (
                 <button key={f.key} type="button"
@@ -118,6 +136,26 @@ export function SiteSearch({ initialQuery }: { initialQuery: string }) {
                   aria-pressed={filter === f.key}
                   onClick={() => setFilter(f.key)}>
                   {f.label} <span className={styles.chipN}>{n}</span>
+                </button>
+              )
+            })}
+          </div>
+        )}
+
+        {/* Persona filter — ANDs with the type filter */}
+        {hasQuery && allMatches.length > 0 && (
+          <div className={styles.filters} role="group" aria-label="Filter results by life stage">
+            <span className={styles.filterLabel}>Life stage</span>
+            {PERSONA_LIST.map((p) => {
+              const n = personaCounts[p.path] || 0
+              const active = persona === p.path
+              return (
+                <button key={p.path} type="button"
+                  className={`${styles.chip}${active ? ` ${styles.chipActive}` : ''}`}
+                  aria-pressed={active}
+                  disabled={n === 0 && !active}
+                  onClick={() => setPersona(active ? '' : p.path)}>
+                  {p.kicker} <span className={styles.chipN}>{n}</span>
                 </button>
               )
             })}
@@ -132,7 +170,7 @@ export function SiteSearch({ initialQuery }: { initialQuery: string }) {
               ? ''
               : records === null
                 ? 'Searching…'
-                : `${results.length} result${results.length === 1 ? '' : 's'}${filter === 'all' ? '' : ` in ${TYPE_FILTERS.find((f) => f.key === filter)?.label}`} for “${debounced.trim()}”`}
+                : `${results.length} result${results.length === 1 ? '' : 's'}${filter === 'all' ? '' : ` in ${TYPE_FILTERS.find((f) => f.key === filter)?.label}`}${personaLabel ? ` for ${personaLabel}` : ''} matching “${debounced.trim()}”`}
         </p>
 
         {/* Results / states */}
