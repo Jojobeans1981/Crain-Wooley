@@ -936,6 +936,15 @@
     overflow: hidden; margin: 0 0 28px; background: #ede5d3;
     border: 1px solid rgba(26,34,48,0.10);
   }
+  /* Staff bio portrait — square headshot floated beside the bio text. */
+  .legacy-bio-portrait {
+    position: relative; float: left; width: 240px; height: 240px;
+    margin: 4px 28px 16px 0; overflow: hidden; background: var(--cw-slate);
+    border: 1px solid rgba(26,34,48,0.10); shape-outside: inset(0);
+  }
+  @media (max-width: 560px) {
+    .legacy-bio-portrait { float: none; width: 200px; height: 200px; margin: 0 0 20px; }
+  }
 }
 
 /* ════════════════════════════════════════════════════════════════════════
