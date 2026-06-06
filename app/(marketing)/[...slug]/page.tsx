@@ -37,7 +37,12 @@ const FALLBACK_REDIRECTS: Record<string, string> = {
 }
 
 export function generateStaticParams() {
-  return allLegacyPaths().map((p) => ({ slug: p.replace(/^\//, '').split('/') }))
+  return allLegacyPaths()
+    // /staff-profiles is owned by the dedicated app/(marketing)/staff-profiles
+    // route (the real Meet-the-Team page with headshots); individual bio
+    // sub-pages (/staff-profiles/<name>) still resolve here.
+    .filter((p) => p !== '/staff-profiles')
+    .map((p) => ({ slug: p.replace(/^\//, '').split('/') }))
 }
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
