@@ -1157,6 +1157,9 @@
     line-height: 1.08; letter-spacing: -0.01em; color: var(--cw-slate); margin: 0 0 18px; }
   .cw-h2-light { color: #fff; }
   .cw-h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.35rem; color: var(--cw-slate); margin: 1.7rem 0 0.5rem; }
+  /* Intro page <h1> — the homepage's main heading, matching the original site
+     where "Estate Planning Attorneys in Dallas-Fort Worth" leads the content. */
+  .cw-intro-title { font-family: var(--font-display); font-weight: 700; font-size: clamp(32px, 4.6vw, 52px); line-height: 1.06; letter-spacing: -0.015em; color: var(--cw-slate); margin: 0 0 20px; }
   .cw-section-head { max-width: 760px; margin: 0 0 40px; }
   .cw-section-head-light .cw-h2 { color: #fff; }
 
@@ -1180,6 +1183,7 @@
   /* 3. Intro + video */
   .cw-intro { background: #fff; padding: 72px 0; }
   .cw-intro-grid { display: grid; grid-template-columns: 1fr; gap: 44px; align-items: start; }
+  .cw-intro-copy { max-width: 660px; }
   .cw-intro-copy p { font-family: var(--font-sans); font-size: 1rem; line-height: 1.75; color: #3c4751; margin: 0 0 18px; }
   .cw-intro-copy a { color: var(--cw-gold-text); text-underline-offset: 2px; }
   .cw-callout { border-left: 3px solid var(--cw-gold); background: var(--cw-bg); padding: 16px 20px; font-weight: 500; color: var(--cw-slate) !important; }
@@ -1195,7 +1199,10 @@
      match its aspect ratio so cover doesn't crop the names off the sides. */
   .cw-intro-video-poster { position: relative; overflow: hidden; aspect-ratio: 1280 / 666; }
   @media (min-width: 980px) {
-    .cw-intro-grid { grid-template-columns: 1.5fr 1fr; gap: 56px; }
+    /* Tight ~600px reading column + a smaller right-hand photo pinned to the
+       edge, matching the original's intro proportions instead of running the
+       body copy nearly full-width. */
+    .cw-intro-grid { grid-template-columns: minmax(0, 600px) minmax(280px, 380px); justify-content: space-between; gap: 56px; }
     .cw-intro-media { position: sticky; top: 120px; }
   }
 
