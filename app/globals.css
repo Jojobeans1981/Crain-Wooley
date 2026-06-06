@@ -1180,7 +1180,9 @@
   .cw-readmore[open] > summary { margin-bottom: 8px; }
   .cw-intro-media { position: relative; }
   .cw-intro-video { width: 100%; aspect-ratio: 16 / 10; background: var(--cw-slate); border: 1px solid rgba(48,68,81,0.18); display: block; }
-  .cw-intro-video-poster { position: relative; overflow: hidden; }
+  /* Poster is the attorney photo (Justin + Jacob) with name labels at the edges;
+     match its aspect ratio so cover doesn't crop the names off the sides. */
+  .cw-intro-video-poster { position: relative; overflow: hidden; aspect-ratio: 1280 / 666; }
   @media (min-width: 980px) {
     .cw-intro-grid { grid-template-columns: 1.5fr 1fr; gap: 56px; }
     .cw-intro-media { position: sticky; top: 120px; }
