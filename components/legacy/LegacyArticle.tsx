@@ -3,6 +3,7 @@ import Image from 'next/image'
 import type { LegacyPage } from '@/lib/legacy'
 import { getSectionNav, type SectionNav, type SectionNavItem } from '@/lib/legacy/section-nav'
 import blogImages from '@/lib/legacy/blog-images.json'
+import { teamMemberByPath } from '@/lib/legacy/team'
 import type { ReactNode } from 'react'
 
 /**
@@ -104,6 +105,8 @@ export default function LegacyArticle({ page, path }: { page: LegacyPage; path: 
   const nav = getSectionNav(path)
   // Blog posts carry a re-hosted featured image (parity with the source).
   const featured = page.type === 'blog_post' ? (blogImages as Record<string, string>)[path] : undefined
+  // Staff bio pages show the member's portrait (same headshot as the team listing).
+  const member = page.type === 'staff' ? teamMemberByPath(path) : undefined
 
   return (
     <div className="cw-article-bg">
@@ -128,6 +131,12 @@ export default function LegacyArticle({ page, path }: { page: LegacyPage; path: 
           <div className="legacy-blog-hero">
             {/* decorative — the headline conveys the topic */}
             <Image src={`/legacy/blog/${featured}`} alt="" fill sizes="(max-width: 980px) 100vw, 760px" style={{ objectFit: 'cover' }} priority />
+          </div>
+        )}
+        {member && (
+          <div className="legacy-bio-portrait">
+            {/* decorative — the name is the page <h1> in the banner above */}
+            <Image src={member.photo} alt="" fill sizes="(max-width: 640px) 100vw, 240px" style={{ objectFit: 'cover' }} priority />
           </div>
         )}
         <article className="learn-article">
