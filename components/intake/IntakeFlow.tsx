@@ -278,7 +278,7 @@ export function IntakeFlow() {
       >
         <span style={{ display: 'flex', alignItems: 'center', gap: 14, flexWrap: 'wrap', fontFamily: cf.mono, fontSize: 10.5, letterSpacing: '0.22em', textTransform: 'uppercase', color: cf.textMute }}>
           <span>Section {Math.min(stepIdx + 1, totalSteps)} of {totalSteps}</span>
-          <span style={{ color: cf.brass }}>· {form.intakeType === 'probate' ? 'Probate' : 'Wills & Trust'}</span>
+          <span style={{ color: cf.brassDark }}>· {form.intakeType === 'probate' ? 'Probate' : 'Wills & Trust'}</span>
           {stepIdx === 0 && (
             <button
               type="button"
@@ -338,9 +338,12 @@ export function IntakeFlow() {
 
         <div style={{ maxWidth: 760 }}>
           <div style={{ marginBottom: isMobile ? 22 : 28 }}>
-            <h2 ref={headingRef} tabIndex={-1} className="font-display" style={{ margin: 0, color: cf.ink, fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.01em', fontSize: 'clamp(30px, 4vw, 40px)', outline: 'none' }}>
+            {/* Carryover: the step title is the flow's primary heading on the
+                form phase — a real <h1> (always visible; the panel's editorial
+                heading is display:none on mobile) fixes page-has-heading-one. */}
+            <h1 ref={headingRef} tabIndex={-1} className="font-display" style={{ margin: 0, color: cf.ink, fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.01em', fontSize: 'clamp(30px, 4vw, 40px)', outline: 'none' }}>
               {currentStep.title}
-            </h2>
+            </h1>
             <p style={{ fontFamily: cf.sans, fontSize: 14.5, color: cf.textMute, margin: '8px 0 0', lineHeight: 1.5 }}>
               {currentStep.hint}
             </p>
@@ -381,7 +384,7 @@ export function IntakeFlow() {
                     onMouseEnter={e => { e.currentTarget.style.borderColor = cf.brass; e.currentTarget.style.background = cf.ivoryWarm }}
                     onMouseLeave={e => { e.currentTarget.style.borderColor = cf.rule; e.currentTarget.style.background = 'transparent' }}
                   >
-                    <span style={{ color: cf.brass, fontSize: 13 }}>{label === 'Print summary' ? '⎙' : '↓'}</span>
+                    <span style={{ color: cf.brassDark, fontSize: 13 }}>{label === 'Print summary' ? '⎙' : '↓'}</span>
                     {label}
                   </button>
                 ))}

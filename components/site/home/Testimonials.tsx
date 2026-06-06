@@ -13,6 +13,8 @@ export type Review = { title: string; quote: string; name: string }
 export function Testimonials({ reviews }: { reviews: Review[] }) {
   const [index, setIndex] = useState(0)
   const [paused, setPaused] = useState(false)
+  // HOME-2: explicit, always-available pause that doesn't depend on hover/focus.
+  const [userPaused, setUserPaused] = useState(false)
   const reducedRef = useRef(false)
   const count = reviews.length
 
@@ -25,10 +27,10 @@ export function Testimonials({ reviews }: { reviews: Review[] }) {
   }, [])
 
   useEffect(() => {
-    if (paused || reducedRef.current || count < 2) return
+    if (paused || userPaused || reducedRef.current || count < 2) return
     const t = setInterval(() => setIndex((i) => (i + 1) % count), 8000)
     return () => clearInterval(t)
-  }, [paused, count])
+  }, [paused, userPaused, count])
 
   return (
     <div
@@ -64,6 +66,21 @@ export function Testimonials({ reviews }: { reviews: Review[] }) {
       </div>
 
       <div className="cw-reviews-controls">
+        {count > 1 && (
+          <button
+            type="button"
+            className="cw-reviews-arrow"
+            aria-label={userPaused ? 'Play testimonial autoplay' : 'Pause testimonial autoplay'}
+            aria-pressed={userPaused}
+            onClick={() => setUserPaused((p) => !p)}
+          >
+            {userPaused ? (
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+            ) : (
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1" /><rect x="14" y="5" width="4" height="14" rx="1" /></svg>
+            )}
+          </button>
+        )}
         <button type="button" className="cw-reviews-arrow" aria-label="Previous testimonial" onClick={prev}>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
         </button>

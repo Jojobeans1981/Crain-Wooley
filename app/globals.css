@@ -127,6 +127,27 @@
     overflow: hidden; clip: rect(0, 0, 0, 0);
     white-space: nowrap; border: 0;
   }
+  /* CH-5: skip-to-content link — off-screen until focused, then pinned top-left. */
+  .cw-skip-link {
+    position: absolute;
+    left: 8px;
+    top: -56px;
+    z-index: 200;
+    background: var(--cw-slate);
+    color: var(--cw-on-slate);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 16px;
+    text-decoration: none;
+    transition: top 150ms ease;
+  }
+  .cw-skip-link:focus {
+    top: 8px;
+    outline: 2px solid var(--cw-gold-soft);
+    outline-offset: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) { .cw-skip-link { transition: none; } }
   .cw-choice:has(.cw-sr-only:focus-visible),
   .cw-seg:has(.cw-sr-only:focus-visible) {
     outline: 2px solid #7A6444;

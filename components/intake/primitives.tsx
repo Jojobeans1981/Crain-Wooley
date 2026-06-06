@@ -54,7 +54,7 @@ export function Field({
   const labelInner = (
     <>
       <span>{label}</span>
-      {required && <span style={{ color: cf.brass, fontSize: 10 }}>required</span>}
+      {required && <span style={{ color: cf.brassDark, fontSize: 10 }}>required</span>}
       {error && <span id={errId} style={{ color: cf.danger, fontSize: 10 }}>· {errorText}</span>}
     </>
   )
@@ -417,7 +417,7 @@ export function BeneficiaryRow({
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 10, padding: '16px 18px', background: cf.ivoryWarm, borderLeft: `2px solid ${cf.brass}` }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <span style={{ fontFamily: cf.mono, fontSize: 10.5, letterSpacing: '0.18em', textTransform: 'uppercase', color: cf.brass, fontWeight: 600 }}>
+        <span style={{ fontFamily: cf.mono, fontSize: 10.5, letterSpacing: '0.18em', textTransform: 'uppercase', color: cf.brassDark, fontWeight: 600 }}>
           Beneficiary {index + 1}
         </span>
         <button type="button" onClick={onRemove}

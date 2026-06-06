@@ -201,7 +201,9 @@ export function PracticeAreas() {
           {SERVICES.map((s) => (
             <li key={s.href}>
               <Link href={s.href} className="cw-service-card">
-                <Image src={s.img} alt={s.title} fill sizes="(max-width: 900px) 100vw, 380px" style={{ objectFit: 'cover' }} />
+                {/* HOME-3: decorative — the visible title below is the label, so
+                    an alt here would be redundant (axe image-redundant-alt). */}
+                <Image src={s.img} alt="" fill sizes="(max-width: 900px) 100vw, 380px" style={{ objectFit: 'cover' }} />
                 <span className="cw-service-tint" aria-hidden="true" />
                 <span className="cw-service-title">{s.title}</span>
               </Link>

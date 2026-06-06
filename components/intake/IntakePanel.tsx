@@ -113,11 +113,11 @@ export function IntakePanel() {
         className="cw-intake-deskonly"
         style={{ position: 'relative', zIndex: 2, flexDirection: 'column', gap: 24 }}
       >
-        <span style={{ fontFamily: cf.mono, fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: cf.brass }}>
+        <span style={{ fontFamily: cf.mono, fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: cf.brassLight }}>
           New Client Intake
         </span>
         <h2 style={{ fontFamily: cf.serif, fontSize: 52, margin: 0, lineHeight: 1.02, fontWeight: 400, letterSpacing: '-0.01em' }}>
-          A thoughtful plan, <em style={{ fontStyle: 'italic', color: cf.brass }}>shaped to you.</em>
+          A thoughtful plan, <em style={{ fontStyle: 'italic', color: cf.brassLight }}>shaped to you.</em>
         </h2>
         <p
           style={{

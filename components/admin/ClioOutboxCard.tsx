@@ -119,7 +119,8 @@ export function ClioOutboxCard() {
             ? 'No leads waiting to sync'
             : `${pending} lead${pending === 1 ? '' : 's'} waiting${status.oldestPendingAt ? `, oldest ${age(status.oldestPendingAt)}` : ''}`}
         </p>
-        <p className="font-mono text-xs text-cw-muted uppercase tracking-widest">
+        {/* Batch D: announce the drain outcome (success result lands here) politely. */}
+        <p className="font-mono text-xs text-cw-muted uppercase tracking-widest" aria-live="polite">
           Last drain: {rel(status.lastDrainAt)}{status.lastDrainResult ? ` — ${status.lastDrainResult}` : ''}
         </p>
         {failed > 0 && (
@@ -127,7 +128,8 @@ export function ClioOutboxCard() {
             {failed} job{failed === 1 ? '' : 's'} failed — needs attention once Clio is live
           </p>
         )}
-        {error && <p className="font-mono text-xs text-red-400 uppercase tracking-widest">{error}</p>}
+        {/* Batch D: drain failures are announced assertively, not color-only. */}
+        {error && <p className="font-mono text-xs text-red-400 uppercase tracking-widest" role="alert">{error}</p>}
       </div>
     </section>
   )
