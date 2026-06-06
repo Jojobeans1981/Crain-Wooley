@@ -146,14 +146,14 @@ export function IntroVideo() {
 
         <div className="cw-intro-media">
           {GUIDE_VIDEO ? (
-            <video className="cw-intro-video" controls preload="metadata" playsInline poster="/home/video-poster.png">
+            <video className="cw-intro-video" controls preload="metadata" playsInline poster="/home/video-poster.jpg">
               <source src={GUIDE_VIDEO} type="video/mp4" />
             </video>
           ) : (
             // Closing video (124 MB) is not committed; show poster until
             // NEXT_PUBLIC_GUIDE_VIDEO_URL is set to a hosted source.
             <div className="cw-intro-video cw-intro-video-poster">
-              <Image src="/home/video-poster.png" alt="Crain & Wooley attorneys" fill sizes="(max-width: 900px) 100vw, 480px" style={{ objectFit: 'cover' }} />
+              <Image src="/home/video-poster.jpg" alt="Crain & Wooley attorneys" fill sizes="(max-width: 900px) 100vw, 480px" style={{ objectFit: 'cover' }} />
             </div>
           )}
         </div>
@@ -245,7 +245,7 @@ export function ReviewsSection() {
           <Link href="/reviews/" className="cw-btn-gold cw-reviews-cta">View All Reviews</Link>
         </div>
         <div className="cw-reviews-photo">
-          <Image src="/home/reviews-feature.png" alt="Crain & Wooley attorneys" fill sizes="(max-width: 900px) 100vw, 460px" style={{ objectFit: 'cover' }} />
+          <Image src="/home/reviews-feature.jpg" alt="Crain & Wooley attorneys" fill sizes="(max-width: 900px) 100vw, 460px" style={{ objectFit: 'cover' }} />
         </div>
       </div>
     </section>
