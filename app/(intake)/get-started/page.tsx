@@ -7,16 +7,29 @@ import Link from 'next/link'
 const practiceAreas = [
   {
     label: 'Estate Planning',
+    href: '/estate-planning/',
     desc: 'Wills, trusts, and powers of attorney — built to protect your family, your assets, and your wishes when it matters most.',
   },
   {
     label: 'Probate',
+    href: '/probate/',
     desc: 'Independent administration, muniment of title, and full probate — guiding executors and heirs through Texas probate court.',
   },
   {
     label: 'Business Law',
+    href: '/business-law/',
     desc: 'Entity formation, operating agreements, contracts, and transactions — practical counsel for closely held businesses and professionals.',
   },
+]
+
+// Footer "Firm" column — real destinations (the legacy routes resolve).
+const firmLinks: { label: string; href: string }[] = [
+  { label: 'About Us', href: '/about-us/' },
+  { label: 'Our Team', href: '/staff-profiles/' },
+  { label: 'Pricing', href: '/about-us/pricing/' },
+  { label: 'Resources', href: '/resources/' },
+  { label: 'Blog', href: '/blogs/' },
+  { label: 'Contact Us', href: '/contact-us/' },
 ]
 
 const CREAM = '#faf5ea'
@@ -508,12 +521,12 @@ export default function IntakeLanding() {
           <p style={{ fontSize: '1.05rem', lineHeight: 1.85, color: INK_SOFT, marginBottom: '20px' }}>
             When you begin working on an estate plan with Crain &amp; Wooley, expect a detailed
             review of your assets, your family situation, and your long-term wishes. We start
-            with a confidential consultation \u2014 in person at one of our offices or virtually \u2014
+            with a confidential consultation — in person at one of our offices or virtually —
             so we can understand what matters most before we put pen to paper.
           </p>
           <p style={{ fontSize: '1.05rem', lineHeight: 1.85, color: INK_SOFT, marginBottom: '20px' }}>
-            From there, we outline the options available under Texas law \u2014 wills, trusts,
-            powers of attorney, healthcare directives \u2014 and explain how Dallas, Tarrant, and
+            From there, we outline the options available under Texas law — wills, trusts,
+            powers of attorney, healthcare directives — and explain how Dallas, Tarrant, and
             Collin County probate courts may affect your plan. You leave the meeting with a
             clear recommendation and a flat-rate quote. No hourly meter. No surprises.
           </p>
@@ -955,13 +968,15 @@ export default function IntakeLanding() {
                 Practice Areas
               </p>
               {practiceAreas.map((a) => (
-                <p
+                <Link
                   key={a.label}
+                  href={a.href}
                   style={{
+                    display: 'block',
                     fontSize: '0.9rem',
                     color: 'rgba(255,255,255,0.7)',
+                    textDecoration: 'none',
                     marginBottom: '10px',
-                    cursor: 'pointer',
                     transition: 'color 0.2s',
                   }}
                   onMouseEnter={(e) =>
@@ -972,7 +987,7 @@ export default function IntakeLanding() {
                   }
                 >
                   {a.label}
-                </p>
+                </Link>
               ))}
             </div>
 
@@ -990,28 +1005,28 @@ export default function IntakeLanding() {
               >
                 Firm
               </p>
-              {['About Us', 'Our Team', 'Pricing', 'Resources', 'Blog', 'Contact Us'].map(
-                (item) => (
-                  <p
-                    key={item}
-                    style={{
-                      fontSize: '0.9rem',
-                      color: 'rgba(255,255,255,0.7)',
-                      marginBottom: '10px',
-                      cursor: 'pointer',
-                      transition: 'color 0.2s',
-                    }}
-                    onMouseEnter={(e) =>
-                      (e.currentTarget.style.color = GOLD_LIGHT)
-                    }
-                    onMouseLeave={(e) =>
-                      (e.currentTarget.style.color = 'rgba(255,255,255,0.7)')
-                    }
-                  >
-                    {item}
-                  </p>
-                ),
-              )}
+              {firmLinks.map((item) => (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  style={{
+                    display: 'block',
+                    fontSize: '0.9rem',
+                    color: 'rgba(255,255,255,0.7)',
+                    textDecoration: 'none',
+                    marginBottom: '10px',
+                    transition: 'color 0.2s',
+                  }}
+                  onMouseEnter={(e) =>
+                    (e.currentTarget.style.color = GOLD_LIGHT)
+                  }
+                  onMouseLeave={(e) =>
+                    (e.currentTarget.style.color = 'rgba(255,255,255,0.7)')
+                  }
+                >
+                  {item.label}
+                </Link>
+              ))}
             </div>
 
             <div>

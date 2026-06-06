@@ -22,7 +22,7 @@ export const TEAM: TeamMember[] = [
   { name: 'Connor Martin', title: 'Attorney', slug: 'connor-martin', office: 'Plano', photo: '/team/connor-martin.jpg', bio: true },
   { name: 'Kevin Berber', title: 'Director of Marketing and Communications', slug: 'kevin-berber', office: 'Plano', photo: '/team/kevin-berber.jpg', bio: true },
   { name: 'Marcel Williams', title: 'Paralegal', slug: 'marcel-williams', office: 'Plano', photo: '/team/marcel-williams.jpg', bio: true },
-  { name: 'Mary Hughes', title: 'Paralegal', slug: 'mary-hughes', office: 'Plano', photo: '/team/mary-hughes.png', bio: true },
+  { name: 'Mary Hughes', title: 'Paralegal', slug: 'mary-hughes', office: 'Plano', photo: '/team/mary-hughes.jpg', bio: true },
   { name: 'Brynn Siciliano', title: 'Marketing and Event Coordinator / Legal Services Coordinator', slug: 'brynn-siciliano', office: 'Plano', photo: '/team/brynn-siciliano.jpg', bio: true },
   { name: 'Matthew White', title: 'Operations & Legal Assistant', slug: 'matthew-white', office: 'Plano', photo: '/team/matthew-white.jpg', bio: true },
   { name: 'Jacob Wooley', title: 'Partner & Attorney', slug: 'jacob-wooley', office: 'Mansfield', photo: '/team/jacob-wooley.jpg', bio: true },

@@ -991,10 +991,17 @@
     font-family: var(--font-sans);
   }
   .cw-phonestrip-label { color: var(--cw-on-slate); font-weight: 600; font-size: 14px; margin-right: 2px; }
-  .cw-phone { display: inline-flex; align-items: baseline; gap: 7px; }
+  .cw-phone { display: inline-flex; align-items: baseline; gap: 7px; white-space: nowrap; }
   .cw-phone-city { color: var(--cw-on-slate-mute); font-size: 13.5px; }
-  .cw-phone-num { color: var(--cw-on-slate); font-weight: 700; font-size: 18px; letter-spacing: 0.01em; text-decoration: none; }
+  .cw-phone-num { color: var(--cw-on-slate); font-weight: 700; font-size: 18px; letter-spacing: 0.01em; text-decoration: none; white-space: nowrap; }
   .cw-phone-num:hover { color: var(--cw-gold-soft); }
+  /* Mobile: keep each office on one line (no mid-number breaks), left-aligned + compact. */
+  @media (max-width: 767px) {
+    .cw-phonestrip { justify-content: flex-start; gap: 4px 18px; }
+    .cw-phone-num { font-size: 15px; }
+    .cw-phone-city { font-size: 12px; }
+    .cw-phonestrip-label { font-size: 12.5px; width: 100%; }
+  }
 
   /* Desktop nav row */
   .cw-navrow { display: flex; align-items: center; gap: 10px; padding-top: 12px; }
