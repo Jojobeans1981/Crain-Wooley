@@ -991,17 +991,21 @@
   }
   .cw-site-header.cw-scrolled { border-bottom: 1px solid var(--cw-gold); }
 
-  .cw-header-inner { display: flex; align-items: center; gap: 28px; padding-top: 14px; padding-bottom: 14px; }
-  .cw-logo-img { width: auto; height: 84px; display: block; }
+  /* Top utility bar — full-width slate strip carrying the location phones,
+     above the logo/nav row, so the header reads as the live multi-row layout. */
+  .cw-utility { background: var(--cw-slate-deep); border-bottom: 1px solid var(--cw-line-on-slate); }
+  .cw-utility-inner { display: flex; justify-content: flex-end; align-items: center; padding: 11px 0; }
+
+  .cw-header-inner { display: flex; align-items: center; gap: 28px; padding-top: 22px; padding-bottom: 22px; }
+  .cw-logo-img { width: auto; height: 92px; display: block; }
   @media (max-width: 1023px) { .cw-logo-img { height: 60px; } }
 
   .cw-header-main { flex: 1; min-width: 0; }
 
-  /* Phone strip */
+  /* Phone strip (lives in the utility bar) */
   .cw-phonestrip {
     display: flex; align-items: baseline; justify-content: flex-end; flex-wrap: wrap;
-    gap: 8px 26px; padding-bottom: 12px; border-bottom: 1px dashed var(--cw-line-on-slate);
-    font-family: var(--font-sans);
+    gap: 6px 26px; font-family: var(--font-sans);
   }
   .cw-phonestrip-label { color: var(--cw-on-slate); font-weight: 600; font-size: 14px; margin-right: 2px; }
   .cw-phone { display: inline-flex; align-items: baseline; gap: 7px; white-space: nowrap; }
@@ -1103,8 +1107,16 @@
   }
 
   /* ── Footer ── */
-  .cw-site-footer { background: var(--cw-slate); color: var(--cw-on-slate); }
-  .cw-footer-grid { display: grid; grid-template-columns: 1fr; gap: 40px; padding-top: 56px; padding-bottom: 48px; }
+  /* Dark textured footer (Scorpion footer-v1-bg) — slate wash over the texture. */
+  .cw-site-footer {
+    background-color: var(--cw-slate);
+    background-image: linear-gradient(rgba(30,44,53,0.88), rgba(26,38,48,0.94)), url('/home/footer-bg.jpg');
+    background-size: cover; background-position: center; background-repeat: no-repeat;
+    color: var(--cw-on-slate);
+  }
+  .cw-footer-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; padding: 44px 0; border-bottom: 1px solid var(--cw-line-on-slate); }
+  .cw-footer-tagline { font-family: var(--font-display); font-weight: 700; font-size: clamp(22px, 2.6vw, 30px); line-height: 1.2; color: #fff; margin: 0; max-width: 640px; }
+  .cw-footer-grid { display: grid; grid-template-columns: 1fr; gap: 40px; padding-top: 60px; padding-bottom: 52px; }
   @media (min-width: 768px) { .cw-footer-grid { grid-template-columns: 1.2fr 1fr 1.3fr; gap: 48px; } }
   .cw-footer-logo { height: 96px; width: auto; display: block; margin-bottom: 20px; }
   .cw-footer-phone { font-family: var(--font-sans); font-weight: 700; font-size: 22px; color: var(--cw-on-slate); text-decoration: none; }
@@ -1166,21 +1178,34 @@
   .cw-section-head-light .cw-h2 { color: #fff; }
 
   /* 1. Hero */
-  .cw-hero { position: relative; min-height: 78vh; display: flex; align-items: center; background: var(--cw-slate); overflow: hidden; }
+  /* Scorpion gold rhythm — hero rides the accessible-gold band (#8A7142) so the
+     video shows through a gold wash with AA-safe white text. */
+  .cw-hero { position: relative; min-height: 78vh; display: flex; align-items: center; background: var(--cw-gold-band); overflow: hidden; }
   .cw-hero-bg { position: absolute; inset: 0; z-index: 0; }
   .cw-hero-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  .cw-hero-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(48,68,81,0.86) 0%, rgba(48,68,81,0.66) 55%, rgba(48,68,81,0.42) 100%); }
+  .cw-hero-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(138,113,66,0.88) 0%, rgba(138,113,66,0.7) 55%, rgba(138,113,66,0.5) 100%); }
   .cw-hero-inner { position: relative; z-index: 1; padding-top: 90px; padding-bottom: 90px; max-width: 760px; }
   .cw-hero-eyebrow { display: block; font-family: var(--font-sans); font-size: 0.9375rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cw-gold-soft); margin-bottom: 16px; }
   .cw-hero-title { font-family: var(--font-display); font-weight: 700; font-size: clamp(34px, 5.4vw, 60px); line-height: 1.04; letter-spacing: -0.015em; color: #fff; margin: 0 0 22px; }
   .cw-hero-sub { font-family: var(--font-sans); font-size: clamp(15px, 1.6vw, 17px); line-height: 1.65; color: rgba(255,255,255,0.9); margin: 0 0 30px; max-width: 620px; }
 
-  /* 2. Badge wall */
-  .cw-badges { background: #fff; padding: 40px 0; border-bottom: 1px solid var(--cw-line, rgba(48,68,81,0.12)); }
-  .cw-badge-row { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 28px 38px; }
-  .cw-badge-item { display: flex; }
-  .cw-badge { position: relative; display: block; width: 120px; height: 80px; filter: grayscale(0.1); transition: transform .15s ease; }
-  .cw-badge-item a:hover .cw-badge { transform: translateY(-2px); }
+  /* 2. Badge wall — auto-advancing natural-aspect strip (Scorpion sl_ato-rsp) */
+  .cw-badges { background: #fff; padding: 28px 0; border-bottom: 1px solid var(--cw-line, rgba(48,68,81,0.12)); }
+  .cw-badge-strip { overflow: hidden; }
+  .cw-badge-track {
+    list-style: none; margin: 0; padding: 0; display: flex; align-items: center;
+    gap: 48px; width: max-content; animation: cw-badge-marquee 60s linear infinite;
+  }
+  .cw-badge-strip:hover .cw-badge-track { animation-play-state: paused; }
+  .cw-badge-item { flex: none; display: flex; align-items: center; }
+  /* natural aspect: fixed height, width follows the image's own ratio */
+  .cw-badge { height: clamp(150px, 16vw, 210px); width: auto; display: block; filter: grayscale(0.06); }
+  @keyframes cw-badge-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  /* No auto-motion under reduced-motion — manual horizontal scroll instead. */
+  @media (prefers-reduced-motion: reduce) {
+    .cw-badge-track { animation: none; }
+    .cw-badge-strip { overflow-x: auto; scrollbar-width: thin; }
+  }
 
   /* 3. Intro + video */
   .cw-intro { background: #fff; padding: 72px 0; }
@@ -1195,8 +1220,12 @@
   .cw-readmore > summary::after { content: "+"; font-size: 18px; line-height: 1; }
   .cw-readmore[open] > summary::after { content: "\2013"; }
   .cw-readmore[open] > summary { margin-bottom: 8px; }
-  .cw-intro-media { position: relative; }
+  .cw-intro-media { position: relative; display: flex; flex-direction: column; gap: 22px; }
+  /* Office/staff photo box — 1.63:1 (matches content-v6-img 743×455), square corners */
+  .cw-intro-photo { position: relative; width: 100%; aspect-ratio: 743 / 455; overflow: hidden; border: 1px solid rgba(48,68,81,0.14); }
   .cw-intro-video { width: 100%; aspect-ratio: 16 / 10; background: var(--cw-slate); border: 1px solid rgba(48,68,81,0.18); display: block; }
+  .cw-intro-play { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 64px; height: 64px; border-radius: 50%; background: rgba(138,113,66,0.92); }
+  .cw-intro-play::after { content: ""; position: absolute; left: 54%; top: 50%; transform: translate(-50%,-50%); border-style: solid; border-width: 11px 0 11px 18px; border-color: transparent transparent transparent #fff; }
   /* Poster is the attorney photo (Justin + Jacob) with name labels at the edges;
      match its aspect ratio so cover doesn't crop the names off the sides. */
   .cw-intro-video-poster { position: relative; overflow: hidden; aspect-ratio: 1280 / 666; }
@@ -1204,14 +1233,14 @@
     /* Tight ~600px reading column + a smaller right-hand photo pinned to the
        edge, matching the original's intro proportions instead of running the
        body copy nearly full-width. */
-    .cw-intro-grid { grid-template-columns: minmax(0, 600px) minmax(280px, 380px); justify-content: space-between; gap: 56px; }
+    .cw-intro-grid { grid-template-columns: minmax(0, 600px) minmax(360px, 560px); justify-content: space-between; gap: 56px; }
     .cw-intro-media { position: sticky; top: 120px; }
   }
 
   /* 4. Guide band */
-  .cw-guide { position: relative; background: var(--cw-slate); padding: 72px 0; overflow: hidden; }
+  .cw-guide { position: relative; background: var(--cw-gold-band); padding: 72px 0; overflow: hidden; }
   .cw-guide-bg { object-fit: cover; z-index: 0; }
-  .cw-guide-tint { position: absolute; inset: 0; background: rgba(40,59,70,0.82); z-index: 1; }
+  .cw-guide-tint { position: absolute; inset: 0; background: rgba(138,113,66,0.86); z-index: 1; }
   .cw-guide-inner { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr; gap: 36px; align-items: center; }
   .cw-guide-copy .cw-eyebrow { font-family: var(--font-display); font-size: clamp(26px,3.4vw,38px); font-weight: 700; letter-spacing: -0.01em; text-transform: none; color: #fff; }
   .cw-guide-copy p { font-family: var(--font-sans); font-size: 1rem; line-height: 1.7; color: rgba(255,255,255,0.85); margin: 0 0 24px; max-width: 520px; }
@@ -1230,8 +1259,8 @@
   /* 6. Divider */
   .cw-divider { position: relative; height: 280px; background: var(--cw-slate); overflow: hidden; }
 
-  /* 7. Reviews */
-  .cw-reviews { background: var(--cw-slate); padding: 72px 0; }
+  /* 7. Reviews — accessible-gold band (Scorpion gold rhythm), white text */
+  .cw-reviews { background: var(--cw-gold-band); padding: 88px 0; }
   .cw-reviews-grid { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center; }
   @media (min-width: 900px) { .cw-reviews-grid { grid-template-columns: 1.4fr 1fr; } }
   .cw-reviews-photo { position: relative; min-height: 360px; display: none; }
@@ -1239,20 +1268,31 @@
   .cw-reviews-cta { margin-top: 24px; }
   .cw-reviews-carousel { outline: none; }
   .cw-reviews-carousel:focus-visible { outline: 2px solid var(--cw-gold-soft); outline-offset: 6px; }
-  .cw-reviews-viewport { position: relative; }
+  /* Taller viewport so the band reads as full as the live reviews zone. */
+  .cw-reviews-viewport { position: relative; min-height: 420px; }
+  @media (min-width: 900px) { .cw-reviews-viewport { min-height: 480px; } }
   .cw-review { display: none; margin: 0; }
   .cw-review-active { display: block; }
-  .cw-review-stars { color: var(--cw-gold-soft); font-size: 1.25rem; letter-spacing: 2px; margin-bottom: 14px; }
-  .cw-review-title { font-family: var(--font-display); font-weight: 700; font-size: 1.5rem; color: #fff; margin: 0 0 14px; }
-  .cw-review-quote { font-family: var(--font-sans); font-size: 1rem; line-height: 1.7; color: rgba(255,255,255,0.86); margin: 0 0 16px; border: none; }
-  .cw-review-name { font-family: var(--font-sans); font-weight: 600; font-size: 0.875rem; letter-spacing: 0.04em; color: var(--cw-gold-soft); }
+  .cw-review-stars { color: #fff; font-size: 1.4rem; letter-spacing: 3px; margin-bottom: 16px; }
+  .cw-review-title { font-family: var(--font-display); font-weight: 700; font-size: 1.75rem; color: #fff; margin: 0 0 16px; }
+  .cw-review-quote { font-family: var(--font-sans); font-size: 1.0625rem; line-height: 1.75; color: rgba(255,255,255,0.94); margin: 0 0 18px; border: none; }
+  .cw-review-name { font-family: var(--font-sans); font-weight: 600; font-size: 0.9375rem; letter-spacing: 0.04em; color: #fff; }
   .cw-reviews-controls { display: flex; align-items: center; gap: 16px; margin-top: 26px; }
   .cw-reviews-arrow { width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; color: #fff; background: transparent; border: 1px solid var(--cw-line-on-slate); cursor: pointer; transition: border-color .15s, color .15s; }
-  .cw-reviews-arrow:hover { color: var(--cw-gold-soft); border-color: var(--cw-gold-soft); }
-  .cw-reviews-arrow:focus-visible { outline: 2px solid var(--cw-gold-soft); outline-offset: 2px; }
+  .cw-reviews-arrow:hover { color: #fff; border-color: #fff; }
+  .cw-reviews-arrow:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
   .cw-reviews-dots { display: flex; gap: 8px; }
-  .cw-reviews-dot { width: 9px; height: 9px; border-radius: 50%; border: 1px solid var(--cw-gold-soft); background: transparent; padding: 0; cursor: pointer; }
-  .cw-dot-active { background: var(--cw-gold-soft); border-color: var(--cw-gold-soft); }
+  .cw-reviews-dot { width: 9px; height: 9px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.8); background: transparent; padding: 0; cursor: pointer; }
+  .cw-dot-active { background: #fff; border-color: #fff; }
+
+  /* CTAs sitting on the gold bands flip to white-fill / gold-text so they keep
+     contrast (a gold button on a gold band would vanish). */
+  .cw-hero .cw-btn-gold, .cw-guide .cw-btn-gold, .cw-reviews .cw-btn-gold {
+    background: #fff; color: var(--cw-gold-text); border-color: #fff;
+  }
+  .cw-hero .cw-btn-gold:hover, .cw-guide .cw-btn-gold:hover, .cw-reviews .cw-btn-gold:hover {
+    background: rgba(255,255,255,0.88); color: var(--cw-gold-text);
+  }
 
   /* 8. Value props */
   .cw-values { background: var(--cw-slate); padding: 72px 0; border-top: 1px solid var(--cw-line-on-slate); }
