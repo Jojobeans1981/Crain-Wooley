@@ -1,9 +1,13 @@
 import 'dotenv/config'
 import { PrismaClient } from '@prisma/client'
-import { PrismaBetterSqlite3 } from '@prisma/adapter-better-sqlite3'
+import { PrismaPg } from '@prisma/adapter-pg'
 
+const connectionString = process.env.DIRECT_URL || process.env.DATABASE_URL
+if (!connectionString) {
+  throw new Error('DIRECT_URL/DATABASE_URL is not set (expected a Postgres connection string).')
+}
 const prisma = new PrismaClient({
-  adapter: new PrismaBetterSqlite3({ url: process.env.DATABASE_URL || 'file:./.data/dev.db' }),
+  adapter: new PrismaPg({ connectionString }),
 })
 
 async function main() {
