@@ -55,25 +55,34 @@ const BADGES: Badge[] = [
   { src: '/home/badges/gold-client-champion-2023.png', alt: '2023 Gold Client Champion' },
 ]
 
+// Natural-aspect badge (no forced box / no contain-letterboxing); height is set
+// in CSS, width follows the image's own ratio — matches Scorpion's sl_ato-rsp.
+function BadgeImg({ b, decorative }: { b: Badge; decorative?: boolean }) {
+  // eslint-disable-next-line @next/next/no-img-element
+  return <img className="cw-badge" src={b.src} alt={decorative ? '' : b.alt} loading="lazy" />
+}
+
 export function BadgeWall() {
   return (
     <section className="cw-badges" aria-label="Awards and credentials">
-      <div className="cw-container">
-        <ul className="cw-badge-row">
-          {BADGES.map((b) => {
-            const img = (
-              <span className="cw-badge">
-                <Image src={b.src} alt={b.alt} fill sizes="140px" style={{ objectFit: 'contain' }} />
-              </span>
-            )
-            return (
-              <li key={b.src} className="cw-badge-item">
-                {b.href
-                  ? <a href={b.href} target="_blank" rel="noopener noreferrer" aria-label={b.alt}>{img}</a>
-                  : img}
-              </li>
-            )
-          })}
+      {/* Single horizontal auto-advancing strip (CSS marquee). The list is
+          rendered twice so the loop is seamless; the second copy is hidden from
+          assistive tech. prefers-reduced-motion stops the motion and turns the
+          strip into a manually scrollable row (see globals.css). */}
+      <div className="cw-badge-strip">
+        <ul className="cw-badge-track">
+          {BADGES.map((b) => (
+            <li key={b.src} className="cw-badge-item">
+              {b.href
+                ? <a href={b.href} target="_blank" rel="noopener noreferrer" aria-label={b.alt}><BadgeImg b={b} /></a>
+                : <BadgeImg b={b} />}
+            </li>
+          ))}
+          {BADGES.map((b) => (
+            <li key={`dup-${b.src}`} className="cw-badge-item" aria-hidden="true">
+              <BadgeImg b={b} decorative />
+            </li>
+          ))}
         </ul>
       </div>
     </section>
@@ -146,15 +155,23 @@ export function IntroVideo() {
         </div>
 
         <div className="cw-intro-media">
+          {/* Office / staff photo (Scorpion content-v6-img) in a 1.63:1 box,
+              cover, square corners — beside the Protect-Your-Legacy copy. */}
+          <div className="cw-intro-photo">
+            <Image src="/home/intro-office.jpg" alt="Crain & Wooley office and staff" fill sizes="(max-width: 900px) 100vw, 560px" style={{ objectFit: 'cover' }} />
+          </div>
+
+          {/* Welcome / intro video (Scorpion CWBOTH30). The full file is ~123 MB
+              so it is served from a hosted source via NEXT_PUBLIC_GUIDE_VIDEO_URL;
+              until that env var is set we show the poster frame with a play cue. */}
           {GUIDE_VIDEO ? (
             <video className="cw-intro-video" controls preload="metadata" playsInline poster="/home/video-poster.jpg">
               <source src={GUIDE_VIDEO} type="video/mp4" />
             </video>
           ) : (
-            // Closing video (124 MB) is not committed; show poster until
-            // NEXT_PUBLIC_GUIDE_VIDEO_URL is set to a hosted source.
-            <div className="cw-intro-video cw-intro-video-poster">
-              <Image src="/home/video-poster.jpg" alt="Crain & Wooley attorneys" fill sizes="(max-width: 900px) 100vw, 480px" style={{ objectFit: 'cover' }} />
+            <div className="cw-intro-video cw-intro-video-poster" role="img" aria-label="Welcome video from Crain & Wooley (coming soon)">
+              <Image src="/home/video-poster.jpg" alt="" fill sizes="(max-width: 900px) 100vw, 560px" style={{ objectFit: 'cover' }} />
+              <span className="cw-intro-play" aria-hidden="true" />
             </div>
           )}
         </div>

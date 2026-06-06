@@ -312,13 +312,9 @@ export function SiteHeader() {
       </div>
 
       <header className={`cw-site-header${scrolled ? ' cw-scrolled' : ''}`}>
-        <div className="cw-container cw-header-inner">
-          <Link href="/" title="Home" aria-label="Crain & Wooley — Home">
-            <Logo className="cw-logo-img" />
-          </Link>
-
-          <div className="cw-header-main">
-            {/* Phone strip */}
+        {/* Top utility bar — the three location phone numbers, above the main nav */}
+        <div className="cw-utility">
+          <div className="cw-container cw-utility-inner">
             <div className="cw-phonestrip">
               <span className="cw-phonestrip-label">Call Us Today!</span>
               {PHONES.map((p) => (
@@ -328,7 +324,15 @@ export function SiteHeader() {
                 </span>
               ))}
             </div>
+          </div>
+        </div>
 
+        <div className="cw-container cw-header-inner">
+          <Link href="/" title="Home" aria-label="Crain & Wooley — Home">
+            <Logo className="cw-logo-img" />
+          </Link>
+
+          <div className="cw-header-main">
             {/* Desktop nav */}
             <div className="cw-navrow">
               <nav aria-label="Primary" style={{ flex: 1, minWidth: 0 }}>
@@ -467,6 +471,11 @@ const SOCIAL = [
 export function SiteFooter() {
   return (
     <footer className="cw-site-footer">
+      {/* Extra content row (matches the live multi-row footer height) */}
+      <div className="cw-container cw-footer-top">
+        <p className="cw-footer-tagline">Compassionate estate planning &amp; elder law for Dallas&ndash;Fort Worth families.</p>
+        <Link href="/contact-us/" className="cw-btn-gold">Schedule a Consultation</Link>
+      </div>
       <div className="cw-container cw-footer-grid">
         {/* Brand + phone + social */}
         <div>
