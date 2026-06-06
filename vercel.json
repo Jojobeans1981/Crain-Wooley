@@ -1,5 +1,0 @@
-{
-  "crons": [
-    { "path": "/api/clio/drain", "schedule": "*/10 * * * *" }
-  ]
-}
