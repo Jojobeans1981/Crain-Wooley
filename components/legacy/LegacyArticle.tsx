@@ -1,6 +1,8 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import type { LegacyPage } from '@/lib/legacy'
 import { getSectionNav, type SectionNav, type SectionNavItem } from '@/lib/legacy/section-nav'
+import blogImages from '@/lib/legacy/blog-images.json'
 import type { ReactNode } from 'react'
 
 /**
@@ -100,6 +102,8 @@ export default function LegacyArticle({ page, path }: { page: LegacyPage; path: 
   const section = KICKER[page.type] ?? 'Crain & Wooley'
   const title = page.h1 || page.title
   const nav = getSectionNav(path)
+  // Blog posts carry a re-hosted featured image (parity with the source).
+  const featured = page.type === 'blog_post' ? (blogImages as Record<string, string>)[path] : undefined
 
   return (
     <div className="cw-article-bg">
@@ -120,6 +124,12 @@ export default function LegacyArticle({ page, path }: { page: LegacyPage; path: 
       <div className={nav ? 'cw-container legacy-shell' : 'cw-container legacy-body'}>
         {nav && <SectionSidebar nav={nav} />}
         <div className="legacy-article-col">
+        {featured && (
+          <div className="legacy-blog-hero">
+            {/* decorative — the headline conveys the topic */}
+            <Image src={`/legacy/blog/${featured}`} alt="" fill sizes="(max-width: 980px) 100vw, 760px" style={{ objectFit: 'cover' }} priority />
+          </div>
+        )}
         <article className="learn-article">
           {blocks.map((block, i) => {
         // The H1 line sometimes repeats as the first body block — skip it.

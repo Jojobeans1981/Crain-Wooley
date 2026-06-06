@@ -896,6 +896,25 @@
   .blog-row:hover .blog-row-title { color: #9B8059; }
   .blog-row-date { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: #6b6356; }
   .blog-row-title { font-family: var(--font-display); font-size: 1.1rem; color: #304451; line-height: 1.3; }
+  /* Blog rows that have a re-hosted featured image: thumbnail + stacked text. */
+  .blog-row-media {
+    display: grid;
+    grid-template-columns: 104px 1fr;
+    grid-template-areas: "thumb date" "thumb title";
+    column-gap: 16px; row-gap: 3px; align-content: center; padding: 14px 0;
+  }
+  .blog-row-thumb {
+    grid-area: thumb; position: relative; width: 104px; height: 70px; align-self: center;
+    overflow: hidden; background: #ede5d3; border: 1px solid rgba(26,34,48,0.10);
+  }
+  .blog-row-media .blog-row-date { grid-area: date; align-self: end; }
+  .blog-row-media .blog-row-title { grid-area: title; align-self: start; }
+  /* Blog article featured image (parity with the source post hero). */
+  .legacy-blog-hero {
+    position: relative; width: 100%; aspect-ratio: 16 / 9;
+    overflow: hidden; margin: 0 0 28px; background: #ede5d3;
+    border: 1px solid rgba(26,34,48,0.10);
+  }
 }
 
 /* ════════════════════════════════════════════════════════════════════════
@@ -1234,7 +1253,17 @@
   .learn-eyebrow-light { color: var(--cw-gold-soft); }
 
   /* ── Legacy title banner (page title block) ── */
-  .legacy-banner { background: var(--cw-slate); padding: 52px 0 48px; }
+  /* Interior page banner — the source's shared sub-banner (dark navy +
+     handwriting texture) over slate, with a subtle dark overlay so the white
+     title/breadcrumb keep AA contrast. Matches estateplanningdfw.law interiors. */
+  .legacy-banner {
+    background-color: var(--cw-slate);
+    background-image: linear-gradient(rgba(26,38,48,0.38), rgba(26,38,48,0.48)), url('/legacy/sub-banner.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 52px 0 48px;
+  }
   .legacy-banner-inner { text-align: center; }
   .legacy-banner-title { font-family: var(--font-display); font-weight: 700; font-size: clamp(32px, 5vw, 56px); line-height: 1.05; letter-spacing: -0.012em; color: #fff; margin: 0; }
   .legacy-crumbs { margin: 0 0 16px; }
