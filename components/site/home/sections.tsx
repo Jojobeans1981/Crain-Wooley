@@ -19,8 +19,9 @@ export function Hero() {
         <div className="cw-hero-overlay" aria-hidden="true" />
       </div>
       <div className="cw-container cw-hero-inner">
-        <strong className="cw-hero-eyebrow">Life Can Be Full of Surprises</strong>
-        <h1 className="cw-hero-title">The Cost of Planning for Your Future Shouldn&rsquo;t Be One of Them</h1>
+        {/* Faithful to estateplanningdfw.law: the hero caption reads "Life Can Be
+            Full of Surprises"; the page's single <h1> lives in the intro below. */}
+        <p className="cw-hero-title">Life Can Be Full of Surprises</p>
         <p className="cw-hero-sub">
           Crain &amp; Wooley offers comprehensive, flat-rate services that serve clients of all
           backgrounds throughout their lifetime. No matter where you are in life, we make estate
@@ -107,8 +108,8 @@ export function IntroVideo() {
     <section className="cw-intro" aria-label="About Crain & Wooley">
       <div className="cw-container cw-intro-grid">
         <div className="cw-intro-copy">
-          <h2 className="cw-eyebrow">Estate Planning Attorneys in Dallas-Fort Worth</h2>
-          <h3 className="cw-h2">Let Our Compassionate Lawyers Help Protect Your Legacy</h3>
+          <h1 className="cw-intro-title">Estate Planning Attorneys in Dallas-Fort Worth</h1>
+          <h2 className="cw-h2">Let Our Compassionate Lawyers Help Protect Your Legacy</h2>
           <p>
             At <Link href="/about-us/">Crain &amp; Wooley</Link>, planning for the future means making
             decisions you can trust. From major life changes to inevitable losses, it&rsquo;s essential to
@@ -122,7 +123,7 @@ export function IntroVideo() {
           </p>
           <p>{`That is why we take great pride in guiding clients of all backgrounds and income levels through each phase of the planning process. When you choose our firm, we make it our top priority to prepare you for the future and ease potential burdens on your family.`}</p>
           <p>{`When we create your estate plan, we explain every document in plain language, so you know exactly how it operates for your needs. Families in Fort Worth and the wider DFW area come to us with unique circumstances, from business succession planning to blended family matters and property ownership in several locations. Our estate planning attorneys build solutions that grow with you, keeping your documents up to date as Texas law continues to evolve.`}</p>
-          <h3 className="cw-h2">Choosing the Right Estate Planning and Elder Law Firm</h3>
+          <h2 className="cw-h2">Choosing the Right Estate Planning and Elder Law Firm</h2>
           <p>{`Selecting an attorney to handle your estate, long-term care, or probate concerns is a personal decision, and it helps to understand how different firms approach this work. When you meet with an estate lawyer in our Dallas-Fort Worth offices, we talk in detail about your priorities, your family relationships, and any worries you have about future medical needs, guardianship, or business continuity. We also review how Texas probate courts in counties such as Tarrant and Dallas are likely to handle your estate, so you can see how today's planning choices may play out in real court procedures.`}</p>
           <p>{`As we walk through your options, we explain the flat-rate nature of most planning services, what is included in those packages, and when hourly work might become necessary for litigation or contested matters. This transparent structure allows you to compare options confidently and decide whether you want ongoing plan maintenance, help with elder law questions like Medicaid eligibility, or a more limited set of documents for now. By the end of your initial meeting, you should have a clear sense of the next steps, the documents we recommend, and how our team will stay in touch as your plan is drafted, reviewed, and signed.`}</p>
 
@@ -131,8 +132,8 @@ export function IntroVideo() {
             <div className="cw-readmore-body">
               {INTRO_MORE.map((b, i) => (
                 <div key={i}>
-                  {b.h2 && <h3 className="cw-h2">{b.h2}</h3>}
-                  {b.h3 && <h4 className="cw-h3">{b.h3}</h4>}
+                  {b.h2 && <h2 className="cw-h2">{b.h2}</h2>}
+                  {b.h3 && <h3 className="cw-h3">{b.h3}</h3>}
                   {b.p && <p>{b.p}</p>}
                 </div>
               ))}
