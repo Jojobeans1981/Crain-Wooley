@@ -19,7 +19,7 @@ export default function LearnHubPage() {
         <h1 className="learn-h1">
           Estate planning, explained in plain language.
         </h1>
-        <p className="text-cw-ink-soft text-[1.25rem] leading-relaxed mb-7">
+        <p className="text-cw-ink-soft text-[1.25rem] leading-relaxed mb-7 max-w-[46rem]">
           No jargon, no pressure — just clear answers about wills, trusts, probate, and protecting the people you love.
           Start with your situation, or take a two-minute quiz.
         </p>
@@ -44,8 +44,8 @@ export default function LearnHubPage() {
       <section className="py-10" aria-labelledby="persona-h">
         <p className="learn-eyebrow">Start where you are</p>
         <h2 id="persona-h" className="learn-h2 mb-1">Find your path</h2>
-        <p className="text-cw-ink-soft mb-7 max-w-xl">Pick the description that fits best and we will line up the right guides, in the right order.</p>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 reveal">
+        <p className="text-cw-ink-soft mb-7 max-w-[34rem]">Pick the description that fits best and we will line up the right guides, in the right order.</p>
+        <div className="learn-hub-grid reveal">
           {PERSONA_LIST.map((p) => (
             <Link key={p.slug} href={`/learn/${p.startPillar}`} className="learn-card">
               <span className="learn-kicker">{p.kicker}</span>
@@ -61,8 +61,8 @@ export default function LearnHubPage() {
       <section className="py-10" aria-labelledby="pillars-h">
         <p className="learn-eyebrow">Browse by topic</p>
         <h2 id="pillars-h" className="learn-h2 mb-1">The essentials</h2>
-        <p className="text-cw-ink-soft mb-7 max-w-xl">Nine cornerstone guides covering every part of a Texas estate plan.</p>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 reveal">
+        <p className="text-cw-ink-soft mb-7 max-w-[34rem]">Nine cornerstone guides covering every part of a Texas estate plan.</p>
+        <div className="learn-hub-grid reveal">
           {PILLARS.map((p) => (
             <Link key={p.slug} href={`/learn/${p.slug}`} className="learn-card">
               <span className="learn-num">{p.num}</span>
