@@ -38,6 +38,13 @@
 
   *, *::before, *::after { box-sizing: border-box; }
 
+  /* Canvas / overscroll is plain white to match the live Scorpion surface.
+     Setting a background on <html> stops the cream body box from propagating to
+     the viewport canvas, so the cloned marketing/legacy pages (white via
+     .cw-page / .cw-article-bg) no longer flash cream on scroll-bounce. The
+     intake funnel still sits on the cream body box below and is unchanged. */
+  html { background-color: #fff; }
+
   body {
     background-color: #faf5ea;     /* cf.cream */
     color: #1a2230;                /* cf.text */
@@ -1198,8 +1205,9 @@
   }
   .cw-badge-strip:hover .cw-badge-track { animation-play-state: paused; }
   .cw-badge-item { flex: none; display: flex; align-items: center; }
-  /* natural aspect: fixed height, width follows the image's own ratio */
-  .cw-badge { height: clamp(150px, 16vw, 210px); width: auto; display: block; filter: grayscale(0.06); }
+  /* Natural aspect: fixed height (~120–150px), width follows the image's own
+     ratio — no object-fit:fill, so logos are never stretched. */
+  .cw-badge { height: clamp(120px, 13vw, 150px); width: auto; display: block; filter: grayscale(0.06); }
   @keyframes cw-badge-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
   /* No auto-motion under reduced-motion — manual horizontal scroll instead. */
   @media (prefers-reduced-motion: reduce) {
