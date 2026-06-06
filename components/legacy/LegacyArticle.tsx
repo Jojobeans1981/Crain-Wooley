@@ -4,6 +4,7 @@ import type { LegacyPage } from '@/lib/legacy'
 import { getSectionNav, type SectionNav, type SectionNavItem } from '@/lib/legacy/section-nav'
 import blogImages from '@/lib/legacy/blog-images.json'
 import { teamMemberByPath } from '@/lib/legacy/team'
+import { ValueProps, ReviewsSection, Locations } from '@/components/site/home/sections'
 import type { ReactNode } from 'react'
 
 /**
@@ -109,6 +110,7 @@ export default function LegacyArticle({ page, path }: { page: LegacyPage; path: 
   const member = page.type === 'staff' ? teamMemberByPath(path) : undefined
 
   return (
+    <>
     <div className="cw-article-bg">
       {/* Page-title block — dark slate banner with breadcrumb + H1 (matches live interior) */}
       <header className="legacy-banner">
@@ -175,5 +177,13 @@ export default function LegacyArticle({ page, path }: { page: LegacyPage; path: 
         </div>
       </div>
     </div>
+
+    {/* Standard interior closing zone — the same designed bands the original
+        site puts below every interior page (value props → reviews → schedule).
+        Reuses the homepage section components so all legacy pages match at once. */}
+    <ValueProps />
+    <ReviewsSection />
+    <Locations />
+    </>
   )
 }
