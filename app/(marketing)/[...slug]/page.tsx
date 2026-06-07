@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound, redirect } from 'next/navigation'
 import { getLegacyPage, allLegacyPaths } from '@/lib/legacy'
+import { pageMetadata } from '@/lib/seo'
 import LegacyArticle from '@/components/legacy/LegacyArticle'
 
 type Params = { slug: string[] }
@@ -49,11 +50,8 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const { slug } = await params
   const page = getLegacyPage(toPath(slug))
   if (!page) return {}
-  return {
-    title: page.title,
-    description: page.description,
-    alternates: { canonical: toPath(slug) },
-  }
+  // OG/Twitter derive from each page's already-captured title/description.
+  return pageMetadata({ title: page.title, description: page.description, path: toPath(slug), type: 'article' })
 }
 
 export default async function LegacyCatchAll({ params }: { params: Promise<Params> }) {

@@ -1,8 +1,8 @@
-import type { Metadata } from 'next'
 import Link from 'next/link'
 import { allLegacyPaths, LEGACY_PAGES } from '@/lib/legacy'
 import { PILLAR_SLUGS, PILLAR_BY_SLUG } from '@/lib/learn/pillars'
 import { years } from '@/lib/legacy/blog-index'
+import { pageMetadata } from '@/lib/seo'
 
 /**
  * HTML sitemap (closes the footer-linked /site-map 404). Generated from the same
@@ -10,11 +10,11 @@ import { years } from '@/lib/legacy/blog-index'
  * pillars, every migrated legacy page (grouped by section), and the blog
  * archive — so it stays in sync as the legacy crawl grows.
  */
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: 'Site Map | Crain & Wooley',
   description: 'A directory of every page on the Crain & Wooley website.',
-  alternates: { canonical: '/site-map' },
-}
+  path: '/site-map',
+})
 
 const MAIN: { href: string; label: string }[] = [
   { href: '/', label: 'Home' },
