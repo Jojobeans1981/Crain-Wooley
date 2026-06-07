@@ -3,7 +3,7 @@
   "sourceCounts": {
     "override": 28,
     "auto": 27,
-    "none": 289
+    "none": 290
   },
   "personaCounts": {
     "high-net-worth": 15,
@@ -2092,6 +2092,12 @@
     },
     {
       "url": "/wylie/wills",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/privacy-policy",
       "type": "page",
       "personas": [],
       "personaSource": "none"
