@@ -23,6 +23,9 @@ const nextConfig: NextConfig = {
       // year/month date archives are served as real pages.
       { source: '/blogs/categories/:slug*', destination: '/blogs', permanent: true },
 
+      // Live site 301s the singular /blog to the /blogs index — match it.
+      { source: '/blog', destination: '/blogs', permanent: true },
+
       // NOTE: the ~480 legacy marketing/blog URLs must be RECREATED at their
       // existing paths on this app before DNS cutover (route_manifest.csv is the
       // checklist) — they are not redirects, they must return 200.
