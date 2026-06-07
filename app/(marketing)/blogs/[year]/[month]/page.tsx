@@ -11,11 +11,16 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { year, month } = await params
-  if (!postsByYearMonth(year, month).length) return {}
+  const count = postsByYearMonth(year, month).length
+  if (!count) return {}
   return {
     title: `${cap(month)} ${year} Estate Planning Articles | Crain & Wooley`,
     description: `Crain & Wooley estate planning blog posts from ${cap(month)} ${year}.`,
     alternates: { canonical: `/blogs/${year}/${month}` },
+    // Thin month archives (<2 posts) are noindex; year archives and the main
+    // index stay indexable. Only thin months override the global robots, so
+    // fatter months keep inheriting the staging-noindex / prod-index default.
+    ...(count < 2 ? { robots: { index: false, follow: true } } : {}),
   }
 }
 

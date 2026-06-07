@@ -142,6 +142,14 @@ export default function LegacyArticle({ page, path }: { page: LegacyPage; path: 
           </div>
         )}
         <article className="learn-article">
+          {page.video && (
+            <div className="legacy-video">
+              {/* Hosted on the Scorpion /media origin — embedded, not committed. */}
+              <video controls preload="metadata" playsInline src={page.video}>
+                <track kind="captions" />
+              </video>
+            </div>
+          )}
           {blocks.map((block, i) => {
         // The H1 line sometimes repeats as the first body block — skip it.
         if (i === 0 && page.h1 && block.trim() === page.h1.trim()) return null

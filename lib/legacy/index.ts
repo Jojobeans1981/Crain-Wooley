@@ -17,6 +17,10 @@ export interface LegacyPage {
   type: string
   words: number
   body: string
+  /** Optional hosted video/audio source (media-center pages). Embedded, never
+   * committed; the file lives on the Scorpion /media host and must migrate at
+   * cutover for the embed to keep working on the live domain. */
+  video?: string
 }
 
 const PAGES = data as Record<string, LegacyPage>
