@@ -1287,11 +1287,12 @@
   .cw-review-title { font-family: var(--font-display); font-weight: 700; font-size: 1.75rem; color: #fff; margin: 0 0 16px; }
   .cw-review-quote { font-family: var(--font-sans); font-size: 1.0625rem; line-height: 1.75; color: rgba(255,255,255,0.94); margin: 0 0 18px; border: none; }
   .cw-review-name { font-family: var(--font-sans); font-weight: 600; font-size: 0.9375rem; letter-spacing: 0.04em; color: #fff; }
-  .cw-reviews-controls { display: flex; align-items: center; gap: 16px; margin-top: 26px; }
+  /* wrap so the dot row (one dot per review) can't overflow narrow viewports */
+  .cw-reviews-controls { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 16px; margin-top: 26px; }
   .cw-reviews-arrow { width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; color: #fff; background: transparent; border: 1px solid var(--cw-line-on-slate); cursor: pointer; transition: border-color .15s, color .15s; }
   .cw-reviews-arrow:hover { color: #fff; border-color: #fff; }
   .cw-reviews-arrow:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
-  .cw-reviews-dots { display: flex; gap: 8px; }
+  .cw-reviews-dots { display: flex; flex-wrap: wrap; gap: 8px; }
   .cw-reviews-dot { width: 9px; height: 9px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.8); background: transparent; padding: 0; cursor: pointer; }
   .cw-dot-active { background: #fff; border-color: #fff; }
 
