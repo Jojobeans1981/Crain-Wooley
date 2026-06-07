@@ -7,34 +7,18 @@ import { ReviewsGrid } from '@/components/site/ReviewsGrid'
  * Client reviews — a real, data-driven page (replaces the old text-filler legacy
  * entry, which has been removed from legacy-pages.json). Renders all ~200
  * scraped testimonials in a paginated accessible-gold grid, sharing the
- * lib/reviews source of truth with the homepage carousel. Review/AggregateRating
- * JSON-LD mirrors the live site's review schema.
+ * lib/reviews source of truth with the homepage carousel.
+ *
+ * No page-level review/rating JSON-LD: the source reviews carry no rating value,
+ * and the live /reviews asserts no rating schema — so claiming an AggregateRating
+ * would be fabricated. The global LegalService + address schema (app/layout.tsx)
+ * still applies to this page, matching live.
  */
 export const metadata = pageMetadata({
   title: 'Client Reviews & Testimonials | Crain & Wooley',
   description: `Read ${REVIEW_COUNT}+ client reviews for Crain & Wooley estate planning attorneys serving the Dallas-Fort Worth area.`,
   path: '/reviews',
 })
-
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'LegalService',
-  name: 'Crain & Wooley',
-  url: 'https://www.estateplanningdfw.law/reviews',
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '5',
-    bestRating: '5',
-    reviewCount: String(REVIEW_COUNT),
-  },
-  review: REVIEWS.slice(0, 12).map((r) => ({
-    '@type': 'Review',
-    reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
-    author: { '@type': 'Person', name: r.name.replace(/^[—-]\s*/, '') || 'Crain & Wooley Client' },
-    name: r.title,
-    reviewBody: r.quote,
-  })),
-}
 
 export default function ReviewsPage() {
   return (
@@ -59,8 +43,6 @@ export default function ReviewsPage() {
           <ReviewsGrid reviews={REVIEWS} />
         </div>
       </section>
-
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </div>
   )
 }
