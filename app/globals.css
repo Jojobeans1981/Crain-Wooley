@@ -46,6 +46,8 @@
   html { background-color: #fff; }
 
   body {
+    margin: 0;                     /* reset UA-default 8px so the header bars and
+                                      full-bleed sections run edge-to-edge (live) */
     background-color: #faf5ea;     /* cf.cream */
     color: #1a2230;                /* cf.text */
     font-family: var(--font-sans);
@@ -975,9 +977,11 @@
  * ════════════════════════════════════════════════════════════════════════ */
 @layer components {
   /* Announcement bar (gold) */
+  /* Light announcement strip above the slate bar, full-bleed (matches live). */
   .cw-anno {
-    background: var(--cw-gold-strong);
-    color: var(--cw-on-slate);
+    background: #fff;
+    color: var(--cw-slate);
+    border-bottom: 1px solid rgba(48,68,81,0.12);
     font-family: var(--font-sans);
     font-weight: 600;
     text-align: center;
@@ -985,7 +989,7 @@
     padding: 14px 22px;
     font-size: 15px;
   }
-  .cw-anno a { color: var(--cw-on-slate); text-underline-offset: 3px; }
+  .cw-anno a { color: var(--cw-gold-text); text-underline-offset: 3px; }
   .cw-anno a:hover { text-decoration-thickness: 2px; }
 
   /* Sticky slate header */
@@ -1000,7 +1004,7 @@
 
   /* Top utility bar — full-width slate strip carrying the location phones,
      above the logo/nav row, so the header reads as the live multi-row layout. */
-  .cw-utility { background: var(--cw-slate-deep); border-bottom: 1px solid var(--cw-line-on-slate); }
+  .cw-utility { background: var(--cw-slate); border-bottom: 1px solid var(--cw-line-on-slate); }
   /* Taller utility bar so total header height ≈222px (matches live). */
   .cw-utility-inner { display: flex; justify-content: flex-end; align-items: center; padding: 31px 0; }
 
