@@ -1200,11 +1200,12 @@
   .cw-hero-bg { position: absolute; inset: 0; z-index: 0; }
   .cw-hero-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .cw-hero-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(138,113,66,0.88) 0%, rgba(138,113,66,0.7) 55%, rgba(138,113,66,0.5) 100%); }
-  .cw-hero-inner { position: relative; z-index: 1; padding-top: 90px; padding-bottom: 90px; max-width: 760px; }
+  /* Centered hero content block (heading, subtitle, body, CTA), matching live. */
+  .cw-hero-inner { position: relative; z-index: 1; padding-top: 90px; padding-bottom: 90px; max-width: 760px; margin-left: auto; margin-right: auto; text-align: center; }
   .cw-hero-eyebrow { display: block; font-family: var(--font-sans); font-size: 0.9375rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cw-gold-soft); margin-bottom: 16px; }
   .cw-hero-title { font-family: var(--font-display); font-weight: 400; font-size: clamp(40px, 6vw, 71px); line-height: 1.05; letter-spacing: -0.01em; color: #29415A; margin: 0 0 12px; }
   .cw-hero-subtitle { font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: clamp(20px, 2.3vw, 30px); line-height: 1.2; color: #29415A; margin: 0 0 20px; }
-  .cw-hero-sub { font-family: var(--font-sans); font-size: clamp(16px, 1.5vw, 19px); line-height: 1.8; color: #29415A; margin: 0 0 30px; max-width: 620px; }
+  .cw-hero-sub { font-family: var(--font-sans); font-size: clamp(16px, 1.5vw, 19px); line-height: 1.8; color: #29415A; margin: 0 auto 30px; max-width: 620px; }
 
   /* 2. Badge wall — auto-advancing natural-aspect strip (Scorpion sl_ato-rsp) */
   .cw-badges { background: #fff; padding: 28px 0; border-bottom: 1px solid var(--cw-line, rgba(48,68,81,0.12)); }
