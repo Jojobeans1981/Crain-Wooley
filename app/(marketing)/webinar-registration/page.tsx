@@ -1,5 +1,5 @@
-import type { Metadata } from 'next'
 import Link from 'next/link'
+import { pageMetadata } from '@/lib/seo'
 
 /**
  * Webinar registration (closes the announcement-bar /webinar-registration 404).
@@ -8,12 +8,12 @@ import Link from 'next/link'
  * deliberately NO submission endpoint wired here (see the TODO on the <form>).
  * Until it's connected, the visible notice + phone number is the working path.
  */
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: 'Webinar Registration | Crain & Wooley',
   description:
     'Register for the Crain & Wooley estate planning webinar. Managing partner Justin Crain simplifies complex legal concepts so you can plan with confidence.',
-  alternates: { canonical: '/webinar-registration' },
-}
+  path: '/webinar-registration',
+})
 
 const LEARN = [
   ['Avoid Probate Nightmares', 'Keep your assets out of costly court delays.'],

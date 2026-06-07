@@ -41,6 +41,23 @@ export const metadata: Metadata = {
   robots: SITE_INDEXABLE
     ? { index: true, follow: true }
     : { index: false, follow: false, nocache: true },
+  // Global OG/Twitter defaults — every page emits a social card. Pages that set
+  // their own openGraph (via lib/seo pageMetadata) override these per-page.
+  openGraph: {
+    type: 'website',
+    siteName: 'Crain & Wooley',
+    title: 'Crain & Wooley — Estate Planning Attorneys | Dallas-Fort Worth, TX',
+    description:
+      'Protect your assets with our qualified Dallas-Fort Worth estate planning attorneys. We build customized wills and trusts. Schedule a confidential consultation today.',
+    images: [{ url: '/social-share.jpg', width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Crain & Wooley — Estate Planning Attorneys | Dallas-Fort Worth, TX',
+    description:
+      'Protect your assets with our qualified Dallas-Fort Worth estate planning attorneys. We build customized wills and trusts. Schedule a confidential consultation today.',
+    images: ['/social-share.jpg'],
+  },
 }
 
 const jsonLd = {

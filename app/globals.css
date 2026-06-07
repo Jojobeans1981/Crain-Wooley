@@ -1023,7 +1023,8 @@
   /* Mobile: keep each office on one line (no mid-number breaks), left-aligned + compact. */
   @media (max-width: 767px) {
     .cw-phonestrip { justify-content: flex-start; gap: 4px 18px; }
-    .cw-phone-num { font-size: 15px; }
+    /* Larger tap area for the phone numbers on touch screens. */
+    .cw-phone-num { font-size: 15px; display: inline-block; padding: 6px 0; }
     .cw-phone-city { font-size: 12px; }
     .cw-phonestrip-label { font-size: 12.5px; width: 100%; }
   }
@@ -1393,15 +1394,19 @@
 
   /* Webinar registration (/webinar-registration) */
   .cw-webinar-grid { display: grid; grid-template-columns: 1fr; gap: 40px; margin-top: 28px; }
+  .cw-webinar-grid > * { min-width: 0; }   /* let children shrink — no mobile overflow */
   @media (min-width: 900px) { .cw-webinar-grid { grid-template-columns: 1.1fr 0.9fr; gap: 56px; align-items: start; } }
   .cw-webinar-form { background: #fff; border: 1px solid rgba(48,68,81,0.16); border-top: 3px solid var(--cw-gold); padding: 28px; }
   .cw-webinar-form-title { font-family: var(--font-display); font-weight: 700; font-size: 1.6rem; color: var(--cw-slate); margin: 0 0 12px; }
   .cw-webinar-notice { font-family: var(--font-sans); font-size: 14px; line-height: 1.55; color: var(--cw-slate); background: var(--cw-bg); border-left: 3px solid var(--cw-gold); padding: 12px 14px; margin: 0 0 20px; }
   .cw-webinar-notice a { color: var(--cw-gold-text); font-weight: 700; }
-  .cw-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+  .cw-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; min-width: 0; }
   .cw-field > span { font-family: var(--font-sans); font-size: 13px; font-weight: 600; color: var(--cw-slate); }
-  .cw-field input, .cw-field select { font-family: var(--font-sans); font-size: 15px; padding: 11px 12px; border: 1px solid rgba(48,68,81,0.28); background: #fff; border-radius: 0; }
+  /* width:100% + min-width:0 so inputs fill their cell and shrink (inputs carry a
+     ~200px default intrinsic width that otherwise overflows narrow viewports). */
+  .cw-field input, .cw-field select { width: 100%; min-width: 0; box-sizing: border-box; font-family: var(--font-sans); font-size: 16px; padding: 11px 12px; border: 1px solid rgba(48,68,81,0.28); background: #fff; border-radius: 0; }
   .cw-field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 560px) { .cw-field-row { grid-template-columns: 1fr; } }
   .cw-field-check { display: flex; align-items: flex-start; gap: 10px; margin: 4px 0 20px; font-family: var(--font-sans); font-size: 13.5px; line-height: 1.5; color: var(--cw-slate); }
   .cw-webinar-form .cw-btn-gold { width: 100%; }
   .cw-webinar-form .cw-btn-gold[disabled] { opacity: 0.6; cursor: not-allowed; }
