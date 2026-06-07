@@ -2,7 +2,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Testimonials } from './Testimonials'
 import { FEATURED_REVIEWS } from '@/lib/reviews'
-import { HeroVideo } from './HeroVideo'
 
 /* ════════════════════════════════════════════════════════════════════════
  * Homepage sections — literal clone of estateplanningdfw.law (body only;
@@ -14,15 +13,13 @@ import { HeroVideo } from './HeroVideo'
 // ── 1. Mainstage hero ──
 export function Hero() {
   return (
+    // TODO(video-migration): replace warm-ivory placeholder with the hero background <video> once the Blob-hosted URL exists. Keep heading/subtitle text #29415A; add a subtle dark scrim ONLY if a contrast check on the video poster frame drops #29415A below 4.5:1.
     <section className="cw-hero" aria-label="Introduction">
-      <div className="cw-hero-bg">
-        <HeroVideo />
-        <div className="cw-hero-overlay" aria-hidden="true" />
-      </div>
       <div className="cw-container cw-hero-inner">
         {/* Faithful to estateplanningdfw.law: the hero caption reads "Life Can Be
             Full of Surprises"; the page's single <h1> lives in the intro below. */}
         <p className="cw-hero-title">Life Can Be Full of Surprises</p>
+        <p className="cw-hero-subtitle">The Cost of Planning for Your Future Shouldn&rsquo;t Be One of Them</p>
         <p className="cw-hero-sub">
           Crain &amp; Wooley offers comprehensive, flat-rate services that serve clients of all
           backgrounds throughout their lifetime. No matter where you are in life, we make estate
@@ -156,11 +153,9 @@ export function IntroVideo() {
         </div>
 
         <div className="cw-intro-media">
-          {/* Office / staff photo (Scorpion content-v6-img) in a 1.63:1 box,
-              cover, square corners — beside the Protect-Your-Legacy copy. */}
-          <div className="cw-intro-photo">
-            <Image src="/home/intro-office.jpg" alt="Crain & Wooley office and staff" fill sizes="(max-width: 900px) 100vw, 560px" style={{ objectFit: 'cover' }} />
-          </div>
+          {/* Live intro right column is ONLY the attorney video (Justin Crain /
+              Jacob Wooley). The sunset/office photo was a duplicate of the image
+              in the "Download Our Free Guide" band, so it has been removed. */}
 
           {/* Welcome / intro video (Scorpion CWBOTH30). The full file is ~123 MB
               so it is served from a hosted source via NEXT_PUBLIC_GUIDE_VIDEO_URL;
