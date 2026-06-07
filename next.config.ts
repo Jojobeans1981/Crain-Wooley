@@ -26,6 +26,13 @@ const nextConfig: NextConfig = {
       // Live site 301s the singular /blog to the /blogs index — match it.
       { source: '/blog', destination: '/blogs', permanent: true },
 
+      // Sitemap-diff backfill: live URLs with no new-build equivalent → best
+      // target (parent section), so they 308 instead of hitting the catch-all
+      // 404. /blogs/categories/* is already covered by the wildcard above.
+      { source: '/events-calendar/event-details', destination: '/events', permanent: true },
+      { source: '/events-calendar', destination: '/events', permanent: true },
+      { source: '/fort-worth/minor-trusts', destination: '/learn/trusts', permanent: true },
+
       // NOTE: the ~480 legacy marketing/blog URLs must be RECREATED at their
       // existing paths on this app before DNS cutover (route_manifest.csv is the
       // checklist) — they are not redirects, they must return 200.

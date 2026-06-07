@@ -3,7 +3,7 @@
   "sourceCounts": {
     "override": 28,
     "auto": 27,
-    "none": 290
+    "none": 301
   },
   "personaCounts": {
     "high-net-worth": 15,
@@ -2001,12 +2001,6 @@
       "personaSource": "none"
     },
     {
-      "url": "/reviews",
-      "type": "page",
-      "personas": [],
-      "personaSource": "none"
-    },
-    {
       "url": "/services",
       "type": "page",
       "personas": [],
@@ -2098,6 +2092,78 @@
     },
     {
       "url": "/privacy-policy",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/media-center/firm-videos/estate-planning-lawyers",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/media-center/radio-show/business-continuity-planning-i",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/media-center/radio-show/business-continuity-planning-ii",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/media-center/radio-show/celebrities-who-died-w-o-a-plan",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/media-center/radio-show/divorce-proofing",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/media-center/radio-show/diy-legal-templates",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/media-center/radio-show/intro-to-trusts-i",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/media-center/radio-show/intro-to-trusts-ii",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/media-center/radio-show/intro-to-wills-i",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/media-center/radio-show/intro-to-wills-ii",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/media-center/radio-show/trusts-probate",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/media-center/radio-show/updating-wills",
       "type": "page",
       "personas": [],
       "personaSource": "none"

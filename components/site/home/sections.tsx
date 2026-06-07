@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Testimonials, type Review } from './Testimonials'
+import { Testimonials } from './Testimonials'
+import { FEATURED_REVIEWS } from '@/lib/reviews'
 import { HeroVideo } from './HeroVideo'
 
 /* ════════════════════════════════════════════════════════════════════════
@@ -242,24 +243,13 @@ export function Divider() {
   )
 }
 
-// ── 7. Testimonials ──
-const REVIEWS: Review[] = [
-  { title: 'Thank you and God Bless you', name: '— Donna V.', quote: `Thank you for being my Living Trust and other Estate documents attorney. Due to our move and storage of business and personal documents, we had trouble locating & we took a lot longer to respond to your drafts, etc. You were very patient with me and my needing lots of explaining of legal terms and meanings. At my age, I was concerned about getting things done but wanting it all done right. You were very prompt in responding to my questions and I think by time of signing I felt confident we had things just the way we wanted to protect my heirs. Thank you and God Bless you.` },
-  { title: 'Very much appreciated', name: '— Sarah P.', quote: `I am very much appreciated your service If anyone like me needed your service I will introduce about you. Everything you did with in a week. Very much satisfied all your service.` },
-  { title: 'Smooth and easy', name: '— Anonymous', quote: `Learning about trusts at the meal was easy and educational. The set down at the office was where the finer points of trusts was explained. That is where and when we decided to make it safe and easy for our heirs. Our final meeting where we signed everything and an explanation of each item was given went smooth and easy. All in all I would say the investment in the trust was worth it. Thank you to Crain & Wooley office and staff` },
-  { title: 'Professional and knowledgeable', name: '— Susan X.', quote: `My husband and I recently had our living trust completed through the help of Crain and Wooley. Justin and his staffs are professional and knowledgeable. A special thanks to client education specialist Stephen. He is such a nice gentleman and always answers our questions clearly and right to the point, and always ready to help by answering your concerns promptly. We will certainly refer the law firm to our families and friends!` },
-  { title: 'Excellent, Highly recommend', name: '— Linda B.', quote: `We went to seminar to just find out what we needed to do for a will, They gave us all the info we needed right then there. Offered a really good price if we signed up to get one that day. A few weeks later after our appointment we have a Living trust. They were helpful with all our questions and were very thorough with these explaining the whole process. They stuck with the price that we paid + let us call anytime if we had any questions. Excellent, Highly recommend this company.` },
-  { title: 'So good to finally have a plan', name: '— Leslie W.', quote: `After worrying about our lack of estate planning for years, it feels so good to finally have a plan in place. Thank you for making the process relativity painless and offering the educational support we needed.` },
-  { title: '5 Stars', name: '— James A.', quote: `Me and my appreciate Mr. Crosby we think that he was very professional in doing his job and we give him 5 stars when it come to him doing his Job.` },
-  { title: 'Overall experience was seamless', name: '— Earl B.', quote: `We recently had the opportunity to attend a workshop hosted by Crain & Wooley regarding wills and estate planning. Based on the information provided we decided to proceed with our estate planning with Justin and his team. The overall experience was seamless and the process was clearly communicated. We had our homework and once that was completed, several iterations later we had our final walk-through and signed estate plan. We would recommend Justin to our family and friends.` },
-]
-
+// ── 7. Testimonials ── (data: lib/reviews, shared with the /reviews page)
 export function ReviewsSection() {
   return (
     <section className="cw-reviews" aria-label="Client testimonials">
       <div className="cw-container cw-reviews-grid">
         <div className="cw-reviews-left">
-          <Testimonials reviews={REVIEWS} />
+          <Testimonials reviews={FEATURED_REVIEWS} />
           <Link href="/reviews/" className="cw-btn-gold cw-reviews-cta">View All Reviews</Link>
         </div>
         <div className="cw-reviews-photo">
