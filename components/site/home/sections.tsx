@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { Testimonials } from './Testimonials'
+import { HeroVideo } from './HeroVideo'
 import { FEATURED_REVIEWS } from '@/lib/reviews'
 
 /* ════════════════════════════════════════════════════════════════════════
@@ -13,8 +14,11 @@ import { FEATURED_REVIEWS } from '@/lib/reviews'
 // ── 1. Mainstage hero ──
 export function Hero() {
   return (
-    // TODO(video-migration): replace warm-ivory placeholder with the hero background <video> once the Blob-hosted URL exists. Keep heading/subtitle text #29415A; add a subtle dark scrim ONLY if a contrast check on the video poster frame drops #29415A below 4.5:1.
     <section className="cw-hero" aria-label="Introduction">
+      <div className="cw-hero-bg">
+        <HeroVideo />
+        <div className="cw-hero-overlay" aria-hidden="true" />
+      </div>
       <div className="cw-container cw-hero-inner">
         {/* Faithful to estateplanningdfw.law: the hero caption reads "Life Can Be
             Full of Surprises"; the page's single <h1> lives in the intro below. */}
