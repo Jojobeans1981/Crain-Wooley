@@ -26,25 +26,3 @@ export function BlogPostRows({ posts }: { posts: BlogPost[] }) {
     </div>
   )
 }
-
-/** Index view grouped by year, each year heading linking to its archive. */
-export function BlogByYear({ posts }: { posts: BlogPost[] }) {
-  const byYear = new Map<string, BlogPost[]>()
-  for (const p of posts) {
-    if (!byYear.has(p.year)) byYear.set(p.year, [])
-    byYear.get(p.year)!.push(p)
-  }
-  return (
-    <>
-      {[...byYear.entries()].map(([year, list]) => (
-        <section key={year} className="blog-year-group">
-          <h2 className="legacy-h2">
-            <Link href={`/blogs/${year}`}>{year}</Link>{' '}
-            <span className="blog-year-count">{list.length}</span>
-          </h2>
-          <BlogPostRows posts={list} />
-        </section>
-      ))}
-    </>
-  )
-}

@@ -45,7 +45,7 @@ export function IntakePanel() {
           pointerEvents: 'none',
         }}
       >
-        <source src="/hero-bg.mp4" type="video/mp4" />
+        <source src="/Mainstage-Video-Final-1.mp4" type="video/mp4" />
       </video>
       <div
         style={{

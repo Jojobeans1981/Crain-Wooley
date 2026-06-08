@@ -16,16 +16,8 @@ export interface BlogPost {
 
 const POSTS = posts as BlogPost[]
 
-export const MONTHS = [
-  'january', 'february', 'march', 'april', 'may', 'june',
-  'july', 'august', 'september', 'october', 'november', 'december',
-]
-
 export const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1)
 
-export function allPosts(): BlogPost[] {
-  return POSTS
-}
 export function years(): string[] {
   return [...new Set(POSTS.map((p) => p.year))]
 }
