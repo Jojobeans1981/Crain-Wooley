@@ -1244,7 +1244,8 @@
   .cw-intro-play { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 64px; height: 64px; border-radius: 50%; background: rgba(138,113,66,0.92); }
   .cw-intro-play::after { content: ""; position: absolute; left: 54%; top: 50%; transform: translate(-50%,-50%); border-style: solid; border-width: 11px 0 11px 18px; border-color: transparent transparent transparent #fff; }
   /* "Which Estate Plan Do I Need?" quiz card beneath the attorney video/poster. */
-  .cw-intro-quiz { background: #fff; border: 1px solid rgba(48,68,81,0.14); border-top: 3px solid var(--cw-gold); padding: 22px 24px; }
+  .cw-intro-quiz { background: #fff; border: 1px solid rgba(48,68,81,0.14); border-top: 3px solid var(--cw-gold); padding: 22px 24px; box-shadow: 0 4px 14px rgba(48,68,81,0.06); transition: box-shadow .18s ease, transform .18s ease; }
+  .cw-intro-quiz:hover { box-shadow: 0 10px 24px rgba(48,68,81,0.12); transform: translateY(-2px); }
   .cw-intro-quiz-title { font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; line-height: 1.2; color: var(--cw-slate); margin: 0 0 8px; }
   .cw-intro-quiz-copy { font-family: var(--font-sans); font-size: 14px; line-height: 1.55; color: #3c4751; margin: 0 0 16px; }
   .cw-intro-quiz .cw-btn-gold { width: 100%; }
@@ -1355,7 +1356,10 @@
   .cw-loc-btn { padding-left: 40px; padding-right: 40px; }
 
   @media (prefers-reduced-motion: reduce) {
-    .cw-badge, .cw-service-tint, .cw-news-card { transition: none; }
+    .cw-badge, .cw-service-tint, .cw-news-card,
+    .blog-card-link, .blog-card-thumb img, .cw-intro-quiz { transition: none; }
+    .blog-card-link:hover, .cw-intro-quiz:hover { transform: none; }
+    .blog-card-link:hover .blog-card-thumb img { transform: none; }
   }
 }
 
@@ -1420,8 +1424,12 @@
 
   .blog-grid { list-style: none; margin: 30px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
   .blog-card { min-width: 0; }
-  .blog-card-link { display: flex; flex-direction: column; height: 100%; text-decoration: none; }
+  .blog-card-link { display: flex; flex-direction: column; height: 100%; text-decoration: none; transition: transform .18s ease, box-shadow .18s ease; }
+  .blog-card-link:hover { transform: translateY(-3px); box-shadow: 0 12px 26px rgba(48,68,81,0.14); }
+  .blog-card-link:focus-visible { outline: 2px solid var(--cw-gold); outline-offset: 3px; }
   .blog-card-thumb { position: relative; display: block; width: 100%; aspect-ratio: 3 / 2; background: #ede5d3; overflow: hidden; }
+  .blog-card-thumb img { transition: transform .4s ease; }
+  .blog-card-link:hover .blog-card-thumb img { transform: scale(1.05); }
   .blog-card-cap { background: var(--cw-slate); color: #fff; padding: 22px 24px 26px; flex: 1; }
   .blog-card-date { display: block; font-family: var(--font-sans); font-size: 13px; color: rgba(255,255,255,0.8); margin-bottom: 10px; }
   .blog-card-title { display: block; font-family: var(--font-display); font-size: 21px; line-height: 1.25; color: #fff; }
@@ -1471,20 +1479,22 @@
   @media (min-width: 900px) { .cw-webinar-grid { grid-template-columns: 1.1fr 0.9fr; gap: 56px; align-items: start; } }
   .cw-webinar-form { background: #fff; border: 1px solid rgba(48,68,81,0.16); border-top: 3px solid var(--cw-gold); padding: 28px; }
   .cw-webinar-form-title { font-family: var(--font-display); font-weight: 700; font-size: 1.6rem; color: var(--cw-slate); margin: 0 0 12px; }
-  .cw-webinar-notice { font-family: var(--font-sans); font-size: 14px; line-height: 1.55; color: var(--cw-slate); background: var(--cw-bg); border-left: 3px solid var(--cw-gold); padding: 12px 14px; margin: 0 0 20px; }
-  .cw-webinar-notice a { color: var(--cw-gold-text); font-weight: 700; }
   .cw-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; min-width: 0; }
   .cw-field > span { font-family: var(--font-sans); font-size: 13px; font-weight: 600; color: var(--cw-slate); }
   /* width:100% + min-width:0 so inputs fill their cell and shrink (inputs carry a
      ~200px default intrinsic width that otherwise overflows narrow viewports). */
-  .cw-field input, .cw-field select { width: 100%; min-width: 0; box-sizing: border-box; font-family: var(--font-sans); font-size: 16px; padding: 11px 12px; border: 1px solid rgba(48,68,81,0.28); background: #fff; border-radius: 0; }
+  .cw-field input, .cw-field select { width: 100%; min-width: 0; box-sizing: border-box; font-family: var(--font-sans); font-size: 16px; padding: 11px 12px; border: 1px solid rgba(48,68,81,0.28); background: #fff; border-radius: 0; transition: border-color .15s ease, box-shadow .15s ease; }
+  .cw-field input:focus, .cw-field select:focus { outline: none; border-color: var(--cw-gold); box-shadow: 0 0 0 3px rgba(155,128,89,0.18); }
   .cw-field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   @media (max-width: 560px) { .cw-field-row { grid-template-columns: 1fr; } }
   .cw-field-check { display: flex; align-items: flex-start; gap: 10px; margin: 4px 0 20px; font-family: var(--font-sans); font-size: 13.5px; line-height: 1.5; color: var(--cw-slate); }
+  .cw-field-check input { accent-color: var(--cw-gold); width: 16px; height: 16px; margin-top: 1px; flex: none; }
+  .cw-field-check input:focus-visible { outline: 2px solid var(--cw-gold); outline-offset: 2px; }
   .cw-webinar-form .cw-btn-gold { width: 100%; }
   .cw-webinar-form .cw-btn-gold[disabled] { opacity: 0.6; cursor: not-allowed; }
-  .cw-webinar-static-hint { font-family: var(--font-sans); font-size: 12.5px; color: var(--cw-muted); margin: 10px 0 0; text-align: center; }
   .cw-form-error { color: #b23b3b; font-family: var(--font-sans); font-size: 14px; margin-top: 10px; }
+  /* Form success state — gold check above the confirmation heading. */
+  .cw-form-check { display: block; margin: 0 0 14px; }
   .learn-article { max-width: 760px; margin-left: auto; margin-right: auto; }
   .learn-article.cw-container { padding-top: 48px; }
 
