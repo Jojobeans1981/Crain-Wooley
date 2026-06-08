@@ -977,19 +977,17 @@
  * ════════════════════════════════════════════════════════════════════════ */
 @layer components {
   /* Announcement bar (gold) */
-  /* Light announcement strip above the slate bar, full-bleed (matches live). */
   .cw-anno {
-    background: #fff;
-    color: var(--cw-slate);
-    border-bottom: 1px solid rgba(48,68,81,0.12);
+    background: var(--cw-gold-band); /* #8A7142 — gold fill behind white text, AA 4.6:1; same gold as the guide band. EXACT-ORIGINAL alt: #9B8059 (fails AA, 3.73:1). SAFER alt: var(--cw-gold-strong) #806848 (5.26:1). */
+    color: #fff;
     font-family: var(--font-sans);
     font-weight: 600;
     text-align: center;
     line-height: 1.4;
-    padding: 14px 22px;
+    padding: 18.5px 22px; /* was 14px — strip now ~59px to match live's anno height (was ~50px) */
     font-size: 15px;
   }
-  .cw-anno a { color: var(--cw-gold-text); text-underline-offset: 3px; }
+  .cw-anno a { color: #fff; text-underline-offset: 3px; }
   .cw-anno a:hover { text-decoration-thickness: 2px; }
 
   /* Sticky slate header */
