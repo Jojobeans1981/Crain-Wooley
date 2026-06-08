@@ -1394,6 +1394,12 @@
   /* ── Body column ── */
   .legacy-body { padding-top: 44px; padding-bottom: 56px; }
 
+  /* Blog posts: live uses a tall gold title band with a white centered H1, no breadcrumb. White on #9B8059 = 3.73:1, but the title is large text (>=34px) so it clears the 3:1 large-text bar. */
+  .legacy-banner--blog { background: var(--cw-gold); padding: clamp(80px, 9vw, 156px) 0; }
+  .legacy-banner--blog .legacy-banner-title { color: #fff; }
+  /* Live blog body column is wider than the standard 760 article measure. */
+  .legacy-body--blog .learn-article { max-width: 900px; }
+
   /* HTML sitemap (/site-map) — grouped, multi-column link directory */
   .cw-sitemap { padding-top: 40px; padding-bottom: 64px; }
   .cw-sitemap section { margin-bottom: 30px; }
