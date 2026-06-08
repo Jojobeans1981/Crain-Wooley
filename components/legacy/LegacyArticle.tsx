@@ -2,7 +2,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import type { LegacyPage } from '@/lib/legacy'
 import { getSectionNav, type SectionNav, type SectionNavItem } from '@/lib/legacy/section-nav'
-import blogImages from '@/lib/legacy/blog-images.json'
 import { teamMemberByPath } from '@/lib/legacy/team'
 import { ValueProps, ReviewsSection, Locations } from '@/components/site/home/sections'
 import type { ReactNode } from 'react'
@@ -104,8 +103,6 @@ export default function LegacyArticle({ page, path }: { page: LegacyPage; path: 
   const section = KICKER[page.type] ?? 'Crain & Wooley'
   const title = page.h1 || page.title
   const nav = getSectionNav(path)
-  // Blog posts carry a re-hosted featured image (parity with the source).
-  const featured = page.type === 'blog_post' ? (blogImages as Record<string, string>)[path] : undefined
   // Staff bio pages show the member's portrait (same headshot as the team listing).
   const member = page.type === 'staff' ? teamMemberByPath(path) : undefined
 
@@ -113,28 +110,24 @@ export default function LegacyArticle({ page, path }: { page: LegacyPage; path: 
     <>
     <div className="cw-article-bg">
       {/* Page-title block — dark slate banner with breadcrumb + H1 (matches live interior) */}
-      <header className="legacy-banner">
+      <header className={`legacy-banner${page.type === 'blog_post' ? ' legacy-banner--blog' : ''}`}>
         <div className="cw-container legacy-banner-inner">
-          <nav aria-label="Breadcrumb" className="legacy-crumbs">
-            <ol>
-              <li><Link href="/">Home</Link></li>
-              <li><span>{section}</span></li>
-              <li><span aria-current="page">{title}</span></li>
-            </ol>
-          </nav>
+          {page.type !== 'blog_post' && (
+            <nav aria-label="Breadcrumb" className="legacy-crumbs">
+              <ol>
+                <li><Link href="/">Home</Link></li>
+                <li><span>{section}</span></li>
+                <li><span aria-current="page">{title}</span></li>
+              </ol>
+            </nav>
+          )}
           <h1 className="legacy-banner-title">{title}</h1>
         </div>
       </header>
 
-      <div className={nav ? 'cw-container legacy-shell' : 'cw-container legacy-body'}>
+      <div className={nav ? 'cw-container legacy-shell' : `cw-container legacy-body${page.type === 'blog_post' ? ' legacy-body--blog' : ''}`}>
         {nav && <SectionSidebar nav={nav} />}
         <div className="legacy-article-col">
-        {featured && (
-          <div className="legacy-blog-hero">
-            {/* decorative — the headline conveys the topic */}
-            <Image src={`/legacy/blog/${featured}`} alt="" fill sizes="(max-width: 980px) 100vw, 760px" style={{ objectFit: 'cover' }} priority />
-          </div>
-        )}
         {member && (
           <div className="legacy-bio-portrait">
             {/* decorative — the name is the page <h1> in the banner above */}
