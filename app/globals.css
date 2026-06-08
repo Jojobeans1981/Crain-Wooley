@@ -732,6 +732,15 @@
   .cw-hero-anim .cw-hero-title   { animation-delay: 180ms; }
   .cw-hero-anim .cw-hero-sub     { animation-delay: 320ms; }
   .cw-hero-anim .cw-hero-ctas    { animation-delay: 460ms; }
+  /* Marketing homepage hero also animates its italic subtitle + CTA button
+     (scoped to .cw-hero so the intake get-started hero is unaffected). */
+  .cw-hero.cw-hero-anim .cw-hero-subtitle,
+  .cw-hero.cw-hero-anim .cw-btn-gold {
+    opacity: 0;
+    animation: cwHeroEnter 560ms cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  }
+  .cw-hero.cw-hero-anim .cw-hero-subtitle { animation-delay: 250ms; }
+  .cw-hero.cw-hero-anim .cw-btn-gold { animation-delay: 460ms; }
   @keyframes cwHeroEnter {
     from { opacity: 0; transform: translateY(12px); }
     to   { opacity: 1; transform: none; }
@@ -746,7 +755,9 @@
     .cw-hero-anim .cw-hero-eyebrow,
     .cw-hero-anim .cw-hero-title,
     .cw-hero-anim .cw-hero-sub,
-    .cw-hero-anim .cw-hero-ctas {
+    .cw-hero-anim .cw-hero-ctas,
+    .cw-hero.cw-hero-anim .cw-hero-subtitle,
+    .cw-hero.cw-hero-anim .cw-btn-gold {
       opacity: 1;
       animation: none;
     }

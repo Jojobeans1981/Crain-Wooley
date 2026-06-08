@@ -14,7 +14,7 @@ import { FEATURED_REVIEWS } from '@/lib/reviews'
 // ── 1. Mainstage hero ──
 export function Hero() {
   return (
-    <section className="cw-hero" aria-label="Introduction">
+    <section className="cw-hero cw-hero-anim" aria-label="Introduction">
       <div className="cw-hero-bg">
         <HeroVideo />
         <div className="cw-hero-overlay" aria-hidden="true" />
@@ -117,7 +117,7 @@ const INTRO_MORE: { h2?: string; h3?: string; p?: string }[] = [
 export function IntroVideo() {
   return (
     <section className="cw-intro" aria-label="About Crain & Wooley">
-      <div className="cw-container cw-intro-grid">
+      <div className="cw-container cw-intro-grid reveal">
         <div className="cw-intro-copy">
           <h1 className="cw-intro-title">Estate Planning Attorneys in Dallas-Fort Worth</h1>
           <h2 className="cw-h2">Let Our Compassionate Lawyers Help Protect Your Legacy</h2>
@@ -192,7 +192,7 @@ export function GuideBand() {
     <section className="cw-guide" aria-label="Free Estate Planning Guide">
       <Image className="cw-guide-bg" src="/home/guide-band-bg.jpg" alt="" fill sizes="100vw" style={{ objectFit: 'cover' }} aria-hidden="true" />
       <div className="cw-guide-tint" aria-hidden="true" />
-      <div className="cw-container cw-guide-inner">
+      <div className="cw-container cw-guide-inner reveal">
         <div className="cw-guide-copy">
           <strong className="cw-eyebrow cw-eyebrow-light">Download Our Free Estate Planning Guide</strong>
           <p>The world of estate planning can be overwhelming, but our team aims to make things simple. Download our Free Estate Planning Guide today to learn more.</p>
@@ -217,11 +217,11 @@ export function PracticeAreas() {
   return (
     <section className="cw-services" aria-label="Practice areas">
       <div className="cw-container">
-        <div className="cw-section-head">
+        <div className="cw-section-head reveal">
           <span className="cw-eyebrow">Estate Planning Services</span>
           <h2 className="cw-h2">What We Can Do For You</h2>
         </div>
-        <ul className="cw-service-grid">
+        <ul className="cw-service-grid reveal-stagger">
           {SERVICES.map((s) => (
             <li key={s.href}>
               <Link href={s.href} className="cw-service-card">
@@ -252,7 +252,7 @@ export function Divider() {
 export function ReviewsSection() {
   return (
     <section className="cw-reviews" aria-label="Client testimonials">
-      <div className="cw-container cw-reviews-grid">
+      <div className="cw-container cw-reviews-grid reveal">
         <div className="cw-reviews-left">
           <Testimonials reviews={FEATURED_REVIEWS} />
           <Link href="/reviews/" className="cw-btn-gold cw-reviews-cta">View All Reviews</Link>
@@ -279,12 +279,12 @@ export function ValueProps() {
   return (
     <section className="cw-values" aria-label="Why choose us">
       <div className="cw-container cw-values-grid">
-        <div className="cw-values-head">
+        <div className="cw-values-head reveal">
           <span className="cw-eyebrow cw-eyebrow-light">Designed for Your Comfort &amp; Convenience</span>
           <h2 className="cw-h2 cw-h2-light">Estate Planning With Us Means:</h2>
           <Link href="/contact-us/" className="cw-btn-gold">Contact Us</Link>
         </div>
-        <ul className="cw-values-list">
+        <ul className="cw-values-list reveal-stagger">
           {VALUES.map((v) => (
             <li key={v.title} className="cw-value">
               <span className="cw-value-icon" aria-hidden="true">
@@ -316,10 +316,10 @@ export function LatestNews() {
   return (
     <section className="cw-news" aria-label="Latest news">
       <div className="cw-container">
-        <div className="cw-section-head">
+        <div className="cw-section-head reveal">
           <h2 className="cw-h2">Latest News From Crain &amp; Wooley</h2>
         </div>
-        <ul className="cw-news-grid">
+        <ul className="cw-news-grid reveal-stagger">
           {POSTS.map((p) => (
             <li key={p.href}>
               <Link href={p.href} className="cw-news-card">
@@ -351,11 +351,11 @@ export function Locations() {
   return (
     <section className="cw-locations" aria-label="Schedule a consultation">
       <div className="cw-container">
-        <div className="cw-section-head cw-section-head-light">
+        <div className="cw-section-head cw-section-head-light reveal">
           <h2 className="cw-h2 cw-h2-light">Schedule a Consultation Today!</h2>
           <p className="cw-locations-sub">Start By Selecting a Convenient Location</p>
         </div>
-        <ul className="cw-loc-grid">
+        <ul className="cw-loc-grid reveal-stagger">
           {LOCATIONS.map((l) => (
             <li key={l.city} className="cw-loc-card">
               <span className="cw-loc-thumb">
