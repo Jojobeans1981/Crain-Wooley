@@ -175,7 +175,11 @@ export function IntroVideo() {
             </div>
           )}
           {/* Quick path into the Learning Center self-assessment. */}
-          <Link href="/learn/quizzes/which-plan-do-i-need" className="cw-btn-gold cw-intro-quiz-btn">Take the Quiz</Link>
+          <div className="cw-intro-quiz">
+            <h3 className="cw-intro-quiz-title">Which Estate Plan Do I Need?</h3>
+            <p className="cw-intro-quiz-copy">Free 2-minute quiz &mdash; answer a few questions about your life and goals, and we&rsquo;ll point you to the right place to start.</p>
+            <Link href="/learn/quizzes/which-plan-do-i-need" className="cw-btn-gold">Take the Quiz</Link>
+          </div>
         </div>
       </div>
     </section>
