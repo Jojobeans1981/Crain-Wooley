@@ -67,3 +67,6 @@ prisma/*.db-journal
 
 .vercel
 .gstack/
+
+# responsive-audit screenshots (scripts/mobile-audit.mjs output)
+mobile-audit/
