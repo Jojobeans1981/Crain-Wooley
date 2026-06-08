@@ -1243,8 +1243,11 @@
   .cw-intro-video { width: 100%; aspect-ratio: 16 / 10; background: var(--cw-slate); border: 1px solid rgba(48,68,81,0.18); display: block; }
   .cw-intro-play { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 64px; height: 64px; border-radius: 50%; background: rgba(138,113,66,0.92); }
   .cw-intro-play::after { content: ""; position: absolute; left: 54%; top: 50%; transform: translate(-50%,-50%); border-style: solid; border-width: 11px 0 11px 18px; border-color: transparent transparent transparent #fff; }
-  /* "Take the Quiz" CTA centered beneath the attorney video/poster. */
-  .cw-intro-quiz-btn { align-self: center; }
+  /* "Which Estate Plan Do I Need?" quiz card beneath the attorney video/poster. */
+  .cw-intro-quiz { background: #fff; border: 1px solid rgba(48,68,81,0.14); border-top: 3px solid var(--cw-gold); padding: 22px 24px; }
+  .cw-intro-quiz-title { font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; line-height: 1.2; color: var(--cw-slate); margin: 0 0 8px; }
+  .cw-intro-quiz-copy { font-family: var(--font-sans); font-size: 14px; line-height: 1.55; color: #3c4751; margin: 0 0 16px; }
+  .cw-intro-quiz .cw-btn-gold { width: 100%; }
   /* Poster is the attorney photo (Justin + Jacob) with name labels at the edges;
      match its aspect ratio so cover doesn't crop the names off the sides. */
   .cw-intro-video-poster { position: relative; overflow: hidden; aspect-ratio: 1280 / 666; }
