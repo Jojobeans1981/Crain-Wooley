@@ -44,3 +44,25 @@ export function yearMonths(): { year: string; month: string }[] {
   }
   return out
 }
+
+import legacyPages from './legacy-pages.json'
+
+const MONTHS_FULL = ['January','February','March','April','May','June','July','August','September','October','November','December']
+const pageBody = (path: string): string => ((legacyPages as Record<string, { body?: string }>)[path]?.body) ?? ''
+
+export interface DatedBlogPost extends BlogPost { date: string; ts: number }
+
+function postDate(p: BlogPost): { date: string; ts: number } {
+  const m = pageBody(p.path).slice(0, 500).match(/(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2}),\s+(20\d\d)/)
+  if (m) {
+    const mi = MONTHS_FULL.indexOf(m[1])
+    return { date: `${m[1]} ${Number(m[2])}, ${m[3]}`, ts: Date.UTC(Number(m[3]), mi, Number(m[2])) }
+  }
+  return { date: `${cap(p.month)} ${p.year}`, ts: Date.UTC(Number(p.year), p.monthIdx, 1) }
+}
+
+let _sorted: DatedBlogPost[] | null = null
+export function allPostsSorted(): DatedBlogPost[] {
+  if (!_sorted) _sorted = POSTS.map((p) => ({ ...p, ...postDate(p) })).sort((a, b) => b.ts - a.ts)
+  return _sorted
+}
