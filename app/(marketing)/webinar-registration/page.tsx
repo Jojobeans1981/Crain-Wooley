@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { pageMetadata } from '@/lib/seo'
+import { WebinarForm } from '@/components/site/WebinarForm'
 
 /**
  * Webinar registration (closes the announcement-bar /webinar-registration 404).
@@ -67,38 +68,7 @@ export default function WebinarRegistrationPage() {
             </ul>
           </div>
 
-          {/* Registration form — STATIC. TODO: wire to the real submission
-              endpoint (Scorpion/CRM webhook). No endpoint is invented here; the
-              form does not submit. */}
-          <aside className="cw-webinar-form" aria-labelledby="reg-h">
-            <h2 id="reg-h" className="cw-webinar-form-title">Register today!</h2>
-            <p className="cw-webinar-notice" role="note">
-              Online registration is being connected. To reserve your seat now, call{' '}
-              <a href="tel:9729451610">(972) 945-1610</a>.
-            </p>
-            <form aria-describedby="reg-static">
-              <label className="cw-field">
-                <span>Session</span>
-                <select name="session" defaultValue="" disabled>
-                  <option value="" disabled>Select a session…</option>
-                  <option value="12pm">12:00 pm</option>
-                  <option value="630pm">6:30 pm</option>
-                </select>
-              </label>
-              <div className="cw-field-row">
-                <label className="cw-field"><span>First Name</span><input type="text" name="firstName" autoComplete="given-name" disabled /></label>
-                <label className="cw-field"><span>Last Name</span><input type="text" name="lastName" autoComplete="family-name" disabled /></label>
-              </div>
-              <label className="cw-field"><span>Email</span><input type="email" name="email" autoComplete="email" disabled /></label>
-              <label className="cw-field"><span>Phone Number</span><input type="tel" name="phone" autoComplete="tel" disabled /></label>
-              <label className="cw-field-check">
-                <input type="checkbox" name="consent" disabled />
-                <span>I consent to receiving emails and/or text message reminders for this event.</span>
-              </label>
-              <button type="button" className="cw-btn-gold" disabled aria-disabled="true">Register</button>
-              <p id="reg-static" className="cw-webinar-static-hint">Form not yet active &mdash; please call to register.</p>
-            </form>
-          </aside>
+          <WebinarForm />
         </div>
       </div>
     </div>
