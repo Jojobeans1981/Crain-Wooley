@@ -20,6 +20,10 @@ export function WebinarForm() {
 
   if (status === 'done') return (
     <aside className="cw-webinar-form" role="status" aria-labelledby="reg-h">
+      <svg className="cw-form-check" width="46" height="46" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="12" fill="#806848" />
+        <path d="M7 12.4l3.2 3.2L17 9" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
       <h2 id="reg-h" className="cw-webinar-form-title">You’re registered!</h2>
       <p>Thanks, {form.firstName || 'there'} — we’ll email your webinar details shortly. Questions? Call <a href="tel:9729451610">(972) 945-1610</a>.</p>
     </aside>
