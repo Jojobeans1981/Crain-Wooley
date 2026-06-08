@@ -174,6 +174,8 @@ export function IntroVideo() {
               <span className="cw-intro-play" aria-hidden="true" />
             </div>
           )}
+          {/* Quick path into the Learning Center self-assessment. */}
+          <Link href="/learn/quizzes/which-plan-do-i-need" className="cw-btn-gold cw-intro-quiz-btn">Take the Quiz</Link>
         </div>
       </div>
     </section>
