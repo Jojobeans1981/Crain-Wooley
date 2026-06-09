@@ -10,6 +10,12 @@ function ScheduleContent() {
   const params = useSearchParams()
   const sessionId = params.get('session_id')
   const leadId = params.get('leadId')
+  const rawCalLink = process.env.NEXT_PUBLIC_CAL_LINK?.trim() || ''
+  const calLink = rawCalLink
+    ? /^https?:\/\//i.test(rawCalLink)
+      ? rawCalLink
+      : `https://${rawCalLink.replace(/^\/+/, '')}`
+    : ''
   const [leadName, setLeadName] = useState('')
   const [verified, setVerified] = useState(false)
   const [checking, setChecking] = useState(true)
@@ -143,32 +149,45 @@ function ScheduleContent() {
             </div>
 
             <div className="cw-panel-gold overflow-hidden min-h-[520px] relative">
-              <div className="p-10 text-center space-y-5 min-h-[520px] flex flex-col items-center justify-center">
-                <div className="border-2 border-cw-gold rounded w-16 h-16 flex items-center justify-center text-cw-gold text-xs font-semibold tracking-wider">
-                  CAL
+              {calLink ? (
+                <div className="min-h-[520px] bg-white">
+                  <iframe
+                    title="Cal.com scheduling widget"
+                    src={calLink}
+                    className="w-full min-h-[520px] border-0"
+                    loading="lazy"
+                    allow="camera; microphone; fullscreen; clipboard-read; clipboard-write"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  />
                 </div>
-                <p className="text-xs text-cw-ink-mute uppercase tracking-widest font-semibold">Scheduling Widget</p>
-                <p className="text-cw-ink-soft text-sm max-w-sm leading-relaxed">
-                  The Cal.com embed loads here. It is configured to pass your lead details securely.
-                </p>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-lg mt-8">
-                  <div className="p-4 border border-cw-line bg-white rounded text-left">
-                    <div className="text-[10px] text-cw-ink-mute uppercase mb-1 tracking-wider font-semibold">Pass-through</div>
-                    <div className="text-xs text-cw-navy">leadId: {leadId}</div>
-                    <div className="text-xs text-cw-navy">name: {leadName}</div>
+              ) : (
+                <div className="p-10 text-center space-y-5 min-h-[520px] flex flex-col items-center justify-center">
+                  <div className="border-2 border-cw-gold rounded w-16 h-16 flex items-center justify-center text-cw-gold text-xs font-semibold tracking-wider">
+                    CAL
                   </div>
-                  <div className="p-4 border border-cw-line bg-white rounded text-left">
-                    <div className="text-[10px] text-cw-ink-mute uppercase mb-1 tracking-wider font-semibold">Event Type</div>
-                    <div className="text-xs text-cw-navy">60-Min Consultation</div>
-                    <div className="text-xs text-cw-navy">Price: $0 (pre-paid)</div>
+                  <p className="text-xs text-cw-ink-mute uppercase tracking-widest font-semibold">Scheduling Widget</p>
+                  <p className="text-cw-ink-soft text-sm max-w-sm leading-relaxed">
+                    Set <code className="font-mono">NEXT_PUBLIC_CAL_LINK</code> to load the live Cal.com scheduler here.
+                  </p>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-lg mt-8">
+                    <div className="p-4 border border-cw-line bg-white rounded text-left">
+                      <div className="text-[10px] text-cw-ink-mute uppercase mb-1 tracking-wider font-semibold">Pass-through</div>
+                      <div className="text-xs text-cw-navy">leadId: {leadId}</div>
+                      <div className="text-xs text-cw-navy">name: {leadName}</div>
+                    </div>
+                    <div className="p-4 border border-cw-line bg-white rounded text-left">
+                      <div className="text-[10px] text-cw-ink-mute uppercase mb-1 tracking-wider font-semibold">Event Type</div>
+                      <div className="text-xs text-cw-navy">60-Min Consultation</div>
+                      <div className="text-xs text-cw-navy">Price: $0 (pre-paid)</div>
+                    </div>
+                  </div>
+
+                  <div className="mt-6 text-[10px] text-cw-ink-mute uppercase tracking-widest font-semibold">
+                    Ready to sync with Clio and calendar
                   </div>
                 </div>
-
-                <div className="mt-6 text-[10px] text-cw-ink-mute uppercase tracking-widest font-semibold">
-                  Ready to sync with Clio and calendar
-                </div>
-              </div>
+              )}
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-center">

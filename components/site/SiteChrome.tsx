@@ -442,11 +442,6 @@ const OFFICES = [
     map: 'http://maps.google.com/maps?f=q&hl=en&z=15&q=6040%20Camp%20Bowie%20Blvd.,Fort%20Worth,TX,76116',
   },
 ]
-// TODO(addresses): the LIVE site (values above) and the old staging build
-// disagreed on the Mansfield and Fort Worth addresses — staging omitted the
-// suite numbers / used different values. Using the LIVE values here for parity.
-// Confirm the canonical addresses with the client before launch.
-
 const SOCIAL = [
   {
     label: 'Facebook', href: 'https://www.facebook.com/crainwooley/',

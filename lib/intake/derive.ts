@@ -4,6 +4,7 @@
  * summary (also used as the Clio matter description), and the Prisma row.
  */
 import type { IntakeForm } from '@/lib/intake/schema'
+import type { IntakeFormData, PracticeArea, Urgency } from '@/types'
 import {
   SERVICE_OPTIONS, OFFICE_OPTIONS, URGENCY_OPTIONS, WILLS_ASSET_OPTIONS, ASSET_OPTIONS,
 } from '@/lib/intake/schema'
@@ -17,7 +18,7 @@ const label = (opts: ReadonlyArray<{ id: string; label: string }>, id: string) =
 const yn = (v: boolean | null) => (v === true ? 'Yes' : v === false ? 'No' : '—')
 
 /** Source urgency id → app Urgency enum (drives the qualify gate). */
-export function mapUrgency(form: IntakeForm): $Enums.Urgency {
+export function mapUrgency(form: IntakeForm): Urgency {
   switch (form.urgency) {
     case 'soon': return 'IMMEDIATE'
     case 'month': return 'WITHIN_MONTH'
@@ -27,7 +28,7 @@ export function mapUrgency(form: IntakeForm): $Enums.Urgency {
   }
 }
 
-export function mapPracticeArea(form: IntakeForm): $Enums.PracticeArea {
+export function mapPracticeArea(form: IntakeForm): PracticeArea {
   return form.intakeType === 'probate' ? 'PROBATE' : 'ESTATE_PLANNING'
 }
 
@@ -103,16 +104,16 @@ export function buildIntakeSummary(form: IntakeForm): string {
 }
 
 /** Minimal shape qualifyLead() consumes (matches IntakeFormData fields it reads). */
-export function deriveGateInput(form: IntakeForm) {
+export function deriveGateInput(form: IntakeForm): IntakeFormData {
   return {
     firstName: form.firstName,
     lastName: form.lastName,
     email: form.email,
     phone: form.phone,
-    practiceArea: mapPracticeArea(form),
+    practiceArea: mapPracticeArea(form) as $Enums.PracticeArea,
     caseType: deriveCaseType(form),
     description: buildIntakeSummary(form),
-    urgency: mapUrgency(form),
+    urgency: mapUrgency(form) as $Enums.Urgency,
     consentToContact: form.consentToContact,
     consentToTerms: form.consentToTerms,
   }
@@ -125,10 +126,10 @@ export function buildLeadData(form: IntakeForm, gate: { qualified: boolean; reas
     lastName: form.lastName,
     email: form.email,
     phone: form.phone,
-    practiceArea: mapPracticeArea(form),
+    practiceArea: mapPracticeArea(form) as $Enums.PracticeArea,
     caseType: deriveCaseType(form),
     description: buildIntakeSummary(form),
-    urgency: mapUrgency(form),
+    urgency: mapUrgency(form) as $Enums.Urgency,
     qualified: gate.qualified,
     disqualifyReason: gate.reason,
     status: (gate.qualified ? 'QUALIFIED' : 'DISQUALIFIED') as $Enums.LeadStatus,

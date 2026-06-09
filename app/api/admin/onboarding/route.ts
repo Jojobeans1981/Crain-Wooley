@@ -5,6 +5,7 @@ import { prisma } from '@/lib/db/prisma'
 import { enqueueClioSync, drainClioOutbox } from '@/lib/clio/outbox'
 import { isClioConnected } from '@/lib/clio/connection'
 import { requireRole } from '@/src/lib/auth/requireRole'
+import { sendPortalAccessEmail } from '@/lib/portal/notify'
 
 export async function POST(req: NextRequest) {
   const auth = await requireRole(req, 'ADMIN')
@@ -30,6 +31,10 @@ export async function POST(req: NextRequest) {
     })
 
     await enqueueClioSync('ONBOARD_MATTER', leadId)
+
+    await sendPortalAccessEmail(leadId, 'admin-onboarding-started').catch((error) => {
+      console.error('[ADMIN_ONBOARDING] portal email failed', error)
+    })
 
     // Fast path: if Clio is connected, sync now so the admin sees parity behavior.
     if (await isClioConnected()) {

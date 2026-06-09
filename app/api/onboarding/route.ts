@@ -2,6 +2,7 @@ export const dynamic = 'force-dynamic'
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/db/prisma'
 import { ClioService } from '@/lib/clio/ClioService'
+import { sendPortalAccessEmail } from '@/lib/portal/notify'
 
 export async function POST(req: NextRequest) {
   try {
@@ -72,6 +73,10 @@ export async function POST(req: NextRequest) {
         clioContactId: contactId,
         clioMatterId: matter.id,
       },
+    })
+
+    await sendPortalAccessEmail(leadId, 'onboarding-started').catch((error) => {
+      console.error('[ONBOARDING] portal email failed', error)
     })
 
     return NextResponse.json({

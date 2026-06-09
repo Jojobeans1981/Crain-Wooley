@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && (prisma migrate deploy || echo 'migrate deploy skipped — DB unavailable at build (see PR #21)') && next build",
+    "build": "node scripts/build.mjs",
     "start": "next start",
     "lint": "eslint",
     "predev": "node scripts/build-search-index.mjs",

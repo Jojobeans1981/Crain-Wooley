@@ -27,6 +27,11 @@ export type AuditEventType =
   | 'ONBOARDING_TEMPLATE_UPDATED'
   | 'CLIO_CONNECTED'
   | 'CLIO_DRAIN'
+  | 'PORTAL_LINK_REQUESTED'
+  | 'PORTAL_LINK_SENT'
+  | 'PORTAL_ITEM_REQUESTED'
+  | 'PORTAL_SIGNATURE_REQUESTED'
+  | 'PORTAL_DOCUMENT_UPLOADED'
 
 export async function auditEvent(input: {
   type: AuditEventType

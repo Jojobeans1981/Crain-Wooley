@@ -29,8 +29,6 @@ export function Hero() {
           backgrounds throughout their lifetime. No matter where you are in life, we make estate
           planning simple to better prepare you and your family for the future.
         </p>
-        {/* TODO: primary hero CTA may later divert to /qualify (the intake funnel).
-            For now it matches the live destination (/contact-us/). */}
         <Link href="/contact-us/" className="cw-btn-gold">Book a Consultation</Link>
       </div>
     </section>

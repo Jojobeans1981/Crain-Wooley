@@ -19,7 +19,7 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: '*',
         allow: '/',
         // Never index the app/admin/intake-internal surfaces.
-        disallow: ['/dashboard', '/leads', '/sequences', '/ghost-assistant', '/login', '/unauthorized', '/api/', '/payment', '/tracker'],
+        disallow: ['/dashboard', '/leads', '/sequences', '/ghost-assistant', '/login', '/unauthorized', '/api/', '/payment', '/tracker', '/portal'],
       },
     ],
     sitemap: `${SITE}/sitemap.xml`,

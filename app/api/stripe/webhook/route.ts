@@ -5,6 +5,7 @@ import { prisma } from '@/lib/db/prisma'
 import { enqueueClioSync, drainClioOutbox } from '@/lib/clio/outbox'
 import { isClioConnected } from '@/lib/clio/connection'
 import { auditEvent } from '@/lib/audit'
+import { sendPortalAccessEmail } from '@/lib/portal/notify'
 import type Stripe from 'stripe'
 
 export async function POST(req: NextRequest) {
@@ -45,6 +46,10 @@ export async function POST(req: NextRequest) {
         type: 'PAYMENT_COMPLETED',
         leadId,
         meta: { stripeSessionId: session.id },
+      })
+
+      await sendPortalAccessEmail(leadId, 'payment-completed').catch((error) => {
+        console.error('[STRIPE WEBHOOK] portal email failed', error)
       })
 
       // Disconnect-safe Clio sync: persist the intent, then drain if connected.

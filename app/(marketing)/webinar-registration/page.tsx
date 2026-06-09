@@ -5,9 +5,8 @@ import { WebinarForm } from '@/components/site/WebinarForm'
 /**
  * Webinar registration (closes the announcement-bar /webinar-registration 404).
  * Content ported from estateplanningdfw.law/webinar-registration. The live page
- * has a registration form; this is a FAITHFUL STATIC rendering of it — there is
- * deliberately NO submission endpoint wired here (see the TODO on the <form>).
- * Until it's connected, the visible notice + phone number is the working path.
+ * includes the registration form wired through the shared marketing lead
+ * endpoint, so the visible form is the working path.
  */
 export const metadata = pageMetadata({
   title: 'Webinar Registration | Crain & Wooley',
