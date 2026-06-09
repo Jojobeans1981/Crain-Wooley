@@ -1,0 +1,170 @@
+═══════════════════════════════════════════════════════════════════════════════
+  WHERE TO GET EACH ENV VAR — VISUAL MAP
+═══════════════════════════════════════════════════════════════════════════════
+
+1️⃣  LEAD_NOTIFICATION_EMAIL
+────────────────────────────────────────────────────────────────────────────────
+    You don't GET it. You DECIDE it.
+
+    📞 CALL HARON or JUSTIN
+
+    Question: "Where should website leads email go?"
+
+    They'll say one of:
+    ├─ intake@crainwooley.com      ← firm main inbox
+    ├─ haron@futureeng.com          ← ops team
+    └─ justin@crainwooley.com       ← attorney
+
+    Write down their answer ✍️
+    Use that value.
+
+═══════════════════════════════════════════════════════════════════════════════
+
+2️⃣  RESEND_API_KEY
+────────────────────────────────────────────────────────────────────────────────
+    WHERE: 🌐 https://resend.com/dashboard
+
+    LOGIN with Crain & Wooley account
+    (Ask Haron if you don't have it)
+
+    LOOK for: Left sidebar
+            ↓
+           "API Keys"  or "Settings" → "API Keys"
+
+    COPY: The long string that starts with "re_"
+          ↓
+          re_1234567890abcdef...
+
+    OR ask Haron: "Can you send me the Resend API key?"
+
+    ✏️ Write it down when you have it
+
+═══════════════════════════════════════════════════════════════════════════════
+
+3️⃣  RESEND_FROM_EMAIL
+────────────────────────────────────────────────────────────────────────────────
+    WHERE: 🌐 https://resend.com/dashboard (same place as #2)
+
+    LOGIN (same account)
+
+    LOOK for: Left sidebar
+            ↓
+           "Domains" or "Senders"
+
+    FIND: An email that has a GREEN CHECKMARK ✓
+          (like: intake@crainwooley.com)
+
+    If no checkmark:
+    ├─ Click "Verify"
+    ├─ Check that email inbox
+    ├─ Click the link Resend sent
+    └─ Come back (should be green now)
+
+    COPY: The verified email
+
+    ✏️ Write it down
+
+═══════════════════════════════════════════════════════════════════════════════
+
+4️⃣  PORTAL_LINK_SECRET
+────────────────────────────────────────────────────────────────────────────────
+    You GENERATE this (no account needed)
+
+    OPEN: Terminal or PowerShell
+
+    PASTE THIS:
+
+    ┌─────────────────────────────────────────────────────────────┐
+    │ node -e "console.log(require('crypto').randomBytes(32)      │
+    │ .toString('hex'))"                                          │
+    └─────────────────────────────────────────────────────────────┘
+
+    PRESS: Enter
+
+    GET: Random string (32 characters)
+         ↓
+         a7f3e9c1b2d8f4a6c9e1b3d5f7a9c2e4
+
+    COPY: That string
+
+    ✏️ Write it down
+
+═══════════════════════════════════════════════════════════════════════════════
+
+5️⃣  NEXT_PUBLIC_GUIDE_VIDEO_URL
+────────────────────────────────────────────────────────────────────────────────
+    You GET this AFTER uploading videos to Blob
+
+    WHEN: After you migrate 12 videos to Vercel Blob
+
+    PROCESS:
+    1. Ask Haron for Vercel Blob token
+    2. Upload 12 MP4s to Blob
+       (Follow: https://vercel.com/docs/storage/vercel-blob)
+    3. After upload, Vercel gives you URLs like:
+
+       https://cwboth30-xxxxx.blob.vercel-storage.com/CWBOTH30.mp4
+
+    4. COPY the CWBOTH30 URL
+    5. Use as NEXT_PUBLIC_GUIDE_VIDEO_URL
+
+    ✏️ Do this later (after video migration)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+THEN: SET THEM IN VERCEL
+════════════════════════════════════════════════════════════════════════════════
+
+    1. Go to: 🌐 https://vercel.com
+    2. Click: Crain-Wooley project
+    3. Click: Settings (⚙️ icon, top right)
+    4. Click: Environment Variables (left sidebar)
+    5. Click: Add New
+
+    6. Fill in:
+       Name:  LEAD_NOTIFICATION_EMAIL
+       Value: [what you got from Haron/Justin]
+       Environments: ☑ Production  ☑ Preview
+
+    7. Click: Save
+    8. Repeat for: RESEND_API_KEY, RESEND_FROM_EMAIL, PORTAL_LINK_SECRET
+
+    9. Vercel auto-redeploys
+    10. Test guide form (should email)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+QUICK CHECKLIST
+════════════════════════════════════════════════════════════════════════════════
+
+☐ Call Haron → Ask for LEAD_NOTIFICATION_EMAIL destination
+☐ Go to Resend dashboard → Copy RESEND_API_KEY
+☐ Resend dashboard → Find verified RESEND_FROM_EMAIL (green ✓)
+☐ Open terminal → Run node command → Copy PORTAL_LINK_SECRET
+☐ Go to Vercel → Settings → Environment Variables
+☐ Add 4 vars (Prod + Preview)
+☐ Redeploy
+☐ Test guide form
+☐ [Later] Migrate videos → get NEXT_PUBLIC_GUIDE_VIDEO_URL → set in Vercel
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🆘 IF STUCK
+════════════════════════════════════════════════════════════════════════════════
+
+Can't log in to Resend?
+  → Ask Haron: "What are the Resend credentials?"
+
+Don't have Vercel access?
+  → Ask Haron: "Can you add me as a collaborator to Vercel?"
+
+Node command doesn't work?
+  → Use this instead: https://1password.com/password-generator/
+  → Generate 32+ random chars → Copy → Use
+
+Don't know where leads should email?
+  → Ask Justin Crain directly
+
+═══════════════════════════════════════════════════════════════════════════════
+👉 Still stuck? All details in: GET_ENV_VARS_STEP_BY_STEP.md
+═══════════════════════════════════════════════════════════════════════════════
