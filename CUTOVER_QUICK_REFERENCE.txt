@@ -1,0 +1,198 @@
+═══════════════════════════════════════════════════════════════════════════════
+  CRAIN & WOOLEY CUTOVER — QUICK REFERENCE (Save & Print)
+═══════════════════════════════════════════════════════════════════════════════
+
+PROJECT STATUS: ✅ CODE COMPLETE — READY FOR CUTOVER
+Last commit: 84d8033 (Add handoff docs: code review + Haron summary)
+Staging: https://crain-wooley-intake.vercel.app
+Live target: https://www.estateplanningdfw.law
+
+───────────────────────────────────────────────────────────────────────────────
+  3 BLOCKING ACTIONS (Do these now)
+───────────────────────────────────────────────────────────────────────────────
+
+[ ] 1. Push commits to GitHub
+    cd C:\Users\beame\Desktop\Crain-Wooley
+    git push origin main
+
+    3 commits ready:
+    - Add client portal foundation + onboarding improvements (28 files)
+    - Add cutover documentation: env vars checklist + next steps (2 files)
+    - Add handoff docs: code review + Haron summary (2 files)
+
+[ ] 2. Set Vercel env vars (Production + Preview)
+    LEAD_NOTIFICATION_EMAIL = [firm inbox]
+    RESEND_API_KEY = [confirm set]
+    RESEND_FROM_EMAIL = [confirm verified in Resend]
+    PORTAL_LINK_SECRET = [generate random 32+ char string]
+
+    Then redeploy staging → test guide form → should email firm
+
+[ ] 3. Request Vercel Blob access + migrate videos
+    Download all 12 from estateplanningdfw.law/media/*.mp4 (before DNS!)
+    Upload to Blob
+    Update lib/legacy/legacy-pages.json with Blob URLs
+    Set NEXT_PUBLIC_GUIDE_VIDEO_URL = CWBOTH30 Blob URL
+    Commit + redeploy
+
+───────────────────────────────────────────────────────────────────────────────
+  ESSENTIAL DOCUMENTS (In repo root)
+───────────────────────────────────────────────────────────────────────────────
+
+READ FIRST:
+  HARON_HANDOFF.md ............. 5 min read, all you need to know
+  CUTOVER_ENV_CHECKLIST.md ..... Full env vars + runbook (bookmark this)
+
+REFERENCE:
+  NEXT_STEPS.md ................ Summary of completed work + immediate actions
+  PORTAL_CODE_REVIEW.md ........ Security audit (portal is production-ready)
+  COMPLETION_SUMMARY.md ........ Full status report
+
+───────────────────────────────────────────────────────────────────────────────
+  VERCEL ENV VARS (At a glance)
+───────────────────────────────────────────────────────────────────────────────
+
+BLOCKING (set now):
+  LEAD_NOTIFICATION_EMAIL        [firm inbox]
+  RESEND_API_KEY                 [confirm set]
+  RESEND_FROM_EMAIL              [confirm verified]
+  PORTAL_LINK_SECRET             [new — generate random 32+ chars]
+
+AT CUTOVER (set then):
+  NEXT_PUBLIC_SITE_INDEXABLE=true    (Production only, at DNS cutover)
+  NEXT_PUBLIC_GUIDE_VIDEO_URL        (after video migration to Blob)
+
+IF PRODUCT FUNNEL (Track B):
+  NEXT_PUBLIC_DEMO_MODE=false        (only with live Stripe/Cal/Clio)
+  STRIPE_SECRET_KEY, etc.            (live keys)
+  CLIO_CLIENT_ID, CLIO_CLIENT_SECRET (production OAuth)
+
+───────────────────────────────────────────────────────────────────────────────
+  CUTOVER TIMELINE
+───────────────────────────────────────────────────────────────────────────────
+
+TODAY (Before DNS):
+  [ ] Push commits to GitHub
+  [ ] Set Vercel env + redeploy
+  [ ] Test forms on staging
+  [ ] Download + migrate 12 videos to Blob
+  [ ] Update legacy-pages.json + commit + redeploy
+  [ ] Run mobile audit (if layout changed)
+
+CUTOVER DAY:
+  [ ] Final spot-check on staging (all pages, forms)
+  [ ] Set NEXT_PUBLIC_SITE_INDEXABLE=true (Prod only) + redeploy
+  [ ] Add estateplanningdfw.law to Vercel
+  [ ] Update registrar nameservers to Vercel (DNS cutover — last step)
+  [ ] Verify live domain (pages render, forms work, robots.txt allows indexing)
+
+AFTER CUTOVER (48 hours):
+  [ ] Monitor Vercel logs
+  [ ] Confirm form deliverability
+  [ ] Submit sitemap to Google Search Console
+  [ ] Confirm Scorpion is disconnected
+
+───────────────────────────────────────────────────────────────────────────────
+  FORM TEST CHECKLIST
+───────────────────────────────────────────────────────────────────────────────
+
+On staging (after env vars set):
+
+Guide form (/resources/free-estate-planning-guide):
+  [ ] Submit with valid name + email
+  [ ] Email arrives in LEAD_NOTIFICATION_EMAIL
+  [ ] Email contains firm name + guide PDF link
+
+Webinar form (/webinar-registration):
+  [ ] Submit with valid name + email + phone + session
+  [ ] Email arrives in LEAD_NOTIFICATION_EMAIL
+  [ ] Email contains session time + phone number
+
+Portal access (/portal):
+  [ ] Submit leadId + email (valid lead)
+  [ ] Email arrives in LEAD_NOTIFICATION_EMAIL
+  [ ] Email contains secure portal link
+  [ ] Click link → portal loads (if lead exists)
+
+───────────────────────────────────────────────────────────────────────────────
+  FIRM DECISIONS NEEDED (Route to Justin Crain)
+───────────────────────────────────────────────────────────────────────────────
+
+Before cutover, confirm:
+
+[ ] Lead email destination
+    Where should guide/webinar/portal leads go?
+    → Test inbox first (for pre-cutover testing)
+    → Real firm inbox at cutover
+
+[ ] Webinar registration details
+    What times/dates should appear on the form?
+    Currently: 12pm, 6:30pm
+    Need: real session dates
+
+[ ] Privacy policy review
+    Does existing policy need counsel review before PII flows?
+    Recommendation: review before go-live
+
+[ ] Product funnel go-live
+    Launch Track B (real bookings/payments) with marketing site or later?
+    Same day = needs live Stripe/Cal/Clio keys today
+    Later = can keep demo mode on for now
+
+[ ] Interior-page breadcrumb
+    Remove (recommended) or keep?
+    Recommended: remove in separate PR post-cutover
+
+───────────────────────────────────────────────────────────────────────────────
+  GIT CHEAT SHEET
+───────────────────────────────────────────────────────────────────────────────
+
+Check status:
+  git status
+
+View commits ready to push:
+  git log --oneline -5
+
+Push to GitHub:
+  git push origin main
+
+View changes:
+  git diff HEAD~3
+
+───────────────────────────────────────────────────────────────────────────────
+  SUCCESS CRITERIA (GO-LIVE)
+───────────────────────────────────────────────────────────────────────────────
+
+✅ estateplanningdfw.law resolves (DNS points to Vercel)
+✅ All pages render without 404s
+✅ Forms send real emails to firm inbox
+✅ robots.txt allows Google indexing
+✅ /sitemap.xml resolves
+✅ Canonicals self-referential
+✅ No Scorpion platform remains
+✅ Vercel logs are clean (no errors)
+
+───────────────────────────────────────────────────────────────────────────────
+  CONTACTS
+───────────────────────────────────────────────────────────────────────────────
+
+Technical issues:        Claude Code (this session)
+Vercel access:          Haron Wilson / Joseph Panetta
+Domain / DNS:           Joseph Panetta or registrar
+Firm decisions:         Justin Crain
+Blob token:             Vercel dashboard
+
+───────────────────────────────────────────────────────────────────────────────
+  KEY URLS
+───────────────────────────────────────────────────────────────────────────────
+
+GitHub repo:      https://github.com/Jojobeans1981/Crain-Wooley
+Staging:          https://crain-wooley-intake.vercel.app
+Live target:      https://www.estateplanningdfw.law
+Vercel dashboard: https://vercel.com
+Scorpion live:    [still active until DNS cutover]
+
+═══════════════════════════════════════════════════════════════════════════════
+  Prepared by: Claude Haiku 4.5 | Date: June 9, 2026
+  Status: Ready for cutover. Await Haron's env setup + Joseph's video migration.
+═══════════════════════════════════════════════════════════════════════════════
