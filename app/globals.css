@@ -1143,8 +1143,11 @@
   .cw-burger { display: inline-flex; order: 0; margin-left: 0; }
   .cw-brand { order: 1; flex: 1; justify-content: center; }
   .cw-header-phone { display: inline-flex; order: 2; }
-  .cw-header-inner { align-items: center; gap: 12px; padding: 18px 0; }
-  .cw-logo-img { height: 132px; }
+  /* Mobile (390): logo 124px + 30px padding -> 184px block, matching the capture. */
+  .cw-header-inner { align-items: center; gap: 12px; padding: 30px 0; }
+  .cw-logo-img { height: 124px; }
+  /* Tablet (768–1279): larger logo per the capture. */
+  @media (min-width: 768px) and (max-width: 1279px) { .cw-logo-img { height: 142px; } }
   @media (min-width: 1280px) {
     /* Full desktop header — reset the mobile flex order so the logo is on the
        LEFT (order 0) and the phone/nav column on the right (order 1). */
