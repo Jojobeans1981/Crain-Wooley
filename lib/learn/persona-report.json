@@ -3,7 +3,7 @@
   "sourceCounts": {
     "override": 28,
     "auto": 27,
-    "none": 301
+    "none": 303
   },
   "personaCounts": {
     "high-net-worth": 15,
@@ -2165,6 +2165,18 @@
     {
       "url": "/media-center/radio-show/updating-wills",
       "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/fort-worth/minor-trusts",
+      "type": "page",
+      "personas": [],
+      "personaSource": "none"
+    },
+    {
+      "url": "/blogs/2026/june/recommended-frequency-for-regular-estate-plan-re",
+      "type": "blog",
       "personas": [],
       "personaSource": "none"
     },
