@@ -1,9 +1,7 @@
-'use client'
-import { useRef } from 'react'
-
 // ── 2. Award / credential badge wall ──
-// Arrow-navigated carousel matching the original (prev/next chevrons over a
-// horizontally scrollable strip), replacing the old auto-advancing marquee.
+// Static, centered, evenly-spaced row — matching the original, which presents
+// the credentials as a fixed row (no marquee, no arrow carousel, no scroll).
+// Server-renderable; no client JS.
 type Badge = { src: string; alt: string; href?: string }
 const BADGES: Badge[] = [
   { src: '/home/badges/texas-bar-scholars.png', alt: 'Texas Bar College - Professional Society of Legal Scholars' },
@@ -30,51 +28,34 @@ function BadgeImg({ b }: { b: Badge }) {
   return <img className="cw-badge" src={b.src} alt={b.alt} loading="lazy" />
 }
 
-// Static (non-interactive) credential strip for interior pages — the original
-// repeats the award logos below the page banner on practice-area / location
-// pages. Server-renderable; no carousel controls.
-export function BadgeStrip() {
+function BadgeRow() {
   return (
-    <section className="cw-badges cw-badges-interior" aria-label="Awards and credentials">
-      <ul className="cw-badge-track cw-badge-track-static">
-        {BADGES.map((b) => (
-          <li key={b.src} className="cw-badge-item">
-            <BadgeImg b={b} />
-          </li>
-        ))}
-      </ul>
+    <ul className="cw-badge-track">
+      {BADGES.map((b) => (
+        <li key={b.src} className="cw-badge-item">
+          {b.href
+            ? <a href={b.href} target="_blank" rel="noopener noreferrer" aria-label={b.alt}><BadgeImg b={b} /></a>
+            : <BadgeImg b={b} />}
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+// Homepage credential row (full-size badges).
+export function BadgeWall() {
+  return (
+    <section className="cw-badges" aria-label="Awards and credentials">
+      <BadgeRow />
     </section>
   )
 }
 
-export function BadgeWall() {
-  const trackRef = useRef<HTMLUListElement>(null)
-
-  function scrollByPage(dir: 1 | -1) {
-    const el = trackRef.current
-    if (!el) return
-    el.scrollBy({ left: dir * Math.round(el.clientWidth * 0.8), behavior: 'smooth' })
-  }
-
+// Interior pages repeat the credentials below the banner at a smaller size.
+export function BadgeStrip() {
   return (
-    <section className="cw-badges" aria-label="Awards and credentials">
-      <div className="cw-badge-carousel">
-        <button type="button" className="cw-badge-nav cw-badge-prev" aria-label="Previous awards" onClick={() => scrollByPage(-1)}>
-          <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
-        </button>
-        <ul className="cw-badge-track" ref={trackRef}>
-          {BADGES.map((b) => (
-            <li key={b.src} className="cw-badge-item">
-              {b.href
-                ? <a href={b.href} target="_blank" rel="noopener noreferrer" aria-label={b.alt}><BadgeImg b={b} /></a>
-                : <BadgeImg b={b} />}
-            </li>
-          ))}
-        </ul>
-        <button type="button" className="cw-badge-nav cw-badge-next" aria-label="Next awards" onClick={() => scrollByPage(1)}>
-          <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
-        </button>
-      </div>
+    <section className="cw-badges cw-badges-interior" aria-label="Awards and credentials">
+      <BadgeRow />
     </section>
   )
 }

@@ -1244,33 +1244,21 @@
   .cw-hero-subtitle { font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: clamp(20px, 2.3vw, 30px); line-height: 1.2; color: #29415A; margin: 0 0 20px; }
   .cw-hero-sub { font-family: var(--font-sans); font-size: clamp(16px, 1.5vw, 19px); line-height: 1.8; color: #29415A; margin: 0 auto 30px; max-width: 620px; }
 
-  /* 2. Badge wall — arrow-navigated carousel (prev/next chevrons flank a
-     horizontally scrollable, snap-aligned strip), matching the original's
-     interaction. No autoplay, so it is reduced-motion friendly by design. */
-  .cw-badges { background: #fff; padding: 28px 0; border-bottom: 1px solid var(--cw-line, rgba(48,68,81,0.12)); }
-  .cw-badge-carousel { display: flex; align-items: center; gap: 8px; max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+  /* 2. Badge wall — static, centered, evenly-spaced credential row matching the
+     original (Scorpion sl_ato-rsp): no marquee, no arrows, no scroll; wraps when
+     the logos exceed one row. */
+  .cw-badges { background: #fff; padding: 32px 0; border-bottom: 1px solid var(--cw-line, rgba(48,68,81,0.12)); }
   .cw-badge-track {
-    list-style: none; margin: 0; padding: 4px 0; display: flex; align-items: center;
-    gap: 48px; flex: 1; overflow-x: auto; scroll-behavior: smooth;
-    scroll-snap-type: x mandatory; scrollbar-width: none; -ms-overflow-style: none;
+    list-style: none; margin: 0 auto; padding: 0 16px; display: flex; flex-wrap: wrap;
+    align-items: center; justify-content: center; gap: 26px 44px; max-width: 1180px;
   }
-  .cw-badge-track::-webkit-scrollbar { display: none; }
-  .cw-badge-item { flex: none; display: flex; align-items: center; scroll-snap-align: start; }
-  /* Natural aspect: fixed height (~120–150px), width follows the image's own
-     ratio — no object-fit:fill, so logos are never stretched. */
+  .cw-badge-item { flex: none; display: flex; align-items: center; }
+  /* Natural aspect: fixed height, width follows the image's own ratio — no
+     object-fit:fill, so logos are never stretched. */
   .cw-badge { height: clamp(120px, 13vw, 150px); width: auto; display: block; filter: grayscale(0.06); }
-  .cw-badge-nav {
-    flex: none; width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center;
-    border: 1px solid var(--cw-line, rgba(48,68,81,0.18)); background: #fff; color: var(--cw-slate);
-    cursor: pointer; transition: background .15s, color .15s;
-  }
-  .cw-badge-nav:hover { background: var(--cw-slate); color: #fff; }
-  .cw-badge-nav:focus-visible { outline: 2px solid var(--cw-gold); outline-offset: 2px; }
-  /* Interior credential strip — static, centered, wraps (no carousel controls).
-     The original repeats the award logos below the banner on practice pages. */
+  /* Interior pages repeat the credentials below the banner at a smaller size. */
   .cw-badges-interior { padding: 22px 0; }
-  .cw-badge-track-static { flex-wrap: wrap; justify-content: center; gap: 28px 40px; overflow: visible; max-width: 1100px; margin: 0 auto; padding: 0 16px; scroll-snap-type: none; }
-  .cw-badges-interior .cw-badge { height: clamp(78px, 8vw, 104px); }
+  .cw-badges-interior .cw-badge { height: clamp(74px, 7.5vw, 98px); }
 
   /* Interior consultation CTA band — slate, matches the original's
      "Call or Visit Crain & Wooley Today" block above the reviews. */
