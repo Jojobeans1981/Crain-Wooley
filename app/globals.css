@@ -1500,6 +1500,33 @@
      (>=34px) title. Matches the original interior sub-banner. */
   .legacy-banner--gold { background: var(--cw-gold); padding: clamp(64px, 7.5vw, 104px) 0; }
   .legacy-banner--gold .legacy-banner-title { color: #fff; }
+
+  /* ── Family-B interior template ── */
+  /* Two-column intro: copy left, framed photo right. */
+  .cw-fb-intro { background: #fff; padding: clamp(40px, 5vw, 72px) 0; }
+  .cw-fb-intro-grid { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center; }
+  @media (min-width: 900px) { .cw-fb-intro-grid { grid-template-columns: 1.15fr 0.85fr; gap: 54px; } }
+  .cw-fb-intro-copy { max-width: 640px; }
+  .cw-fb-h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(30px, 3.4vw, 44px); line-height: 1.12; color: #343434; text-transform: none; letter-spacing: normal; margin: 0 0 18px; }
+  .cw-fb-intro-copy p { font-family: var(--font-sans); font-size: 16.46px; line-height: 1.8; color: #343434; margin: 0 0 16px; }
+  .cw-fb-intro-media img { display: block; width: 100%; height: auto; border: 8px solid #fff; outline: 1px solid var(--cw-line, rgba(48,68,81,0.18)); box-shadow: 0 2px 10px rgba(48,68,81,0.12); }
+
+  /* Accordion groups */
+  .cw-fb-accgroup { background: #fff; padding: clamp(28px, 4vw, 56px) 0; }
+  .cw-fb-acc-heading { text-align: center; margin: 0 0 12px; }
+  /* "EXPAND EACH SECTION TO LEARN MORE" — uppercase Montserrat 500 + gold rule. */
+  .cw-fb-instruction { font-family: var(--font-sans); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; font-size: 14px; color: #343434; text-align: center; margin: 0 auto 28px; padding-bottom: 14px; position: relative; width: max-content; max-width: 100%; }
+  .cw-fb-instruction::after { content: ""; position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); width: 56px; height: 3px; background: var(--cw-gold); }
+  .cw-accordion { max-width: 980px; margin: 0 auto; border-top: 1px solid rgba(48,68,81,0.14); }
+  .cw-accordion-item { border-bottom: 1px solid rgba(48,68,81,0.14); }
+  .cw-accordion-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; cursor: pointer; list-style: none;
+    background: var(--cw-gold-band); color: #fff; padding: 16px 22px; margin: 8px 0 0; font-family: var(--font-sans); font-weight: 600; font-size: 16px; }
+  .cw-accordion-head::-webkit-details-marker { display: none; }
+  .cw-accordion-head:hover { background: var(--cw-gold-strong); }
+  .cw-accordion-chev { flex: none; transition: transform 200ms ease; }
+  .cw-accordion-item[open] .cw-accordion-chev { transform: rotate(180deg); }
+  .cw-accordion-body { padding: 18px 22px 4px; font-family: var(--font-sans); }
+  .cw-accordion-body p { font-size: 16px; line-height: 1.8; color: #343434; margin: 0 0 14px; }
   /* Live blog body column is wider than the standard 760 article measure. */
   .legacy-body--blog .learn-article { max-width: 900px; }
 

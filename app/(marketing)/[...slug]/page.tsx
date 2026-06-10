@@ -3,6 +3,8 @@ import { notFound, redirect } from 'next/navigation'
 import { getLegacyPage, allLegacyPaths } from '@/lib/legacy'
 import { pageMetadata } from '@/lib/seo'
 import LegacyArticle from '@/components/legacy/LegacyArticle'
+import FamilyBPage from '@/components/legacy/FamilyBPage'
+import { getFamilyBPage } from '@/lib/legacy/family-b'
 
 type Params = { slug: string[] }
 
@@ -57,6 +59,10 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 export default async function LegacyCatchAll({ params }: { params: Promise<Params> }) {
   const { slug } = await params
   const path = toPath(slug)
+  // Structured family-B pages render the corrected interior template; the rest
+  // still fall back to the flat LegacyArticle (with the shared template fixes).
+  const fb = getFamilyBPage(path)
+  if (fb) return <FamilyBPage page={fb} />
   const page = getLegacyPage(path)
   if (page) return <LegacyArticle page={page} path={path} />
 

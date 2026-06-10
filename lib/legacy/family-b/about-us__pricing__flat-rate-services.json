@@ -1,0 +1,33 @@
+{
+  "path": "/about-us/pricing/flat-rate-services",
+  "bannerTitle": "Flat Rate Services",
+  "contentH1": "Flat Rate Estate Planning Services",
+  "introBody": [
+    "Proactively completing a comprehensive estate plan is one of the greatest gifts you can give your loved ones. You will provide peace of mind knowing that your estate settlement will be greatly simplified and estate administration costs lessened or eliminated depending on the estate planning tool you choose to use – a Will or a Trust."
+  ],
+  "introImage": "/interior/about-us__pricing__flat-rate-services-intro.jpg",
+  "accordionGroups": [
+    {
+      "instruction": "Expand Each Section to Learn More",
+      "items": [
+        {
+          "title": "Comprehensive Will Plan | $2,115",
+          "body": "The Comprehensive Will Plan offers a thorough and accessible estate planning solution for those who want to ensure that their wishes are clearly documented and that they receive the guidance they need. This plan includes the creation of a Last Will and Testament along with other essential documents to manage your affairs during your lifetime and upon your passing. Unlike our basic Will Plan, the Comprehensive Will Plan includes 12 months of access to our firm at no additional charge, allowing you to make updates and ask questions without worrying about extra fees. We also take the time to review your documents with you, ensuring that you fully understand their contents and how to use your estate plan effectively.Included Documents and Services (Click Here for Legal Term Descriptions):Durable Power of AttorneyMedical Power of AttorneyHIPAA ReleaseDirective to PhysiciansDeclaration of Guardians in Advance of NeedLast Will and TestamentDocument Signing ServicesWritten Legal EducationScheduled Document Review and EducationSecure Client Portal & Document StorageUnlimited Support and Updates for 12 MonthsEstate Plan and Law Review (Month 10)Client-Only WebinarsEstate Plan Organizational System"
+        },
+        {
+          "title": "Comprehensive Trust Plan | $6,985",
+          "body": "The Comprehensive Trust Portfolio is a complete, turn-key estate planning solution designed for those who want thorough, personalized guidance and peace of mind. Unlike our Will Plan and Trust Plan, which provide essential documents but do not include additional assistance or ongoing education, the Comprehensive Trust Portfolio goes beyond the basics. With this plan, you receive not only the foundational estate planning documents but also an entire year of unlimited support—without worrying about being billed for every meeting, question, or update.What makes this plan truly unique is that all services are provided for a single, one-time flat fee. This means you won't face unexpected charges for meetings, revisions, or additional requests. We take care of everything from start to finish, including drafting and filing documents, reviewing your assets, and providing ongoing education to ensure you fully understand how your estate plan works. The typical process takes 2-3 months, but with 12 months of access, you have ample time to ask questions, adjust your plan, and gain the confidence that everything is handled correctly—without the pressure of running out of time or incurring extra costs.By choosing the Comprehensive Trust Portfolio, you gain the assurance that your plan is not only comprehensive but also proactively managed. You receive the support you need to make sure every asset is accounted for, every document is understood, and every detail of your estate plan is implemented correctly. This inclusive approach allows you to focus on what matters most—knowing that your estate plan is ready to serve your needs and protect your legacy.Included Documents and Services (Click Here for Legal Term Descriptions):Durable Power of AttorneyMedical Power of AttorneyHIPAA ReleaseDirective to PhysiciansDeclaration of Guardians in Advance of NeedPour-Over WillDocument Signing ServicesWritten Legal EducationLiving TrustTrust Funding Education MemoMemorandum of Personal Property"
+        },
+        {
+          "title": "Lifetime Lawyer Program | $9,970",
+          "body": "The Lifetime Lawyer Program offers a truly comprehensive estate planning experience, designed for clients seeking ongoing support without worrying about additional costs. Whether you choose to use a Living Trust, Last Will and Testament, or a combination of both as part of your plan, our program provides lifetime assistance to ensure your estate plan remains effective and aligned with your goals. This includes continuous support not just for you, but also for those who will manage your estate after you, such as Trustees and Executors, ensuring they have the guidance they need to fulfill their roles.With the Lifetime Lawyer Program, all services are included for as long as you are living (or, in the case of married couples, as long as one spouse is living), making it easier to navigate life changes and legal updates. You’ll receive all necessary documents, unlimited updates, and ongoing legal education, allowing us to focus on building a lasting relationship with you—without the worry of being billed by the hour or for every meeting. It’s a turn-key solution that handles everything from the creation and filing of documents to the education needed to ensure you fully understand your estate plan.Key Benefits of the Lifetime Lawyer Program:Unlimited Support and Updates for Life: Make as many changes or updates to your estate plan as needed, ask questions, and receive guidance without worrying about hourly fees. Whether you need adjustments due to life events, law changes, or simply have questions about your documents, we are here for you with no additional charges.Annual Law Review and Unlimited Meetings: Each year, we provide you with a report detailing updates on estate and tax laws, helping you stay informed about relevant changes. If you want to understand how these updates might impact your specific estate plan, you can schedule a meeting with us anytime, at no extra cost, ensuring your plan remains aligned with your goals.Client-Only Webinars: Access exclusive web"
+        }
+      ]
+    }
+  ],
+  "closers": [
+    "pillars",
+    "testimonials",
+    "schedule"
+  ]
+}
