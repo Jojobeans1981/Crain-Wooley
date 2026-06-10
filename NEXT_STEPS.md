@@ -134,3 +134,48 @@ Full step-by-step guide in `CUTOVER_ENV_CHECKLIST.md`:
 ---
 
 **Ready to proceed. Await Haron's env var setup + Joseph's video migration.**
+
+---
+
+## 🎨 PIXEL-FAITHFUL PASS — Open Items (Phase 0–4 rig)
+
+Flagged for decision, not resolved in code (except where noted). Ordered by impact. The visual-diff
+rig lives in `scripts/visual-diff/`; findings in `docs/reference/{visual-parity-assessment,route-parity,cutover-parity}.md`.
+
+### 1. Interior template structural parity (biggest item)
+Token parity is exact (Phase 2, validated), but **no template reaches the <1% full-page pixel
+tolerance** and none can without structural rebuilds. Interior pages render from the legacy scrape
+(`LegacyArticle`) as simplified articles — 40–60% the height of the original's full Scorpion
+templates (`/estate-planning/` clone 5865px vs original 9558px). See `visual-parity-assessment.md`.
+**Decide:** per-template structural rebuilds (rig is the acceptance gate) vs. ship token + SEO
+parity now. Homepage + shared chrome are already close.
+
+### 2. Blog content strategy (open item #1)
+189/190 sitemap posts resolve as legacy 200s. Gaps: the 2026-06-09 post (not in `blog-index`) and
+36 `/blogs/categories/*` taxonomy pages (no route). **Decide:** publish-freeze vs. in-app admin vs.
+sync script — each needs an import path + a `/blogs/categories/[cat]` route.
+
+### 3. Chat dock replacement (open item #2)
+Scorpion's chat widget is gone by design. **Decide** whether the quiz/intake CTA replaces it or a
+chat product is added (lead-capture continuity).
+
+### 4. Featured reviews — blessed list (open item #3)
+`reviews.json` now has a `featured` flag (Phase 4); 8 marked as a default, homepage filters on it.
+**Get the client's blessed 8** and move the flags.
+
+### 5. Favicon / app icons
+No `app/favicon.ico` / `app/icon.*`. Needs the client's brand icon. (404 page styled in Phase 4.)
+
+### 6. Repo size / git-lfs
+Phase 0 baseline screenshots are **~129M** in history; clone + diff images (**~530M**) are
+gitignored and regenerable. **Recommend git-lfs** for committed image artifacts (or drop the
+baseline and regenerate) — Vercel pulls the repo every build.
+
+### How to re-run the rig
+```bash
+npx tsx scripts/visual-diff/capture.ts original     # baseline (committed)
+npm run build && npm run start &                     # serve clone on :3000
+npx tsx scripts/visual-diff/capture.ts clone         # capture clone
+npx tsx scripts/visual-diff/diff.ts                  # -> diff-report/index.html
+npx tsx scripts/visual-diff/route-parity.ts          # -> docs/reference/route-parity.md
+```
