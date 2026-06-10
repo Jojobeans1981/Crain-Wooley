@@ -64,7 +64,7 @@ export default async function LegacyCatchAll({ params }: { params: Promise<Param
   // entries fall back to LegacyArticle (full body + the shared gold-banner/no-
   // chrome fixes) so a page is never left empty.
   const fb = getFamilyBPage(path)
-  if (fb && (fb.introBody.length > 0 || fb.accordionGroups.length > 0)) return <FamilyBPage page={fb} />
+  if (fb && (fb.bodyBlocks.length > 0 || fb.accordionGroups.length > 0)) return <FamilyBPage page={fb} />
   const page = getLegacyPage(path)
   if (page) return <LegacyArticle page={page} path={path} />
 

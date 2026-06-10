@@ -44,7 +44,25 @@ async function main() {
     let bodyEnd = 99999
     for (const e of Array.from(document.querySelectorAll('[aria-expanded], .qst')) as HTMLElement[]) { if (e.tagName.toLowerCase() === 'svg') continue; if ((e.textContent || '').replace(/\s+/g, ' ').trim().length < 5) continue; const t = e.getBoundingClientRect().top; if (t > 480 && t < bodyEnd) bodyEnd = t }
     for (const e of Array.from(document.querySelectorAll('h2,h3,h4,strong,div,p,span')) as HTMLElement[]) { const tx = (e.textContent || '').replace(/\s+/g, ' '); const t = e.getBoundingClientRect().top; if (t > 480 && t < bodyEnd && e.children.length < 5 && /Estate Planning With Us Means|Schedule a Consultation Today|Expand Each Section|Virtual Services FAQ/i.test(tx)) bodyEnd = t }
-    const introBody = (Array.from(document.querySelectorAll('p')) as HTMLElement[]).filter((e) => { const r = e.getBoundingClientRect(); return r.top > 480 && r.top < bodyEnd && (e.textContent || '').replace(/\s+/g, ' ').trim().length > 40 }).map((e) => (e.textContent || '').replace(/\s+/g, ' ').trim()).slice(0, 16)
+    // Full ordered body: every paragraph, sub-heading, and list between the
+    // banner and the first accordion/closer — page for page, no truncation.
+    const blockEls = (Array.from(document.querySelectorAll('h2,h3,h4,p,ul,ol')) as HTMLElement[]).filter((e) => {
+      const r = e.getBoundingClientRect()
+      if (!(r.top > 480 && r.top < bodyEnd)) return false
+      if (e.closest('[aria-expanded], .qst, footer, nav, header')) return false
+      const tag = e.tagName.toLowerCase()
+      if ((tag === 'p' || tag === 'li') && e.closest('ul, ol')) return false // captured via the list
+      if ((tag === 'ul' || tag === 'ol') && e.parentElement && e.parentElement.closest('ul, ol')) return false // nested
+      return (e.textContent || '').replace(/\s+/g, ' ').trim().length > 1
+    })
+    const bodyBlocks = blockEls.map((e) => {
+      const tag = e.tagName.toLowerCase()
+      const tx = (e.textContent || '').replace(/\s+/g, ' ').trim()
+      if (tag === 'ul' || tag === 'ol') return { type: 'ul', items: (Array.from(e.querySelectorAll(':scope > li')) as HTMLElement[]).map((li) => (li.textContent || '').replace(/\s+/g, ' ').trim()).filter((s) => s.length > 0) }
+      if (tag === 'h2') return { type: 'h2', text: tx }
+      if (tag === 'h3' || tag === 'h4') return { type: 'h3', text: tx }
+      return { type: 'p', text: tx }
+    }).filter((blk) => ('items' in blk ? blk.items.length > 0 : (blk.text || '').length > 1))
     const items: { title: string; body: string; top: number; group: string }[] = []
     const seen = new Set<string>()
     // Plan accordions use [aria-expanded]/<summary>; their panel is aria-controlled.
@@ -73,7 +91,7 @@ async function main() {
       testimonials: !!all.find((e) => /Schedule a Consultation|What Our Clients|Testimonial/i.test(e.textContent || '')) || document.querySelectorAll('[class*=review]').length > 0,
       schedule: !!all.find((e) => /Schedule a Consultation Today/i.test(e.textContent || '')),
     }
-    return { bannerTitle, contentH1, introBody, introImage, items, faqHeading, closers }
+    return { bannerTitle, contentH1, bodyBlocks, introImage, items, faqHeading, closers }
   })
 
   // download the intro image via in-page fetch (browser networking bypasses the bot-block)
@@ -100,7 +118,7 @@ async function main() {
     path: key,
     bannerTitle: data.bannerTitle,
     contentH1: data.contentH1,
-    introBody: data.introBody,
+    bodyBlocks: data.bodyBlocks,
     introImage: introImagePath || null,
     accordionGroups: [
       ...(plans.length ? [{ instruction: 'Expand Each Section to Learn More', items: plans }] : []),
@@ -116,7 +134,7 @@ async function main() {
   pages[key] = out
   const sorted = Object.fromEntries(Object.keys(pages).sort().map((k) => [k, pages[k]]))
   writeFileSync(idxFile, JSON.stringify(sorted, null, 2))
-  console.log(`extracted ${key}: banner="${out.bannerTitle}" h1="${out.contentH1}" introPara=${out.introBody.length} image=${introImagePath || 'none'} planAcc=${plans.length} faqAcc=${faq.length} closers=[${closers.join(',')}]`)
+  console.log(`extracted ${key}: banner="${out.bannerTitle}" h1="${out.contentH1}" blocks=${out.bodyBlocks.length} image=${introImagePath || 'none'} planAcc=${plans.length} faqAcc=${faq.length} closers=[${closers.join(',')}]`)
 }
 
 main().catch((e) => { console.error(e); process.exit(1) })

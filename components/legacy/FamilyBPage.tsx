@@ -1,6 +1,16 @@
 import { ValueProps, ReviewsSection, Locations } from '@/components/site/home/sections'
 import { Accordion } from './Accordion'
-import type { FamilyBData } from '@/lib/legacy/family-b'
+import type { FamilyBData, BodyBlock } from '@/lib/legacy/family-b'
+
+// Render one ordered body block (paragraph, sub-heading, or list) faithfully.
+function Block({ block, k }: { block: BodyBlock; k: number }) {
+  switch (block.type) {
+    case 'h2': return <h2 key={k} className="cw-fb-h2">{block.text}</h2>
+    case 'h3': return <h3 key={k} className="cw-fb-h3">{block.text}</h3>
+    case 'ul': return <ul key={k} className="cw-fb-ul">{block.items.map((it, j) => <li key={j}>{it}</li>)}</ul>
+    default: return <p key={k}>{block.text}</p>
+  }
+}
 
 /**
  * Family-B interior template (the corrected legacy layout): full-bleed gold
@@ -27,18 +37,37 @@ export default function FamilyBPage({ page }: { page: FamilyBData }) {
       </header>
 
       <section className="cw-fb-intro">
-        <div className={`cw-container cw-fb-intro-grid${page.introImage ? '' : ' cw-fb-intro-grid--noimg'}`}>
-          <div className="cw-fb-intro-copy">
-            {page.contentH1 && <h2 className="cw-fb-h1">{page.contentH1}</h2>}
-            {page.introBody.map((p, i) => <p key={i}>{p}</p>)}
-          </div>
-          {page.introImage && (
-            <div className="cw-fb-intro-media">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={page.introImage} alt="" loading="lazy" />
+        {/* Two-column intro: heading + lede beside the framed photo. The lede is
+            the first body blocks (up to the first sub-heading, max 3); the full
+            remaining body renders below — page for page, nothing dropped. */}
+        {(() => {
+          let lede = page.introImage ? page.bodyBlocks.slice(0, 3) : []
+          const cut = lede.findIndex((b) => b.type === 'h2' || b.type === 'h3')
+          if (cut > 0) lede = lede.slice(0, cut)
+          else if (cut === 0) lede = []
+          const rest = page.bodyBlocks.slice(lede.length)
+          return (
+            <div className="cw-container">
+              <div className={`cw-fb-intro-grid${page.introImage && lede.length ? '' : ' cw-fb-intro-grid--noimg'}`}>
+                <div className="cw-fb-intro-copy">
+                  {page.contentH1 && <h2 className="cw-fb-h1">{page.contentH1}</h2>}
+                  {lede.map((b, i) => <Block key={i} block={b} k={i} />)}
+                </div>
+                {page.introImage && lede.length > 0 && (
+                  <div className="cw-fb-intro-media">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={page.introImage} alt="" loading="lazy" />
+                  </div>
+                )}
+              </div>
+              {rest.length > 0 && (
+                <div className="cw-fb-body">
+                  {rest.map((b, i) => <Block key={i} block={b} k={i} />)}
+                </div>
+              )}
             </div>
-          )}
-        </div>
+          )
+        })()}
       </section>
 
       {page.accordionGroups.map((g, i) => (

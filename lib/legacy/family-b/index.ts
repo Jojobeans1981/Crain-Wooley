@@ -8,11 +8,16 @@ import pages from './pages.json'
  * The rollout just re-runs the extractor — no per-page imports.
  */
 export type AccordionGroup = { heading?: string; instruction?: string; items: { title: string; body: string }[] }
+export type BodyBlock =
+  | { type: 'p'; text: string }
+  | { type: 'h2'; text: string }
+  | { type: 'h3'; text: string }
+  | { type: 'ul'; items: string[] }
 export type FamilyBData = {
   path: string
   bannerTitle: string
   contentH1: string
-  introBody: string[]
+  bodyBlocks: BodyBlock[]
   introImage: string | null
   accordionGroups: AccordionGroup[]
   closers: string[] // 'pillars' | 'testimonials' | 'schedule', in render order
