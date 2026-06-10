@@ -1,0 +1,61 @@
+{
+  "_doc": "Rectangles (CSS px, top-left origin, full-page coords) painted out on BOTH sides before diffing, so known-intentional deltas and dynamic content never count. Optional 'viewports' limits a rect to named breakpoints. Coords are refined in Phase 3 against the actual clone capture; Phase 0 ships documented placeholders for the known deltas.",
+  "global": [
+    {
+      "note": "Scorpion chat dock (Connect/Text/Call/Email) — removed by design, sat bottom-right",
+      "x": 0,
+      "y": 0,
+      "w": 0,
+      "h": 0,
+      "viewports": []
+    },
+    {
+      "note": "AudioEye accessibility widget — removed by design, sat bottom-left",
+      "x": 0,
+      "y": 0,
+      "w": 0,
+      "h": 0,
+      "viewports": []
+    }
+  ],
+  "routes": {
+    "/": [
+      {
+        "note": "Quiz card sidebar — our addition (keep), under the attorney video. Mask the band it occupies so the extra element never counts. Refine in Phase 3.",
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0,
+        "viewports": []
+      },
+      {
+        "note": "Hero video frame — autoplay frame differs between captures. Mask the hero media box. Refine in Phase 3.",
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0,
+        "viewports": []
+      }
+    ],
+    "/blogs/": [
+      {
+        "note": "Blog post dates/recency drift — original publishes new posts; mask the card date row. Refine in Phase 3.",
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0,
+        "viewports": []
+      }
+    ],
+    "/blogs/2026/june/recommended-frequency-for-regular-estate-plan-re/": [
+      {
+        "note": "Post date / related-posts recency — mask the byline date. Refine in Phase 3.",
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0,
+        "viewports": []
+      }
+    ]
+  }
+}
