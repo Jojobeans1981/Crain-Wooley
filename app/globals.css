@@ -1013,6 +1013,8 @@
   }
   .cw-anno a { color: #fff; text-underline-offset: 3px; }
   .cw-anno a:hover { text-decoration-thickness: 2px; }
+  /* Original hides the announcement bar on mobile (shown at >=768). */
+  @media (max-width: 767px) { .cw-anno { display: none; } }
 
   /* Sticky slate header */
   .cw-site-header {
@@ -1024,52 +1026,51 @@
   }
   .cw-site-header.cw-scrolled { border-bottom: 1px solid var(--cw-gold); }
 
-  /* Top utility bar — full-width slate strip carrying the location phones,
-     above the logo/nav row, so the header reads as the live multi-row layout. */
-  .cw-utility { background: var(--cw-slate); border-bottom: 1px solid var(--cw-line-on-slate); }
-  /* Taller utility bar so total header height ≈222px (matches live). */
-  .cw-utility-inner { display: flex; justify-content: flex-end; align-items: center; padding: 31px 0; }
+  /* ONE unified slate block (height ≈222px). Logo ~156px on the left, full
+     height of the block; the right column stacks the phone row over the nav row. */
+  .cw-header-inner { display: flex; align-items: stretch; gap: 34px; padding: 33px 0; }
+  .cw-brand { flex: none; display: flex; align-items: center; }
+  .cw-logo-img { width: auto; height: 156px; display: block; }
+  .cw-header-right { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: center; }
 
-  .cw-header-inner { display: flex; align-items: center; gap: 28px; padding-top: 22px; padding-bottom: 22px; }
-  .cw-logo-img { width: auto; height: 92px; display: block; }
-  @media (max-width: 1023px) { .cw-logo-img { height: 60px; } }
-
-  .cw-header-main { flex: 1; min-width: 0; }
-
-  /* Phone strip (lives in the utility bar) */
-  .cw-phonestrip {
+  /* Phone row — Call Us Today! + 3 offices, right-aligned. Its bottom border is
+     the dashed divider; because the row lives in the right column it begins
+     after the logo and runs to the right edge (never crossing the logo). */
+  .cw-phonerow {
     display: flex; align-items: baseline; justify-content: flex-end; flex-wrap: wrap;
-    gap: 6px 26px; font-family: var(--font-sans);
+    gap: 4px 28px; font-family: var(--font-sans); padding-bottom: 16px;
+    border-bottom: 1px dashed rgba(255,255,255,0.3);
   }
-  .cw-phonestrip-label { color: var(--cw-on-slate); font-weight: 600; font-size: 14px; margin-right: 2px; }
-  .cw-phone { display: inline-flex; align-items: baseline; gap: 7px; white-space: nowrap; }
-  .cw-phone-city { color: var(--cw-on-slate-mute); font-size: 13.5px; }
-  .cw-phone-num { color: var(--cw-on-slate); font-weight: 700; font-size: 18px; letter-spacing: 0.01em; text-decoration: none; white-space: nowrap; }
+  .cw-call-label { color: var(--cw-on-slate); font-weight: 500; font-size: 16.46px; margin-right: 4px; }
+  .cw-phone { display: inline-flex; align-items: baseline; gap: 8px; white-space: nowrap; }
+  .cw-phone-city { color: var(--cw-on-slate); font-weight: 400; font-size: 16.46px; }
+  /* Numbers visibly larger than their city labels (per the capture: 21.98 vs 16.46). */
+  .cw-phone-num { color: var(--cw-on-slate); font-weight: 500; font-size: 21.98px; letter-spacing: 0.01em; text-decoration: none; white-space: nowrap; }
   .cw-phone-num:hover { color: var(--cw-gold-soft); }
-  /* Mobile: keep each office on one line (no mid-number breaks), left-aligned + compact. */
-  @media (max-width: 767px) {
-    .cw-phonestrip { justify-content: flex-start; gap: 4px 18px; }
-    /* Larger tap area for the phone numbers on touch screens. */
-    .cw-phone-num { font-size: 15px; display: inline-block; padding: 6px 0; }
-    .cw-phone-city { font-size: 12px; }
-    .cw-phonestrip-label { font-size: 12.5px; width: 100%; }
-  }
 
-  /* Desktop nav row */
-  .cw-navrow { display: flex; align-items: center; gap: 10px; padding-top: 12px; }
-  .cw-nav { display: flex; align-items: center; gap: 4px; flex: 1; list-style: none; margin: 0; padding: 0; }
+  /* Mobile/tablet gold circle call button (right side of the compact header). */
+  .cw-header-phone {
+    display: none; flex: none; width: 48px; height: 48px; border-radius: 50%;
+    background: var(--cw-gold); color: #fff; align-items: center; justify-content: center; text-decoration: none;
+  }
+  .cw-header-phone:hover { background: var(--cw-gold-strong); }
+
+  /* Nav row — items spread across the right column, ending at the Contact Us
+     button. Multi-word items wrap to two lines like the original; no carets. */
+  .cw-navrow { display: flex; align-items: stretch; padding-top: 14px; }
+  .cw-nav-wrap { flex: 1; min-width: 0; display: flex; }
+  .cw-nav { display: flex; align-items: center; justify-content: space-between; flex: 1; gap: 14px; list-style: none; margin: 0; padding: 0; }
   .cw-nav-item { position: relative; display: flex; align-items: center; }
   .cw-nav-link {
-    display: inline-flex; align-items: center; gap: 5px;
-    font-family: var(--font-sans); font-size: 15px; font-weight: 400; line-height: 1.2;
-    color: var(--cw-on-slate); text-decoration: none; padding: 10px 12px;
-    background: transparent; border: none; cursor: pointer;
-    transition: color 150ms ease;
+    display: inline-flex; align-items: center; text-align: center; white-space: normal;
+    font-family: var(--font-sans); font-size: 16.46px; font-weight: 400; line-height: 1.2;
+    color: var(--cw-on-slate); text-decoration: none; padding: 4px 0; max-width: 84px;
+    background: transparent; border: none; cursor: pointer; transition: color 150ms ease;
   }
   .cw-nav-link:hover, .cw-nav-item:hover > .cw-nav-link, .cw-nav-item:focus-within > .cw-nav-link { color: var(--cw-gold-soft); }
   .cw-nav-link[aria-current="page"], .cw-nav-link.cw-current { color: var(--cw-gold-soft); }
+  /* Base caret style retained for the mobile drawer toggle; desktop has no caret. */
   .cw-nav-caret { width: 10px; height: 10px; flex: none; transition: transform 200ms ease; }
-  .cw-nav-item:hover .cw-nav-caret, .cw-nav-item:focus-within .cw-nav-caret { transform: rotate(180deg); }
 
   /* Flyout dropdown */
   .cw-flyout {
@@ -1097,10 +1098,12 @@
 
   /* Contact CTA (gold) */
   .cw-contact-btn {
-    flex: none; font-family: var(--font-sans); font-weight: 600; font-size: 14px; line-height: 1.2;
-    color: var(--cw-on-slate); background: var(--cw-gold-strong); border: 1px solid var(--cw-gold-strong);
-    padding: 13px 26px; text-decoration: none; border-radius: 0; transition: background-color 150ms ease;
+    flex: none; align-self: center; margin-left: 30px;
+    font-family: var(--font-sans); font-weight: 500; font-size: 16.46px; line-height: 1.2;
+    color: #fff; background: var(--cw-gold-strong); border: 1px solid var(--cw-gold-strong);
+    padding: 16px 25px; text-decoration: none; border-radius: 0; transition: background-color 150ms ease;
     display: inline-flex; align-items: center; justify-content: center; text-align: center;
+    white-space: normal; max-width: 118px; /* wraps "Contact Us" to two lines -> ~72px tall, like the original */
   }
   .cw-contact-btn:hover { background: #8a7150; }
   .cw-contact-btn:focus-visible, .cw-nav-link:focus-visible, .cw-anno a:focus-visible,
@@ -1133,12 +1136,23 @@
   .cw-drawer-sub a { display: block; font-size: 15px; color: var(--cw-on-slate-mute); padding: 12px 20px 12px 34px; border-bottom: 1px solid var(--cw-line-on-slate); text-decoration: none; }
   .cw-drawer-sub a:hover { color: var(--cw-gold-soft); }
 
-  /* Show/hide desktop vs mobile at the 1280 breakpoint */
-  .cw-navrow { display: none; }
-  .cw-burger { display: inline-flex; }
+  /* Compact header below 1280 (tablet + mobile): hamburger left, logo centered,
+     gold circle call button right — no inline phones/nav (those live in the
+     drawer), matching the original's 390/768 captures. */
+  .cw-header-right { display: none; }
+  .cw-burger { display: inline-flex; order: 0; margin-left: 0; }
+  .cw-brand { order: 1; flex: 1; justify-content: center; }
+  .cw-header-phone { display: inline-flex; order: 2; }
+  .cw-header-inner { align-items: center; gap: 12px; padding: 18px 0; }
+  .cw-logo-img { height: 132px; }
   @media (min-width: 1280px) {
-    .cw-navrow { display: flex; }
-    .cw-burger { display: none; }
+    /* Full desktop header — reset the mobile flex order so the logo is on the
+       LEFT (order 0) and the phone/nav column on the right (order 1). */
+    .cw-header-inner { align-items: stretch; gap: 34px; padding: 33px 0; }
+    .cw-brand { order: 0; flex: none; justify-content: flex-start; }
+    .cw-header-right { order: 1; display: flex; }
+    .cw-logo-img { height: 156px; }
+    .cw-burger, .cw-header-phone { display: none; }
   }
 
   /* ── Footer ── */

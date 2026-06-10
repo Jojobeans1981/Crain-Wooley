@@ -143,7 +143,7 @@ function Logo({ className, style }: { className?: string; style?: React.CSSPrope
 }
 
 // ── Desktop nav item (label link + caret toggle + flyout) ──
-function DesktopItem({ item, open, active, onToggle, onOpen, onClose }: { item: NavNode; open: boolean; active: boolean; onToggle: () => void; onOpen: () => void; onClose: () => void }) {
+function DesktopItem({ item, open, active, onOpen, onClose }: { item: NavNode; open: boolean; active: boolean; onOpen: () => void; onClose: () => void }) {
   const linkClass = `cw-nav-link${active ? ' cw-current' : ''}`
   const current = active ? 'page' : undefined
   if (!item.children?.length) {
@@ -162,18 +162,9 @@ function DesktopItem({ item, open, active, onToggle, onOpen, onClose }: { item: 
       onFocus={onOpen}
       onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node)) onClose() }}
     >
-      <Link href={item.href} className={linkClass} aria-current={current}>{item.label}</Link>
-      <button
-        type="button"
-        className="cw-nav-link"
-        style={{ paddingLeft: 0, paddingRight: 6 }}
-        aria-haspopup="true"
-        aria-expanded={open}
-        aria-label={`Open ${item.label} submenu`}
-        onClick={onToggle}
-      >
-        <Caret />
-      </button>
+      {/* No caret/chevron — dropdowns open on hover/focus-within (CSS), matching
+          the original. aria-haspopup on the label conveys the submenu to AT. */}
+      <Link href={item.href} className={linkClass} aria-haspopup="true" aria-expanded={open} aria-current={current}>{item.label}</Link>
       <ul className={`cw-flyout${open ? ' cw-open' : ''}`} role="menu">
         {item.children.map((child) => (
           <li key={child.label} role="none">
@@ -312,11 +303,19 @@ export function SiteHeader() {
       </div>
 
       <header className={`cw-site-header${scrolled ? ' cw-scrolled' : ''}`}>
-        {/* Top utility bar — the three location phone numbers, above the main nav */}
-        <div className="cw-utility">
-          <div className="cw-container cw-utility-inner">
-            <div className="cw-phonestrip">
-              <span className="cw-phonestrip-label">Call Us Today!</span>
+        {/* ONE unified slate header block: full-height logo on the left, a
+            two-row stack on the right (phones over nav), divided by a dashed
+            rule that begins after the logo column. Matches the original. */}
+        <div className="cw-container cw-header-inner">
+          <Link href="/" className="cw-brand" title="Home" aria-label="Crain & Wooley — Home">
+            <Logo className="cw-logo-img" />
+          </Link>
+
+          <div className="cw-header-right">
+            {/* Top row: Call Us Today! + the three office phones, right-aligned.
+                Its bottom border is the dashed divider. */}
+            <div className="cw-phonerow">
+              <span className="cw-call-label">Call Us Today!</span>
               {PHONES.map((p) => (
                 <span className="cw-phone" key={p.city}>
                   <span className="cw-phone-city">{p.city}:</span>
@@ -324,18 +323,9 @@ export function SiteHeader() {
                 </span>
               ))}
             </div>
-          </div>
-        </div>
-
-        <div className="cw-container cw-header-inner">
-          <Link href="/" title="Home" aria-label="Crain & Wooley — Home">
-            <Logo className="cw-logo-img" />
-          </Link>
-
-          <div className="cw-header-main">
-            {/* Desktop nav */}
+            {/* Bottom row: nav (right-aligned) ending at the Contact Us button. */}
             <div className="cw-navrow">
-              <nav aria-label="Primary" style={{ flex: 1, minWidth: 0 }}>
+              <nav aria-label="Primary" className="cw-nav-wrap">
                 <ul className="cw-nav">
                   {NAV.map((item) => (
                     <DesktopItem
@@ -343,7 +333,6 @@ export function SiteHeader() {
                       item={item}
                       open={openMenu === item.label}
                       active={isActive(item.href)}
-                      onToggle={() => setOpenMenu(openMenu === item.label ? null : item.label)}
                       onOpen={() => setOpenMenu(item.label)}
                       onClose={() => setOpenMenu((m) => (m === item.label ? null : m))}
                     />
@@ -366,6 +355,14 @@ export function SiteHeader() {
           >
             <BurgerIcon />
           </button>
+
+          {/* Mobile/tablet: gold circle call button on the right (matches the
+              original's compact header — hamburger left, logo centered, this right). */}
+          <a className="cw-header-phone" href="tel:9729451610" aria-label="Call Crain & Wooley">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M6.5 3.5h3l1.5 4-2 1.5a11 11 0 0 0 5 5l1.5-2 4 1.5v3a2 2 0 0 1-2 2A16 16 0 0 1 4.5 5.5a2 2 0 0 1 2-2z" fill="currentColor" />
+            </svg>
+          </a>
         </div>
       </header>
 
