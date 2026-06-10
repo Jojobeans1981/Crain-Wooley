@@ -1495,6 +1495,11 @@
   /* Blog posts: live uses a tall gold title band with a white centered H1, no breadcrumb. White on #9B8059 = 3.73:1, but the title is large text (>=34px) so it clears the 3:1 large-text bar. */
   .legacy-banner--blog { background: var(--cw-gold); padding: clamp(80px, 9vw, 156px) 0; }
   .legacy-banner--blog .legacy-banner-title { color: #fff; }
+  /* Interior content pages: full-bleed solid gold band (~280px desktop) with a
+     white centered H1. White on #9B8059 = 3.73:1 — clears AA 3:1 for the large
+     (>=34px) title. Matches the original interior sub-banner. */
+  .legacy-banner--gold { background: var(--cw-gold); padding: clamp(64px, 7.5vw, 104px) 0; }
+  .legacy-banner--gold .legacy-banner-title { color: #fff; }
   /* Live blog body column is wider than the standard 760 article measure. */
   .legacy-body--blog .learn-article { max-width: 900px; }
 

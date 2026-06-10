@@ -4,7 +4,6 @@ import type { LegacyPage } from '@/lib/legacy'
 import { getSectionNav, type SectionNav, type SectionNavItem } from '@/lib/legacy/section-nav'
 import { teamMemberByPath } from '@/lib/legacy/team'
 import { ValueProps, ReviewsSection, Locations } from '@/components/site/home/sections'
-import { BadgeStrip } from '@/components/site/home/BadgeWall'
 import type { ReactNode } from 'react'
 
 /**
@@ -13,17 +12,6 @@ import type { ReactNode } from 'react'
  * block against the page's h2s/h3s arrays. Inline **bold** and [text](url) are
  * recovered so internal links survive (SEO). Warm-editorial design system.
  */
-
-const KICKER: Record<string, string> = {
-  service: 'Estate Planning',
-  practice_area: 'Estate Planning',
-  location: 'Serving Your Area',
-  staff: 'Our Team',
-  resource: 'Resources',
-  contact: 'Contact',
-  blog_post: 'From the Blog',
-  other: 'Crain & Wooley',
-}
 
 // Inline parser: **bold** and [text](url) → nodes.
 function inline(text: string, keyBase: string): ReactNode[] {
@@ -101,36 +89,25 @@ export default function LegacyArticle({ page, path }: { page: LegacyPage; path: 
   const h2set = new Set(page.h2s.map((s) => s.trim()))
   const h3set = new Set(page.h3s.map((s) => s.trim()))
   const blocks = page.body.split(/\n\s*\n/).map((b) => b.trim()).filter(Boolean)
-  const section = KICKER[page.type] ?? 'Crain & Wooley'
-  const title = page.h1 || page.title
+  // Strip the SEO "| Crain & Wooley" suffix when the metadata title is reused as
+  // display text — page.h1 is empty on ~166 pages, which leaked the SEO title
+  // (e.g. "Flat Rate Services | Crain & Wooley") into the visible H1.
+  const title = (page.h1?.trim() || page.title.replace(/\s*\|\s*Crain\s*&\s*Wooley\s*$/i, '')).trim()
   const nav = getSectionNav(path)
   // Staff bio pages show the member's portrait (same headshot as the team listing).
   const member = page.type === 'staff' ? teamMemberByPath(path) : undefined
-  // Practice-area / service / location pages get the richer interior layout the
-  // original Scorpion template uses (credential strip below the banner, a slate
-  // consultation CTA band before the reviews), closer in structure + height.
-  const rich = page.type === 'practice_area' || page.type === 'service' || page.type === 'location'
 
   return (
     <>
     <div className="cw-article-bg">
-      {/* Page-title block — dark slate banner with breadcrumb + H1 (matches live interior) */}
-      <header className={`legacy-banner${page.type === 'blog_post' ? ' legacy-banner--blog' : ''}`}>
+      {/* Page-title band — full-bleed gold band with the page title. No breadcrumb,
+          badges, or invented chrome: interior pages on the original have none.
+          Blog posts keep their own banner treatment. */}
+      <header className={`legacy-banner${page.type === 'blog_post' ? ' legacy-banner--blog' : ' legacy-banner--gold'}`}>
         <div className="cw-container legacy-banner-inner">
-          {page.type !== 'blog_post' && (
-            <nav aria-label="Breadcrumb" className="legacy-crumbs">
-              <ol>
-                <li><Link href="/">Home</Link></li>
-                <li><span>{section}</span></li>
-                <li><span aria-current="page">{title}</span></li>
-              </ol>
-            </nav>
-          )}
           <h1 className="legacy-banner-title">{title}</h1>
         </div>
       </header>
-
-      {rich && <BadgeStrip />}
 
       <div className={nav ? 'cw-container legacy-shell' : `cw-container legacy-body${page.type === 'blog_post' ? ' legacy-body--blog' : ''}`}>
         {nav && <SectionSidebar nav={nav} />}
@@ -169,18 +146,6 @@ export default function LegacyArticle({ page, path }: { page: LegacyPage; path: 
             return <p key={i} className="learn-p">{inline(t.replace(/\n+/g, ' '), `p${i}`)}</p>
           })}
 
-          <aside className="learn-bookcta" aria-label="Schedule a consultation">
-            <p className="m-0 mb-3.5">
-              Crain &amp; Wooley offers comprehensive, <strong>flat-rate</strong> estate planning across Dallas–Fort Worth —
-              offices in Plano, Mansfield, and Fort Worth, every document explained in plain language.
-            </p>
-            <Link href="/get-started" className="cw-btn-primary">Book a consultation →</Link>
-            <span className="text-cw-ink-mute text-[14px] ml-3">Plano: (972) 945-1610</span>
-          </aside>
-
-          <p className="learn-disclaimer">
-            The information on this page is for general information purposes only and is not legal advice.
-          </p>
         </article>
         </div>
       </div>
@@ -190,18 +155,6 @@ export default function LegacyArticle({ page, path }: { page: LegacyPage; path: 
         site puts below every interior page (value props → reviews → schedule).
         Reuses the homepage section components so all legacy pages match at once. */}
     <ValueProps />
-    {rich && (
-      <section className="cw-interior-cta" aria-label="Schedule a consultation">
-        <div className="cw-container cw-interior-cta-inner">
-          <h2 className="cw-h2 cw-h2-light">Call or Visit Crain &amp; Wooley Today</h2>
-          <p>Plain-language, flat-rate estate planning across Dallas&ndash;Fort Worth. Offices in Plano, Mansfield, and Fort Worth.</p>
-          <div className="cw-interior-cta-actions">
-            <Link href="/contact-us/" className="cw-btn-gold">Book a Consultation</Link>
-            <a href="tel:9729451610" className="cw-interior-cta-phone">(972) 945-1610</a>
-          </div>
-        </div>
-      </section>
-    )}
     <ReviewsSection />
     <Locations />
     </>
