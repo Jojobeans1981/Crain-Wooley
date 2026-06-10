@@ -37,8 +37,14 @@ async function main() {
     for (const h of Array.from(document.querySelectorAll('h1,h2,h3,h4,strong,.h1,[class*=heading]')) as HTMLElement[]) { const r = h.getBoundingClientRect(); const tx = (h.textContent || '').replace(/\s+/g, ' ').trim(); if (r.top > 480 && r.top < 1300 && parseFloat(getComputedStyle(h).fontSize) > 30 && tx.length > 6 && tx.length < 90) { contentH1 = tx; break } }
     let introImage = ''
     for (const i of Array.from(document.querySelectorAll('img')) as HTMLImageElement[]) { const r = i.getBoundingClientRect(); if (i.naturalWidth > 250 && i.naturalHeight > 250 && r.top > 480 && r.top < 1500 && !/logo|accolade|badge|bar-college|elder|naela|banner/i.test(i.src)) { introImage = i.src; break } }
-    const firstAcc = (document.querySelector('[aria-expanded]') as HTMLElement | null)?.getBoundingClientRect().top ?? 99999
-    const introBody = (Array.from(document.querySelectorAll('p')) as HTMLElement[]).filter((e) => { const r = e.getBoundingClientRect(); return r.top > 480 && r.top < firstAcc && (e.textContent || '').replace(/\s+/g, ' ').trim().length > 40 }).map((e) => (e.textContent || '').replace(/\s+/g, ' ').trim()).slice(0, 8)
+    // Intro = body <p> between the banner and the first CONTENT accordion or closer
+    // section. Bound only by content accordions BELOW the banner (a header/widget
+    // [aria-expanded] near the top must not collapse the range), and by the closer
+    // headings, so the footer + accordion panels are excluded.
+    let bodyEnd = 99999
+    for (const e of Array.from(document.querySelectorAll('[aria-expanded], .qst')) as HTMLElement[]) { if (e.tagName.toLowerCase() === 'svg') continue; if ((e.textContent || '').replace(/\s+/g, ' ').trim().length < 5) continue; const t = e.getBoundingClientRect().top; if (t > 480 && t < bodyEnd) bodyEnd = t }
+    for (const e of Array.from(document.querySelectorAll('h2,h3,h4,strong,div,p,span')) as HTMLElement[]) { const tx = (e.textContent || '').replace(/\s+/g, ' '); const t = e.getBoundingClientRect().top; if (t > 480 && t < bodyEnd && e.children.length < 5 && /Estate Planning With Us Means|Schedule a Consultation Today|Expand Each Section|Virtual Services FAQ/i.test(tx)) bodyEnd = t }
+    const introBody = (Array.from(document.querySelectorAll('p')) as HTMLElement[]).filter((e) => { const r = e.getBoundingClientRect(); return r.top > 480 && r.top < bodyEnd && (e.textContent || '').replace(/\s+/g, ' ').trim().length > 40 }).map((e) => (e.textContent || '').replace(/\s+/g, ' ').trim()).slice(0, 16)
     const items: { title: string; body: string; top: number; group: string }[] = []
     const seen = new Set<string>()
     // Plan accordions use [aria-expanded]/<summary>; their panel is aria-controlled.
