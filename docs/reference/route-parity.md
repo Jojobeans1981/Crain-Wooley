@@ -5,9 +5,9 @@
 ## Summary
 
 - **Total live URLs:** 485
-- **Implemented (real 200):** 446
-- **Template exists, content missing:** 1
-- **Missing entirely (would 404):** 38
+- **Implemented (real 200):** 448
+- **Template exists, content missing:** 36
+- **Missing entirely (would 404):** 1
 
 | Category | Total | Implemented | Content-missing | Missing |
 | --- | --- | --- | --- | --- |
@@ -19,9 +19,9 @@
 | reviews | 0 | 0 | 0 | 0 |
 | blog-index | 1 | 1 | 0 | 0 |
 | blog-year | 10 | 10 | 0 | 0 |
-| blog-month | 89 | 88 | 0 | 1 |
-| blog-post | 190 | 189 | 1 | 0 |
-| blog-taxonomy | 36 | 0 | 0 | 36 |
+| blog-month | 89 | 89 | 0 | 0 |
+| blog-post | 190 | 190 | 0 | 0 |
+| blog-taxonomy | 36 | 0 | 36 | 0 |
 | media-index | 1 | 1 | 0 | 0 |
 | media-item | 30 | 30 | 0 | 0 |
 
@@ -100,7 +100,7 @@
 
 ## Content parity (data import, not new templates)
 
-- **Blog posts:** 190 URLs. The blog index/year/month listings render, but there is **no individual-post route** — posts need both a route (`/blogs/[year]/[month]/[slug]`) and content import. 189 of these are already in `blog-index.json`.
+- **Blog posts:** 190 URLs. The blog index/year/month listings render, but there is **no individual-post route** — posts need both a route (`/blogs/[year]/[month]/[slug]`) and content import. 190 of these are already in `blog-index.json`.
 - **Media-center:** 31 URLs. Content not imported.
 
 ## Missing entirely (would 404) — all explained / dispositioned
@@ -115,54 +115,17 @@ There are **0 routes flagged `REVIEW`** (unexplained) — must be zero before cu
 
 | Path | Category | Reason |
 | --- | --- | --- |
-| `/blogs/categories/attorney` | blog-taxonomy | DEFERRED: blog category/taxonomy index not built (feature, not content) — open item #1 |
-| `/blogs/categories/beneficiaries` | blog-taxonomy | DEFERRED: blog category/taxonomy index not built (feature, not content) — open item #1 |
-| `/blogs/categories/business` | blog-taxonomy | DEFERRED: blog category/taxonomy index not built (feature, not content) — open item #1 |
-| `/blogs/categories/community-property` | blog-taxonomy | DEFERRED: blog category/taxonomy index not built (feature, not content) — open item #1 |
-| `/blogs/categories/deed` | blog-taxonomy | DEFERRED: blog category/taxonomy index not built (feature, not content) — open item #1 |
-| `/blogs/categories/disability-planning` | blog-taxonomy | DEFERRED: blog category/taxonomy index not built (feature, not content) — open item #1 |
-| `/blogs/categories/disability-plannng` | blog-taxonomy | DEFERRED: blog category/taxonomy index not built (feature, not content) — open item #1 |
-| `/blogs/categories/divorce` | blog-taxonomy | DEFERRED: blog category/taxonomy index not built (feature, not content) — open item #1 |
-| `/blogs/categories/dnr` | blog-taxonomy | DEFERRED: blog category/taxonomy index not built (feature, not content) — open item #1 |
-| `/blogs/categories/estate-planning` | blog-taxonomy | DEFERRED: blog category/taxonomy index not built (feature, not content) — open item #1 |
-| `/blogs/categories/executor` | blog-taxonomy | DEFERRED: blog category/taxonomy index not built (feature, not content) — open item #1 |
-| `/blogs/categories/family-relationships` | blog-taxonomy | DEFERRED: blog category/taxonomy index not built (feature, not content) — open item #1 |
-| `/blogs/categories/financial-power-of-attorney` | blog-taxonomy | DEFERRED: blog category/taxonomy index not built (feature, not content) — open item #1 |
-| `/blogs/categories/firm-news` | blog-taxonomy | DEFERRED: blog category/taxonomy index not built (feature, not content) — open item #1 |
-| `/blogs/categories/gaurdianship` | blog-taxonomy | DEFERRED: blog category/taxonomy index not built (feature, not content) — open item #1 |
-| `/blogs/categories/gift-tax` | blog-taxonomy | DEFERRED: blog category/taxonomy index not built (feature, not content) — open item #1 |
-| `/blogs/categories/inheritance` | blog-taxonomy | DEFERRED: blog category/taxonomy index not built (feature, not content) — open item #1 |
-| `/blogs/categories/intellectual-property` | blog-taxonomy | DEFERRED: blog category/taxonomy index not built (feature, not content) — open item #1 |
-| `/blogs/categories/irrevocable-trusts` | blog-taxonomy | DEFERRED: blog category/taxonomy index not built (feature, not content) — open item #1 |
-| `/blogs/categories/last-wills-and-testaments` | blog-taxonomy | DEFERRED: blog category/taxonomy index not built (feature, not content) — open item #1 |
-| `/blogs/categories/life-insurance` | blog-taxonomy | DEFERRED: blog category/taxonomy index not built (feature, not content) — open item #1 |
-| `/blogs/categories/living-will` | blog-taxonomy | DEFERRED: blog category/taxonomy index not built (feature, not content) — open item #1 |
-| `/blogs/categories/long-term-care-planning` | blog-taxonomy | DEFERRED: blog category/taxonomy index not built (feature, not content) — open item #1 |
-| `/blogs/categories/marriage` | blog-taxonomy | DEFERRED: blog category/taxonomy index not built (feature, not content) — open item #1 |
-| `/blogs/categories/medicaid` | blog-taxonomy | DEFERRED: blog category/taxonomy index not built (feature, not content) — open item #1 |
-| `/blogs/categories/medical-power-of-attorney` | blog-taxonomy | DEFERRED: blog category/taxonomy index not built (feature, not content) — open item #1 |
-| `/blogs/categories/online-wills` | blog-taxonomy | DEFERRED: blog category/taxonomy index not built (feature, not content) — open item #1 |
-| `/blogs/categories/power-of-attorney` | blog-taxonomy | DEFERRED: blog category/taxonomy index not built (feature, not content) — open item #1 |
-| `/blogs/categories/probate` | blog-taxonomy | DEFERRED: blog category/taxonomy index not built (feature, not content) — open item #1 |
-| `/blogs/categories/qualified-domestic-trusts` | blog-taxonomy | DEFERRED: blog category/taxonomy index not built (feature, not content) — open item #1 |
-| `/blogs/categories/revocable-living` | blog-taxonomy | DEFERRED: blog category/taxonomy index not built (feature, not content) — open item #1 |
-| `/blogs/categories/secure-act` | blog-taxonomy | DEFERRED: blog category/taxonomy index not built (feature, not content) — open item #1 |
-| `/blogs/categories/spousal-inheritance` | blog-taxonomy | DEFERRED: blog category/taxonomy index not built (feature, not content) — open item #1 |
-| `/blogs/categories/taxes` | blog-taxonomy | DEFERRED: blog category/taxonomy index not built (feature, not content) — open item #1 |
-| `/blogs/categories/trusts` | blog-taxonomy | DEFERRED: blog category/taxonomy index not built (feature, not content) — open item #1 |
-| `/blogs/categories/wills` | blog-taxonomy | DEFERRED: blog category/taxonomy index not built (feature, not content) — open item #1 |
-| `/blogs/2026/june` | blog-month | DEFERRED: current-month listing empty until blog recency sync imports new posts — open item #1 |
 | `/events-calendar/event-details` | page | BY DESIGN: Scorpion events-calendar system not ported (dynamic widget, like the chat dock) |
 
 ## Template-exists-but-content-missing
 
 | Path | Category | Reason |
 | --- | --- | --- |
-_1 URLs in this class — 190 blog posts + 31 media-center. Full list omitted for brevity; they share the two import paths above._
+_36 URLs in this class — 190 blog posts + 31 media-center. Full list omitted for brevity; they share the two import paths above._
 
 ## Implemented (sample)
 
-_446 URLs serve real 200s (343 legacy pages + static routes + blog listings). Representative sample:_
+_448 URLs serve real 200s (343 legacy pages + static routes + blog listings). Representative sample:_
 
 | Path | Category | Reason |
 | --- | --- | --- |
