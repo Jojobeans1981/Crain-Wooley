@@ -4,6 +4,7 @@ import type { LegacyPage } from '@/lib/legacy'
 import { getSectionNav, type SectionNav, type SectionNavItem } from '@/lib/legacy/section-nav'
 import { teamMemberByPath } from '@/lib/legacy/team'
 import { ValueProps, ReviewsSection, Locations } from '@/components/site/home/sections'
+import { BadgeStrip } from '@/components/site/home/BadgeWall'
 import type { ReactNode } from 'react'
 
 /**
@@ -105,6 +106,10 @@ export default function LegacyArticle({ page, path }: { page: LegacyPage; path: 
   const nav = getSectionNav(path)
   // Staff bio pages show the member's portrait (same headshot as the team listing).
   const member = page.type === 'staff' ? teamMemberByPath(path) : undefined
+  // Practice-area / service / location pages get the richer interior layout the
+  // original Scorpion template uses (credential strip below the banner, a slate
+  // consultation CTA band before the reviews), closer in structure + height.
+  const rich = page.type === 'practice_area' || page.type === 'service' || page.type === 'location'
 
   return (
     <>
@@ -124,6 +129,8 @@ export default function LegacyArticle({ page, path }: { page: LegacyPage; path: 
           <h1 className="legacy-banner-title">{title}</h1>
         </div>
       </header>
+
+      {rich && <BadgeStrip />}
 
       <div className={nav ? 'cw-container legacy-shell' : `cw-container legacy-body${page.type === 'blog_post' ? ' legacy-body--blog' : ''}`}>
         {nav && <SectionSidebar nav={nav} />}
@@ -183,6 +190,18 @@ export default function LegacyArticle({ page, path }: { page: LegacyPage; path: 
         site puts below every interior page (value props → reviews → schedule).
         Reuses the homepage section components so all legacy pages match at once. */}
     <ValueProps />
+    {rich && (
+      <section className="cw-interior-cta" aria-label="Schedule a consultation">
+        <div className="cw-container cw-interior-cta-inner">
+          <h2 className="cw-h2 cw-h2-light">Call or Visit Crain &amp; Wooley Today</h2>
+          <p>Plain-language, flat-rate estate planning across Dallas&ndash;Fort Worth. Offices in Plano, Mansfield, and Fort Worth.</p>
+          <div className="cw-interior-cta-actions">
+            <Link href="/contact-us/" className="cw-btn-gold">Book a Consultation</Link>
+            <a href="tel:9729451610" className="cw-interior-cta-phone">(972) 945-1610</a>
+          </div>
+        </div>
+      </section>
+    )}
     <ReviewsSection />
     <Locations />
     </>

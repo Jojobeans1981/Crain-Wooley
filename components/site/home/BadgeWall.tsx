@@ -30,6 +30,23 @@ function BadgeImg({ b }: { b: Badge }) {
   return <img className="cw-badge" src={b.src} alt={b.alt} loading="lazy" />
 }
 
+// Static (non-interactive) credential strip for interior pages — the original
+// repeats the award logos below the page banner on practice-area / location
+// pages. Server-renderable; no carousel controls.
+export function BadgeStrip() {
+  return (
+    <section className="cw-badges cw-badges-interior" aria-label="Awards and credentials">
+      <ul className="cw-badge-track cw-badge-track-static">
+        {BADGES.map((b) => (
+          <li key={b.src} className="cw-badge-item">
+            <BadgeImg b={b} />
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
+
 export function BadgeWall() {
   const trackRef = useRef<HTMLUListElement>(null)
 

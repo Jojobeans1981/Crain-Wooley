@@ -58,3 +58,26 @@ per-template structural rebuilds.** Two compounding causes:
 Ship the validated token parity + the SEO/route parity (geo 100%) now. Treat per-template
 structural parity as a scoped follow-on, template by template, using this same rig as the
 acceptance gate (it already gives worst-first ordering and per-breakpoint computed-style truth).
+
+## Estate-planning proof (practice-area template)
+
+A structural proof on `/estate-planning/` produced a key, slightly counter-intuitive result:
+
+- **The original template** has, top→bottom: badge strip → two-column intro with gold callout
+  boxes → "why us" cards band → **alternating image+text content sections** → **photo CTA band** →
+  reviews → **second photo section** → consultation CTA.
+- **Asset-free additions** (a credential badge strip + a slate "Call or Visit Today" CTA band,
+  scoped to `practice_area`/`service`/`location` in `LegacyArticle`) made the page visibly closer
+  and added ~710px of height (5865 → 6574px vs the original's 9558px).
+- **But the full-page pixel diff went UP** (e.g. mobile 35% → 41%), because the new sections land
+  at different vertical positions than the original's, shifting everything below them.
+
+**Takeaway:** full-page pixel diff is the wrong gauge for *incremental* structural work — it
+regresses while real fidelity improves, until sections align pixel-for-pixel. Reaching <1% requires
+a **complete, section-aligned rebuild with the original's section images** (the alternating
+image+text blocks and the two CTA photos), which are not in the repo and must be migrated (same
+Vercel Blob path as the 12 hero videos). That is a real, asset-dependent effort per template — but
+one good practice-area rebuild covers ~13 practice areas + ~66 geo pages that share this template.
+
+The asset-free improvements are **kept** (they make ~30 practice/geo pages genuinely more faithful);
+expect their pixel-diff numbers to stay elevated until a full image-aligned rebuild lands.

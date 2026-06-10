@@ -147,8 +147,16 @@ Token parity is exact (Phase 2, validated), but **no template reaches the <1% fu
 tolerance** and none can without structural rebuilds. Interior pages render from the legacy scrape
 (`LegacyArticle`) as simplified articles — 40–60% the height of the original's full Scorpion
 templates (`/estate-planning/` clone 5865px vs original 9558px). See `visual-parity-assessment.md`.
-**Decide:** per-template structural rebuilds (rig is the acceptance gate) vs. ship token + SEO
-parity now. Homepage + shared chrome are already close.
+
+**Estate-planning proof done.** Asset-free structural additions (credential strip + slate CTA band,
+now live on ~30 practice/geo pages) improved fidelity but *raised* the pixel diff — proving that
+reaching <1% needs a **complete, section-aligned rebuild with the original's section images**, not
+incremental additions. Those images must be migrated (same Vercel Blob path as the 12 hero videos —
+**blocked on Joseph's Blob access**). One good practice-area rebuild then covers ~13 practice areas
++ ~66 geo pages.
+
+**Decide:** commit to full image-aligned rebuilds (start when Blob access lands) vs. ship token +
+SEO parity now. Homepage + shared chrome are already close.
 
 ### 2. Blog content strategy (open item #1)
 189/190 sitemap posts resolve as legacy 200s. Gaps: the 2026-06-09 post (not in `blog-index`) and
