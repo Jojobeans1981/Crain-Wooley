@@ -1,0 +1,502 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Crain & Wooley · visual diff</title>
+<style>
+body{font:14px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;margin:0;background:#f5f3ef;color:#222}
+header{padding:20px 28px;background:#304451;color:#fff;position:sticky;top:0;z-index:2}
+header h1{margin:0 0 4px;font-size:18px}
+header p{margin:0;opacity:.85}
+main{padding:24px;max-width:1280px;margin:0 auto}
+.card{background:#fff;border-radius:10px;padding:16px 18px;margin:0 0 18px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.card h3{margin:0 0 10px;font-size:15px;display:flex;align-items:center;gap:10px}
+.card small{font-weight:400;color:#777}
+.pct{margin-left:auto;font-variant-numeric:tabular-nums;font-weight:700}
+.pass{border-left:5px solid #2e7d32}.pass .pct{color:#2e7d32}
+.fail{border-left:5px solid #c62828}.fail .pct{color:#c62828}
+.pending{border-left:5px solid #b0a070;opacity:.8}
+.note{color:#8a7142;margin:0 0 8px;font-size:12px}
+.trip{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.trip figure{margin:0}
+.trip figcaption{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#999;margin-bottom:4px}
+.trip img{width:100%;border:1px solid #e3ded6;border-radius:6px;background:#fff;vertical-align:top}
+</style></head><body>
+<header><h1>Crain &amp; Wooley — visual parity report</h1>
+<p>60 comparisons · 60 over 1% tolerance · sorted worst-first · masked regions excluded</p></header>
+<main><div class="card fail">
+      <h3>/reviews/ <small>tablet · reviews</small> <span class="pct">78.55%</span></h3>
+      
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="reviews/tablet.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="reviews/tablet.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="reviews/tablet.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/reviews/ <small>mobile · reviews</small> <span class="pct">76.91%</span></h3>
+      <p class="note">1 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="reviews/mobile.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="reviews/mobile.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="reviews/mobile.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/media-center/ <small>desktop · media-index</small> <span class="pct">73.65%</span></h3>
+      <p class="note">1 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="media-center/desktop.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="media-center/desktop.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="media-center/desktop.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/media-center/ <small>mobile · media-index</small> <span class="pct">65.33%</span></h3>
+      <p class="note">1 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="media-center/mobile.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="media-center/mobile.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="media-center/mobile.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/staff-profiles/ <small>tablet · staff-index</small> <span class="pct">62.75%</span></h3>
+      
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="staff-profiles/tablet.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="staff-profiles/tablet.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="staff-profiles/tablet.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/media-center/ <small>tablet · media-index</small> <span class="pct">60.80%</span></h3>
+      
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="media-center/tablet.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="media-center/tablet.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="media-center/tablet.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/media-center/firm-videos/texas-estate-planning-crain-wooley/ <small>desktop · media-item</small> <span class="pct">60.48%</span></h3>
+      <p class="note">1 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="media-center__firm-videos__texas-estate-planning-crain-wooley/desktop.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="media-center__firm-videos__texas-estate-planning-crain-wooley/desktop.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="media-center__firm-videos__texas-estate-planning-crain-wooley/desktop.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/contact-us/ <small>desktop · contact</small> <span class="pct">60.15%</span></h3>
+      <p class="note">1 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="contact-us/desktop.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="contact-us/desktop.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="contact-us/desktop.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/contact-us/ <small>tablet · contact</small> <span class="pct">59.85%</span></h3>
+      
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="contact-us/tablet.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="contact-us/tablet.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="contact-us/tablet.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/blogs/ <small>mobile · blog-index</small> <span class="pct">59.51%</span></h3>
+      <p class="note">1 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="blogs/mobile.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="blogs/mobile.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="blogs/mobile.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/media-center/firm-videos/texas-estate-planning-crain-wooley/ <small>tablet · media-item</small> <span class="pct">59.50%</span></h3>
+      
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="media-center__firm-videos__texas-estate-planning-crain-wooley/tablet.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="media-center__firm-videos__texas-estate-planning-crain-wooley/tablet.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="media-center__firm-videos__texas-estate-planning-crain-wooley/tablet.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/media-center/firm-videos/texas-estate-planning-crain-wooley/ <small>mobile · media-item</small> <span class="pct">58.50%</span></h3>
+      <p class="note">1 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="media-center__firm-videos__texas-estate-planning-crain-wooley/mobile.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="media-center__firm-videos__texas-estate-planning-crain-wooley/mobile.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="media-center__firm-videos__texas-estate-planning-crain-wooley/mobile.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/blogs/2026/june/recommended-frequency-for-regular-estate-plan-re/ <small>mobile · blog-post</small> <span class="pct">57.49%</span></h3>
+      <p class="note">1 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="blogs__2026__june__recommended-frequency-for-regular-estate-plan-re/mobile.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="blogs__2026__june__recommended-frequency-for-regular-estate-plan-re/mobile.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="blogs__2026__june__recommended-frequency-for-regular-estate-plan-re/mobile.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/blogs/ <small>tablet · blog-index</small> <span class="pct">56.95%</span></h3>
+      
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="blogs/tablet.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="blogs/tablet.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="blogs/tablet.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/about-us/pricing/ <small>desktop · pricing</small> <span class="pct">55.46%</span></h3>
+      <p class="note">1 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="about-us__pricing/desktop.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="about-us__pricing/desktop.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="about-us__pricing/desktop.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/about-us/ <small>desktop · about</small> <span class="pct">54.15%</span></h3>
+      <p class="note">1 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="about-us/desktop.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="about-us/desktop.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="about-us/desktop.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/blogs/2026/june/recommended-frequency-for-regular-estate-plan-re/ <small>tablet · blog-post</small> <span class="pct">53.31%</span></h3>
+      
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="blogs__2026__june__recommended-frequency-for-regular-estate-plan-re/tablet.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="blogs__2026__june__recommended-frequency-for-regular-estate-plan-re/tablet.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="blogs__2026__june__recommended-frequency-for-regular-estate-plan-re/tablet.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/resources/ <small>desktop · resources</small> <span class="pct">52.12%</span></h3>
+      <p class="note">1 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="resources/desktop.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="resources/desktop.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="resources/desktop.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/resources/ <small>mobile · resources</small> <span class="pct">51.63%</span></h3>
+      <p class="note">1 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="resources/mobile.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="resources/mobile.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="resources/mobile.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/ <small>mobile · home</small> <span class="pct">51.45%</span></h3>
+      <p class="note">2 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="home/mobile.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="home/mobile.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="home/mobile.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/staff-profiles/justin-t-crain/ <small>tablet · staff-profile</small> <span class="pct">51.37%</span></h3>
+      
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="staff-profiles__justin-t-crain/tablet.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="staff-profiles__justin-t-crain/tablet.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="staff-profiles__justin-t-crain/tablet.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/about-us/ <small>tablet · about</small> <span class="pct">49.19%</span></h3>
+      
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="about-us/tablet.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="about-us/tablet.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="about-us/tablet.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/resources/ <small>tablet · resources</small> <span class="pct">48.89%</span></h3>
+      
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="resources/tablet.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="resources/tablet.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="resources/tablet.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/contact-us/ <small>mobile · contact</small> <span class="pct">47.95%</span></h3>
+      <p class="note">1 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="contact-us/mobile.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="contact-us/mobile.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="contact-us/mobile.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/about-us/pricing/ <small>mobile · pricing</small> <span class="pct">47.93%</span></h3>
+      <p class="note">1 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="about-us__pricing/mobile.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="about-us__pricing/mobile.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="about-us__pricing/mobile.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/staff-profiles/justin-t-crain/ <small>mobile · staff-profile</small> <span class="pct">47.92%</span></h3>
+      <p class="note">1 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="staff-profiles__justin-t-crain/mobile.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="staff-profiles__justin-t-crain/mobile.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="staff-profiles__justin-t-crain/mobile.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/about-us/pricing/ <small>tablet · pricing</small> <span class="pct">47.63%</span></h3>
+      
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="about-us__pricing/tablet.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="about-us__pricing/tablet.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="about-us__pricing/tablet.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/staff-profiles/justin-t-crain/ <small>desktop · staff-profile</small> <span class="pct">47.33%</span></h3>
+      <p class="note">1 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="staff-profiles__justin-t-crain/desktop.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="staff-profiles__justin-t-crain/desktop.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="staff-profiles__justin-t-crain/desktop.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/staff-profiles/ <small>mobile · staff-index</small> <span class="pct">47.09%</span></h3>
+      <p class="note">1 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="staff-profiles/mobile.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="staff-profiles/mobile.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="staff-profiles/mobile.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/ <small>desktop · home</small> <span class="pct">46.00%</span></h3>
+      <p class="note">3 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="home/desktop.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="home/desktop.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="home/desktop.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/business-law/ <small>tablet · practice-area</small> <span class="pct">43.95%</span></h3>
+      
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="business-law/tablet.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="business-law/tablet.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="business-law/tablet.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/about-us/ <small>mobile · about</small> <span class="pct">43.48%</span></h3>
+      <p class="note">1 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="about-us/mobile.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="about-us/mobile.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="about-us/mobile.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/ <small>tablet · home</small> <span class="pct">43.43%</span></h3>
+      <p class="note">1 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="home/tablet.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="home/tablet.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="home/tablet.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/blogs/2026/june/recommended-frequency-for-regular-estate-plan-re/ <small>desktop · blog-post</small> <span class="pct">43.15%</span></h3>
+      <p class="note">2 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="blogs__2026__june__recommended-frequency-for-regular-estate-plan-re/desktop.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="blogs__2026__june__recommended-frequency-for-regular-estate-plan-re/desktop.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="blogs__2026__june__recommended-frequency-for-regular-estate-plan-re/desktop.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/estate-planning/ <small>desktop · practice-area</small> <span class="pct">43.10%</span></h3>
+      <p class="note">1 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="estate-planning/desktop.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="estate-planning/desktop.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="estate-planning/desktop.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/estate-planning/trusts/ <small>desktop · practice-area-child</small> <span class="pct">41.90%</span></h3>
+      <p class="note">1 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="estate-planning__trusts/desktop.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="estate-planning__trusts/desktop.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="estate-planning__trusts/desktop.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/staff-profiles/ <small>desktop · staff-index</small> <span class="pct">40.83%</span></h3>
+      <p class="note">1 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="staff-profiles/desktop.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="staff-profiles/desktop.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="staff-profiles/desktop.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/business-law/ <small>desktop · practice-area</small> <span class="pct">40.30%</span></h3>
+      <p class="note">1 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="business-law/desktop.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="business-law/desktop.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="business-law/desktop.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/mansfield/ <small>desktop · geo</small> <span class="pct">39.66%</span></h3>
+      <p class="note">1 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="mansfield/desktop.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="mansfield/desktop.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="mansfield/desktop.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/mansfield/ <small>tablet · geo</small> <span class="pct">39.52%</span></h3>
+      
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="mansfield/tablet.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="mansfield/tablet.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="mansfield/tablet.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/probate/ <small>desktop · practice-area</small> <span class="pct">38.74%</span></h3>
+      <p class="note">1 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="probate/desktop.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="probate/desktop.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="probate/desktop.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/estate-planning/wills/ <small>desktop · practice-area-child</small> <span class="pct">38.71%</span></h3>
+      <p class="note">1 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="estate-planning__wills/desktop.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="estate-planning__wills/desktop.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="estate-planning__wills/desktop.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/estate-planning/ <small>mobile · practice-area</small> <span class="pct">38.11%</span></h3>
+      <p class="note">1 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="estate-planning/mobile.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="estate-planning/mobile.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="estate-planning/mobile.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/mansfield/ <small>mobile · geo</small> <span class="pct">37.47%</span></h3>
+      <p class="note">1 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="mansfield/mobile.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="mansfield/mobile.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="mansfield/mobile.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/probate/ <small>tablet · practice-area</small> <span class="pct">37.28%</span></h3>
+      
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="probate/tablet.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="probate/tablet.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="probate/tablet.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/estate-planning/trusts/ <small>tablet · practice-area-child</small> <span class="pct">35.65%</span></h3>
+      
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="estate-planning__trusts/tablet.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="estate-planning__trusts/tablet.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="estate-planning__trusts/tablet.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/business-law/ <small>mobile · practice-area</small> <span class="pct">35.06%</span></h3>
+      <p class="note">1 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="business-law/mobile.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="business-law/mobile.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="business-law/mobile.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/probate/ <small>mobile · practice-area</small> <span class="pct">34.85%</span></h3>
+      <p class="note">1 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="probate/mobile.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="probate/mobile.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="probate/mobile.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/estate-planning/wills/ <small>tablet · practice-area-child</small> <span class="pct">33.14%</span></h3>
+      
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="estate-planning__wills/tablet.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="estate-planning__wills/tablet.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="estate-planning__wills/tablet.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/estate-planning/trusts/ <small>mobile · practice-area-child</small> <span class="pct">33.10%</span></h3>
+      <p class="note">1 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="estate-planning__trusts/mobile.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="estate-planning__trusts/mobile.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="estate-planning__trusts/mobile.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/estate-planning/ <small>tablet · practice-area</small> <span class="pct">32.69%</span></h3>
+      
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="estate-planning/tablet.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="estate-planning/tablet.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="estate-planning/tablet.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/estate-planning/wills/ <small>mobile · practice-area-child</small> <span class="pct">32.06%</span></h3>
+      <p class="note">1 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="estate-planning__wills/mobile.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="estate-planning__wills/mobile.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="estate-planning__wills/mobile.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/plano/ <small>tablet · geo</small> <span class="pct">30.67%</span></h3>
+      
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="plano/tablet.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="plano/tablet.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="plano/tablet.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/plano/ <small>desktop · geo</small> <span class="pct">28.67%</span></h3>
+      <p class="note">1 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="plano/desktop.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="plano/desktop.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="plano/desktop.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/plano/ <small>mobile · geo</small> <span class="pct">26.72%</span></h3>
+      <p class="note">1 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="plano/mobile.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="plano/mobile.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="plano/mobile.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/site-map/ <small>desktop · sitemap</small> <span class="pct">12.58%</span></h3>
+      <p class="note">1 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="site-map/desktop.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="site-map/desktop.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="site-map/desktop.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/site-map/ <small>mobile · sitemap</small> <span class="pct">11.83%</span></h3>
+      <p class="note">1 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="site-map/mobile.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="site-map/mobile.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="site-map/mobile.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/site-map/ <small>tablet · sitemap</small> <span class="pct">11.73%</span></h3>
+      
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="site-map/tablet.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="site-map/tablet.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="site-map/tablet.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/reviews/ <small>desktop · reviews</small> <span class="pct">11.59%</span></h3>
+      <p class="note">2 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="reviews/desktop.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="reviews/desktop.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="reviews/desktop.diff.png"></figure>
+      </div></div>
+<div class="card fail">
+      <h3>/blogs/ <small>desktop · blog-index</small> <span class="pct">5.64%</span></h3>
+      <p class="note">2 mask(s) applied</p>
+      <div class="trip">
+        <figure><figcaption>original</figcaption><img loading="lazy" src="blogs/desktop.original.png"></figure>
+        <figure><figcaption>clone</figcaption><img loading="lazy" src="blogs/desktop.clone.png"></figure>
+        <figure><figcaption>diff</figcaption><img loading="lazy" src="blogs/desktop.diff.png"></figure>
+      </div></div></main></body></html>

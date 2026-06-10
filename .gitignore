@@ -70,3 +70,11 @@ prisma/*.db-journal
 
 # responsive-audit screenshots (scripts/mobile-audit.mjs output)
 mobile-audit/
+
+# Visual-diff generated image artifacts — large (~530M) and fully regenerable via
+# scripts/visual-diff (capture.ts clone + diff.ts). The Phase 0 ORIGINAL baseline
+# PNGs are committed; clone shots, raw HTML snapshots, and diff-report images are
+# NOT (regenerate locally). See docs/reference/NEXT_STEPS.md for git-lfs guidance.
+docs/reference/capture/**/clone.png
+docs/reference/capture/**/clone.html
+diff-report/**/*.png

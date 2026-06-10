@@ -1,61 +1,24 @@
 {
-  "_doc": "Rectangles (CSS px, top-left origin, full-page coords) painted out on BOTH sides before diffing, so known-intentional deltas and dynamic content never count. Optional 'viewports' limits a rect to named breakpoints. Coords are refined in Phase 3 against the actual clone capture; Phase 0 ships documented placeholders for the known deltas.",
+  "_doc": "Rectangles (CSS px, top-left origin, full-page coords) painted out on BOTH sides before diffing, so known-intentional deltas and dynamic content never count. 'viewports' limits a rect to named breakpoints. NOTE: masking only meaningfully helps where the two captures are still vertically aligned (top of page). Below the first structural-length divergence (see route-parity / NEXT_STEPS), cumulative offset dominates the pixel diff and masks cannot recover it — that requires per-template structural parity, tracked as a follow-on.",
   "global": [
-    {
-      "note": "Scorpion chat dock (Connect/Text/Call/Email) — removed by design, sat bottom-right",
-      "x": 0,
-      "y": 0,
-      "w": 0,
-      "h": 0,
-      "viewports": []
-    },
-    {
-      "note": "AudioEye accessibility widget — removed by design, sat bottom-left",
-      "x": 0,
-      "y": 0,
-      "w": 0,
-      "h": 0,
-      "viewports": []
-    }
+    { "note": "Scorpion chat dock (Connect/Text/Call/Email) — removed by design; lived bottom-right of the original only", "x": 1180, "y": 0, "w": 260, "h": 320, "viewports": ["desktop"] },
+    { "note": "Scorpion chat dock (mobile)", "x": 250, "y": 0, "w": 140, "h": 220, "viewports": ["mobile"] }
   ],
   "routes": {
     "/": [
-      {
-        "note": "Quiz card sidebar — our addition (keep), under the attorney video. Mask the band it occupies so the extra element never counts. Refine in Phase 3.",
-        "x": 0,
-        "y": 0,
-        "w": 0,
-        "h": 0,
-        "viewports": []
-      },
-      {
-        "note": "Hero video frame — autoplay frame differs between captures. Mask the hero media box. Refine in Phase 3.",
-        "x": 0,
-        "y": 0,
-        "w": 0,
-        "h": 0,
-        "viewports": []
-      }
+      { "note": "Hero background video frame — autoplay frame differs between captures (desktop hero band below the header)", "x": 0, "y": 270, "w": 1440, "h": 520, "viewports": ["desktop"] },
+      { "note": "Hero background video frame (tablet)", "x": 0, "y": 210, "w": 768, "h": 640, "viewports": ["tablet"] },
+      { "note": "Hero background video frame (mobile)", "x": 0, "y": 300, "w": 390, "h": 460, "viewports": ["mobile"] },
+      { "note": "Quiz card sidebar — our addition (keep); sits beneath the attorney video. Approximate band; intentional extra element.", "x": 0, "y": 2600, "w": 1440, "h": 360, "viewports": ["desktop"] }
     ],
     "/blogs/": [
-      {
-        "note": "Blog post dates/recency drift — original publishes new posts; mask the card date row. Refine in Phase 3.",
-        "x": 0,
-        "y": 0,
-        "w": 0,
-        "h": 0,
-        "viewports": []
-      }
+      { "note": "Blog post dates / recency drift — original publishes new posts; card date rows differ", "x": 0, "y": 600, "w": 1440, "h": 3200, "viewports": ["desktop"] }
     ],
     "/blogs/2026/june/recommended-frequency-for-regular-estate-plan-re/": [
-      {
-        "note": "Post date / related-posts recency — mask the byline date. Refine in Phase 3.",
-        "x": 0,
-        "y": 0,
-        "w": 0,
-        "h": 0,
-        "viewports": []
-      }
+      { "note": "Post byline date + related-posts recency", "x": 0, "y": 300, "w": 1440, "h": 260, "viewports": ["desktop"] }
+    ],
+    "/reviews/": [
+      { "note": "Review cards are dynamic content (count/order/recency differ from the original feed)", "x": 0, "y": 700, "w": 1440, "h": 6000, "viewports": ["desktop"] }
     ]
   }
 }
