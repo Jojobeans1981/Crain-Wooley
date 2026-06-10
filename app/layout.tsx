@@ -1,5 +1,11 @@
 import type { Metadata } from 'next'
+import { Montserrat } from 'next/font/google'
 import './globals.css'
+
+// Marketing body/UI font. Scoped to .cw-page (see globals.css) so intake/admin
+// keep Inter; .variable only defines --font-marketing-sans, it changes nothing
+// until referenced.
+const montserrat = Montserrat({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--font-marketing-sans', display: 'swap' })
 
 const fontVars = {
   '--font-display-fallback': '"Cormorant Garamond", "Hoefler Text", "Times New Roman", serif',
@@ -66,7 +72,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const isDemo = process.env.NEXT_PUBLIC_DEMO_MODE === 'true'
 
   return (
-    <html lang="en" style={fontVars}>
+    <html lang="en" style={fontVars} className={montserrat.variable}>
       <head>
         {/* arno-pro (display serif) â€” Adobe Typekit, matches the approved intake design */}
         <link rel="preconnect" href="https://use.typekit.net" crossOrigin="" />
