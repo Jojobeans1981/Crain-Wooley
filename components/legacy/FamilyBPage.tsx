@@ -27,7 +27,7 @@ export default function FamilyBPage({ page }: { page: FamilyBData }) {
       </header>
 
       <section className="cw-fb-intro">
-        <div className="cw-container cw-fb-intro-grid">
+        <div className={`cw-container cw-fb-intro-grid${page.introImage ? '' : ' cw-fb-intro-grid--noimg'}`}>
           <div className="cw-fb-intro-copy">
             {page.contentH1 && <h2 className="cw-fb-h1">{page.contentH1}</h2>}
             {page.introBody.map((p, i) => <p key={i}>{p}</p>)}

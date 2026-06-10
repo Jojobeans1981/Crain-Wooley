@@ -59,10 +59,12 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 export default async function LegacyCatchAll({ params }: { params: Promise<Params> }) {
   const { slug } = await params
   const path = toPath(slug)
-  // Structured family-B pages render the corrected interior template; the rest
-  // still fall back to the flat LegacyArticle (with the shared template fixes).
+  // Structured family-B pages render the corrected interior template — but only
+  // when the extraction actually captured content (intro or accordions). Sparse
+  // entries fall back to LegacyArticle (full body + the shared gold-banner/no-
+  // chrome fixes) so a page is never left empty.
   const fb = getFamilyBPage(path)
-  if (fb) return <FamilyBPage page={fb} />
+  if (fb && (fb.introBody.length > 0 || fb.accordionGroups.length > 0)) return <FamilyBPage page={fb} />
   const page = getLegacyPage(path)
   if (page) return <LegacyArticle page={page} path={path} />
 

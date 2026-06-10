@@ -1506,6 +1506,9 @@
   .cw-fb-intro { background: #fff; padding: clamp(40px, 5vw, 72px) 0; }
   .cw-fb-intro-grid { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center; }
   @media (min-width: 900px) { .cw-fb-intro-grid { grid-template-columns: 1.15fr 0.85fr; gap: 54px; } }
+  /* Pages with no intro photo (most geo/service pages) render a single column. */
+  .cw-fb-intro-grid--noimg { grid-template-columns: 1fr !important; }
+  .cw-fb-intro-grid--noimg .cw-fb-intro-copy { max-width: 820px; }
   .cw-fb-intro-copy { max-width: 640px; }
   .cw-fb-h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(30px, 3.4vw, 44px); line-height: 1.12; color: #343434; text-transform: none; letter-spacing: normal; margin: 0 0 18px; }
   .cw-fb-intro-copy p { font-family: var(--font-sans); font-size: 16.46px; line-height: 1.8; color: #343434; margin: 0 0 16px; }
