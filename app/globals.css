@@ -72,7 +72,9 @@
   }
   .cw-page h1, .cw-page h2, .cw-page h3, .cw-page h4 { color: #343434; }
   .cw-page h1 { font-weight: 400; letter-spacing: normal; line-height: 1.1; }
-  .cw-page h2 { font-family: var(--font-sans); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; line-height: 1.2; }
+  /* Body-content section H2s are uppercase Montserrat; closer-band headings
+     (.cw-h2-light) are mixed-case Cormorant (scoped out here, styled in the band). */
+  .cw-page h2:not(.cw-h2-light) { font-family: var(--font-sans); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; line-height: 1.2; }
 
   code, pre, .mono { font-family: var(--font-mono); }
 
@@ -1225,8 +1227,10 @@
   /* Section head — Montserrat 500 UPPERCASE, lh 1.2, ls 0.05em, #343434.
      Per-breakpoint sizes from the original capture (mobile/tablet/desktop:
      22.69 / 25.03 / 25.68px) — not a Cormorant clamp. */
-  .cw-h2 { font-family: var(--font-sans); font-weight: 500; text-transform: uppercase;
+  .cw-h2:not(.cw-h2-light) { font-family: var(--font-sans); font-weight: 500; text-transform: uppercase;
     font-size: 22.69px; line-height: 1.2; letter-spacing: 0.05em; color: #343434; margin: 0 0 18px; }
+  .cw-h2.cw-h2-light { font-size: 22.69px; line-height: 1.15; margin: 0 0 18px; }
+  @media (min-width: 768px) { .cw-h2.cw-h2-light { font-size: clamp(30px, 3.4vw, 40px); } }
   @media (min-width: 768px) { .cw-h2 { font-size: 25.03px; } }
   @media (min-width: 1200px) { .cw-h2 { font-size: 25.68px; } }
   .cw-h2-light { color: #fff; }
