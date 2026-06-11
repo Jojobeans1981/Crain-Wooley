@@ -1408,12 +1408,16 @@
   /* CTAs on the gold bands (guide, reviews) flip to white-fill / gold-text so
      they keep contrast on gold. The hero is now a light band, so its CTA stays
      the base accessible-gold #806848 (white text, square). */
-  .cw-guide .cw-btn-gold, .cw-reviews .cw-btn-gold {
+  .cw-guide .cw-btn-gold {
     background: #fff; color: var(--cw-gold-text); border-color: #fff;
   }
-  .cw-guide .cw-btn-gold:hover, .cw-reviews .cw-btn-gold:hover {
+  .cw-guide .cw-btn-gold:hover {
     background: rgba(255,255,255,0.88); color: var(--cw-gold-text);
   }
+  /* Original "See all Reviews" is a GOLD-fill white-text square button (like the
+     values "Contact Us"), not white fill. */
+  .cw-reviews .cw-btn-gold { background: var(--cw-gold); color: #fff; border-color: var(--cw-gold); border-radius: 0; }
+  .cw-reviews .cw-btn-gold:hover { background: var(--cw-gold-dark, #7a6444); color: #fff; }
   /* Hero CTA — accessible-gold #806848, white text, square, per live. */
   .cw-hero .cw-btn-gold { padding: 17px 26px; font-weight: 500; }
 

@@ -13,8 +13,6 @@ export type Review = { title: string; quote: string; name: string }
 export function Testimonials({ reviews }: { reviews: Review[] }) {
   const [index, setIndex] = useState(0)
   const [paused, setPaused] = useState(false)
-  // HOME-2: explicit, always-available pause that doesn't depend on hover/focus.
-  const [userPaused, setUserPaused] = useState(false)
   const reducedRef = useRef(false)
   const count = reviews.length
 
@@ -27,10 +25,10 @@ export function Testimonials({ reviews }: { reviews: Review[] }) {
   }, [])
 
   useEffect(() => {
-    if (paused || userPaused || reducedRef.current || count < 2) return
+    if (paused || reducedRef.current || count < 2) return
     const t = setInterval(() => setIndex((i) => (i + 1) % count), 8000)
     return () => clearInterval(t)
-  }, [paused, userPaused, count])
+  }, [paused, count])
 
   return (
     <div
@@ -65,38 +63,13 @@ export function Testimonials({ reviews }: { reviews: Review[] }) {
         ))}
       </div>
 
+      {/* Baseline controls: prev/next ARROWS only (no dot rail, no pause button) —
+          matches the original #ReviewsS8 carousel. Autoplay still honors
+          prefers-reduced-motion and pauses on hover/focus. */}
       <div className="cw-reviews-controls">
-        {count > 1 && (
-          <button
-            type="button"
-            className="cw-reviews-arrow"
-            aria-label={userPaused ? 'Play testimonial autoplay' : 'Pause testimonial autoplay'}
-            aria-pressed={userPaused}
-            onClick={() => setUserPaused((p) => !p)}
-          >
-            {userPaused ? (
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
-            ) : (
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1" /><rect x="14" y="5" width="4" height="14" rx="1" /></svg>
-            )}
-          </button>
-        )}
         <button type="button" className="cw-reviews-arrow" aria-label="Previous testimonial" onClick={prev}>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
         </button>
-        <div className="cw-reviews-dots" role="tablist" aria-label="Choose testimonial">
-          {reviews.map((r, i) => (
-            <button
-              key={i}
-              type="button"
-              role="tab"
-              aria-selected={i === index}
-              aria-label={`Testimonial ${i + 1}`}
-              className={`cw-reviews-dot${i === index ? ' cw-dot-active' : ''}`}
-              onClick={() => go(i)}
-            />
-          ))}
-        </div>
         <button type="button" className="cw-reviews-arrow" aria-label="Next testimonial" onClick={next}>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
         </button>

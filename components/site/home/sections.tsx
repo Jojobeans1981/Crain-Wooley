@@ -209,7 +209,7 @@ export function ReviewsSection() {
         </div>
         <div className="cw-reviews-left">
           <Testimonials reviews={FEATURED_REVIEWS} />
-          <Link href="/reviews/" className="cw-btn-gold cw-reviews-cta">View All Reviews</Link>
+          <Link href="/reviews/" className="cw-btn-gold cw-reviews-cta">See all Reviews</Link>
         </div>
       </div>
     </section>
