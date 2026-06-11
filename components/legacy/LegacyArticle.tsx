@@ -103,7 +103,7 @@ export default function LegacyArticle({ page, path }: { page: LegacyPage; path: 
       {/* Page-title band — full-bleed gold band with the page title. No breadcrumb,
           badges, or invented chrome: interior pages on the original have none.
           Blog posts keep their own banner treatment. */}
-      <header className={`legacy-banner${page.type === 'blog_post' ? ' legacy-banner--blog' : ' legacy-banner--gold'}`}>
+      <header className={`legacy-banner${page.type === 'blog_post' ? ' legacy-banner--blog' : ' legacy-banner--navy'}`}>
         <div className="cw-container legacy-banner-inner">
           <h1 className="legacy-banner-title">{title}</h1>
         </div>

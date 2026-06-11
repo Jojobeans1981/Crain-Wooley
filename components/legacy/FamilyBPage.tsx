@@ -39,7 +39,7 @@ export default function FamilyBPage({ page }: { page: FamilyBData }) {
   const contentBlocks = page.bodyBlocks.filter((b) => b.type !== 'closer')
   return (
     <>
-      <header className="legacy-banner legacy-banner--gold">
+      <header className="legacy-banner legacy-banner--navy">
         <div className="cw-container legacy-banner-inner">
           <h1 className="legacy-banner-title">{page.bannerTitle}</h1>
         </div>
