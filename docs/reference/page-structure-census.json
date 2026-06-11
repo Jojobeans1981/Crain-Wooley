@@ -3,7 +3,18 @@
     "path": "/",
     "family": "other",
     "banner": {
-      "type": "none"
+      "type": "none",
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#MainstageS6"
+      },
+      "real": {
+        "kind": "none",
+        "asset": ""
+      }
     },
     "announcementBar": true,
     "announcementText": "Register for our free webinar to compare wills vs trusts and how to av",
@@ -44,7 +55,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "About Us",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -81,7 +103,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Pricing",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -122,7 +155,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Flat Rate Services",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -163,7 +207,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Hourly Service",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -204,7 +259,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Service Model",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -241,7 +307,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Allen",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -345,7 +422,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Asset Protection",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -449,7 +537,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Guardianship",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -553,7 +652,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Medicaid Planning",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -657,7 +767,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Power of Attorney",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -761,7 +882,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Probate",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -865,7 +997,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Probate Litigation",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -969,7 +1112,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Retirement Planning",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -1073,7 +1227,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Special Needs Planning",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -1177,7 +1342,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Pooled Special Needs Trusts",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -1281,7 +1457,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Trusts",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -1385,7 +1572,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Minor Trusts",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -1489,7 +1687,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Trust Administration",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -1593,7 +1802,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Trust Litigation",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -1697,7 +1917,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Wills",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -1801,7 +2032,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Arlington",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -1905,7 +2147,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Probate",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -2009,7 +2262,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Probate Litigation",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -2112,7 +2376,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Blogs",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -2138,7 +2413,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Recommended Frequency for Regular Estate Plan Reviews",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -2183,7 +2469,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Business Law",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -2251,7 +2548,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Business Succession Planning",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -2319,7 +2627,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Contact Us",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -2350,7 +2669,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Estate Planning",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -2387,7 +2717,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Adult Guardianship",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -2543,7 +2884,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Adult Medicaid",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -2699,7 +3051,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Asset Protection",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -2855,7 +3218,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Charitable Trusts",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -3011,7 +3385,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Conservatorship",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -3167,7 +3552,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Disability Planning",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -3323,7 +3719,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Existing Plan Review Update",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -3479,7 +3886,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Inheritance Law",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -3635,7 +4053,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Irrevocable Trusts",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -3791,7 +4220,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Long-Term Care Planning",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -3947,7 +4387,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Power of Attorney",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -4103,7 +4554,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Financial Power of Attorney",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -4259,7 +4721,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Medical Power of Attorney",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -4415,7 +4888,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Pre & Postnuptial Agreements",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -4571,7 +5055,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Retirement Planning",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -4727,7 +5222,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Revocable Living Trusts",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -4883,7 +5389,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Supplemental Needs Trust",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -5039,7 +5556,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Tax Planning",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -5195,7 +5723,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Trusts",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -5351,7 +5890,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Trust Administration",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -5507,7 +6057,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Trust Litigation",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -5663,7 +6224,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Wills",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -5819,7 +6391,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Living Wills",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -5975,7 +6558,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Events",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -6003,7 +6597,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Minor Trusts",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -6107,7 +6712,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Garland",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -6211,7 +6827,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Probate Litigation",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -6315,7 +6942,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Mansfield",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -6467,7 +7105,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Probate",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -6571,7 +7220,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Business Development",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -6723,7 +7383,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Estate Planning",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -6875,7 +7546,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Asset Protection",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -7027,7 +7709,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Charitable Trusts",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -7179,7 +7872,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Conservatorship",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -7331,7 +8035,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Disability Planning",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -7483,7 +8198,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Irrevocable Trusts",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -7635,7 +8361,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Living Wills",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -7787,7 +8524,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Medicaid Planning",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -7939,7 +8687,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Revocable Living Trusts",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -8091,7 +8850,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Special Needs Planning",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -8243,7 +9013,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Tax Planning",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -8395,7 +9176,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Trusts",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -8547,7 +9339,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Special Needs Trust",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -8699,7 +9502,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Trust Administration",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -8851,7 +9665,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Wills",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -9003,7 +9828,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Existing Plan Review Update",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -9159,7 +9995,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Long Term Care Planning",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -9311,7 +10158,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Power of Attorney",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -9463,7 +10321,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Pre & Postnuptial Agreements",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -9615,7 +10484,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Probate",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -9767,7 +10647,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Probate Litigation",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -9919,7 +10810,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "McKinney",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -10027,7 +10929,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Guardianship",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -10131,7 +11044,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Power of Attorney",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -10235,7 +11159,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Probate",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -10339,7 +11274,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Probate Litigation",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -10443,7 +11389,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Trusts",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -10547,7 +11504,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Special Needs Trust",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -10651,7 +11619,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Trust Litigation",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -10755,7 +11734,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Wills",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -10859,7 +11849,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Media Center",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -10885,7 +11886,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Firm Videos",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -10911,7 +11923,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Common Probate Surprises",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -10937,7 +11960,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Communicate with EMS Workers Via Your License",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -10963,7 +11997,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Do Wills Require Probate",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -10989,7 +12034,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Do You Really Have A Trust?",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -11015,7 +12071,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Estate Planning Lawyers",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -11036,7 +12103,18 @@
     "family": "B",
     "type": "resource",
     "banner": {
-      "type": "none"
+      "type": "none",
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#MainstageS6"
+      },
+      "real": {
+        "kind": "none",
+        "asset": ""
+      }
     },
     "announcementBar": true,
     "announcementText": "Register for our free webinar to compare wills vs trusts and how to av",
@@ -11077,7 +12155,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Justin Talks About MPOA",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -11103,7 +12192,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Medicaid Can Take Assets After Death",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -11129,7 +12229,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Texas Estate Planning | Crain & Wooley",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -11160,7 +12271,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "The Importance of Business Continuity",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -11186,7 +12308,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "The Truth About Beneficiary Designations / Payable On Death",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -11212,7 +12345,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Why Do You Need Power of Attorney Documents?",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -11238,7 +12382,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Your Homestead Exemption",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -11264,7 +12419,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Radio Show",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -11290,7 +12456,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Business Continuity Planning I",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -11316,7 +12493,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Business Continuity Planning II",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -11342,7 +12530,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Business Probate",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -11368,7 +12567,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Celebrities Who Died W/O A Plan",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -11394,7 +12604,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Divorce Proofing",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -11420,7 +12641,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "DIY Legal Templates",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -11446,7 +12678,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Dying Intestate",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -11472,7 +12715,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Intro to Trusts I",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -11498,7 +12752,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Intro to Trusts II",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -11524,7 +12789,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Intro to Wills I",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -11550,7 +12826,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Intro to Wills II",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -11576,7 +12863,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Top 3 Things To Do When Someone Passes Away",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -11602,7 +12900,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Trusts & Probate",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -11628,7 +12937,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Updating Wills",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -11654,7 +12974,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Plano",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -11754,7 +13085,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Guardianship",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -11854,7 +13196,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Long Term Care Planning",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -11954,7 +13307,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Plano Trusts",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -12054,7 +13418,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Special Needs Trust",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -12154,7 +13529,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Trust Administration",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -12254,7 +13640,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Trust Litigation",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -12354,7 +13751,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Power of Attorney",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -12458,7 +13866,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Probate",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -12558,7 +13977,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Wills",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -12653,7 +14083,18 @@
     "family": "B",
     "type": "other",
     "banner": {
-      "type": "none"
+      "type": "none",
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#PrivacyPolicyS1"
+      },
+      "real": {
+        "kind": "none",
+        "asset": ""
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -12679,7 +14120,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Probate",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": true,
     "announcementText": "June 10 11:28 AM EDT Watch a Quick Probate Webinar. Sign up Below! 0 d",
@@ -12751,7 +14203,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Probate Administration",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -12827,7 +14290,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Probate for Out-of-State Executors",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -12903,7 +14377,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Probate Litigation",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -12979,7 +14464,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Resources",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -13012,7 +14508,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Free Estate Planning Guide",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -13040,7 +14547,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Leaving A Legacy Texas Estate Planning",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -13068,7 +14586,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Probate Quiz & Survey",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -13101,7 +14630,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "White Papers",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -13134,7 +14674,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Don’t Want To Leave Your Assets A Mess For Your Family?",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -13161,7 +14712,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Reviews",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -13187,7 +14749,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Services",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -13218,7 +14791,18 @@
     "path": "/site-map",
     "family": "other",
     "banner": {
-      "type": "none"
+      "type": "none",
+      "computed": {
+        "bg": "rgb(255, 255, 255)",
+        "type": "light",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#SiteMapS1"
+      },
+      "real": {
+        "kind": "none",
+        "asset": ""
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -13239,7 +14823,18 @@
     "family": "C",
     "type": "staff",
     "banner": {
-      "type": "none"
+      "type": "none",
+      "computed": {
+        "bg": "rgb(255, 255, 255)",
+        "type": "light",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#CustomStaffSystemS1"
+      },
+      "real": {
+        "kind": "none",
+        "asset": ""
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -13270,7 +14865,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Brynn Siciliano",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -13301,7 +14907,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Connor Martin",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -13332,7 +14949,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Jacob Wooley",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -13363,7 +14991,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Jeremy Crew",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -13394,7 +15033,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Joy Crosby",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -13425,7 +15075,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Justin T. Crain",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -13456,7 +15117,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Kevin Berber",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -13487,7 +15159,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Marcel Williams",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -13518,7 +15201,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Mary Hughes",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -13549,7 +15243,18 @@
       "hasWatermark": false,
       "rule": true,
       "title": "Matthew White",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgba(0, 0, 0, 0)",
+        "type": "transparent",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "form#Form_BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -13580,7 +15285,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Wylie",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -13684,7 +15400,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Trusts",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",
@@ -13788,7 +15515,18 @@
       "hasWatermark": true,
       "rule": true,
       "title": "Wills",
-      "pos": 0
+      "pos": 0,
+      "computed": {
+        "bg": "rgb(155, 128, 89)",
+        "type": "gold",
+        "watermark": false,
+        "watermarkUrl": null,
+        "element": "section#BannerV1"
+      },
+      "real": {
+        "kind": "navy-image",
+        "asset": "/assets/pack/background/sub-banner-about.2506180946474.jpg"
+      }
     },
     "announcementBar": false,
     "announcementText": "",

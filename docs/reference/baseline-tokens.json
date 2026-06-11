@@ -1,0 +1,210 @@
+{
+  "/estate-planning/asset-protection/": {
+    "navyBanner": {
+      "background-color": "rgb(155, 128, 89)",
+      "background-image": "none",
+      "color": "rgb(255, 255, 255)",
+      "padding-top": "57.6094px",
+      "padding-bottom": "57.6094px",
+      "border-bottom": "0px none rgb(255, 255, 255)",
+      "font-family": "Montserrat, sans-serif",
+      "font-size": "16.4622px",
+      "font-weight": "400"
+    },
+    "bannerTitle": {
+      "background-color": "rgba(0, 0, 0, 0)",
+      "background-image": "none",
+      "color": "rgb(255, 255, 255)",
+      "padding-top": "0px",
+      "padding-bottom": "27.4919px",
+      "border-bottom": "0px none rgb(255, 255, 255)",
+      "font-family": "\"Cormorant Garamond\", serif",
+      "font-size": "60.9103px",
+      "font-weight": "400"
+    },
+    "formBanner": null,
+    "sidebar": {
+      "background-color": "rgba(0, 0, 0, 0)",
+      "background-image": "none",
+      "color": "rgb(52, 52, 52)",
+      "padding-top": "0px",
+      "padding-bottom": "0px",
+      "border-bottom": "0px none rgb(52, 52, 52)",
+      "font-family": "Montserrat, sans-serif",
+      "font-size": "16.4622px",
+      "font-weight": "400"
+    },
+    "badgeStrip": {
+      "background-color": "rgb(255, 255, 255)",
+      "background-image": "none",
+      "color": "rgb(52, 52, 52)",
+      "padding-top": "106.547px",
+      "padding-bottom": "106.547px",
+      "border-bottom": "0px none rgb(52, 52, 52)",
+      "font-family": "Montserrat, sans-serif",
+      "font-size": "16.4622px",
+      "font-weight": "400"
+    },
+    "pillars": {
+      "background-color": "rgba(0, 0, 0, 0)",
+      "background-image": "none",
+      "color": "rgb(255, 255, 255)",
+      "padding-top": "106.547px",
+      "padding-bottom": "106.547px",
+      "border-bottom": "0px none rgb(255, 255, 255)",
+      "font-family": "Montserrat, sans-serif",
+      "font-size": "16.4622px",
+      "font-weight": "400"
+    },
+    "schedule": {
+      "background-color": "rgb(48, 68, 81)",
+      "background-image": "none",
+      "color": "rgb(255, 255, 255)",
+      "padding-top": "106.547px",
+      "padding-bottom": "106.547px",
+      "border-bottom": "0px none rgb(255, 255, 255)",
+      "font-family": "Montserrat, sans-serif",
+      "font-size": "16.4622px",
+      "font-weight": "400"
+    },
+    "goldRuleAfter": {
+      "content": "none",
+      "background": "rgba(0, 0, 0, 0)",
+      "borderBottom": "0px none rgb(255, 255, 255)",
+      "width": "auto",
+      "height": "auto"
+    }
+  },
+  "/about-us/": {
+    "navyBanner": {
+      "background-color": "rgb(155, 128, 89)",
+      "background-image": "none",
+      "color": "rgb(255, 255, 255)",
+      "padding-top": "57.6094px",
+      "padding-bottom": "57.6094px",
+      "border-bottom": "0px none rgb(255, 255, 255)",
+      "font-family": "Montserrat, sans-serif",
+      "font-size": "16.4622px",
+      "font-weight": "400"
+    },
+    "bannerTitle": {
+      "background-color": "rgba(0, 0, 0, 0)",
+      "background-image": "none",
+      "color": "rgb(255, 255, 255)",
+      "padding-top": "0px",
+      "padding-bottom": "27.4919px",
+      "border-bottom": "0px none rgb(255, 255, 255)",
+      "font-family": "\"Cormorant Garamond\", serif",
+      "font-size": "60.9103px",
+      "font-weight": "400"
+    },
+    "formBanner": {
+      "background-color": "rgba(0, 0, 0, 0)",
+      "background-image": "none",
+      "color": "rgb(0, 0, 0)",
+      "padding-top": "0px",
+      "padding-bottom": "0px",
+      "border-bottom": "0px none rgb(0, 0, 0)",
+      "font-family": "Montserrat, sans-serif",
+      "font-size": "16.4622px",
+      "font-weight": "400"
+    },
+    "sidebar": null,
+    "badgeStrip": {
+      "background-color": "rgb(255, 255, 255)",
+      "background-image": "none",
+      "color": "rgb(52, 52, 52)",
+      "padding-top": "106.547px",
+      "padding-bottom": "106.547px",
+      "border-bottom": "0px none rgb(52, 52, 52)",
+      "font-family": "Montserrat, sans-serif",
+      "font-size": "16.4622px",
+      "font-weight": "400"
+    },
+    "pillars": {
+      "background-color": "rgb(155, 128, 89)",
+      "background-image": "none",
+      "color": "rgb(255, 255, 255)",
+      "padding-top": "106.547px",
+      "padding-bottom": "106.547px",
+      "border-bottom": "0px none rgb(255, 255, 255)",
+      "font-family": "Montserrat, sans-serif",
+      "font-size": "16.4622px",
+      "font-weight": "400"
+    },
+    "schedule": {
+      "background-color": "rgba(0, 0, 0, 0)",
+      "background-image": "none",
+      "color": "rgb(255, 255, 255)",
+      "padding-top": "106.547px",
+      "padding-bottom": "106.547px",
+      "border-bottom": "0px none rgb(255, 255, 255)",
+      "font-family": "Montserrat, sans-serif",
+      "font-size": "16.4622px",
+      "font-weight": "400"
+    },
+    "goldRuleAfter": {
+      "content": "none",
+      "background": "rgba(0, 0, 0, 0)",
+      "borderBottom": "0px none rgb(255, 255, 255)",
+      "width": "auto",
+      "height": "auto"
+    }
+  },
+  "/staff-profiles/justin-t-crain/": {
+    "navyBanner": {
+      "background-color": "rgb(155, 128, 89)",
+      "background-image": "none",
+      "color": "rgb(255, 255, 255)",
+      "padding-top": "57.6094px",
+      "padding-bottom": "57.6094px",
+      "border-bottom": "0px none rgb(255, 255, 255)",
+      "font-family": "Montserrat, sans-serif",
+      "font-size": "16.4622px",
+      "font-weight": "400"
+    },
+    "bannerTitle": {
+      "background-color": "rgba(0, 0, 0, 0)",
+      "background-image": "none",
+      "color": "rgb(255, 255, 255)",
+      "padding-top": "0px",
+      "padding-bottom": "27.4919px",
+      "border-bottom": "0px none rgb(255, 255, 255)",
+      "font-family": "\"Cormorant Garamond\", serif",
+      "font-size": "60.9103px",
+      "font-weight": "400"
+    },
+    "formBanner": {
+      "background-color": "rgba(0, 0, 0, 0)",
+      "background-image": "none",
+      "color": "rgb(0, 0, 0)",
+      "padding-top": "0px",
+      "padding-bottom": "0px",
+      "border-bottom": "0px none rgb(0, 0, 0)",
+      "font-family": "Montserrat, sans-serif",
+      "font-size": "16.4622px",
+      "font-weight": "400"
+    },
+    "sidebar": null,
+    "badgeStrip": null,
+    "pillars": null,
+    "schedule": {
+      "background-color": "rgb(48, 68, 81)",
+      "background-image": "none",
+      "color": "rgb(255, 255, 255)",
+      "padding-top": "106.547px",
+      "padding-bottom": "106.547px",
+      "border-bottom": "0px none rgb(255, 255, 255)",
+      "font-family": "Montserrat, sans-serif",
+      "font-size": "16.4622px",
+      "font-weight": "400"
+    },
+    "goldRuleAfter": {
+      "content": "none",
+      "background": "rgba(0, 0, 0, 0)",
+      "borderBottom": "0px none rgb(255, 255, 255)",
+      "width": "auto",
+      "height": "auto"
+    }
+  }
+}
