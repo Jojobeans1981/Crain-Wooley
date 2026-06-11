@@ -1461,6 +1461,17 @@
   .cw-locations .cw-btn-gold { background: #fff; color: var(--cw-gold-text); border-color: #fff; }
   .cw-locations .cw-btn-gold:hover { background: rgba(255,255,255,0.88); color: var(--cw-gold-text); }
 
+  /* Light value-card panel (#CTAsS7) — soft panel, centered serif heading + lead,
+     3-up value cards. */
+  .cw-cardsec { background: #fff; padding: 70px 0; }
+  .cw-cardsec-panel { background: #f6f6f6; padding: clamp(40px, 5vw, 72px) clamp(24px, 4vw, 56px); }
+  .cw-cardsec-title { font-family: var(--font-display); font-weight: 400; font-size: clamp(30px, 3.6vw, 44px); line-height: 1.1; color: #343434; text-align: center; margin: 0 0 22px; }
+  .cw-cardsec-lead { font-family: var(--font-sans); font-size: 0.95rem; line-height: 1.7; color: #4a4a4a; text-align: center; max-width: 880px; margin: 0 auto 44px; }
+  .cw-cardsec-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 32px; }
+  @media (min-width: 760px) { .cw-cardsec-grid { grid-template-columns: repeat(3, 1fr); gap: 36px; } }
+  .cw-cardsec-card-title { font-family: var(--font-display); font-weight: 700; font-size: 1.3125rem; color: var(--cw-slate); margin: 0 0 10px; }
+  .cw-cardsec-card-body { font-family: var(--font-sans); font-size: 0.9375rem; line-height: 1.65; color: #4a4a4a; margin: 0; }
+
   /* FAQ closer (#FAQsS3) — navy full-bleed band, collapsed GOLD question-bars
      (serif white question + right chevron), navy gaps between bars. */
   .cw-faqband { background: #304451; padding: 96px 0; color: #fff; }

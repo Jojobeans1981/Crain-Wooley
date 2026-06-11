@@ -219,6 +219,25 @@
         "expanded": true
       },
       {
+        "kind": "cards",
+        "heading": "Flat Rate Estate Planning Services",
+        "para": "Proactively completing a comprehensive estate plan is one of the greatest gifts you can give your loved ones. You will provide peace of mind knowing that your estate settlement will be greatly simplified and estate administration costs lessened or eliminated depending on the estate planning tool you choose to use – a Will or a Trust.",
+        "items": [
+          {
+            "title": "Flat-Rate Pricing*",
+            "body": "Finally, you won’t need a lawyer to understand your legal fees. We clearly communicate our pricing structure upfront, so you can feel comfortable with our service from start to finish. No surprises, no hidden fees. *Our flat rate fees apply only to proactive planning services."
+          },
+          {
+            "title": "Optional Lifetime Guarantee",
+            "body": "With our optional lifetime guarantee, your will and trust will be automatically updated over the years to ensure it stays current with best practices, reflects your current wishes and minimizes future confusion for your family."
+          },
+          {
+            "title": "Knowledgeable Service",
+            "body": "Laws change all the time. We stay up to date with all the latest information so that you’re covered. No one else in the region is as dedicated or educated in this area of law. We’re the experts so you don’t have to be."
+          }
+        ]
+      },
+      {
         "kind": "closer",
         "which": "testimonials"
       },

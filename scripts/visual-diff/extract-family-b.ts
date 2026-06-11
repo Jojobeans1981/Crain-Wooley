@@ -81,8 +81,30 @@ async function main() {
         for (const c of cNodes) if (c[0] !== prev) { bands.push({ kind: 'closer', which: c[0] }); prev = c[0] }
         continue
       }
-      // A non-schedule CTA strip (e.g. CTAsS7) is chrome — skip.
-      if (/(^|\s)cta(\s|$)/.test(cls)) continue
+      // A non-schedule CTA: if it carries a card feed (#CTAsS7Feed value cards),
+      // emit a light value-card panel; otherwise it's a chrome strip — skip.
+      if (/(^|\s)cta(\s|$)/.test(cls)) {
+        const feed = sec.querySelector('[id$="Feed"].ui-repeater, ul.ui-repeater, [class*="ui-repeater"]')
+        const cardEls = feed ? (Array.from(feed.querySelectorAll('[data-key], li[data-item]')) as HTMLElement[]) : []
+        if (cardEls.length) {
+          const hEl = sec.querySelector('h2, h3, h4') as HTMLElement | null
+          const cHeading = hEl ? (hEl.textContent || '').replace(/\s+/g, ' ').trim() : ''
+          const cItems = cardEls.map((li) => {
+            const t = li.querySelector('strong, h3, h4, .fnt_t-co') as HTMLElement | null
+            const bEl = li.querySelector('.cnt-stl, p') as HTMLElement | null
+            return { title: t ? (t.textContent || '').replace(/\s+/g, ' ').trim() : '', body: bEl ? (bEl.textContent || '').replace(/\s+/g, ' ').trim() : '' }
+          }).filter((c) => c.title)
+          // lead paragraph = a section paragraph that isn't inside the card feed
+          let cPara = ''
+          for (const pEl of Array.from(sec.querySelectorAll('p, .cnt-stl')) as HTMLElement[]) {
+            if (feed && feed.contains(pEl)) continue
+            const tx = (pEl.textContent || '').replace(/\s+/g, ' ').trim().replace(new RegExp('^' + cHeading.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\s*'), '')
+            if (tx.length >= 30) { cPara = tx; break }
+          }
+          if (cItems.length) { bands.push({ kind: 'cards', heading: cHeading, para: cPara, items: cItems }); continue }
+        }
+        continue
+      }
 
       // Content / accordion section. Intro prose = blocks before the first
       // accordion control (the wrapper-aware boundary: strictly-precedes AND does

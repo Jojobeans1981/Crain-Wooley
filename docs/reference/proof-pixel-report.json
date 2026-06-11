@@ -4,83 +4,32 @@
     {
       "page": "/about-us/pricing/flat-rate-services/",
       "vp": "desktop",
-      "pct": 0.4506286561772203,
+      "pct": 0.5712206335094911,
       "pass": false,
       "w": 1440,
-      "h": 6059,
-      "masks": 0
+      "h": 6749,
+      "masks": 0,
+      "maskAreaPct": 0
     },
     {
       "page": "/about-us/pricing/flat-rate-services/",
       "vp": "tablet",
-      "pct": 0.5522410125013693,
+      "pct": 0.5627058495905588,
       "pass": false,
       "w": 768,
-      "h": 6086,
-      "masks": 0
+      "h": 6920,
+      "masks": 0,
+      "maskAreaPct": 0
     },
     {
       "page": "/about-us/pricing/flat-rate-services/",
       "vp": "mobile",
-      "pct": 0.4667705959947236,
+      "pct": 0.392859132178466,
       "pass": false,
       "w": 390,
-      "h": 8339,
-      "masks": 0
-    },
-    {
-      "page": "/allen/",
-      "vp": "desktop",
-      "pct": 0.2766407279314888,
-      "pass": false,
-      "w": 1440,
-      "h": 9108,
-      "masks": 0
-    },
-    {
-      "page": "/allen/",
-      "vp": "tablet",
-      "pct": 0.20658330481963047,
-      "pass": false,
-      "w": 768,
-      "h": 10229,
-      "masks": 0
-    },
-    {
-      "page": "/allen/",
-      "vp": "mobile",
-      "pct": 0.2536211246727852,
-      "pass": false,
-      "w": 390,
-      "h": 16260,
-      "masks": 0
-    },
-    {
-      "page": "/staff-profiles/justin-t-crain/",
-      "vp": "desktop",
-      "pct": 0.3139124131044283,
-      "pass": false,
-      "w": 1440,
-      "h": 2893,
-      "masks": 0
-    },
-    {
-      "page": "/staff-profiles/justin-t-crain/",
-      "vp": "tablet",
-      "pct": 0.5043196165736485,
-      "pass": false,
-      "w": 768,
-      "h": 3046,
-      "masks": 0
-    },
-    {
-      "page": "/staff-profiles/justin-t-crain/",
-      "vp": "mobile",
-      "pct": 0.41012368300503893,
-      "pass": false,
-      "w": 390,
-      "h": 4366,
-      "masks": 0
+      "h": 9667,
+      "masks": 0,
+      "maskAreaPct": 0
     }
   ]
 }

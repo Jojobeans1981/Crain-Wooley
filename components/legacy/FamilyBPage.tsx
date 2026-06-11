@@ -125,6 +125,29 @@ function FaqBand({ band }: { band: Extract<Band, { kind: 'accordion' }> }) {
   )
 }
 
+// Light value-card panel (#CTAsS7) — centered heading + lead paragraph + a
+// 3-up grid of value cards on a soft panel. Full-bleed.
+function CardSection({ band }: { band: Extract<Band, { kind: 'cards' }> }) {
+  return (
+    <section className="cw-cardsec" aria-label={band.heading || 'Services'}>
+      <div className="cw-container">
+        <div className="cw-cardsec-panel">
+          {band.heading && <h2 className="cw-cardsec-title">{band.heading}</h2>}
+          {band.para && <p className="cw-cardsec-lead">{band.para}</p>}
+          <ul className="cw-cardsec-grid">
+            {band.items.map((it, i) => (
+              <li key={i} className="cw-cardsec-card">
+                <h3 className="cw-cardsec-card-title">{it.title}</h3>
+                {it.body && <p className="cw-cardsec-card-body">{it.body}</p>}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 /**
  * Family-B interior template. Renders the ordered `bands` model so the original's
  * band interleaving is reproduced (flow bands — intro/prose/collapsed-accordion —
@@ -134,7 +157,7 @@ function FaqBand({ band }: { band: Extract<Band, { kind: 'accordion' }> }) {
 function BandPage({ page }: { page: FamilyBData }) {
   const bands = page.bands!
   const hasSidebar = !!(page.sidebar && page.sidebar.length > 0)
-  const isBleed = (b: Band) => b.kind === 'closer' || (b.kind === 'accordion' && b.expanded)
+  const isBleed = (b: Band) => b.kind === 'closer' || b.kind === 'cards' || (b.kind === 'accordion' && b.expanded)
   const out: React.ReactNode[] = []
   let flow: Band[] = []
   let sidebarUsed = false
@@ -149,6 +172,7 @@ function BandPage({ page }: { page: FamilyBData }) {
     if (!isBleed(b)) { flow.push(b); return }
     flush()
     if (b.kind === 'closer') { const C = CLOSER[b.which]; if (C) out.push(<C key={`b${i}`} />) }
+    else if (b.kind === 'cards') out.push(<CardSection key={`b${i}`} band={b} />)
     else out.push(<FaqBand key={`b${i}`} band={b} />)
   })
   flush()

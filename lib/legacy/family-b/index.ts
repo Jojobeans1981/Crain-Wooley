@@ -24,6 +24,7 @@ export type Band =
   | { kind: 'intro'; heading: string; blocks: BodyBlock[]; image: string | null }
   | { kind: 'prose'; blocks: BodyBlock[] }
   | { kind: 'accordion'; heading?: string; instruction?: string; items: { title: string; body: string }[]; expanded: boolean }
+  | { kind: 'cards'; heading: string; para: string; items: { title: string; body: string }[] } // light value-card panel (#CTAsS7)
   | { kind: 'closer'; which: string }
 export type FamilyBData = {
   path: string
