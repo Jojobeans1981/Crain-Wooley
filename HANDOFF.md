@@ -70,12 +70,37 @@ After UNIT 0 re-baselined, desktop Type-B passes landed (all uncommitted):
   DOM diverges; this is the planned `*:cards` MASK target (feed region), not a
   height-chase. Still OPEN.
 
-STILL OPEN (next session): cards CTAsS7 feed mask; testimonials residual (gold-fill
-"See all Reviews" + carousel ARROWS not dots + heading); footer + intro text bands;
-and the big one — TABLET/MOBILE (testimonials 62%, intro 50%, cards 41%): the
-original changes LAYOUT MODE (stacks columns) at <900px; replicate the stacking,
-don't chase height with padding (owner note). Fast single-band tool added:
-`scripts/visual-diff/_band1.ts <origSel> <cloneSel> <name>`.
+DONE since: **cards CTAsS7 feed mask** (24.3->1.74% desktop; `*:cards`={y:.35,h:.65},
+masks.md logged, committed 0ce3064) — band shell scored, JS-feed region masked.
+**Testimonials** controls -> ARROWS only (dots + pause removed) + "See all Reviews"
+gold-fill button (committed 0ce3064). Desktop testimonials still ~25% — the photo
+proportions + quote-text block (content/position) drive it, not the controls.
+
+STILL OPEN (next session), in directive order:
+- **footer** (11.5% desktop / 30% tablet / 14% mobile, SHARED -> 9 cells): footer
+  IS navy (`#FooterV1.ftr dk-bg` #304451 — verified; the `footer`/#FooterZone
+  wrapper is transparent and fooled the crop into looking light). Real diffs: the
+  clone's full-width `.cw-footer-top` tagline+"Schedule a Consultation" bar is NOT
+  in the original (its tagline is a small inline h30 by the logo/phone, no button
+  row); AND the original #FooterZone is TALLER (959 vs clone 867). Tablet 30% =
+  column stacking differs <768px.
+- **intro+body** text band (27% desktop, clone +85px TALLER): tighten lede/photo
+  block + body spacing.
+- **TABLET/MOBILE** (biggest): testimonials 62-64%, intro 42-50%, faq/values 22-36%
+  — the original changes LAYOUT MODE (stacks columns) <900px; replicate the
+  stacking, don't chase height with padding (owner note).
+- **testimonials desktop residual** (~25%): photo column width + quote-text block.
+- **sub-pixel-floor exceptions** (new protocol): banner is the candidate but at
+  ~4.65% it still has minor geometry residual (search width/heading) — verify
+  geometry identical first, THEN log as OWNER-APPROVED EXCEPTION with crops +
+  evidence; don't bend the <1% gate.
+
+CAUTION (hard-won this session): side-by-side COMPOSITE crops misled me 4x (cards
+navy/light, faq, values, footer). ALWAYS confirm a band's bg/structure via
+COMPUTED styles (dk-bg/lt-bg class + getComputedStyle) before changing CSS — the
+crop is for spotting WHERE, computed truth for WHAT. Fast tool:
+`scripts/visual-diff/_band1.ts <origSel> <cloneSel> <name>` (quote selectors;
+zsh globs `[id^=..]`). unit0-crop-verify.ts emits all 7 flat-rate band crops.
 
 2. **Turbopack stale-CSS gotcha.** The Next dev (Turbopack) file watcher silently
    MISSES script/heredoc writes to `app/globals.css` and serves STALE styles — the
