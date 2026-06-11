@@ -87,6 +87,27 @@ async function main() {
         else if (tag === 'h3' || tag === 'h4') bodyBlocks.push({ type: 'h3', text: tx })
         else bodyBlocks.push({ type: 'p', text: tx })
       }
+      // Orphan prose the h/p/ul selector misses: (a) block prose in <article>/
+      // <blockquote>/<figcaption> with no inner block (firm-video descriptions);
+      // (b) the download-guide widget's heading <strong> + blurb <em> sitting
+      // directly in a <div>. Short runs (buttons, bylines) are left out.
+      for (const e of Array.from(sec.querySelectorAll('article, blockquote, figcaption')) as HTMLElement[]) {
+        if (e.closest('[aria-expanded], .qst, footer, nav, header')) continue
+        if (e.querySelector('p, h2, h3, h4, ul, ol')) continue
+        const tx = (e.textContent || '').replace(/\s+/g, ' ').trim()
+        if (tx.length >= 20 && tx !== contentH1) bodyBlocks.push({ type: 'p', text: tx })
+      }
+      for (const e of Array.from(sec.querySelectorAll('em, strong')) as HTMLElement[]) {
+        if (e.closest('[aria-expanded], .qst, footer, nav, header, p, li, h1, h2, h3, h4, a, article, blockquote, figcaption')) continue
+        const tx = (e.textContent || '').replace(/\s+/g, ' ').trim()
+        if (tx.length >= 20 && tx !== contentH1) bodyBlocks.push({ type: 'p', text: tx })
+      }
+      // Bylines / datelines ('By Crain & Wooley') on media-center video/radio pages.
+      for (const e of Array.from(sec.querySelectorAll('address')) as HTMLElement[]) {
+        if (e.closest('[aria-expanded], .qst, footer, nav, header')) continue
+        const tx = (e.textContent || '').replace(/\s+/g, ' ').trim()
+        if (tx.length >= 3 && tx !== contentH1) bodyBlocks.push({ type: 'p', text: tx })
+      }
     }
     const items: { title: string; body: string; top: number; group: string }[] = []
     const seen = new Set<string>()
