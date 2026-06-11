@@ -226,6 +226,7 @@ const VALUES = [
 export function ValueProps() {
   return (
     <section className="cw-values" aria-label="Why choose us">
+      <span className="cw-values-script" aria-hidden="true">Crain &amp; Wooley</span>
       <div className="cw-container cw-values-grid">
         <div className="cw-values-head reveal">
           <span className="cw-eyebrow cw-eyebrow-light">Designed for Your Comfort &amp; Convenience</span>

@@ -1,6 +1,10 @@
 import type { Metadata } from 'next'
-import { Montserrat } from 'next/font/google'
+import { Montserrat, Pinyon_Script } from 'next/font/google'
 import './globals.css'
+
+// Cursive script for the faint handwriting watermark on the pillars band,
+// matching the original's script-handwriting background.
+const script = Pinyon_Script({ subsets: ['latin'], weight: '400', variable: '--font-script', display: 'swap' })
 
 // Marketing body/UI font. Scoped to .cw-page (see globals.css) so intake/admin
 // keep Inter; .variable only defines --font-marketing-sans, it changes nothing
@@ -72,7 +76,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const isDemo = process.env.NEXT_PUBLIC_DEMO_MODE === 'true'
 
   return (
-    <html lang="en" style={fontVars} className={montserrat.variable}>
+    <html lang="en" style={fontVars} className={`${montserrat.variable} ${script.variable}`}>
       <head>
         {/* arno-pro (display serif) â€” Adobe Typekit, matches the approved intake design */}
         <link rel="preconnect" href="https://use.typekit.net" crossOrigin="" />

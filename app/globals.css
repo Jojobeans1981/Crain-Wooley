@@ -1411,7 +1411,15 @@
   .cw-hero .cw-btn-gold { padding: 17px 26px; font-weight: 500; }
 
   /* 8. Value props */
-  .cw-values { background: var(--cw-slate); padding: 72px 0; border-top: 1px solid var(--cw-line-on-slate); }
+  .cw-values { position: relative; overflow: hidden; background: var(--cw-slate); padding: 72px 0; border-top: 1px solid var(--cw-line-on-slate); }
+  /* Faint script-handwriting watermark behind the pillars band, matching the
+     original's script background. Real element (avoids the CSS content quirk). */
+  .cw-values-script {
+    position: absolute; right: -2%; top: 50%; transform: translateY(-50%) rotate(-8deg);
+    font-family: var(--font-script), cursive; font-size: clamp(120px, 22vw, 320px); line-height: 1; white-space: nowrap;
+    color: rgba(255, 255, 255, 0.05); pointer-events: none; z-index: 0; user-select: none;
+  }
+  .cw-values-grid { position: relative; z-index: 1; }
   .cw-values-grid { display: grid; grid-template-columns: 1fr; gap: 44px; align-items: start; }
   @media (min-width: 900px) { .cw-values-grid { grid-template-columns: 1fr 1.3fr; gap: 64px; } }
   .cw-values-head .cw-btn-gold { margin-top: 8px; }
