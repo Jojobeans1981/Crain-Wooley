@@ -37,7 +37,10 @@ async function main() {
   for (const path of PAGES) {
     const slug = path.replace(/^\/+|\/+$/g, '').replace(/\//g, '__') || 'home'
     for (const vp of VPS) {
-      const pg = await b.newPage({ viewport: { width: vp.w, height: vp.h } })
+      // reducedMotion freezes scroll-reveal + carousels on BOTH sides (the clone's
+      // .reveal/.reveal-stagger resolve to visible; the original's `anm` bands too),
+      // so the capture is deterministic instead of racing intersection observers.
+      const pg = await b.newPage({ viewport: { width: vp.w, height: vp.h }, reducedMotion: 'reduce' })
       const origFile = `pixel-baselines/original/${slug}-${vp.n}.png`
       if (!existsSync(origFile)) { const buf = await shot(pg, ORIG + path); writeFileSync(origFile, buf); manifest.push({ src: 'original', url: ORIG + path, viewport: vp.n, bytes: buf.length }); await pg.waitForTimeout(3000) /* courtesy */ }
       const cloneBuf = await shot(pg, CLONE + path)

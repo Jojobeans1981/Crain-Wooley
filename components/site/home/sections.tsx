@@ -196,18 +196,17 @@ export function Divider() {
   )
 }
 
-// ── 7. Testimonials ── (data: lib/reviews, shared with the /reviews page)
+// ── 7. Testimonials ── (the #ImageGroupS1 / #ReviewsS8 closer band: gold #9B8059
+// with the faint handwritten-letters watermark, white text, a single centered
+// review carousel. Shared by the homepage and every interior page. Data: the
+// curated 8 from lib/reviews, same set the original features site-wide.)
 export function ReviewsSection() {
   return (
     <section className="cw-reviews" aria-label="Client testimonials">
-      <div className="cw-container cw-reviews-grid reveal">
-        <div className="cw-reviews-left">
-          <Testimonials reviews={FEATURED_REVIEWS} />
-          <Link href="/reviews/" className="cw-btn-gold cw-reviews-cta">View All Reviews</Link>
-        </div>
-        <div className="cw-reviews-photo">
-          <Image src="/home/reviews-feature.jpg" alt="Crain & Wooley attorneys" fill sizes="(max-width: 900px) 100vw, 460px" style={{ objectFit: 'cover' }} />
-        </div>
+      <span className="cw-reviews-wm" aria-hidden="true" />
+      <div className="cw-container cw-reviews-inner reveal">
+        <Testimonials reviews={FEATURED_REVIEWS} />
+        <Link href="/reviews/" className="cw-btn-gold cw-reviews-cta">View All Reviews</Link>
       </div>
     </section>
   )
@@ -226,14 +225,13 @@ const VALUES = [
 export function ValueProps() {
   return (
     <section className="cw-values" aria-label="Why choose us">
-      <span className="cw-values-script" aria-hidden="true">Crain &amp; Wooley</span>
       <div className="cw-container cw-values-grid">
         <div className="cw-values-head reveal">
           <span className="cw-eyebrow cw-eyebrow-light">Designed for Your Comfort &amp; Convenience</span>
           <h2 className="cw-h2 cw-h2-light">Estate Planning With Us Means:</h2>
           <Link href="/contact-us/" className="cw-btn-gold">Contact Us</Link>
         </div>
-        <ul className="cw-values-list reveal-stagger">
+        <ul className="cw-values-list cw-values-card reveal-stagger">
           {VALUES.map((v) => (
             <li key={v.title} className="cw-value">
               <span className="cw-value-icon" aria-hidden="true">
@@ -303,17 +301,21 @@ export function Locations() {
         <div className="cw-section-head cw-section-head-light reveal">
           <h2 className="cw-h2 cw-h2-light">Schedule a Consultation Today!</h2>
           <p className="cw-locations-sub">Start By Selecting a Convenient Location</p>
+          <span className="cw-loc-flair" aria-hidden="true" />
         </div>
         <ul className="cw-loc-grid reveal-stagger">
           {LOCATIONS.map((l) => (
             <li key={l.city} className="cw-loc-card">
               <span className="cw-loc-thumb">
                 <Image src={l.img} alt={`${l.city} office`} fill sizes="(max-width: 900px) 100vw, 360px" style={{ objectFit: 'cover' }} />
+                <span className="cw-loc-tint" aria-hidden="true" />
               </span>
-              <span className="cw-loc-city">{l.city}</span>
-              {l.external
-                ? <a href={l.href} target="_blank" rel="noopener noreferrer" className="cw-btn-gold cw-loc-btn">Contact Us</a>
-                : <Link href={l.href} className="cw-btn-gold cw-loc-btn">Contact Us</Link>}
+              <span className="cw-loc-body">
+                <span className="cw-loc-city">{l.city}</span>
+                {l.external
+                  ? <a href={l.href} target="_blank" rel="noopener noreferrer" className="cw-btn-gold cw-loc-btn">Contact Us</a>
+                  : <Link href={l.href} className="cw-btn-gold cw-loc-btn">Contact Us</Link>}
+              </span>
             </li>
           ))}
         </ul>

@@ -63,9 +63,21 @@ async function main() {
     for (const sec of Array.from(mainEl.children) as HTMLElement[]) {
       const stx = (sec.textContent || '').replace(/\s+/g, ' ')
       const cls = (sec.className?.toString() || '').toLowerCase()
-      if (/Estate Planning With Us Means|DESIGNED FOR YOUR COMFORT/i.test(stx) || /(^|\s)vls(\s|$)/.test(cls)) { bodyBlocks.push({ type: 'closer', which: 'pillars' }); continue }
-      if (/Schedule a Consultation Today/i.test(stx) || /(^|\s)cta(\s|$)/.test(cls)) { bodyBlocks.push({ type: 'closer', which: 'schedule' }); continue }
-      if (/What (Our|People)[^.]{0,30}Say|client testimonials|hear from our clients/i.test(stx) || /(^|\s)(rvw|tst|testim|review)/.test(cls)) { bodyBlocks.push({ type: 'closer', which: 'testimonials' }); continue }
+      // Closer / CTA bands are rendered by dedicated shared components (Testimonials,
+      // Values, Schedule), never as body prose — so skip the whole subtree here.
+      // A reviews wrapper (#ImageGroupS1.img-grp) NESTS both the feed and the
+      // schedule band, so leaving it in body would leak the quote text and inflate
+      // the page. The per-page closer SEQUENCE is computed separately, in document
+      // order, below. (cta-only strips like CTAsS7 are chrome — skipped, not closers.)
+      if (sec.querySelector('[id^="Reviews"], .rvw, blockquote.ato, #ValuesV2, .vls, section[id^="CTAs"]') || /(^|\s)(vls|cta|rvw)(\s|$)/.test(cls) || /Schedule a Consultation Today|Estate Planning With Us Means|DESIGNED FOR YOUR COMFORT/i.test(stx)) { continue }
+      // Accordion / FAQ Q&A is captured separately (the accordion pass below) and
+      // rendered as COLLAPSED groups — never as inline prose, which would duplicate
+      // every Q&A and inflate the page ~3x (the dominant pixel-cascade source). But a
+      // section can hold a real intro (H1 + paragraph + photo) BEFORE its accordions
+      // (e.g. FAQsS2). So keep only prose that PRECEDES the first accordion control;
+      // skip the rest of the section. A section that opens with one (FAQsS3) yields
+      // nothing here.
+      const faqBoundary = sec.querySelector('.qst, [aria-expanded], summary, [itemtype*="Question"]')
       if (sec.tagName === 'FORM' || /^(Form_)?Banner/.test(sec.id) || /(^|\s)(bnr|banner)/.test(cls)) {
         if (!bannerTitle) { const h = sec.querySelector('.fnt_t-1, h1, h2, .h1, strong') as HTMLElement | null; if (h) bannerTitle = (h.textContent || '').replace(/\s+/g, ' ').trim().replace(/\bSearch\s*$/, '').trim() }
         if (sec.querySelector('[name*="SiteSearch"], input[type="search"]')) bannerSearch = true
@@ -84,7 +96,7 @@ async function main() {
         for (const i of Array.from(cz.querySelectorAll('img')) as HTMLImageElement[]) { const src = i.getAttribute('data-src') || i.getAttribute('data-lazy-src') || i.getAttribute('src') || i.src || ''; if (src && !/^data:|\.svg|logo|accolade|badge|bar-college|elder|naela|banner|icon|sprite/i.test(src)) { introImage = src; break } }
       }
       for (const e of Array.from(sec.querySelectorAll('h2,h3,h4,p,ul,ol')) as HTMLElement[]) {
-        if (e.closest('[aria-expanded], .qst, footer, nav, header, [itemtype*="Question"], .sd-zn')) continue
+        if (e.closest('[aria-expanded], .qst, footer, nav, header, [itemtype*="Question"], .sd-zn') || (faqBoundary && (!(faqBoundary.compareDocumentPosition(e) & Node.DOCUMENT_POSITION_PRECEDING) || (faqBoundary.compareDocumentPosition(e) & Node.DOCUMENT_POSITION_CONTAINS)))) continue
         const tag = e.tagName.toLowerCase()
         if ((tag === 'p' || tag === 'li') && e.closest('ul, ol')) continue
         if ((tag === 'ul' || tag === 'ol') && e.parentElement && e.parentElement.closest('ul, ol')) continue
@@ -100,19 +112,19 @@ async function main() {
       // (b) the download-guide widget's heading <strong> + blurb <em> sitting
       // directly in a <div>. Short runs (buttons, bylines) are left out.
       for (const e of Array.from(sec.querySelectorAll('article, blockquote, figcaption')) as HTMLElement[]) {
-        if (e.closest('[aria-expanded], .qst, footer, nav, header, [itemtype*="Question"], .sd-zn')) continue
+        if (e.closest('[aria-expanded], .qst, footer, nav, header, [itemtype*="Question"], .sd-zn') || (faqBoundary && (!(faqBoundary.compareDocumentPosition(e) & Node.DOCUMENT_POSITION_PRECEDING) || (faqBoundary.compareDocumentPosition(e) & Node.DOCUMENT_POSITION_CONTAINS)))) continue
         if (e.querySelector('p, h2, h3, h4, ul, ol')) continue
         const tx = (e.textContent || '').replace(/\s+/g, ' ').trim()
         if (tx.length >= 20 && tx !== contentH1) bodyBlocks.push({ type: 'p', text: tx })
       }
       for (const e of Array.from(sec.querySelectorAll('em, strong')) as HTMLElement[]) {
-        if (e.closest('[aria-expanded], .qst, footer, nav, header, p, li, h1, h2, h3, h4, a, article, blockquote, figcaption, .sd-zn')) continue
+        if (e.closest('[aria-expanded], .qst, footer, nav, header, p, li, h1, h2, h3, h4, a, article, blockquote, figcaption, .sd-zn') || (faqBoundary && (!(faqBoundary.compareDocumentPosition(e) & Node.DOCUMENT_POSITION_PRECEDING) || (faqBoundary.compareDocumentPosition(e) & Node.DOCUMENT_POSITION_CONTAINS)))) continue
         const tx = (e.textContent || '').replace(/\s+/g, ' ').trim()
         if (tx.length >= 20 && tx !== contentH1) bodyBlocks.push({ type: 'p', text: tx })
       }
       // Bylines / datelines ('By Crain & Wooley') on media-center video/radio pages.
       for (const e of Array.from(sec.querySelectorAll('address')) as HTMLElement[]) {
-        if (e.closest('[aria-expanded], .qst, footer, nav, header, [itemtype*="Question"], .sd-zn')) continue
+        if (e.closest('[aria-expanded], .qst, footer, nav, header, [itemtype*="Question"], .sd-zn') || (faqBoundary && (!(faqBoundary.compareDocumentPosition(e) & Node.DOCUMENT_POSITION_PRECEDING) || (faqBoundary.compareDocumentPosition(e) & Node.DOCUMENT_POSITION_CONTAINS)))) continue
         const tx = (e.textContent || '').replace(/\s+/g, ' ').trim()
         if (tx.length >= 3 && tx !== contentH1) bodyBlocks.push({ type: 'p', text: tx })
       }
@@ -122,7 +134,7 @@ async function main() {
       // are already excluded. textContent (not just direct text) so inline-wrapped
       // prose ('<div>...<span>...</span></div>') is captured too.
       for (const e of Array.from(sec.querySelectorAll('div')) as HTMLElement[]) {
-        if (e.closest('[aria-expanded], .qst, footer, nav, header, [itemtype*="Question"], .sd-zn')) continue
+        if (e.closest('[aria-expanded], .qst, footer, nav, header, [itemtype*="Question"], .sd-zn') || (faqBoundary && (!(faqBoundary.compareDocumentPosition(e) & Node.DOCUMENT_POSITION_PRECEDING) || (faqBoundary.compareDocumentPosition(e) & Node.DOCUMENT_POSITION_CONTAINS)))) continue
         if (e.querySelector('div, p, ul, ol, li, h1, h2, h3, h4, article, blockquote, figcaption, address')) continue
         const tx = (e.textContent || '').replace(/\s+/g, ' ').trim()
         // On staff PROFILE bands the role/title + office labels sit in short leaves
@@ -182,7 +194,20 @@ async function main() {
         if (heading || links.length) sidebar.push({ kind, heading, links })
       }
     }
-    return { bannerTitle, contentH1, bodyBlocks, introImage, items, faqHeading, sidebar, badgeStrip, bannerSearch }
+    // Closer SEQUENCE in document order (robust to nesting). Three band types:
+    //  testimonials = reviews feed (#ReviewsS8 / .rvw); pillars = #ValuesV2 / .vls;
+    //  schedule = a CTAs section headed "Schedule a Consultation Today!". Sorted by
+    //  document position, then collapsed to consecutive-unique so a band's nested
+    //  sub-nodes (ReviewsS8Feed/Header/Button) count once. This is the authoritative
+    //  per-page order the renderer reads (flat-rate p>t>s; allen t>p>s; justin s).
+    const closerNodes: [string, Element][] = []
+    document.querySelectorAll('[id^="Reviews"], .rvw').forEach((e) => closerNodes.push(['testimonials', e]))
+    document.querySelectorAll('#ValuesV2, .vls').forEach((e) => closerNodes.push(['pillars', e]))
+    document.querySelectorAll('section[id^="CTAs"]').forEach((e) => { if (/Schedule a Consultation Today/i.test(e.textContent || '')) closerNodes.push(['schedule', e]) })
+    closerNodes.sort((a, b) => (a[1].compareDocumentPosition(b[1]) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1))
+    const closers: string[] = []
+    for (const [t] of closerNodes) if (closers[closers.length - 1] !== t) closers.push(t)
+    return { bannerTitle, contentH1, bodyBlocks, introImage, items, faqHeading, sidebar, badgeStrip, bannerSearch, closers }
   })
 
   // Intro image: resolve to absolute, download via in-page fetch (browser
@@ -211,9 +236,8 @@ async function main() {
   // split accordion items by source group: plans (aria-expanded) vs FAQ (.qst)
   const plans = data.items.filter((i) => i.group === 'plans').sort((a, b) => a.top - b.top).map(({ title, body }) => ({ title, body }))
   const faq = data.items.filter((i) => i.group === 'faq').sort((a, b) => a.top - b.top).map(({ title, body }) => ({ title, body }))
-  // closers list = the section-walk markers, deduped in source order (authoritative;
-  // the renderer reads the in-body markers and uses this only as a fallback).
-  const closers = [...new Set(data.bodyBlocks.filter((b) => b.type === 'closer').map((b) => b.which as string))]
+  // Per-page closer sequence, in document order (computed in-page above).
+  const closers = data.closers
 
   const out = {
     path: key,
