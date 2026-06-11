@@ -25,7 +25,13 @@ function paint(p: PNG, rs: Rect[]) { for (const r of rs) for (let y = r.y; y < r
 async function shot(pg: Page, url: string): Promise<Buffer> {
   await pg.goto(url, { waitUntil: 'load', timeout: 60_000 })
   await pg.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 600) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 70)) } window.scrollTo(0, 0) })
-  await pg.waitForTimeout(1100)
+  // Force-reveal scroll-gated content on BOTH sides. The original hides bands
+  // behind `data-onvisible="anm"` IntersectionObserver reveals (opacity:0 until
+  // intersected) and headless capture doesn't fire them reliably, so whole bands
+  // screenshot EMPTY (text is in the DOM but invisible). The clone uses .reveal/
+  // .reveal-stagger. Pin both visible so the capture is deterministic + complete.
+  await pg.addStyleTag({ content: '[data-onvisible],.anm,[class*="anm"],.reveal,.reveal-stagger,.reveal-stagger>*{opacity:1!important;transform:none!important;visibility:visible!important;animation:none!important;transition:none!important}' }).catch(() => {})
+  await pg.waitForTimeout(900)
   return (await pg.screenshot({ fullPage: true })) as Buffer
 }
 
