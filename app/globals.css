@@ -1453,6 +1453,8 @@
   .cw-loc-grid { list-style: none; margin: 50px 0 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 26px; }
   @media (min-width: 760px) { .cw-loc-grid { grid-template-columns: repeat(3, 1fr); gap: 30px; } }
   .cw-loc-card { position: relative; display: block; min-height: 380px; overflow: hidden; }
+  /* Stacked single-column cards (mobile) are far shorter than the 3-up desktop ones. */
+  @media (max-width: 759px) { .cw-loc-card { min-height: 210px; } .cw-loc-grid { margin-top: 34px; } }
   .cw-loc-thumb { position: absolute; inset: 0; }
   .cw-loc-tint { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.5), rgba(0,0,0,0) 55%); }
   .cw-loc-body { position: absolute; left: 0; bottom: 0; padding: 26px; display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
