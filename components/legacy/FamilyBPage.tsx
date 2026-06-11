@@ -105,14 +105,13 @@ function FaqBand({ band }: { band: Extract<Band, { kind: 'accordion' }> }) {
       <div className="cw-container">
         <div className="cw-faqband-head">
           {band.heading && <h2 className="cw-h2 cw-h2-light cw-faqband-title">{band.heading}</h2>}
-          <span className="cw-loc-flair" aria-hidden="true" />
         </div>
         <div className="cw-faqband-acc">
           {band.items.map((it, i) => (
             <details key={i} className="cw-faqbar">
               <summary className="cw-faqbar-head">
                 <span className="cw-faqbar-q">{it.title}</span>
-                <svg className="cw-faqbar-chev" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                <svg className="cw-faqbar-chev" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
               </summary>
               <div className="cw-faqbar-body">
                 {it.body.split(/\n+/).filter(Boolean).map((para, j) => <p key={j}>{para}</p>)}
