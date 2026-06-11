@@ -36,8 +36,20 @@ expanded-FAQ/cards/closers — full width). Dark bands are NAVY watermark (#3044
 `#CTAsS7` is a light value-card panel. Closer colors/alternation were a lazy-fallback
 artifact — all dark bands are navy when images are forced.
 
-## Gate posture (owner-agreed two-tier, if style parity verified)
+## Gate posture — TWO-TIER (ACTIVE; style parity verified, `docs/reference/font-audit.md`)
 
-<1% for structure/chrome bands; ≤3–5% per text band where implementation-stack font
-rendering differs; full-page reported informationally. Masks are auditable
-(`docs/reference/masks.md`) and the gate prints masked-area % per page.
+Pinned definition (do not let this drift):
+
+- **STRUCTURE / CHROME bands** — banner, badge strip, sidebars, closers, location
+  cards, FAQ bars (collapsed state), staff cards: **<1% per band**.
+- **TEXT-CONTENT bands** — flowing prose / body regions: **≤5% per band** (aim ≤3%
+  where cheap).
+- **FULL-PAGE**: reported **informationally** alongside per-band numbers + masked-area %.
+- A band failing its tier is STILL A FAILURE. The tiers narrow tolerance per band
+  type; they do NOT create a third "close enough" bucket.
+
+Why two-tier is justified: the font audit shows both clone and original resolve
+h1→Cormorant Garamond and body→Montserrat identically headless — fonts are not the
+diff source, so a text-band residual is sub-pixel stack rendering. Masks are
+reserved for genuinely divergent JS-data widgets only (`docs/reference/masks.md`),
+never for text bands; the gate prints masked-area % per page.
