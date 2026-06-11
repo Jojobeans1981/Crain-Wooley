@@ -50,12 +50,12 @@ function Intro({ band }: { band: Extract<Band, { kind: 'intro' }> }) {
   const rest = band.blocks.slice(lede.length)
   return (
     <>
-      <div className={`cw-fb-intro-grid${band.image && lede.length ? '' : ' cw-fb-intro-grid--noimg'}`}>
+      <div className={`cw-fb-intro-grid${band.image ? '' : ' cw-fb-intro-grid--noimg'}`}>
         <div className="cw-fb-intro-copy">
           {band.heading && <h2 className="cw-fb-h1">{band.heading}</h2>}
           {lede.map((b, i) => <Block key={i} block={b} k={i} />)}
         </div>
-        {band.image && lede.length > 0 && (
+        {band.image && (
           <div className="cw-fb-intro-media">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={band.image} alt="" loading="lazy" />

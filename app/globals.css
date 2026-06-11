@@ -1299,8 +1299,8 @@
   .cw-badge-nav:hover { background: var(--cw-slate); color: #fff; }
   .cw-badge-nav:focus-visible { outline: 2px solid var(--cw-gold); outline-offset: 2px; }
   /* Interior pages repeat the credentials below the banner at a smaller size. */
-  .cw-badges-interior { padding: 22px 0; }
-  .cw-badges-interior .cw-badge { height: clamp(74px, 7.5vw, 98px); }
+  .cw-badges-interior { padding: 64px 0; }
+  .cw-badges-interior .cw-badge { height: clamp(96px, 9vw, 150px); }
 
   /* Interior consultation CTA band — slate, matches the original's
      "Call or Visit Crain & Wooley Today" block above the reviews. */
