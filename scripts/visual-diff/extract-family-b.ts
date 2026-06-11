@@ -58,6 +58,7 @@ async function main() {
     let introImage = ''
     let firstContent = true
     let badgeStrip = false
+    let bannerSearch = false
     const bodyBlocks: { type: string; text?: string; items?: string[]; which?: string }[] = []
     for (const sec of Array.from(mainEl.children) as HTMLElement[]) {
       const stx = (sec.textContent || '').replace(/\s+/g, ' ')
@@ -67,6 +68,7 @@ async function main() {
       if (/What (Our|People)[^.]{0,30}Say|client testimonials|hear from our clients/i.test(stx) || /(^|\s)(rvw|tst|testim|review)/.test(cls)) { bodyBlocks.push({ type: 'closer', which: 'testimonials' }); continue }
       if (sec.tagName === 'FORM' || /^(Form_)?Banner/.test(sec.id) || /(^|\s)(bnr|banner)/.test(cls)) {
         if (!bannerTitle) { const h = sec.querySelector('.fnt_t-1, h1, h2, .h1, strong') as HTMLElement | null; if (h) bannerTitle = (h.textContent || '').replace(/\s+/g, ' ').trim().replace(/\bSearch\s*$/, '').trim() }
+        if (sec.querySelector('[name*="SiteSearch"], input[type="search"]')) bannerSearch = true
         continue
       }
       // Badge strip (aws) — record presence (rendered as the shared BadgeStrip),
@@ -180,7 +182,7 @@ async function main() {
         if (heading || links.length) sidebar.push({ kind, heading, links })
       }
     }
-    return { bannerTitle, contentH1, bodyBlocks, introImage, items, faqHeading, sidebar, badgeStrip }
+    return { bannerTitle, contentH1, bodyBlocks, introImage, items, faqHeading, sidebar, badgeStrip, bannerSearch }
   })
 
   // Intro image: resolve to absolute, download via in-page fetch (browser
@@ -225,6 +227,7 @@ async function main() {
     ],
     sidebar: data.sidebar,
     badgeStrip: data.badgeStrip,
+    bannerSearch: data.bannerSearch,
     closers,
   }
   // Upsert into one combined keyed file so the rollout needs no per-page import.

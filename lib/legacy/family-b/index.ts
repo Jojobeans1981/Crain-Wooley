@@ -26,6 +26,7 @@ export type FamilyBData = {
   accordionGroups: AccordionGroup[]
   sidebar?: SidebarBlock[] // sd-zn right-rail (sibling nav, CTA cards, office)
   badgeStrip?: boolean // aws accolade strip present under the banner
+  bannerSearch?: boolean // Form_BannerV1 site-search box in the banner
   closers: string[] // 'pillars' | 'testimonials' | 'schedule', in render order
 }
 

@@ -294,13 +294,16 @@ export function SiteHeader() {
       {/* CH-5: skip link — first focusable element on every page. */}
       <a href="#main" className="cw-skip-link">Skip to main content</a>
 
-      {/* Announcement bar (gold) — CH-6: wrapped as a labelled region so its
-          content isn't orphaned outside a landmark. */}
-      <div className="cw-anno" role="region" aria-label="Site announcement">
-        Register for our free{' '}
-        <Link href="/webinar-registration/">webinar</Link>{' '}
-        to compare wills vs trusts and how to avoid probate
-      </div>
+      {/* Announcement bar (gold) — HOMEPAGE ONLY per census (the original renders
+          the global webinar strip only on /; interior pages do not). CH-6:
+          labelled region so its content isn't orphaned outside a landmark. */}
+      {pathname === '/' && (
+        <div className="cw-anno" role="region" aria-label="Site announcement">
+          Register for our free{' '}
+          <Link href="/webinar-registration/">webinar</Link>{' '}
+          to compare wills vs trusts and how to avoid probate
+        </div>
+      )}
 
       <header className={`cw-site-header${scrolled ? ' cw-scrolled' : ''}`}>
         {/* ONE unified slate header block: full-height logo on the left, a

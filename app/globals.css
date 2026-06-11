@@ -1532,6 +1532,12 @@
     margin: 16px auto 0;
     background: var(--cw-gold);
   }
+  /* Banner site-search box (Form_BannerV1 pages), wired to /site-search. */
+  .legacy-banner-search { display: flex; justify-content: center; margin: 18px auto 0; max-width: 360px; }
+  .legacy-banner-search input { flex: 1; min-width: 0; font-family: var(--font-sans); font-size: 15px; padding: 9px 14px; border: 1px solid rgba(255,255,255,0.45); border-right: none; background: rgba(255,255,255,0.96); color: #343434; }
+  .legacy-banner-search input::placeholder { color: #6b6356; }
+  .legacy-banner-search button { background: var(--cw-gold); border: 1px solid var(--cw-gold); color: #fff; padding: 0 14px; display: inline-flex; align-items: center; cursor: pointer; }
+  .legacy-banner-search button:hover { background: var(--cw-gold-dark, #7a6444); }
 
   /* ── Family-B interior template ── */
   /* Two-column intro: copy left, framed photo right. */
