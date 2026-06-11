@@ -1536,6 +1536,30 @@
   /* ── Family-B interior template ── */
   /* Two-column intro: copy left, framed photo right. */
   .cw-fb-intro { background: #fff; padding: clamp(40px, 5vw, 72px) 0; }
+
+  /* Content zone + right-rail sidebar — the original's cnt-zn five-8ths /
+     sd-zn three-8ths split (stacks below 1000px). */
+  .cw-fb-main { background: #fff; padding: clamp(40px, 5vw, 72px) 0; }
+  .cw-fb-layout { display: grid; grid-template-columns: 1fr; gap: 40px; }
+  @media (min-width: 1000px) { .cw-fb-layout { grid-template-columns: 5fr 3fr; gap: 48px; align-items: start; } }
+  .cw-fb-layout--full { grid-template-columns: 1fr; }
+  .cw-fb-content { min-width: 0; }
+  .cw-fb-content .cw-fb-body { max-width: none; margin: 24px 0 0; }
+  .cw-fb-content .cw-fb-intro-copy, .cw-fb-content .cw-fb-intro-grid--noimg .cw-fb-intro-copy { max-width: none; }
+  .cw-fb-content .cw-fb-accgroup { background: transparent; padding: 32px 0 0; }
+
+  /* Sidebar (sd-zn): sibling nav + CTA cards + office/contact. */
+  .cw-fb-sidebar { font-family: var(--font-sans); }
+  .cw-sd { display: flex; flex-direction: column; gap: 26px; }
+  .cw-sd-heading { font-family: var(--font-sans); font-weight: 600; font-size: 17px; color: #343434; margin: 0 0 12px; padding-bottom: 8px; border-bottom: 2px solid var(--cw-gold); }
+  .cw-sd-links { list-style: none; margin: 0; padding: 0; }
+  .cw-sd-links li { margin: 0 0 7px; }
+  .cw-sd-links a { color: var(--cw-gold-text, #7a6444); text-decoration: none; font-size: 15px; line-height: 1.5; }
+  .cw-sd-links a:hover { text-decoration: underline; }
+  .cw-sd-cta { background: #f6f1e7; padding: 20px; border-left: 2px solid var(--cw-gold); }
+  .cw-sd-cta .cw-sd-heading { border-bottom: none; padding-bottom: 0; font-family: var(--font-display); font-weight: 400; font-size: 20px; }
+  .cw-sd-cta .cw-sd-links a { display: inline-block; margin-top: 8px; font-weight: 600; color: var(--cw-gold-text, #7a6444); }
+
   .cw-fb-intro-grid { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center; }
   @media (min-width: 900px) { .cw-fb-intro-grid { grid-template-columns: 1.15fr 0.85fr; gap: 54px; } }
   /* Pages with no intro photo (most geo/service pages) render a single column. */

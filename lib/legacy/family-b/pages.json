@@ -634,26 +634,6 @@
         "text": "Call us at (972) 945-1610 or book your consultation online."
       },
       {
-        "type": "ul",
-        "items": [
-          "Plano Contact Us",
-          "Mansfield Contact Us",
-          "Ft Worth Contact Us"
-        ]
-      },
-      {
-        "type": "p",
-        "text": "Download Our Free Estate Planning Guide"
-      },
-      {
-        "type": "p",
-        "text": "The world of estate planning can be overwhelming, but our team aims to make things simple. Download our Free Estate Planning Guide today to learn more."
-      },
-      {
-        "type": "p",
-        "text": "The world of estate planning can be overwhelming, but our team aims to make things simple. Download our Free Estate Planning Guide today to learn more."
-      },
-      {
         "type": "closer",
         "which": "pillars"
       },
@@ -664,6 +644,82 @@
     ],
     "introImage": null,
     "accordionGroups": [],
+    "sidebar": [
+      {
+        "kind": "nav",
+        "heading": "Staff Profiles",
+        "links": [
+          {
+            "text": "Justin T. Crain",
+            "href": "/staff-profiles/justin-t-crain/"
+          },
+          {
+            "text": "Jacob Wooley",
+            "href": "/staff-profiles/jacob-wooley/"
+          },
+          {
+            "text": "Matthew White",
+            "href": "/staff-profiles/matthew-white/"
+          },
+          {
+            "text": "Kevin Berber",
+            "href": "/staff-profiles/kevin-berber/"
+          },
+          {
+            "text": "Brynn Siciliano",
+            "href": "/staff-profiles/brynn-siciliano/"
+          },
+          {
+            "text": "Jeremy Crew",
+            "href": "/staff-profiles/jeremy-crew/"
+          },
+          {
+            "text": "Joy Crosby",
+            "href": "/staff-profiles/joy-crosby/"
+          },
+          {
+            "text": "Marcel Williams",
+            "href": "/staff-profiles/marcel-williams/"
+          },
+          {
+            "text": "Connor Martin",
+            "href": "/staff-profiles/connor-martin/"
+          },
+          {
+            "text": "Mary Hughes",
+            "href": "/staff-profiles/mary-hughes/"
+          }
+        ]
+      },
+      {
+        "kind": "cta",
+        "heading": "Download Our Free Estate Planning Guide",
+        "links": [
+          {
+            "text": "Download the Guide",
+            "href": "/resources/free-estate-planning-guide/"
+          }
+        ]
+      },
+      {
+        "kind": "cta",
+        "heading": "Plano",
+        "links": [
+          {
+            "text": "Contact Us",
+            "href": "/plano-contact-us/"
+          },
+          {
+            "text": "Contact Us",
+            "href": "https://outlook.office.com/book/CrainWooleyCopy3@crainwooley.law/?ismsaljsauthenabled=true"
+          },
+          {
+            "text": "Contact Us",
+            "href": "https://outlook.office.com/book/CrainWooleyCopy3@crainwooley.law/?ismsaljsauthenabled=true"
+          }
+        ]
+      }
+    ],
     "closers": [
       "pillars",
       "schedule"

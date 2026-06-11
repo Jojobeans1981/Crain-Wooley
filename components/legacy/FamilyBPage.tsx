@@ -1,5 +1,6 @@
 import { ValueProps, ReviewsSection, Locations } from '@/components/site/home/sections'
 import { Accordion } from './Accordion'
+import { Sidebar } from './Sidebar'
 import type { FamilyBData, BodyBlock } from '@/lib/legacy/family-b'
 
 // Render one ordered body block (paragraph, sub-heading, or list) faithfully.
@@ -37,6 +38,15 @@ export default function FamilyBPage({ page }: { page: FamilyBData }) {
   const markerClosers = [...new Set(page.bodyBlocks.filter((b) => b.type === 'closer').map((b) => (b as { which: string }).which))]
   const closers = markerClosers.length ? markerClosers : page.closers
   const contentBlocks = page.bodyBlocks.filter((b) => b.type !== 'closer')
+  const hasSidebar = !!(page.sidebar && page.sidebar.length > 0)
+
+  // Two-column intro: lede beside the framed photo, then the full remaining body.
+  let lede = page.introImage ? contentBlocks.slice(0, 3) : []
+  const cut = lede.findIndex((b) => b.type === 'h2' || b.type === 'h3')
+  if (cut > 0) lede = lede.slice(0, cut)
+  else if (cut === 0) lede = []
+  const rest = contentBlocks.slice(lede.length)
+
   return (
     <>
       <header className="legacy-banner legacy-banner--navy">
@@ -45,18 +55,11 @@ export default function FamilyBPage({ page }: { page: FamilyBData }) {
         </div>
       </header>
 
-      <section className="cw-fb-intro">
-        {/* Two-column intro: heading + lede beside the framed photo. The lede is
-            the first body blocks (up to the first sub-heading, max 3); the full
-            remaining body renders below — page for page, nothing dropped. */}
-        {(() => {
-          let lede = page.introImage ? contentBlocks.slice(0, 3) : []
-          const cut = lede.findIndex((b) => b.type === 'h2' || b.type === 'h3')
-          if (cut > 0) lede = lede.slice(0, cut)
-          else if (cut === 0) lede = []
-          const rest = contentBlocks.slice(lede.length)
-          return (
-            <div className="cw-container">
+      {/* Content zone + right-rail sidebar (the original's cnt-zn / sd-zn split). */}
+      <section className="cw-fb-main">
+        <div className="cw-container">
+          <div className={`cw-fb-layout${hasSidebar ? '' : ' cw-fb-layout--full'}`}>
+            <div className="cw-fb-content">
               <div className={`cw-fb-intro-grid${page.introImage && lede.length ? '' : ' cw-fb-intro-grid--noimg'}`}>
                 <div className="cw-fb-intro-copy">
                   {page.contentH1 && <h2 className="cw-fb-h1">{page.contentH1}</h2>}
@@ -74,20 +77,22 @@ export default function FamilyBPage({ page }: { page: FamilyBData }) {
                   {rest.map((b, i) => <Block key={i} block={b} k={i} />)}
                 </div>
               )}
+              {page.accordionGroups.map((g, i) => (
+                <div key={i} className="cw-fb-accgroup">
+                  {g.heading && <h2 className="cw-h2 cw-fb-acc-heading">{g.heading}</h2>}
+                  {g.instruction && <p className="cw-fb-instruction">{g.instruction}</p>}
+                  <Accordion items={g.items} />
+                </div>
+              ))}
             </div>
-          )
-        })()}
-      </section>
-
-      {page.accordionGroups.map((g, i) => (
-        <section key={i} className="cw-fb-accgroup">
-          <div className="cw-container">
-            {g.heading && <h2 className="cw-h2 cw-fb-acc-heading">{g.heading}</h2>}
-            {g.instruction && <p className="cw-fb-instruction">{g.instruction}</p>}
-            <Accordion items={g.items} />
+            {hasSidebar && (
+              <aside className="cw-fb-sidebar">
+                <Sidebar blocks={page.sidebar!} />
+              </aside>
+            )}
           </div>
-        </section>
-      ))}
+        </div>
+      </section>
 
       {closers.map((c) => {
         const C = CLOSER[c]

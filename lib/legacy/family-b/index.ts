@@ -16,6 +16,7 @@ export type BodyBlock =
   // Closer band (pillars/testimonials/schedule) recorded at its document position
   // so the renderer re-inserts the shared full-bleed component in source order.
   | { type: 'closer'; which: string }
+export type SidebarBlock = { kind: string; heading: string; links: { text: string; href: string }[] }
 export type FamilyBData = {
   path: string
   bannerTitle: string
@@ -23,6 +24,7 @@ export type FamilyBData = {
   bodyBlocks: BodyBlock[]
   introImage: string | null
   accordionGroups: AccordionGroup[]
+  sidebar?: SidebarBlock[] // sd-zn right-rail (sibling nav, CTA cards, office)
   closers: string[] // 'pillars' | 'testimonials' | 'schedule', in render order
 }
 

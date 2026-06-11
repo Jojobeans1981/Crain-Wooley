@@ -73,12 +73,13 @@ async function main() {
       if (/(^|\s)(aws|awards)/.test(cls) || (/(^|\s)(stf|staff)/.test(cls) && !/stf-pfl|profile/i.test(cls))) continue
       if (firstContent) {
         firstContent = false
-        const h = sec.querySelector('h1, h2, h3, h4') as HTMLElement | null
+        const cz = (sec.querySelector('.cnt-zn') || sec) as HTMLElement // content zone, not the sd-zn sidebar
+        const h = cz.querySelector('h1, h2, h3, h4') as HTMLElement | null
         if (h) contentH1 = (h.textContent || '').replace(/\s+/g, ' ').trim()
-        for (const i of Array.from(sec.querySelectorAll('img')) as HTMLImageElement[]) { const src = i.getAttribute('data-src') || i.getAttribute('data-lazy-src') || i.getAttribute('src') || i.src || ''; if (src && !/^data:|\.svg|logo|accolade|badge|bar-college|elder|naela|banner|icon|sprite/i.test(src)) { introImage = src; break } }
+        for (const i of Array.from(cz.querySelectorAll('img')) as HTMLImageElement[]) { const src = i.getAttribute('data-src') || i.getAttribute('data-lazy-src') || i.getAttribute('src') || i.src || ''; if (src && !/^data:|\.svg|logo|accolade|badge|bar-college|elder|naela|banner|icon|sprite/i.test(src)) { introImage = src; break } }
       }
       for (const e of Array.from(sec.querySelectorAll('h2,h3,h4,p,ul,ol')) as HTMLElement[]) {
-        if (e.closest('[aria-expanded], .qst, footer, nav, header, [itemtype*="Question"]')) continue
+        if (e.closest('[aria-expanded], .qst, footer, nav, header, [itemtype*="Question"], .sd-zn')) continue
         const tag = e.tagName.toLowerCase()
         if ((tag === 'p' || tag === 'li') && e.closest('ul, ol')) continue
         if ((tag === 'ul' || tag === 'ol') && e.parentElement && e.parentElement.closest('ul, ol')) continue
@@ -94,19 +95,19 @@ async function main() {
       // (b) the download-guide widget's heading <strong> + blurb <em> sitting
       // directly in a <div>. Short runs (buttons, bylines) are left out.
       for (const e of Array.from(sec.querySelectorAll('article, blockquote, figcaption')) as HTMLElement[]) {
-        if (e.closest('[aria-expanded], .qst, footer, nav, header, [itemtype*="Question"]')) continue
+        if (e.closest('[aria-expanded], .qst, footer, nav, header, [itemtype*="Question"], .sd-zn')) continue
         if (e.querySelector('p, h2, h3, h4, ul, ol')) continue
         const tx = (e.textContent || '').replace(/\s+/g, ' ').trim()
         if (tx.length >= 20 && tx !== contentH1) bodyBlocks.push({ type: 'p', text: tx })
       }
       for (const e of Array.from(sec.querySelectorAll('em, strong')) as HTMLElement[]) {
-        if (e.closest('[aria-expanded], .qst, footer, nav, header, p, li, h1, h2, h3, h4, a, article, blockquote, figcaption')) continue
+        if (e.closest('[aria-expanded], .qst, footer, nav, header, p, li, h1, h2, h3, h4, a, article, blockquote, figcaption, .sd-zn')) continue
         const tx = (e.textContent || '').replace(/\s+/g, ' ').trim()
         if (tx.length >= 20 && tx !== contentH1) bodyBlocks.push({ type: 'p', text: tx })
       }
       // Bylines / datelines ('By Crain & Wooley') on media-center video/radio pages.
       for (const e of Array.from(sec.querySelectorAll('address')) as HTMLElement[]) {
-        if (e.closest('[aria-expanded], .qst, footer, nav, header, [itemtype*="Question"]')) continue
+        if (e.closest('[aria-expanded], .qst, footer, nav, header, [itemtype*="Question"], .sd-zn')) continue
         const tx = (e.textContent || '').replace(/\s+/g, ' ').trim()
         if (tx.length >= 3 && tx !== contentH1) bodyBlocks.push({ type: 'p', text: tx })
       }
@@ -116,7 +117,7 @@ async function main() {
       // are already excluded. textContent (not just direct text) so inline-wrapped
       // prose ('<div>...<span>...</span></div>') is captured too.
       for (const e of Array.from(sec.querySelectorAll('div')) as HTMLElement[]) {
-        if (e.closest('[aria-expanded], .qst, footer, nav, header, [itemtype*="Question"]')) continue
+        if (e.closest('[aria-expanded], .qst, footer, nav, header, [itemtype*="Question"], .sd-zn')) continue
         if (e.querySelector('div, p, ul, ol, li, h1, h2, h3, h4, article, blockquote, figcaption, address')) continue
         const tx = (e.textContent || '').replace(/\s+/g, ' ').trim()
         // On staff PROFILE bands the role/title + office labels sit in short leaves
@@ -160,7 +161,23 @@ async function main() {
     }
     let faqHeading = ''
     for (const e of Array.from(document.querySelectorAll('h2,h3,h4,strong')) as HTMLElement[]) { const tx = (e.textContent || '').replace(/\s+/g, ' ').trim(); if (/Virtual Services FAQ|Frequently Asked|^FAQ$/i.test(tx) && tx.length < 60) { faqHeading = tx; break } }
-    return { bannerTitle, contentH1, bodyBlocks, introImage, items, faqHeading }
+
+    // Sidebar (sd-zn three-8ths): the right-rail <aside> blocks — sibling-page nav
+    // (sd-nv), CTA cards (sd-cta, e.g. download-guide), office/contact. Captured as
+    // structured blocks the renderer reproduces; links render as-is (relative).
+    const sdEl = document.querySelector('.sd-zn') as HTMLElement | null
+    const sidebar: { kind: string; heading: string; links: { text: string; href: string }[] }[] = []
+    if (sdEl) {
+      for (const aside of Array.from(sdEl.children) as HTMLElement[]) {
+        const cls = (aside.className?.toString() || '').toLowerCase()
+        const kind = /sd-nv|(^|\s)nav/.test(cls) ? 'nav' : /cta/.test(cls) ? 'cta' : 'block'
+        const hEl = aside.querySelector('h1, h2, h3, h4, strong, .fnt_t-co, [class*=fnt_t]') as HTMLElement | null
+        const heading = hEl ? (hEl.textContent || '').replace(/\s+/g, ' ').trim() : ''
+        const links = (Array.from(aside.querySelectorAll('a')) as HTMLAnchorElement[]).map((a) => ({ text: (a.textContent || '').replace(/\s+/g, ' ').trim(), href: a.getAttribute('href') || '' })).filter((l) => l.text && l.text !== heading)
+        if (heading || links.length) sidebar.push({ kind, heading, links })
+      }
+    }
+    return { bannerTitle, contentH1, bodyBlocks, introImage, items, faqHeading, sidebar }
   })
 
   // Intro image: resolve to absolute, download via in-page fetch (browser
@@ -203,6 +220,7 @@ async function main() {
       ...(plans.length ? [{ instruction: 'Expand Each Section to Learn More', items: plans }] : []),
       ...(faq.length ? [{ heading: data.faqHeading || 'Virtual Services FAQ', items: faq }] : []),
     ],
+    sidebar: data.sidebar,
     closers,
   }
   // Upsert into one combined keyed file so the rollout needs no per-page import.
