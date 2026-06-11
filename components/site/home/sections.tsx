@@ -196,17 +196,21 @@ export function Divider() {
   )
 }
 
-// ── 7. Testimonials ── (the #ImageGroupS1 / #ReviewsS8 closer band: gold #9B8059
-// with the faint handwritten-letters watermark, white text, a single centered
-// review carousel. Shared by the homepage and every interior page. Data: the
-// curated 8 from lib/reviews, same set the original features site-wide.)
+// ── 7. Testimonials ── (the #ReviewsS8 closer band: navy watermark, a framed
+// PHOTO on the left + the review carousel on the right (the original's f_rev
+// two-column layout). Data: the curated 8 from lib/reviews, the set the original
+// features site-wide.)
 export function ReviewsSection() {
   return (
     <section className="cw-reviews" aria-label="Client testimonials">
-      <span className="cw-reviews-wm" aria-hidden="true" />
-      <div className="cw-container cw-reviews-inner reveal">
-        <Testimonials reviews={FEATURED_REVIEWS} />
-        <Link href="/reviews/" className="cw-btn-gold cw-reviews-cta">View All Reviews</Link>
+      <div className="cw-container cw-reviews-grid reveal">
+        <div className="cw-reviews-photo">
+          <Image src="/interior/reviews-photo.png" alt="" fill sizes="(max-width: 900px) 100vw, 460px" style={{ objectFit: 'cover' }} />
+        </div>
+        <div className="cw-reviews-left">
+          <Testimonials reviews={FEATURED_REVIEWS} />
+          <Link href="/reviews/" className="cw-btn-gold cw-reviews-cta">View All Reviews</Link>
+        </div>
       </div>
     </section>
   )

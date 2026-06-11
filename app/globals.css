@@ -1377,15 +1377,19 @@
 
   /* 7. Testimonials closer (#ImageGroupS1/#ReviewsS8) — gold #9B8059 with the
      faint handwritten-letters watermark, white text, one centered review. */
-  .cw-reviews { position: relative; overflow: hidden; background: #304451 url('/interior/closer-band-bg.jpg') center / cover no-repeat; padding: clamp(80px, 13vw, 185px) 0; }
+  .cw-reviews { position: relative; overflow: hidden; background: #304451 url('/interior/closer-band-bg.jpg') center / cover no-repeat; padding: clamp(48px, 6vw, 92px) 0; }
   .cw-reviews-wm { display: none; }
-  .cw-reviews-inner { position: relative; z-index: 1; max-width: 760px; text-align: center; }
-  .cw-reviews-cta { margin-top: 26px; display: inline-block; }
+  /* Two-column: framed photo (left) + review carousel (right). */
+  .cw-reviews-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr; gap: 36px; align-items: start; }
+  @media (min-width: 900px) { .cw-reviews-grid { grid-template-columns: 1fr 1.25fr; gap: 52px; } }
+  .cw-reviews-photo { position: relative; min-height: 300px; align-self: stretch; border: 6px solid rgba(255,255,255,0.12); }
+  @media (min-width: 900px) { .cw-reviews-photo { min-height: 460px; } }
+  .cw-reviews-left { min-width: 0; }
+  .cw-reviews-cta { margin-top: 22px; display: inline-block; }
   .cw-reviews-carousel { outline: none; }
   .cw-reviews-carousel:focus-visible { outline: 2px solid var(--cw-gold-soft); outline-offset: 6px; }
-  /* Taller viewport so the band reads as full as the live reviews zone. */
-  .cw-reviews-viewport { position: relative; min-height: 560px; }
-  @media (min-width: 900px) { .cw-reviews-viewport { min-height: 900px; } }
+  .cw-reviews-viewport { position: relative; min-height: 380px; }
+  @media (min-width: 900px) { .cw-reviews-viewport { min-height: 420px; } }
   .cw-review { display: none; margin: 0; }
   .cw-review-active { display: block; }
   .cw-review-stars { color: #fff; font-size: 1.4rem; letter-spacing: 3px; margin-bottom: 16px; }
