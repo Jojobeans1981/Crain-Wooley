@@ -96,8 +96,9 @@ function ContentSection({ bands, sidebar }: { bands: Band[]; sidebar?: SidebarBl
   )
 }
 
-// The original's expanded FAQ closer: a navy full-bleed band (#FAQsS3) with the
-// questions + answers shown (not collapsed). dk-bg alt-bg = navy slate #304451.
+// The original's FAQ closer (#FAQsS3): a navy full-bleed band with a COLLAPSED
+// gold question-bar accordion (serif white question, right chevron, navy gaps
+// between gold bars), answers hidden until expanded.
 function FaqBand({ band }: { band: Extract<Band, { kind: 'accordion' }> }) {
   return (
     <section className="cw-faqband" aria-label={band.heading || 'Frequently asked questions'}>
@@ -106,12 +107,17 @@ function FaqBand({ band }: { band: Extract<Band, { kind: 'accordion' }> }) {
           {band.heading && <h2 className="cw-h2 cw-h2-light cw-faqband-title">{band.heading}</h2>}
           <span className="cw-loc-flair" aria-hidden="true" />
         </div>
-        <div className="cw-faqband-list">
+        <div className="cw-faqband-acc">
           {band.items.map((it, i) => (
-            <div key={i} className="cw-faqband-item">
-              <h3 className="cw-faqband-q">{it.title}</h3>
-              {it.body.split(/\n+/).filter(Boolean).map((para, j) => <p key={j} className="cw-faqband-a">{para}</p>)}
-            </div>
+            <details key={i} className="cw-faqbar">
+              <summary className="cw-faqbar-head">
+                <span className="cw-faqbar-q">{it.title}</span>
+                <svg className="cw-faqbar-chev" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+              </summary>
+              <div className="cw-faqbar-body">
+                {it.body.split(/\n+/).filter(Boolean).map((para, j) => <p key={j}>{para}</p>)}
+              </div>
+            </details>
           ))}
         </div>
       </div>
