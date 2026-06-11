@@ -62,29 +62,25 @@ const PAGES: Record<string, BandDef[]> = {
 }
 const masks: Record<string, Rect[]> = existsSync('scripts/visual-diff/band-masks.json') ? JSON.parse(readFileSync('scripts/visual-diff/band-masks.json', 'utf8')) : {}
 
-async function shot(pg: Page, url: string): Promise<{ buf: Buffer; rects: Record<string, Rect | null> }> {
+// Prepare a page for band-element screenshots: navigate, scroll-reveal, force
+// reveal-gated content + lazy images, settle images so layout is final.
+async function prep(pg: Page, url: string): Promise<void> {
   await pg.goto(url, { waitUntil: 'load', timeout: 60_000 })
   await pg.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 600) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 70)) } window.scrollTo(0, 0) })
   await pg.addStyleTag({ content: '[data-onvisible],.anm,[class*="anm"],.reveal,.reveal-stagger,.reveal-stagger>*{opacity:1!important;transform:none!important;visibility:visible!important;animation:none!important;transition:none!important}' }).catch(() => {})
   await pg.evaluate(() => { document.querySelectorAll('img[data-src], source[data-src]').forEach((e) => { const s = e.getAttribute('data-src'); if (s) { e.setAttribute('src', s); if (e.tagName === 'SOURCE') e.setAttribute('srcset', s) } }) })
-  await pg.waitForTimeout(1400)
-  const sels = (globalThis as { __sels?: string[] }).__sels || []
-  const rects = await pg.evaluate((selList: string[]) => {
-    const out: Record<string, { x: number; y: number; w: number; h: number } | null> = {}
-    const sy = window.scrollY
-    for (const sel of selList) { const e = document.querySelector(sel) as HTMLElement | null; const r = e ? e.getBoundingClientRect() : null; out[sel] = r ? { x: Math.round(r.x), y: Math.round(r.y + sy), w: Math.round(r.width), h: Math.round(r.height) } : null }
-    return out
-  }, sels)
-  const buf = (await pg.screenshot({ fullPage: true })) as Buffer
-  return { buf, rects }
+  await pg.evaluate(() => Promise.all(Array.from(document.images).map((i) => i.complete ? 0 : new Promise<void>((r) => { i.onload = () => r(); i.onerror = () => r(); setTimeout(() => r(), 4000) }))))
+  await pg.waitForTimeout(800)
 }
-
-// Crop a band region out of a full-page PNG (clamped to bounds).
-function crop(src: PNG, r: Rect): PNG {
-  const w = Math.max(1, Math.min(r.w, src.width - Math.max(0, r.x))), h = Math.max(1, Math.min(r.h, src.height - Math.max(0, r.y)))
-  const o = new PNG({ width: w, height: h })
-  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) { const sx = r.x + x, syy = r.y + y; const di = (w * y + x) << 2; if (sx < 0 || syy < 0 || sx >= src.width || syy >= src.height) { o.data[di] = o.data[di + 1] = o.data[di + 2] = o.data[di + 3] = 255; continue } const si = (src.width * syy + sx) << 2; o.data[di] = src.data[si]; o.data[di + 1] = src.data[si + 1]; o.data[di + 2] = src.data[si + 2]; o.data[di + 3] = src.data[si + 3] }
-  return o
+// Screenshot a single band ELEMENT directly (Playwright clips its bbox + scrolls
+// it into view) — avoids fullPage relayout coordinate skew. null if not found.
+async function bandShot(pg: Page, sel: string): Promise<PNG | null> {
+  const loc = pg.locator(sel).first()
+  if (!(await loc.count())) return null
+  const box = await loc.boundingBox().catch(() => null)
+  if (!box || box.height < 8) return null
+  const buf = await loc.screenshot({ timeout: 15_000 }).catch(() => null)
+  return buf ? PNG.sync.read(buf as Buffer) : null
 }
 // Place src top-left into a (w x h) white canvas.
 function pad(src: PNG, w: number, h: number): PNG { const o = new PNG({ width: w, height: h }); o.data.fill(255); for (let y = 0; y < Math.min(h, src.height); y++) for (let x = 0; x < Math.min(w, src.width); x++) { const si = (src.width * y + x) << 2, di = (w * y + x) << 2; o.data[di] = src.data[si]; o.data[di + 1] = src.data[si + 1]; o.data[di + 2] = src.data[si + 2]; o.data[di + 3] = src.data[si + 3] } return o }
@@ -96,18 +92,14 @@ async function main() {
   const scorecard: Record<string, unknown>[] = []
   for (const [path, bands] of Object.entries(PAGES)) {
     const slug = path.replace(/^\/+|\/+$/g, '').replace(/\//g, '__') || 'home'
-    ;(globalThis as { __sels?: string[] }).__sels = [...new Set(bands.flatMap((bd) => [bd.clone, bd.orig]))]
     for (const vp of VPS) {
       const pgC = await b.newPage({ viewport: { width: vp.w, height: vp.h }, reducedMotion: 'reduce' })
       const pgO = await b.newPage({ viewport: { width: vp.w, height: vp.h }, reducedMotion: 'reduce' })
-      const C = await shot(pgC, CLONE + path)
-      const O = await shot(pgO, ORIG + path)
-      await pgC.close(); await pgO.close()
-      const cloneImg = PNG.sync.read(C.buf), origImg = PNG.sync.read(O.buf)
+      await prep(pgC, CLONE + path)
+      await prep(pgO, ORIG + path)
       for (const bd of bands) {
-        const cr = C.rects[bd.clone], or = O.rects[bd.orig]
-        if (!cr || !or || cr.h < 8 || or.h < 8) { scorecard.push({ page: path, vp: vp.n, band: bd.key, tier: bd.tier, pct: null, pass: false, note: !cr ? 'clone band not found' : 'orig band not found' }); continue }
-        const cCrop = crop(cloneImg, cr), oCrop = crop(origImg, or)
+        const cCrop = await bandShot(pgC, bd.clone), oCrop = await bandShot(pgO, bd.orig)
+        if (!cCrop || !oCrop) { scorecard.push({ page: path, vp: vp.n, band: bd.key, tier: bd.tier, pct: null, pass: false, note: !cCrop ? 'clone band not found' : 'orig band not found' }); continue }
         const W = Math.max(cCrop.width, oCrop.width), H = Math.max(cCrop.height, oCrop.height)
         const a = pad(oCrop, W, H), c = pad(cCrop, W, H)
         // Masks are in the band's local coords; values <=1 are treated as
@@ -123,8 +115,9 @@ async function main() {
         const maskArea = bm.reduce((s, r) => s + Math.max(0, r.w) * Math.max(0, r.h), 0) / (W * H)
         const tol = bd.tier === 'text' ? TEXT_TOL : STRUCT_TOL
         writeFileSync(`pixel-baselines/band/diff/${slug}-${vp.n}-${bd.key}.png`, PNG.sync.write(diff))
-        scorecard.push({ page: path, vp: vp.n, band: bd.key, tier: bd.tier, pct, pass: pct < tol, tol, maskAreaPct: maskArea, cloneH: cr.h, origH: or.h })
+        scorecard.push({ page: path, vp: vp.n, band: bd.key, tier: bd.tier, pct, pass: pct < tol, tol, maskAreaPct: maskArea, cloneH: cCrop.height, origH: oCrop.height })
       }
+      await pgC.close(); await pgO.close()
     }
   }
   await b.close()

@@ -4,59 +4,59 @@
     "vp": "desktop",
     "band": "banner",
     "tier": "structure",
-    "pct": 0.15612332609482446,
+    "pct": 0.27289411976911976,
     "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0,
-    "cloneH": 306,
-    "origH": 307
+    "cloneH": 307,
+    "origH": 308
   },
   {
     "page": "/about-us/pricing/flat-rate-services/",
     "vp": "desktop",
     "band": "badge",
     "tier": "structure",
-    "pct": 0.02720340661517132,
+    "pct": 0.053162069988137606,
     "pass": false,
     "tol": 0.01,
-    "maskAreaPct": 0.5935828877005348,
-    "cloneH": 373,
-    "origH": 561
+    "maskAreaPct": 0.5941281138790035,
+    "cloneH": 374,
+    "origH": 562
   },
   {
     "page": "/about-us/pricing/flat-rate-services/",
     "vp": "desktop",
     "band": "intro+body",
     "tier": "text",
-    "pct": 0.26741077058897716,
+    "pct": 0.4679972915091963,
     "pass": false,
     "tol": 0.05,
     "maskAreaPct": 0,
-    "cloneH": 881,
-    "origH": 795
+    "cloneH": 882,
+    "origH": 797
   },
   {
     "page": "/about-us/pricing/flat-rate-services/",
     "vp": "desktop",
     "band": "values",
     "tier": "structure",
-    "pct": 0.31546939552076536,
+    "pct": 0.48923916585206906,
     "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0,
-    "cloneH": 911,
-    "origH": 1022
+    "cloneH": 912,
+    "origH": 1023
   },
   {
     "page": "/about-us/pricing/flat-rate-services/",
     "vp": "desktop",
     "band": "faq",
     "tier": "structure",
-    "pct": 0.437181712962963,
+    "pct": 0.3869055426954732,
     "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0,
-    "cloneH": 2080,
+    "cloneH": 2157,
     "origH": 2160
   },
   {
@@ -64,155 +64,155 @@
     "vp": "desktop",
     "band": "cards",
     "tier": "structure",
-    "pct": 0.016901984857785962,
+    "pct": 0.5060961754493464,
     "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0,
-    "cloneH": 961,
-    "origH": 1086
+    "cloneH": 962,
+    "origH": 1088
   },
   {
     "page": "/about-us/pricing/flat-rate-services/",
     "vp": "desktop",
     "band": "testimonials",
     "tier": "structure",
-    "pct": 0.20665808046497586,
+    "pct": 0.3891873161348721,
     "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0,
-    "cloneH": 1416,
-    "origH": 1472
+    "cloneH": 1417,
+    "origH": 1473
   },
   {
     "page": "/about-us/pricing/flat-rate-services/",
     "vp": "desktop",
     "band": "schedule",
     "tier": "structure",
-    "pct": 0.020813044119817027,
+    "pct": 0.08149130562923666,
     "pass": false,
     "tol": 0.01,
-    "maskAreaPct": 0.6600265604249668,
-    "cloneH": 753,
-    "origH": 740
+    "maskAreaPct": 0.6604774535809018,
+    "cloneH": 754,
+    "origH": 741
   },
   {
     "page": "/about-us/pricing/flat-rate-services/",
     "vp": "desktop",
     "band": "footer",
     "tier": "structure",
-    "pct": 0.10535207391959217,
+    "pct": 0.1705787037037037,
     "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0,
-    "cloneH": 866,
-    "origH": 959
+    "cloneH": 867,
+    "origH": 960
   },
   {
     "page": "/about-us/pricing/flat-rate-services/",
     "vp": "tablet",
     "band": "banner",
     "tier": "structure",
-    "pct": 0.12368177513774105,
+    "pct": 0.1231781550068587,
     "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0,
-    "cloneH": 242,
-    "origH": 242
+    "cloneH": 243,
+    "origH": 243
   },
   {
     "page": "/about-us/pricing/flat-rate-services/",
     "vp": "tablet",
     "band": "badge",
     "tier": "structure",
-    "pct": 0.002079586330935252,
+    "pct": 0.002027885765550239,
     "pass": true,
     "tol": 0.01,
-    "maskAreaPct": 0.593353442246203,
+    "maskAreaPct": 0.5940864234449761,
     "cloneH": 241,
-    "origH": 417
+    "origH": 418
   },
   {
     "page": "/about-us/pricing/flat-rate-services/",
     "vp": "tablet",
     "band": "intro+body",
     "tier": "text",
-    "pct": 0.5474765327946768,
+    "pct": 0.7049563251820197,
     "pass": false,
     "tol": 0.05,
     "maskAreaPct": 0,
-    "cloneH": 1052,
-    "origH": 804
+    "cloneH": 1053,
+    "origH": 805
   },
   {
     "page": "/about-us/pricing/flat-rate-services/",
     "vp": "tablet",
     "band": "values",
     "tier": "structure",
-    "pct": 0.3581351214574899,
+    "pct": 0.459814505798274,
     "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0,
-    "cloneH": 995,
-    "origH": 1235
+    "cloneH": 996,
+    "origH": 1236
   },
   {
     "page": "/about-us/pricing/flat-rate-services/",
     "vp": "tablet",
     "band": "faq",
     "tier": "structure",
-    "pct": 0.36934820795937645,
+    "pct": 0.35841534368114575,
     "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0,
-    "cloneH": 1957,
-    "origH": 2117
+    "cloneH": 2033,
+    "origH": 2118
   },
   {
     "page": "/about-us/pricing/flat-rate-services/",
     "vp": "tablet",
     "band": "cards",
     "tier": "structure",
-    "pct": 0.4199891294799719,
+    "pct": 0.5270922943000936,
     "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0,
-    "cloneH": 880,
-    "origH": 1423
+    "cloneH": 881,
+    "origH": 1424
   },
   {
     "page": "/about-us/pricing/flat-rate-services/",
     "vp": "tablet",
     "band": "testimonials",
     "tier": "structure",
-    "pct": 0.3703520439942303,
+    "pct": 0.3967313923802042,
     "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0,
-    "cloneH": 906,
-    "origH": 1271
+    "cloneH": 907,
+    "origH": 1273
   },
   {
     "page": "/about-us/pricing/flat-rate-services/",
     "vp": "tablet",
     "band": "schedule",
     "tier": "structure",
-    "pct": 0.024634293575920934,
+    "pct": 0.027928108153638814,
     "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0.660377358490566,
     "cloneH": 742,
-    "origH": 643
+    "origH": 644
   },
   {
     "page": "/about-us/pricing/flat-rate-services/",
     "vp": "tablet",
     "band": "footer",
     "tier": "structure",
-    "pct": 0.31908913886958534,
+    "pct": 0.3287954960041696,
     "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0,
-    "cloneH": 971,
+    "cloneH": 972,
     "origH": 1439
   },
   {
@@ -220,7 +220,7 @@
     "vp": "mobile",
     "band": "banner",
     "tier": "structure",
-    "pct": 0.22694462400344753,
+    "pct": 0.22703081232492997,
     "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0,
@@ -232,71 +232,71 @@
     "vp": "mobile",
     "band": "badge",
     "tier": "structure",
-    "pct": 0.003955802968960863,
+    "pct": 0.003929948047595107,
     "pass": true,
     "tol": 0.01,
-    "maskAreaPct": 0.5950657894736842,
-    "cloneH": 213,
-    "origH": 304
+    "maskAreaPct": 0.5941176470588235,
+    "cloneH": 214,
+    "origH": 306
   },
   {
     "page": "/about-us/pricing/flat-rate-services/",
     "vp": "mobile",
     "band": "intro+body",
     "tier": "text",
-    "pct": 0.47374185136897,
+    "pct": 0.6189674133240725,
     "pass": false,
     "tol": 0.05,
     "maskAreaPct": 0,
-    "cloneH": 826,
-    "origH": 885
+    "cloneH": 827,
+    "origH": 886
   },
   {
     "page": "/about-us/pricing/flat-rate-services/",
     "vp": "mobile",
     "band": "values",
     "tier": "structure",
-    "pct": 0.22337206033917362,
+    "pct": 0.3395374621318592,
     "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0,
     "cloneH": 1642,
-    "origH": 1422
+    "origH": 1423
   },
   {
     "page": "/about-us/pricing/flat-rate-services/",
     "vp": "mobile",
     "band": "faq",
     "tier": "structure",
-    "pct": 0.2984148787720216,
+    "pct": 0.3804942415893425,
     "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0,
-    "cloneH": 2352,
-    "origH": 2094
+    "cloneH": 2429,
+    "origH": 2095
   },
   {
     "page": "/about-us/pricing/flat-rate-services/",
     "vp": "mobile",
     "band": "cards",
     "tier": "structure",
-    "pct": 0.5504023737805153,
+    "pct": 0.6435927390366643,
     "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0,
-    "cloneH": 1348,
-    "origH": 1711
+    "cloneH": 1350,
+    "origH": 1712
   },
   {
     "page": "/about-us/pricing/flat-rate-services/",
     "vp": "mobile",
     "band": "testimonials",
     "tier": "structure",
-    "pct": 0.49809870342848356,
+    "pct": 0.5158031397871504,
     "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0,
-    "cloneH": 866,
+    "cloneH": 867,
     "origH": 1501
   },
   {
@@ -304,11 +304,11 @@
     "vp": "mobile",
     "band": "schedule",
     "tier": "structure",
-    "pct": 0.10614939544544173,
+    "pct": 0.11571068623091744,
     "pass": false,
     "tol": 0.01,
-    "maskAreaPct": 0.6595949855351977,
-    "cloneH": 1037,
+    "maskAreaPct": 0.6599229287090559,
+    "cloneH": 1038,
     "origH": 820
   },
   {
@@ -316,119 +316,119 @@
     "vp": "mobile",
     "band": "footer",
     "tier": "structure",
-    "pct": 0.12712586787653812,
+    "pct": 0.1755697528637917,
     "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0,
-    "cloneH": 1489,
-    "origH": 1492
+    "cloneH": 1490,
+    "origH": 1493
   },
   {
     "page": "/allen/",
     "vp": "desktop",
     "band": "banner",
     "tier": "structure",
-    "pct": 0.32070783132530123,
+    "pct": 0.3162888888888889,
     "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0,
-    "cloneH": 249,
-    "origH": 210
+    "cloneH": 250,
+    "origH": 211
   },
   {
     "page": "/allen/",
     "vp": "desktop",
     "band": "badge",
     "tier": "structure",
-    "pct": 0.04274856407209349,
+    "pct": 0.045961842625543696,
     "pass": false,
     "tol": 0.01,
-    "maskAreaPct": 0.5935828877005348,
-    "cloneH": 373,
-    "origH": 561
+    "maskAreaPct": 0.5941281138790035,
+    "cloneH": 374,
+    "origH": 562
   },
   {
     "page": "/allen/",
     "vp": "desktop",
     "band": "sidebar",
     "tier": "structure",
-    "pct": 0.10873464617560503,
+    "pct": 0.11020764370957563,
     "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0,
     "cloneH": 1065,
-    "origH": 5932
+    "origH": 5934
   },
   {
     "page": "/allen/",
     "vp": "desktop",
     "band": "intro+body",
     "tier": "text",
-    "pct": 0.1001869790804217,
+    "pct": 0.10603959713024283,
     "pass": false,
     "tol": 0.05,
     "maskAreaPct": 0,
-    "cloneH": 4985,
-    "origH": 6039
+    "cloneH": 4986,
+    "origH": 6040
   },
   {
     "page": "/allen/",
     "vp": "desktop",
     "band": "testimonials",
     "tier": "structure",
-    "pct": 0.41842970036741417,
+    "pct": 0.4601527382082938,
     "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0,
-    "cloneH": 1416,
-    "origH": 1754
+    "cloneH": 1417,
+    "origH": 1755
   },
   {
     "page": "/allen/",
     "vp": "desktop",
     "band": "values",
     "tier": "structure",
-    "pct": 0.25404639595564255,
+    "pct": 0.3413150320408385,
     "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0,
-    "cloneH": 911,
-    "origH": 1022
+    "cloneH": 912,
+    "origH": 1023
   },
   {
     "page": "/allen/",
     "vp": "desktop",
     "band": "schedule",
     "tier": "structure",
-    "pct": 0.007418474251143574,
-    "pass": true,
+    "pct": 0.04094367079280872,
+    "pass": false,
     "tol": 0.01,
-    "maskAreaPct": 0.6600265604249668,
-    "cloneH": 753,
-    "origH": 740
+    "maskAreaPct": 0.6604774535809018,
+    "cloneH": 754,
+    "origH": 741
   },
   {
     "page": "/allen/",
     "vp": "desktop",
     "band": "footer",
     "tier": "structure",
-    "pct": 0.12764386066204772,
+    "pct": 0.2618936626938357,
     "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0,
-    "cloneH": 866,
-    "origH": 853
+    "cloneH": 867,
+    "origH": 854
   },
   {
     "page": "/allen/",
     "vp": "tablet",
     "band": "banner",
     "tier": "structure",
-    "pct": 0.1846776463963964,
+    "pct": 0.18283770161290322,
     "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0,
-    "cloneH": 185,
+    "cloneH": 186,
     "origH": 151
   },
   {
@@ -436,23 +436,23 @@
     "vp": "tablet",
     "band": "badge",
     "tier": "structure",
-    "pct": 0.0020327488009592326,
+    "pct": 0.0038595245215311005,
     "pass": true,
     "tol": 0.01,
-    "maskAreaPct": 0.593353442246203,
+    "maskAreaPct": 0.5940864234449761,
     "cloneH": 241,
-    "origH": 417
+    "origH": 418
   },
   {
     "page": "/allen/",
     "vp": "tablet",
     "band": "sidebar",
     "tier": "structure",
-    "pct": 0.355292369883932,
+    "pct": 0.3740427522996512,
     "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0,
-    "cloneH": 1036,
+    "cloneH": 1037,
     "origH": 1921
   },
   {
@@ -460,44 +460,44 @@
     "vp": "tablet",
     "band": "intro+body",
     "tier": "text",
-    "pct": 0.18454595746977548,
+    "pct": 0.19843906503643838,
     "pass": false,
     "tol": 0.05,
     "maskAreaPct": 0,
-    "cloneH": 5514,
-    "origH": 9650
+    "cloneH": 5516,
+    "origH": 9651
   },
   {
     "page": "/allen/",
     "vp": "tablet",
     "band": "testimonials",
     "tier": "structure",
-    "pct": 0.2687799136697084,
+    "pct": 0.30496467269883826,
     "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0,
     "cloneH": 906,
-    "origH": 1863
+    "origH": 1865
   },
   {
     "page": "/allen/",
     "vp": "tablet",
     "band": "values",
     "tier": "structure",
-    "pct": 0.3177831899460189,
+    "pct": 0.3483252005798274,
     "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0,
-    "cloneH": 995,
-    "origH": 1235
+    "cloneH": 996,
+    "origH": 1236
   },
   {
     "page": "/allen/",
     "vp": "tablet",
     "band": "schedule",
     "tier": "structure",
-    "pct": 0.009056673966756515,
-    "pass": true,
+    "pct": 0.011474828728661277,
+    "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0.660377358490566,
     "cloneH": 742,
@@ -508,12 +508,12 @@
     "vp": "tablet",
     "band": "footer",
     "tier": "structure",
-    "pct": 0.2923677158816425,
+    "pct": 0.25590510348781076,
     "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0,
-    "cloneH": 971,
-    "origH": 1380
+    "cloneH": 972,
+    "origH": 1381
   },
   {
     "page": "/allen/",
@@ -532,71 +532,71 @@
     "vp": "mobile",
     "band": "badge",
     "tier": "structure",
-    "pct": 0.003955802968960863,
+    "pct": 0.003929948047595107,
     "pass": true,
     "tol": 0.01,
-    "maskAreaPct": 0.5950657894736842,
-    "cloneH": 213,
-    "origH": 304
+    "maskAreaPct": 0.5941176470588235,
+    "cloneH": 214,
+    "origH": 306
   },
   {
     "page": "/allen/",
     "vp": "mobile",
     "band": "sidebar",
     "tier": "structure",
-    "pct": 0.3188599773063398,
+    "pct": 0.36251435332997256,
     "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0,
-    "cloneH": 1062,
-    "origH": 1622
+    "cloneH": 1063,
+    "origH": 1623
   },
   {
     "page": "/allen/",
     "vp": "mobile",
     "band": "intro+body",
     "tier": "text",
-    "pct": 0.18009931880698923,
+    "pct": 0.19078340488756415,
     "pass": false,
     "tol": 0.05,
     "maskAreaPct": 0,
-    "cloneH": 9975,
-    "origH": 11251
+    "cloneH": 9976,
+    "origH": 11252
   },
   {
     "page": "/allen/",
     "vp": "mobile",
     "band": "testimonials",
     "tier": "structure",
-    "pct": 0.23616201519197239,
+    "pct": 0.2701106561372721,
     "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0,
-    "cloneH": 866,
-    "origH": 2103
+    "cloneH": 867,
+    "origH": 2104
   },
   {
     "page": "/allen/",
     "vp": "mobile",
     "band": "values",
     "tier": "structure",
-    "pct": 0.19292295199725162,
+    "pct": 0.31774259033698743,
     "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0,
     "cloneH": 1642,
-    "origH": 1422
+    "origH": 1423
   },
   {
     "page": "/allen/",
     "vp": "mobile",
     "band": "schedule",
     "tier": "structure",
-    "pct": 0.08690502682788122,
+    "pct": 0.09852774072427252,
     "pass": false,
     "tol": 0.01,
-    "maskAreaPct": 0.6595949855351977,
-    "cloneH": 1037,
+    "maskAreaPct": 0.6599229287090559,
+    "cloneH": 1038,
     "origH": 820
   },
   {
@@ -604,92 +604,92 @@
     "vp": "mobile",
     "band": "footer",
     "tier": "structure",
-    "pct": 0.14784832360386424,
+    "pct": 0.2255773532954741,
     "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0,
-    "cloneH": 1489,
-    "origH": 1453
+    "cloneH": 1490,
+    "origH": 1454
   },
   {
     "page": "/staff-profiles/justin-t-crain/",
     "vp": "desktop",
     "band": "banner",
     "tier": "structure",
-    "pct": 0.15180057908070937,
+    "pct": 0.27401470057720057,
     "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0,
-    "cloneH": 306,
-    "origH": 307
+    "cloneH": 307,
+    "origH": 308
   },
   {
     "page": "/staff-profiles/justin-t-crain/",
     "vp": "desktop",
     "band": "intro+body",
     "tier": "text",
-    "pct": 0.11781753504917347,
+    "pct": 0.10970784990070033,
     "pass": false,
     "tol": 0.05,
     "maskAreaPct": 0,
     "cloneH": 654,
-    "origH": 1062
+    "origH": 1063
   },
   {
     "page": "/staff-profiles/justin-t-crain/",
     "vp": "desktop",
     "band": "schedule",
     "tier": "structure",
-    "pct": 0.007418474251143574,
-    "pass": true,
+    "pct": 0.04246150162098438,
+    "pass": false,
     "tol": 0.01,
-    "maskAreaPct": 0.6600265604249668,
-    "cloneH": 753,
-    "origH": 740
+    "maskAreaPct": 0.6604774535809018,
+    "cloneH": 754,
+    "origH": 741
   },
   {
     "page": "/staff-profiles/justin-t-crain/",
     "vp": "desktop",
     "band": "footer",
     "tier": "structure",
-    "pct": 0.12762301129073647,
+    "pct": 0.2606633666538511,
     "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0,
-    "cloneH": 866,
-    "origH": 853
+    "cloneH": 867,
+    "origH": 854
   },
   {
     "page": "/staff-profiles/justin-t-crain/",
     "vp": "tablet",
     "band": "banner",
     "tier": "structure",
-    "pct": 0.12117983815426997,
+    "pct": 0.12068651406035666,
     "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0,
-    "cloneH": 242,
-    "origH": 242
+    "cloneH": 243,
+    "origH": 243
   },
   {
     "page": "/staff-profiles/justin-t-crain/",
     "vp": "tablet",
     "band": "intro+body",
     "tier": "text",
-    "pct": 0.16958965330444203,
+    "pct": 0.20505027860494496,
     "pass": false,
     "tol": 0.05,
     "maskAreaPct": 0,
-    "cloneH": 845,
-    "origH": 1846
+    "cloneH": 846,
+    "origH": 1847
   },
   {
     "page": "/staff-profiles/justin-t-crain/",
     "vp": "tablet",
     "band": "schedule",
     "tier": "structure",
-    "pct": 0.00908475123539982,
-    "pass": true,
+    "pct": 0.011518699460916442,
+    "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0.660377358490566,
     "cloneH": 742,
@@ -700,19 +700,19 @@
     "vp": "tablet",
     "band": "footer",
     "tier": "structure",
-    "pct": 0.2924064009661836,
+    "pct": 0.28965838462466814,
     "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0,
     "cloneH": 971,
-    "origH": 1380
+    "origH": 1381
   },
   {
     "page": "/staff-profiles/justin-t-crain/",
     "vp": "mobile",
     "band": "banner",
     "tier": "structure",
-    "pct": 0.22193492781728075,
+    "pct": 0.2220318896789485,
     "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0,
@@ -724,23 +724,23 @@
     "vp": "mobile",
     "band": "intro+body",
     "tier": "text",
-    "pct": 0.18711084671822328,
+    "pct": 0.2810899340311105,
     "pass": false,
     "tol": 0.05,
     "maskAreaPct": 0,
-    "cloneH": 1260,
-    "origH": 1681
+    "cloneH": 1261,
+    "origH": 1683
   },
   {
     "page": "/staff-profiles/justin-t-crain/",
     "vp": "mobile",
     "band": "schedule",
     "tier": "structure",
-    "pct": 0.09083895853423336,
+    "pct": 0.09825107455165259,
     "pass": false,
     "tol": 0.01,
-    "maskAreaPct": 0.6595949855351977,
-    "cloneH": 1037,
+    "maskAreaPct": 0.6599229287090559,
+    "cloneH": 1038,
     "origH": 820
   },
   {
@@ -748,11 +748,11 @@
     "vp": "mobile",
     "band": "footer",
     "tier": "structure",
-    "pct": 0.1472008403506053,
+    "pct": 0.19506797453106178,
     "pass": false,
     "tol": 0.01,
     "maskAreaPct": 0,
-    "cloneH": 1489,
-    "origH": 1453
+    "cloneH": 1490,
+    "origH": 1454
   }
 ]
