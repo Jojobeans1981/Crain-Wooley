@@ -2,6 +2,13 @@
 
 Status:
 - **Family B (103):** body 100/103 ≥99% (mean 99.7%), metadata 103/103.
+- **Family C (10 staff bios):** body 9/10 ≥99% (mean 98.1%), metadata 10/10 — the
+  family-B template + a stf-pfl classification fix captures the bio; banner=name,
+  role/title + office captured, schedule closer. Only `/staff-profiles/marcel-williams`
+  (80.6%) persists — one bio paragraph is authored as a NAKED TEXT NODE between
+  `</p>` tags (no wrapper); capturing naked div-child text globally is too risky for
+  one page, so flagged. Minor: justin-t-crain headshot uses an unrecognized lazy attr
+  (image none); jacob etc. captured fine.
 - **Family D (36 geo):** body 36/36 ≥99% (mean 99.7%), metadata 36/36 — COMPLETE.
   Geo pixel-check (deployed /allen/): top 37.6% / full 36.8% — same approved
   interior-redesign signature as B (identical FamilyBPage template), structurally

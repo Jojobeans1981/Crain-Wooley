@@ -17,6 +17,7 @@ const norm = (s: string) => (s || '').replace(/\s+/g, ' ').trim()
 const FAMILIES: Record<string, Set<string>> = {
   B: new Set(['service', 'resource', 'other']),
   D: new Set(['location']),
+  C: new Set(['staff']), // individual /staff-profiles/<name> bios (index excluded below)
 }
 
 async function main() {
@@ -25,7 +26,7 @@ async function main() {
   const fam = FAMILIES[famKey] || FAMILIES.B
   const onlyPath = process.argv[3] // optional single-path proof
   const ORIGIN = 'https://www.estateplanningdfw.law'
-  const paths = (onlyPath ? [onlyPath.replace(/\/+$/, '')] : Object.keys(lp).filter((k) => fam.has(lp[k].type))).sort()
+  const paths = (onlyPath ? [onlyPath.replace(/\/+$/, '')] : Object.keys(lp).filter((k) => fam.has(lp[k].type) && k !== '/staff-profiles')).sort()
   console.log(`gating family ${famKey}: ${paths.length} page(s)`)
 
   const b = await chromium.launch()
@@ -42,6 +43,10 @@ async function main() {
     await p.waitForTimeout(30)
     const r = await p.evaluate(() => {
       const mainEl = (document.querySelector('main') || document.body) as HTMLElement
+      // banner title is rendered in the gold banner, so text equal to it elsewhere
+      // (e.g. a staff name repeated in the profile card) is NOT a body gap.
+      let bannerTitle = ''
+      for (const sec of Array.from(mainEl.children) as HTMLElement[]) { const c = (sec.className?.toString() || '').toLowerCase(); if (sec.tagName === 'FORM' || /^(Form_)?Banner/.test(sec.id) || /(^|\s)(bnr|banner)/.test(c)) { const h = sec.querySelector('.fnt_t-1, h1, h2, .h1, strong'); if (h) bannerTitle = (h.textContent || '').replace(/\s+/g, ' ').trim(); break } }
       let total = 0, uncaptured = 0
       const missing: string[] = []
       for (const sec of Array.from(mainEl.children) as HTMLElement[]) {
@@ -49,8 +54,9 @@ async function main() {
         const cls = (sec.className?.toString() || '').toLowerCase()
         const isCloser = /Estate Planning With Us Means|DESIGNED FOR YOUR COMFORT|Schedule a Consultation Today/i.test(stx) || /(^|\s)(vls|cta|rvw|tst|testim|review)/.test(cls) || /What (Our|People)[^.]{0,30}Say/i.test(stx)
         const isBanner = sec.tagName === 'FORM' || /^(Form_)?Banner/.test(sec.id) || /(^|\s)(bnr|banner)/.test(cls)
-        const isAwardsStaff = /(^|\s)(aws|awards|stf|staff)/.test(cls)
+        const isAwardsStaff = /(^|\s)(aws|awards)/.test(cls) || (/(^|\s)(stf|staff)/.test(cls) && !/stf-pfl|profile/i.test(cls))
         if (isCloser || isBanner || isAwardsStaff) continue
+        const isProfile = /stf-pfl|profile/i.test(cls) // staff bio: short role/office leaves count
         const walker = document.createTreeWalker(sec, NodeFilter.SHOW_TEXT)
         let n: Node | null
         while ((n = walker.nextNode())) {
@@ -63,8 +69,8 @@ async function main() {
           const inBlock = !!el.closest('p,li,h1,h2,h3,h4,ul,ol,article,blockquote,figcaption,address,[aria-expanded],.qst,[itemtype*="Question"]')
           const inEmStrong = /^(EM|STRONG)$/.test(el.tagName) && (el.textContent || '').replace(/\s+/g, ' ').trim().length >= 20 && !el.closest('p,li,h1,h2,h3,h4,a,article,blockquote,figcaption')
           const pd = el.closest('div')
-          const inLeafDiv = !!pd && !pd.querySelector('div,p,ul,ol,li,h1,h2,h3,h4,article,blockquote,figcaption,address') && (pd.textContent || '').replace(/\s+/g, ' ').trim().length >= 30
-          if (inBlock || inEmStrong || inLeafDiv) continue
+          const inLeafDiv = !!pd && !pd.querySelector('div,p,ul,ol,li,h1,h2,h3,h4,article,blockquote,figcaption,address') && (pd.textContent || '').replace(/\s+/g, ' ').trim().length >= (isProfile ? 4 : 30)
+          if (inBlock || inEmStrong || inLeafDiv || (bannerTitle && t === bannerTitle)) continue
           uncaptured += t.length
           if (missing.length < 5) missing.push(t.slice(0, 48))
         }

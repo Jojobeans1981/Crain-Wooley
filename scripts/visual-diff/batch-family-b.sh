@@ -10,9 +10,9 @@ TSX="npx tsx scripts/visual-diff/extract-family-b.ts"
 FAMILY="${1:-B}"
 PATHS=$(FAM="$FAMILY" node -e '
 const lp=require("./lib/legacy/legacy-pages.json");
-const sets={B:["service","resource","other"],D:["location"]};
+const sets={B:["service","resource","other"],D:["location"],C:["staff"]};
 const fam=new Set(sets[process.env.FAM]||sets.B);
-const out=Object.keys(lp).filter(k=>fam.has(lp[k].type)).sort();
+const out=Object.keys(lp).filter(k=>fam.has(lp[k].type)&&k!=="/staff-profiles").sort();
 process.stdout.write(out.join("\n"));
 ')
 

@@ -68,12 +68,14 @@ async function main() {
         if (!bannerTitle) { const h = sec.querySelector('.fnt_t-1, h1, h2, .h1, strong') as HTMLElement | null; if (h) bannerTitle = (h.textContent || '').replace(/\s+/g, ' ').trim().replace(/\bSearch\s*$/, '').trim() }
         continue
       }
-      if (/(^|\s)(aws|awards|stf|staff)/.test(cls)) continue
+      // Skip awards (badges) and staff-LISTING bands — but NOT a staff PROFILE band
+      // (stf-pfl), which is the bio content on /staff-profiles/<name> pages.
+      if (/(^|\s)(aws|awards)/.test(cls) || (/(^|\s)(stf|staff)/.test(cls) && !/stf-pfl|profile/i.test(cls))) continue
       if (firstContent) {
         firstContent = false
         const h = sec.querySelector('h1, h2, h3, h4') as HTMLElement | null
         if (h) contentH1 = (h.textContent || '').replace(/\s+/g, ' ').trim()
-        for (const i of Array.from(sec.querySelectorAll('img')) as HTMLImageElement[]) { const src = i.getAttribute('src') || i.src || ''; if (src && !/^data:|\.svg|logo|accolade|badge|bar-college|elder|naela|banner|icon|sprite/i.test(src)) { introImage = src; break } }
+        for (const i of Array.from(sec.querySelectorAll('img')) as HTMLImageElement[]) { const src = i.getAttribute('data-src') || i.getAttribute('data-lazy-src') || i.getAttribute('src') || i.src || ''; if (src && !/^data:|\.svg|logo|accolade|badge|bar-college|elder|naela|banner|icon|sprite/i.test(src)) { introImage = src; break } }
       }
       for (const e of Array.from(sec.querySelectorAll('h2,h3,h4,p,ul,ol')) as HTMLElement[]) {
         if (e.closest('[aria-expanded], .qst, footer, nav, header, [itemtype*="Question"]')) continue
@@ -117,7 +119,12 @@ async function main() {
         if (e.closest('[aria-expanded], .qst, footer, nav, header, [itemtype*="Question"]')) continue
         if (e.querySelector('div, p, ul, ol, li, h1, h2, h3, h4, article, blockquote, figcaption, address')) continue
         const tx = (e.textContent || '').replace(/\s+/g, ' ').trim()
-        if (tx.length >= 30 && tx !== contentH1) bodyBlocks.push({ type: 'p', text: tx })
+        // On staff PROFILE bands the role/title + office labels sit in short leaves
+        // (e.g. 'Senior Attorney'); capture them too. The name is the banner title,
+        // so skip it (avoids a duplicate). Section labels are skipped.
+        const isProfile = /stf-pfl|profile/i.test(cls)
+        const minLen = isProfile ? 4 : 30
+        if (tx.length >= minLen && tx !== contentH1 && tx !== bannerTitle && !/^(About|Locations?|Contact|Search)$/i.test(tx)) bodyBlocks.push({ type: 'p', text: tx })
       }
     }
     const items: { title: string; body: string; top: number; group: string }[] = []

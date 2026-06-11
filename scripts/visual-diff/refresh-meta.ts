@@ -17,8 +17,8 @@ async function main() {
   const write = process.argv.includes('--write')
   const FILE = 'lib/legacy/legacy-pages.json'
   const lp = JSON.parse(readFileSync(FILE, 'utf8')) as Record<string, { type: string; title?: string; description?: string }>
-  const fam = new Set(['service', 'resource', 'other', 'location'])
-  const paths = Object.keys(lp).filter((k) => fam.has(lp[k].type)).sort()
+  const fam = new Set(['service', 'resource', 'other', 'location', 'staff'])
+  const paths = Object.keys(lp).filter((k) => fam.has(lp[k].type) && k !== '/staff-profiles').sort()
 
   const b = await chromium.launch()
   const p = await b.newPage()
