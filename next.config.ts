@@ -1,9 +1,35 @@
 import type { NextConfig } from 'next'
 
+// ── Environment-based caching ──────────────────────────────────────────────
+// Staging (the Vercel URL, NEXT_PUBLIC_SITE_INDEXABLE unset/false) must be
+// ALWAYS-FRESH so the owner + client never see stale content after a deploy —
+// the App Router client Router Cache + bfcache otherwise require a hard refresh.
+// Production (live domain, NEXT_PUBLIC_SITE_INDEXABLE=true) keeps Next/Vercel's
+// standard aggressive caching for cutover. Tied to the same flag that gates
+// indexability, so staging-vs-prod is a single switch. See docs/reference/caching.md.
+const STAGING_FRESH = process.env.NEXT_PUBLIC_SITE_INDEXABLE !== 'true'
+
 const nextConfig: NextConfig = {
   // Force all routes dynamic -- no static generation
   // Required since API routes use lazy DB/Stripe clients
   serverExternalPackages: ['@prisma/client', '@prisma/adapter-pg', 'pg'],
+
+  // On staging, minimise client Router Cache reuse of stale RSC across navs
+  // (static must be >=30 per Next; far fresher than the 300s default). The
+  // no-store HTML header below is the primary always-fresh mechanism.
+  ...(STAGING_FRESH ? { experimental: { staleTimes: { dynamic: 0, static: 30 } } } : {}),
+
+  async headers() {
+    if (!STAGING_FRESH) return [] // production: Next/Vercel defaults (aggressive)
+    return [
+      {
+        // Every document/RSC route EXCEPT fingerprinted assets (which stay
+        // immutable). no-store => browser/CDN always fetch the current deploy.
+        source: '/((?!_next/static|_next/image|favicon.ico).*)',
+        headers: [{ key: 'Cache-Control', value: 'no-store, must-revalidate' }],
+      },
+    ]
+  },
 
   async redirects() {
     return [
