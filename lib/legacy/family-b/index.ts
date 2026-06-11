@@ -13,6 +13,9 @@ export type BodyBlock =
   | { type: 'h2'; text: string }
   | { type: 'h3'; text: string }
   | { type: 'ul'; items: string[] }
+  // Closer band (pillars/testimonials/schedule) recorded at its document position
+  // so the renderer re-inserts the shared full-bleed component in source order.
+  | { type: 'closer'; which: string }
 export type FamilyBData = {
   path: string
   bannerTitle: string

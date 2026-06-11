@@ -3,12 +3,15 @@ import { Accordion } from './Accordion'
 import type { FamilyBData, BodyBlock } from '@/lib/legacy/family-b'
 
 // Render one ordered body block (paragraph, sub-heading, or list) faithfully.
+// 'closer' markers are not body content — they render as full-bleed sections
+// (outside the prose container), so Block ignores them.
 function Block({ block, k }: { block: BodyBlock; k: number }) {
   switch (block.type) {
     case 'h2': return <h2 key={k} className="cw-fb-h2">{block.text}</h2>
     case 'h3': return <h3 key={k} className="cw-fb-h3">{block.text}</h3>
     case 'ul': return <ul key={k} className="cw-fb-ul">{block.items.map((it, j) => <li key={j}>{it}</li>)}</ul>
-    default: return <p key={k}>{block.text}</p>
+    case 'closer': return null
+    default: return <p key={k}>{(block as { text: string }).text}</p>
   }
 }
 
@@ -28,6 +31,12 @@ const CLOSER: Record<string, () => React.ReactElement> = {
 }
 
 export default function FamilyBPage({ page }: { page: FamilyBData }) {
+  // Closer bands are recorded in source order as {type:'closer'} markers within
+  // bodyBlocks; render them (full-bleed) in that order. Fall back to the legacy
+  // page.closers list for entries extracted before markers existed.
+  const markerClosers = [...new Set(page.bodyBlocks.filter((b) => b.type === 'closer').map((b) => (b as { which: string }).which))]
+  const closers = markerClosers.length ? markerClosers : page.closers
+  const contentBlocks = page.bodyBlocks.filter((b) => b.type !== 'closer')
   return (
     <>
       <header className="legacy-banner legacy-banner--gold">
@@ -41,11 +50,11 @@ export default function FamilyBPage({ page }: { page: FamilyBData }) {
             the first body blocks (up to the first sub-heading, max 3); the full
             remaining body renders below — page for page, nothing dropped. */}
         {(() => {
-          let lede = page.introImage ? page.bodyBlocks.slice(0, 3) : []
+          let lede = page.introImage ? contentBlocks.slice(0, 3) : []
           const cut = lede.findIndex((b) => b.type === 'h2' || b.type === 'h3')
           if (cut > 0) lede = lede.slice(0, cut)
           else if (cut === 0) lede = []
-          const rest = page.bodyBlocks.slice(lede.length)
+          const rest = contentBlocks.slice(lede.length)
           return (
             <div className="cw-container">
               <div className={`cw-fb-intro-grid${page.introImage && lede.length ? '' : ' cw-fb-intro-grid--noimg'}`}>
@@ -80,7 +89,7 @@ export default function FamilyBPage({ page }: { page: FamilyBData }) {
         </section>
       ))}
 
-      {page.closers.map((c) => {
+      {closers.map((c) => {
         const C = CLOSER[c]
         return C ? <C key={c} /> : null
       })}

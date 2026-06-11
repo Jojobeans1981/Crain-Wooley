@@ -37,32 +37,37 @@ async function main() {
     for (const h of Array.from(document.querySelectorAll('h1,h2,h3,h4,strong,.h1,[class*=heading]')) as HTMLElement[]) { const r = h.getBoundingClientRect(); const tx = (h.textContent || '').replace(/\s+/g, ' ').trim(); if (r.top > 480 && r.top < 1300 && parseFloat(getComputedStyle(h).fontSize) > 30 && tx.length > 6 && tx.length < 90) { contentH1 = tx; break } }
     let introImage = ''
     for (const i of Array.from(document.querySelectorAll('img')) as HTMLImageElement[]) { const r = i.getBoundingClientRect(); if (i.naturalWidth > 250 && i.naturalHeight > 250 && r.top > 480 && r.top < 1500 && !/logo|accolade|badge|bar-college|elder|naela|banner/i.test(i.src)) { introImage = i.src; break } }
-    // Intro = body <p> between the banner and the first CONTENT accordion or closer
-    // section. Bound only by content accordions BELOW the banner (a header/widget
-    // [aria-expanded] near the top must not collapse the range), and by the closer
-    // headings, so the footer + accordion panels are excluded.
-    let bodyEnd = 99999
-    for (const e of Array.from(document.querySelectorAll('[aria-expanded], .qst')) as HTMLElement[]) { if (e.tagName.toLowerCase() === 'svg') continue; if ((e.textContent || '').replace(/\s+/g, ' ').trim().length < 5) continue; const t = e.getBoundingClientRect().top; if (t > 480 && t < bodyEnd) bodyEnd = t }
-    for (const e of Array.from(document.querySelectorAll('h2,h3,h4,strong,div,p,span')) as HTMLElement[]) { const tx = (e.textContent || '').replace(/\s+/g, ' '); const t = e.getBoundingClientRect().top; if (t > 480 && t < bodyEnd && e.children.length < 5 && /Estate Planning With Us Means|Schedule a Consultation Today|Expand Each Section|Virtual Services FAQ/i.test(tx)) bodyEnd = t }
-    // Full ordered body: every paragraph, sub-heading, and list between the
-    // banner and the first accordion/closer — page for page, no truncation.
-    const blockEls = (Array.from(document.querySelectorAll('h2,h3,h4,p,ul,ol')) as HTMLElement[]).filter((e) => {
-      const r = e.getBoundingClientRect()
-      if (!(r.top > 480 && r.top < bodyEnd)) return false
-      if (e.closest('[aria-expanded], .qst, footer, nav, header')) return false
-      const tag = e.tagName.toLowerCase()
-      if ((tag === 'p' || tag === 'li') && e.closest('ul, ol')) return false // captured via the list
-      if ((tag === 'ul' || tag === 'ol') && e.parentElement && e.parentElement.closest('ul, ol')) return false // nested
-      return (e.textContent || '').replace(/\s+/g, ' ').trim().length > 1
-    })
-    const bodyBlocks = blockEls.map((e) => {
-      const tag = e.tagName.toLowerCase()
-      const tx = (e.textContent || '').replace(/\s+/g, ' ').trim()
-      if (tag === 'ul' || tag === 'ol') return { type: 'ul', items: (Array.from(e.querySelectorAll('li')) as HTMLElement[]).filter((li) => !li.querySelector('ul, ol')).map((li) => (li.textContent || '').replace(/\s+/g, ' ').trim()).filter((s) => s.length > 0) }
-      if (tag === 'h2') return { type: 'h2', text: tx }
-      if (tag === 'h3' || tag === 'h4') return { type: 'h3', text: tx }
-      return { type: 'p', text: tx }
-    }).filter((blk) => ('items' in blk ? blk.items.length > 0 : (blk.text || '').length > 1))
+    // Section-based body capture (container signatures, not positions). Walk
+    // <main>'s top-level sections in document order:
+    //  - closer bands (pillars/testimonials/schedule: dk-bg vls/cta/img-grp, or the
+    //    closer heading text) -> a {type:'closer'} marker, so the renderer re-inserts
+    //    the shared component AT THE SAME position (mid-page interleaving = parity)
+    //  - banner / awards (badges) / staff-listing bands -> skipped
+    //  - content bands -> their full ordered blocks (h2/h3/p/ul); accordion panels
+    //    are excluded (extracted separately). No position cutoff -> body after a
+    //    mid-page closer band survives.
+    const mainEl = (document.querySelector('main') || document.body) as HTMLElement
+    const bodyBlocks: { type: string; text?: string; items?: string[]; which?: string }[] = []
+    for (const sec of Array.from(mainEl.children) as HTMLElement[]) {
+      const stx = (sec.textContent || '').replace(/\s+/g, ' ')
+      const cls = (sec.className?.toString() || '').toLowerCase()
+      if (/Estate Planning With Us Means|DESIGNED FOR YOUR COMFORT/i.test(stx) || /(^|\s)vls(\s|$)/.test(cls)) { bodyBlocks.push({ type: 'closer', which: 'pillars' }); continue }
+      if (/Schedule a Consultation Today/i.test(stx) || /(^|\s)cta(\s|$)/.test(cls)) { bodyBlocks.push({ type: 'closer', which: 'schedule' }); continue }
+      if (/What (Our|People)[^.]{0,30}Say|client testimonials|hear from our clients/i.test(stx) || /(^|\s)(rvw|tst|testim|review)/.test(cls)) { bodyBlocks.push({ type: 'closer', which: 'testimonials' }); continue }
+      if (sec.tagName === 'FORM' || /^(Form_)?Banner/.test(sec.id) || /(^|\s)(bnr|banner|aws|awards|stf|staff)/.test(cls)) continue
+      for (const e of Array.from(sec.querySelectorAll('h2,h3,h4,p,ul,ol')) as HTMLElement[]) {
+        if (e.closest('[aria-expanded], .qst, footer, nav, header')) continue
+        const tag = e.tagName.toLowerCase()
+        if ((tag === 'p' || tag === 'li') && e.closest('ul, ol')) continue
+        if ((tag === 'ul' || tag === 'ol') && e.parentElement && e.parentElement.closest('ul, ol')) continue
+        const tx = (e.textContent || '').replace(/\s+/g, ' ').trim()
+        if (tx.length <= 1 || tx === contentH1) continue
+        if (tag === 'ul' || tag === 'ol') { const items = (Array.from(e.querySelectorAll('li')) as HTMLElement[]).filter((li) => !li.querySelector('ul, ol')).map((li) => (li.textContent || '').replace(/\s+/g, ' ').trim()).filter((s) => s.length > 0); if (items.length) bodyBlocks.push({ type: 'ul', items }) }
+        else if (tag === 'h2') bodyBlocks.push({ type: 'h2', text: tx })
+        else if (tag === 'h3' || tag === 'h4') bodyBlocks.push({ type: 'h3', text: tx })
+        else bodyBlocks.push({ type: 'p', text: tx })
+      }
+    }
     const items: { title: string; body: string; top: number; group: string }[] = []
     const seen = new Set<string>()
     // Plan accordions use [aria-expanded]/<summary>; their panel is aria-controlled.
@@ -86,12 +91,7 @@ async function main() {
     }
     let faqHeading = ''
     for (const e of Array.from(document.querySelectorAll('h2,h3,h4,strong')) as HTMLElement[]) { const tx = (e.textContent || '').replace(/\s+/g, ' ').trim(); if (/Virtual Services FAQ|Frequently Asked|^FAQ$/i.test(tx) && tx.length < 60) { faqHeading = tx; break } }
-    const closers = {
-      pillars: !!all.find((e) => /Estate Planning With Us Means/i.test(e.textContent || '')),
-      testimonials: !!all.find((e) => /Schedule a Consultation|What Our Clients|Testimonial/i.test(e.textContent || '')) || document.querySelectorAll('[class*=review]').length > 0,
-      schedule: !!all.find((e) => /Schedule a Consultation Today/i.test(e.textContent || '')),
-    }
-    return { bannerTitle, contentH1, bodyBlocks, introImage, items, faqHeading, closers }
+    return { bannerTitle, contentH1, bodyBlocks, introImage, items, faqHeading }
   })
 
   // download the intro image via in-page fetch (browser networking bypasses the bot-block)
@@ -112,7 +112,9 @@ async function main() {
   // split accordion items by source group: plans (aria-expanded) vs FAQ (.qst)
   const plans = data.items.filter((i) => i.group === 'plans').sort((a, b) => a.top - b.top).map(({ title, body }) => ({ title, body }))
   const faq = data.items.filter((i) => i.group === 'faq').sort((a, b) => a.top - b.top).map(({ title, body }) => ({ title, body }))
-  const closers = [data.closers.pillars && 'pillars', data.closers.testimonials && 'testimonials', data.closers.schedule && 'schedule'].filter(Boolean)
+  // closers list = the section-walk markers, deduped in source order (authoritative;
+  // the renderer reads the in-body markers and uses this only as a fallback).
+  const closers = [...new Set(data.bodyBlocks.filter((b) => b.type === 'closer').map((b) => b.which as string))]
 
   const out = {
     path: key,

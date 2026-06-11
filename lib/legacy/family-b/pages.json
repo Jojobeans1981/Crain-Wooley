@@ -2800,13 +2800,20 @@
           "Mansfield Contact Us",
           "Ft Worth Contact Us"
         ]
+      },
+      {
+        "type": "closer",
+        "which": "pillars"
+      },
+      {
+        "type": "closer",
+        "which": "schedule"
       }
     ],
     "introImage": null,
     "accordionGroups": [],
     "closers": [
       "pillars",
-      "testimonials",
       "schedule"
     ]
   },
