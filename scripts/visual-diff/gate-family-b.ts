@@ -11,16 +11,29 @@
 import { chromium } from 'playwright'
 import { readFileSync, existsSync } from 'node:fs'
 
+const norm = (s: string) => (s || '').replace(/\s+/g, ' ').trim()
+
+// family key -> legacy-pages.json type set
+const FAMILIES: Record<string, Set<string>> = {
+  B: new Set(['service', 'resource', 'other']),
+  D: new Set(['location']),
+}
+
 async function main() {
-  const lp = JSON.parse(readFileSync('lib/legacy/legacy-pages.json', 'utf8')) as Record<string, { type: string }>
-  const fam = new Set(['service', 'resource', 'other'])
-  const paths = Object.keys(lp).filter((k) => fam.has(lp[k].type)).sort()
+  const lp = JSON.parse(readFileSync('lib/legacy/legacy-pages.json', 'utf8')) as Record<string, { type: string; title?: string; description?: string }>
+  const famKey = (process.argv[2] || 'B').toUpperCase()
+  const fam = FAMILIES[famKey] || FAMILIES.B
+  const onlyPath = process.argv[3] // optional single-path proof
+  const ORIGIN = 'https://www.estateplanningdfw.law'
+  const paths = (onlyPath ? [onlyPath.replace(/\/+$/, '')] : Object.keys(lp).filter((k) => fam.has(lp[k].type))).sort()
+  console.log(`gating family ${famKey}: ${paths.length} page(s)`)
 
   const b = await chromium.launch()
   const p = await b.newPage()
   await p.route('**', (r) => r.abort())
 
-  const results: { path: string; ratio: number; total: number; uncaptured: number; missing: string[] }[] = []
+  type Meta = { titleOk: boolean; descOk: boolean; canonOk: boolean; origTitle: string; cloneTitle: string; origDesc: string; cloneDesc: string }
+  const results: { path: string; ratio: number; total: number; uncaptured: number; missing: string[]; meta?: Meta }[] = []
   for (const path of paths) {
     const slug = path.replace(/^\//, '').replace(/\//g, '__')
     const file = `docs/reference/capture/${slug}/desktop/original.html`
@@ -47,17 +60,33 @@ async function main() {
           if (el.closest('script,style,nav,header,footer')) continue
           total += t.length
           // captured by the extractor / rendered by FamilyBPage?
-          const inBlock = !!el.closest('p,li,h1,h2,h3,h4,ul,ol,article,blockquote,figcaption,address,[aria-expanded],.qst')
+          const inBlock = !!el.closest('p,li,h1,h2,h3,h4,ul,ol,article,blockquote,figcaption,address,[aria-expanded],.qst,[itemtype*="Question"]')
           const inEmStrong = /^(EM|STRONG)$/.test(el.tagName) && (el.textContent || '').replace(/\s+/g, ' ').trim().length >= 20 && !el.closest('p,li,h1,h2,h3,h4,a,article,blockquote,figcaption')
-          if (inBlock || inEmStrong) continue
+          const pd = el.closest('div')
+          const inLeafDiv = !!pd && !pd.querySelector('div,p,ul,ol,li,h1,h2,h3,h4,article,blockquote,figcaption,address') && (pd.textContent || '').replace(/\s+/g, ' ').trim().length >= 30
+          if (inBlock || inEmStrong || inLeafDiv) continue
           uncaptured += t.length
           if (missing.length < 5) missing.push(t.slice(0, 48))
         }
       }
-      return { total, uncaptured, missing }
+      const head = { title: document.title, desc: (document.querySelector('meta[name=description]') as HTMLMetaElement | null)?.content || '', canon: (document.querySelector('link[rel=canonical]') as HTMLLinkElement | null)?.getAttribute('href') || '' }
+      return { total, uncaptured, missing, head }
     })
     const ratio = r.total ? (r.total - r.uncaptured) / r.total : 1
-    results.push({ path, ratio, total: r.total, uncaptured: r.uncaptured, missing: r.missing })
+    // Metadata parity: the clone emits legacy-pages.json title/description and a
+    // canonical of ORIGIN+path; compare to the original <head> (SEO-critical for geo).
+    const entry = lp[path] || lp[path + '/'] || {}
+    // curly vs straight quotes / dashes are an encoding artifact, not a metadata
+    // difference — normalize them so only real title/description diffs surface.
+    const normMeta = (s: string) => norm(s).replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/[–—]/g, '-')
+    const meta = {
+      titleOk: normMeta(r.head.title) === normMeta(entry.title || ''),
+      descOk: normMeta(r.head.desc) === normMeta(entry.description || ''),
+      canonOk: norm(r.head.canon).replace(/\/+$/, '') === (ORIGIN + path).replace(/\/+$/, ''),
+      origTitle: norm(r.head.title), cloneTitle: norm(entry.title || ''),
+      origDesc: norm(r.head.desc), cloneDesc: norm(entry.description || ''),
+    }
+    results.push({ path, ratio, total: r.total, uncaptured: r.uncaptured, missing: r.missing, meta })
   }
   await b.close()
 
@@ -66,10 +95,26 @@ async function main() {
   const below = results.filter((r) => r.ratio >= 0 && r.ratio < 0.99)
   const pass = results.filter((r) => r.ratio >= 0.99)
   const avg = results.filter((r) => r.ratio >= 0).reduce((s, r) => s + r.ratio, 0) / (results.length - noBase.length || 1)
-  console.log(`family-B gate: ${results.length} pages | >=99%: ${pass.length} | <99%: ${below.length} | no-baseline: ${noBase.length}`)
+  console.log(`gate: ${results.length} pages | body >=99%: ${pass.length} | <99%: ${below.length} | no-baseline: ${noBase.length}`)
   console.log(`mean body completeness: ${(avg * 100).toFixed(1)}%`)
+  // metadata parity
+  const withMeta = results.filter((r) => r.meta)
+  const metaTitle = withMeta.filter((r) => r.meta!.titleOk).length
+  const metaDesc = withMeta.filter((r) => r.meta!.descOk).length
+  const metaCanon = withMeta.filter((r) => r.meta!.canonOk).length
+  console.log(`metadata parity: title ${metaTitle}/${withMeta.length} | description ${metaDesc}/${withMeta.length} | canonical ${metaCanon}/${withMeta.length}`)
+  const metaFail = withMeta.filter((r) => !r.meta!.titleOk || !r.meta!.descOk || !r.meta!.canonOk)
+  if (metaFail.length) {
+    console.log('\n--- metadata mismatches ---')
+    for (const r of metaFail) {
+      const m = r.meta!
+      if (!m.titleOk) console.log(`  TITLE ${r.path}\n    orig:  ${m.origTitle}\n    clone: ${m.cloneTitle}`)
+      if (!m.descOk) console.log(`  DESC  ${r.path}\n    orig:  ${m.origDesc.slice(0, 90)}\n    clone: ${m.cloneDesc.slice(0, 90)}`)
+      if (!m.canonOk) console.log(`  CANON ${r.path} (clone canonical = origin+path; verify trailing-slash handling)`)
+    }
+  }
   if (below.length) {
-    console.log('\n--- pages < 99% (ratio | uncaptured/total | sample omitted text) ---')
+    console.log('\n--- pages < 99% body (ratio | uncaptured/total | sample omitted text) ---')
     for (const r of below) console.log(`${(r.ratio * 100).toFixed(1)}%  ${r.path}  (${r.uncaptured}/${r.total})  :: ${r.missing.join(' | ')}`)
   }
   if (noBase.length) console.log('\nno baseline:', noBase.map((r) => r.path).join(', '))

@@ -76,7 +76,7 @@ async function main() {
         for (const i of Array.from(sec.querySelectorAll('img')) as HTMLImageElement[]) { const src = i.getAttribute('src') || i.src || ''; if (src && !/^data:|\.svg|logo|accolade|badge|bar-college|elder|naela|banner|icon|sprite/i.test(src)) { introImage = src; break } }
       }
       for (const e of Array.from(sec.querySelectorAll('h2,h3,h4,p,ul,ol')) as HTMLElement[]) {
-        if (e.closest('[aria-expanded], .qst, footer, nav, header')) continue
+        if (e.closest('[aria-expanded], .qst, footer, nav, header, [itemtype*="Question"]')) continue
         const tag = e.tagName.toLowerCase()
         if ((tag === 'p' || tag === 'li') && e.closest('ul, ol')) continue
         if ((tag === 'ul' || tag === 'ol') && e.parentElement && e.parentElement.closest('ul, ol')) continue
@@ -92,7 +92,7 @@ async function main() {
       // (b) the download-guide widget's heading <strong> + blurb <em> sitting
       // directly in a <div>. Short runs (buttons, bylines) are left out.
       for (const e of Array.from(sec.querySelectorAll('article, blockquote, figcaption')) as HTMLElement[]) {
-        if (e.closest('[aria-expanded], .qst, footer, nav, header')) continue
+        if (e.closest('[aria-expanded], .qst, footer, nav, header, [itemtype*="Question"]')) continue
         if (e.querySelector('p, h2, h3, h4, ul, ol')) continue
         const tx = (e.textContent || '').replace(/\s+/g, ' ').trim()
         if (tx.length >= 20 && tx !== contentH1) bodyBlocks.push({ type: 'p', text: tx })
@@ -104,9 +104,20 @@ async function main() {
       }
       // Bylines / datelines ('By Crain & Wooley') on media-center video/radio pages.
       for (const e of Array.from(sec.querySelectorAll('address')) as HTMLElement[]) {
-        if (e.closest('[aria-expanded], .qst, footer, nav, header')) continue
+        if (e.closest('[aria-expanded], .qst, footer, nav, header, [itemtype*="Question"]')) continue
         const tx = (e.textContent || '').replace(/\s+/g, ' ').trim()
         if (tx.length >= 3 && tx !== contentH1) bodyBlocks.push({ type: 'p', text: tx })
+      }
+      // Prose authored straight into a bare <div> (no <p> wrapper) — a "prose div"
+      // is a leaf block (no block-level child; inline spans/links OK) holding its
+      // own text. >=30 chars keeps out UI labels/counters; closer/accordion/nav
+      // are already excluded. textContent (not just direct text) so inline-wrapped
+      // prose ('<div>...<span>...</span></div>') is captured too.
+      for (const e of Array.from(sec.querySelectorAll('div')) as HTMLElement[]) {
+        if (e.closest('[aria-expanded], .qst, footer, nav, header, [itemtype*="Question"]')) continue
+        if (e.querySelector('div, p, ul, ol, li, h1, h2, h3, h4, article, blockquote, figcaption, address')) continue
+        const tx = (e.textContent || '').replace(/\s+/g, ' ').trim()
+        if (tx.length >= 30 && tx !== contentH1) bodyBlocks.push({ type: 'p', text: tx })
       }
     }
     const items: { title: string; body: string; top: number; group: string }[] = []
@@ -128,6 +139,16 @@ async function main() {
       let panel = q.nextElementSibling as HTMLElement | null
       if (!panel || !(panel.textContent || '').trim()) panel = (q.parentElement?.querySelector('.ans, [class*=ans], [class*=answer], [class*=body], [class*=panel]') as HTMLElement | null)
       items.push({ title: t, body: panel ? (panel.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 2000) : '', top: Math.round(q.getBoundingClientRect().top), group: 'faq' })
+      seen.add(t)
+    }
+    // schema.org FAQ (microdata Question/Answer, no .qst class): question is
+    // [itemprop=name], answer is [itemprop=text] inside acceptedAnswer.
+    for (const q of Array.from(document.querySelectorAll('[itemtype*="Question"]')) as HTMLElement[]) {
+      const nameEl = q.querySelector('[itemprop="name"]') as HTMLElement | null
+      const ansEl = q.querySelector('[itemprop="acceptedAnswer"] [itemprop="text"], [itemprop="text"]') as HTMLElement | null
+      const t = (nameEl?.textContent || '').replace(/\s+/g, ' ').trim()
+      if (!t || t.length < 5 || t.length > 200 || seen.has(t)) continue
+      items.push({ title: t, body: ansEl ? (ansEl.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 2000) : '', top: Math.round(q.getBoundingClientRect().top), group: 'faq' })
       seen.add(t)
     }
     let faqHeading = ''

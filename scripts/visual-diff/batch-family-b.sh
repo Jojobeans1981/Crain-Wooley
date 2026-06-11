@@ -6,10 +6,12 @@ set -u
 cd "$(dirname "$0")/../.." || exit 1
 TSX="npx tsx scripts/visual-diff/extract-family-b.ts"
 
-# Family-B = legacy-pages.json type in {service, resource, other}
-PATHS=$(node -e '
+# Family selector: B = {service,resource,other} (default), D = {location}
+FAMILY="${1:-B}"
+PATHS=$(FAM="$FAMILY" node -e '
 const lp=require("./lib/legacy/legacy-pages.json");
-const fam=new Set(["service","resource","other"]);
+const sets={B:["service","resource","other"],D:["location"]};
+const fam=new Set(sets[process.env.FAM]||sets.B);
 const out=Object.keys(lp).filter(k=>fam.has(lp[k].type)).sort();
 process.stdout.write(out.join("\n"));
 ')
