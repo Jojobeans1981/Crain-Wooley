@@ -66,7 +66,7 @@ async function main() {
           if (el.closest('script,style,nav,header,footer')) continue
           total += t.length
           // captured by the extractor / rendered by FamilyBPage?
-          const inBlock = !!el.closest('p,li,h1,h2,h3,h4,ul,ol,article,blockquote,figcaption,address,[aria-expanded],.qst,[itemtype*="Question"]')
+          const inBlock = !!el.closest('p,li,h1,h2,h3,h4,ul,ol,article,blockquote,figcaption,address,[aria-expanded],.qst,[itemtype*="Question"],.sd-zn')
           const inEmStrong = /^(EM|STRONG)$/.test(el.tagName) && (el.textContent || '').replace(/\s+/g, ' ').trim().length >= 20 && !el.closest('p,li,h1,h2,h3,h4,a,article,blockquote,figcaption')
           const pd = el.closest('div')
           const inLeafDiv = !!pd && !pd.querySelector('div,p,ul,ol,li,h1,h2,h3,h4,article,blockquote,figcaption,address') && (pd.textContent || '').replace(/\s+/g, ' ').trim().length >= (isProfile ? 4 : 30)
