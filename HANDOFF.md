@@ -20,6 +20,18 @@ Proof trio: `/about-us/pricing/flat-rate-services/` (B), `/allen/` (D geo),
    - The full-page top-aligned diff means height parity per band matters as much as
      content. Align top→bottom (banner → badge → intro → body → closers).
 
+3. **Harness can UNDER-count (false greens), not just over-count (false reds).**
+   The per-band gate (`band-gate.ts`) first used fullPage screenshot + crop-at-rect.
+   Playwright's fullPage screenshot RELAYOUTS (viewport→full height), so rects
+   measured at the normal viewport didn't match the fullPage coords (Scorpion's vh
+   layout shifts more than the clone) → crops grabbed the wrong region → diffs were
+   UNDER-counted (bands looked passing when they weren't, e.g. schedule/badge).
+   Also the band MAP mis-pointed testimonials at `#ImageGroupS1` (which wraps
+   reviews+schedule) instead of `#ReviewsS8`. Fixes: screenshot the band ELEMENT
+   directly (`locator.screenshot()`), settle all images before capture, and map
+   each band to its true element. ALWAYS sanity-check a "passing" band by eyeballing
+   its two crops — a false green is as dangerous as a false red.
+
 2. **Turbopack stale-CSS gotcha.** The Next dev (Turbopack) file watcher silently
    MISSES script/heredoc writes to `app/globals.css` and serves STALE styles — the
    pixel gate then reports byte-identical numbers across edits (that's the tell).
