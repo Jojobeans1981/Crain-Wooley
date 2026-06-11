@@ -1,12 +1,13 @@
 /*
- * Structured extractor for family-B interior pages (gold banner + two-column
- * intro + accordion groups + shared closers). Scrapes the original into a
- * structured JSON model the FamilyB template renders, and downloads the intro
- * image into /public. The original is the client's own site; this migrates its
- * content + assets to the new site (same first-party pattern as the legacy crawl).
+ * Structured extractor for family-B interior pages. Produces a single ordered
+ * `bands[]` model (intro / prose / accordion / closer) in DOM source order, so
+ * the renderer reproduces the original's band interleaving (e.g. flat-rate:
+ * intro+plan-accordions -> values(gold) -> FAQ(navy, expanded) -> testimonials
+ * -> schedule). Also downloads the intro image into /public. The original is the
+ * client's own site; this migrates its content + assets to the new site.
  *
  * Usage: npx tsx scripts/visual-diff/extract-family-b.ts /about-us/pricing/flat-rate-services/
- * Output: lib/legacy/family-b/<slug>.json  +  public/interior/<slug>-intro.<ext>
+ * Output: lib/legacy/family-b/pages.json (path-keyed)  +  public/interior/<slug>-intro.<ext>
  */
 import { chromium } from 'playwright'
 import { writeFileSync, mkdirSync, readFileSync, existsSync } from 'node:fs'
@@ -21,8 +22,7 @@ async function main() {
 
   // Reproducible + courteous: load the committed baseline HTML offline when it
   // exists (the live site is never re-hit for a captured URL); otherwise fetch
-  // ONCE, save the baseline, then work from the DOM. Detection is structural
-  // (section/class signatures), so it does not need live CSS/layout.
+  // ONCE, save the baseline, then work from the DOM. Detection is structural.
   const capDir = `docs/reference/capture/${slug}/desktop`
   const capFile = `${capDir}/original.html`
   const b = await chromium.launch()
@@ -42,59 +42,62 @@ async function main() {
   }
 
   const data = await p.evaluate(() => {
-    // Single structural pass over <main>'s top-level sections (container/class
-    // signatures, NOT live positions/styles — so it runs on the offline baseline
-    // DOM too). Each band is classified once:
-    //  - closer (pillars/testimonials/schedule: dk-bg vls/cta/img-grp, or closer
-    //    heading text) -> {type:'closer'} marker, re-inserted by the renderer in
-    //    source order (interleaving = layout parity)
-    //  - banner (form/bnr) -> page title; awards/staff -> skipped
-    //  - first content band -> contentH1 (first heading) + intro photo (first
-    //    non-logo img); every content band -> full ordered blocks (h2/h3/p/ul),
-    //    accordion panels excluded (extracted separately). No position cutoff.
+    // Walk <main>'s top-level sections in DOM order; each yields zero or more
+    // bands. Closer wrappers (#ImageGroupS1) NEST several closer feeds — collect
+    // and order them per-section. FAQ Q&A is never inlined as prose (it would
+    // duplicate the accordion and inflate the page); a section's intro prose is
+    // only what PRECEDES its first accordion control.
     const mainEl = (document.querySelector('main') || document.body) as HTMLElement
-    let bannerTitle = ''
-    let contentH1 = ''
-    let introImage = ''
-    let firstContent = true
-    let badgeStrip = false
-    let bannerSearch = false
-    const bodyBlocks: { type: string; text?: string; items?: string[]; which?: string }[] = []
+    let bannerTitle = '', contentH1 = '', introImage = ''
+    let bannerSearch = false, badgeStrip = false, firstContent = true
+    type Block = { type: string; text?: string; items?: string[] }
+    const bands: Record<string, unknown>[] = []
+
     for (const sec of Array.from(mainEl.children) as HTMLElement[]) {
       const stx = (sec.textContent || '').replace(/\s+/g, ' ')
       const cls = (sec.className?.toString() || '').toLowerCase()
-      // Closer / CTA bands are rendered by dedicated shared components (Testimonials,
-      // Values, Schedule), never as body prose — so skip the whole subtree here.
-      // A reviews wrapper (#ImageGroupS1.img-grp) NESTS both the feed and the
-      // schedule band, so leaving it in body would leak the quote text and inflate
-      // the page. The per-page closer SEQUENCE is computed separately, in document
-      // order, below. (cta-only strips like CTAsS7 are chrome — skipped, not closers.)
-      if (sec.querySelector('[id^="Reviews"], .rvw, blockquote.ato, #ValuesV2, .vls, section[id^="CTAs"]') || /(^|\s)(vls|cta|rvw)(\s|$)/.test(cls) || /Schedule a Consultation Today|Estate Planning With Us Means|DESIGNED FOR YOUR COMFORT/i.test(stx)) { continue }
-      // Accordion / FAQ Q&A is captured separately (the accordion pass below) and
-      // rendered as COLLAPSED groups — never as inline prose, which would duplicate
-      // every Q&A and inflate the page ~3x (the dominant pixel-cascade source). But a
-      // section can hold a real intro (H1 + paragraph + photo) BEFORE its accordions
-      // (e.g. FAQsS2). So keep only prose that PRECEDES the first accordion control;
-      // skip the rest of the section. A section that opens with one (FAQsS3) yields
-      // nothing here.
-      const faqBoundary = sec.querySelector('.qst, [aria-expanded], summary, [itemtype*="Question"]')
+
+      // Banner -> page title (not a band; rendered as the gold/navy banner).
       if (sec.tagName === 'FORM' || /^(Form_)?Banner/.test(sec.id) || /(^|\s)(bnr|banner)/.test(cls)) {
         if (!bannerTitle) { const h = sec.querySelector('.fnt_t-1, h1, h2, .h1, strong') as HTMLElement | null; if (h) bannerTitle = (h.textContent || '').replace(/\s+/g, ' ').trim().replace(/\bSearch\s*$/, '').trim() }
         if (sec.querySelector('[name*="SiteSearch"], input[type="search"]')) bannerSearch = true
         continue
       }
-      // Badge strip (aws) — record presence (rendered as the shared BadgeStrip),
-      // then skip. Staff-LISTING bands are skipped too; staff PROFILE (stf-pfl) is
-      // content and handled above.
+      // Badge strip (aws) / staff-LISTING bands -> not bands.
       if (/(^|\s)(aws|awards)/.test(cls)) { badgeStrip = true; continue }
       if (/(^|\s)(stf|staff)/.test(cls) && !/stf-pfl|profile/i.test(cls)) continue
-      if (firstContent) {
-        firstContent = false
-        const cz = (sec.querySelector('.cnt-zn') || sec) as HTMLElement // content zone, not the sd-zn sidebar
-        const h = cz.querySelector('h1, h2, h3, h4') as HTMLElement | null
-        if (h) contentH1 = (h.textContent || '').replace(/\s+/g, ' ').trim()
-        for (const i of Array.from(cz.querySelectorAll('img')) as HTMLImageElement[]) { const src = i.getAttribute('data-src') || i.getAttribute('data-lazy-src') || i.getAttribute('src') || i.src || ''; if (src && !/^data:|\.svg|logo|accolade|badge|bar-college|elder|naela|banner|icon|sprite/i.test(src)) { introImage = src; break } }
+
+      // Closer / closer-wrapper: collect the closer feeds inside this section in
+      // document order, dedupe consecutive, emit closer bands.
+      const cNodes: [string, Element][] = []
+      sec.querySelectorAll('[id^="Reviews"], .rvw, blockquote.ato').forEach((e) => cNodes.push(['testimonials', e]))
+      sec.querySelectorAll('#ValuesV2, .vls').forEach((e) => cNodes.push(['pillars', e]))
+      sec.querySelectorAll('section[id^="CTAs"]').forEach((e) => { if (/Schedule a Consultation Today/i.test(e.textContent || '')) cNodes.push(['schedule', e]) })
+      if (/(^|\s)vls(\s|$)/.test(cls)) cNodes.push(['pillars', sec])
+      if (/(^|\s)cta(\s|$)/.test(cls) && /Schedule a Consultation Today/i.test(stx)) cNodes.push(['schedule', sec])
+      if (cNodes.length) {
+        cNodes.sort((a, b) => (a[1].compareDocumentPosition(b[1]) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1))
+        let prev: string | null = null
+        for (const c of cNodes) if (c[0] !== prev) { bands.push({ kind: 'closer', which: c[0] }); prev = c[0] }
+        continue
       }
+      // A non-schedule CTA strip (e.g. CTAsS7) is chrome — skip.
+      if (/(^|\s)cta(\s|$)/.test(cls)) continue
+
+      // Content / accordion section. Intro prose = blocks before the first
+      // accordion control (the wrapper-aware boundary: strictly-precedes AND does
+      // not contain the boundary).
+      const faqBoundary = sec.querySelector('.qst, [aria-expanded], summary, [itemtype*="Question"]')
+      let isIntro = false, secHeading = ''
+      if (firstContent) {
+        firstContent = false; isIntro = true
+        const cz = (sec.querySelector('.cnt-zn') || sec) as HTMLElement
+        const h = cz.querySelector('h1, h2, h3, h4') as HTMLElement | null
+        if (h) { contentH1 = (h.textContent || '').replace(/\s+/g, ' ').trim(); secHeading = contentH1 }
+        for (const im of Array.from(cz.querySelectorAll('img')) as HTMLImageElement[]) { const src = im.getAttribute('data-src') || im.getAttribute('data-lazy-src') || im.getAttribute('src') || im.src || ''; if (src && !/^data:|\.svg|logo|accolade|badge|bar-college|elder|naela|banner|icon|sprite/i.test(src)) { introImage = src; break } }
+      }
+
+      const blocks: Block[] = []
       for (const e of Array.from(sec.querySelectorAll('h2,h3,h4,p,ul,ol')) as HTMLElement[]) {
         if (e.closest('[aria-expanded], .qst, footer, nav, header, [itemtype*="Question"], .sd-zn') || (faqBoundary && (!(faqBoundary.compareDocumentPosition(e) & Node.DOCUMENT_POSITION_PRECEDING) || (faqBoundary.compareDocumentPosition(e) & Node.DOCUMENT_POSITION_CONTAINS)))) continue
         const tag = e.tagName.toLowerCase()
@@ -102,117 +105,93 @@ async function main() {
         if ((tag === 'ul' || tag === 'ol') && e.parentElement && e.parentElement.closest('ul, ol')) continue
         const tx = (e.textContent || '').replace(/\s+/g, ' ').trim()
         if (tx.length <= 1 || tx === contentH1) continue
-        if (tag === 'ul' || tag === 'ol') { const items = (Array.from(e.querySelectorAll('li')) as HTMLElement[]).filter((li) => !li.querySelector('ul, ol')).map((li) => (li.textContent || '').replace(/\s+/g, ' ').trim()).filter((s) => s.length > 0); if (items.length) bodyBlocks.push({ type: 'ul', items }) }
-        else if (tag === 'h2') bodyBlocks.push({ type: 'h2', text: tx })
-        else if (tag === 'h3' || tag === 'h4') bodyBlocks.push({ type: 'h3', text: tx })
-        else bodyBlocks.push({ type: 'p', text: tx })
+        if (tag === 'ul' || tag === 'ol') { const items = (Array.from(e.querySelectorAll('li')) as HTMLElement[]).filter((li) => !li.querySelector('ul, ol')).map((li) => (li.textContent || '').replace(/\s+/g, ' ').trim()).filter((s) => s.length > 0); if (items.length) blocks.push({ type: 'ul', items }) }
+        else if (tag === 'h2') blocks.push({ type: 'h2', text: tx })
+        else if (tag === 'h3' || tag === 'h4') blocks.push({ type: 'h3', text: tx })
+        else blocks.push({ type: 'p', text: tx })
       }
-      // Orphan prose the h/p/ul selector misses: (a) block prose in <article>/
-      // <blockquote>/<figcaption> with no inner block (firm-video descriptions);
-      // (b) the download-guide widget's heading <strong> + blurb <em> sitting
-      // directly in a <div>. Short runs (buttons, bylines) are left out.
       for (const e of Array.from(sec.querySelectorAll('article, blockquote, figcaption')) as HTMLElement[]) {
         if (e.closest('[aria-expanded], .qst, footer, nav, header, [itemtype*="Question"], .sd-zn') || (faqBoundary && (!(faqBoundary.compareDocumentPosition(e) & Node.DOCUMENT_POSITION_PRECEDING) || (faqBoundary.compareDocumentPosition(e) & Node.DOCUMENT_POSITION_CONTAINS)))) continue
         if (e.querySelector('p, h2, h3, h4, ul, ol')) continue
         const tx = (e.textContent || '').replace(/\s+/g, ' ').trim()
-        if (tx.length >= 20 && tx !== contentH1) bodyBlocks.push({ type: 'p', text: tx })
+        if (tx.length >= 20 && tx !== contentH1) blocks.push({ type: 'p', text: tx })
       }
       for (const e of Array.from(sec.querySelectorAll('em, strong')) as HTMLElement[]) {
         if (e.closest('[aria-expanded], .qst, footer, nav, header, p, li, h1, h2, h3, h4, a, article, blockquote, figcaption, .sd-zn') || (faqBoundary && (!(faqBoundary.compareDocumentPosition(e) & Node.DOCUMENT_POSITION_PRECEDING) || (faqBoundary.compareDocumentPosition(e) & Node.DOCUMENT_POSITION_CONTAINS)))) continue
         const tx = (e.textContent || '').replace(/\s+/g, ' ').trim()
-        if (tx.length >= 20 && tx !== contentH1) bodyBlocks.push({ type: 'p', text: tx })
+        if (tx.length >= 20 && tx !== contentH1) blocks.push({ type: 'p', text: tx })
       }
-      // Bylines / datelines ('By Crain & Wooley') on media-center video/radio pages.
       for (const e of Array.from(sec.querySelectorAll('address')) as HTMLElement[]) {
         if (e.closest('[aria-expanded], .qst, footer, nav, header, [itemtype*="Question"], .sd-zn') || (faqBoundary && (!(faqBoundary.compareDocumentPosition(e) & Node.DOCUMENT_POSITION_PRECEDING) || (faqBoundary.compareDocumentPosition(e) & Node.DOCUMENT_POSITION_CONTAINS)))) continue
         const tx = (e.textContent || '').replace(/\s+/g, ' ').trim()
-        if (tx.length >= 3 && tx !== contentH1) bodyBlocks.push({ type: 'p', text: tx })
+        if (tx.length >= 3 && tx !== contentH1) blocks.push({ type: 'p', text: tx })
       }
-      // Prose authored straight into a bare <div> (no <p> wrapper) — a "prose div"
-      // is a leaf block (no block-level child; inline spans/links OK) holding its
-      // own text. >=30 chars keeps out UI labels/counters; closer/accordion/nav
-      // are already excluded. textContent (not just direct text) so inline-wrapped
-      // prose ('<div>...<span>...</span></div>') is captured too.
+      const isProfile = /stf-pfl|profile/i.test(cls)
       for (const e of Array.from(sec.querySelectorAll('div')) as HTMLElement[]) {
         if (e.closest('[aria-expanded], .qst, footer, nav, header, [itemtype*="Question"], .sd-zn') || (faqBoundary && (!(faqBoundary.compareDocumentPosition(e) & Node.DOCUMENT_POSITION_PRECEDING) || (faqBoundary.compareDocumentPosition(e) & Node.DOCUMENT_POSITION_CONTAINS)))) continue
         if (e.querySelector('div, p, ul, ol, li, h1, h2, h3, h4, article, blockquote, figcaption, address')) continue
         const tx = (e.textContent || '').replace(/\s+/g, ' ').trim()
-        // On staff PROFILE bands the role/title + office labels sit in short leaves
-        // (e.g. 'Senior Attorney'); capture them too. The name is the banner title,
-        // so skip it (avoids a duplicate). Section labels are skipped.
-        const isProfile = /stf-pfl|profile/i.test(cls)
         const minLen = isProfile ? 4 : 30
-        if (tx.length >= minLen && tx !== contentH1 && tx !== bannerTitle && !/^(About|Locations?|Contact|Search)$/i.test(tx)) bodyBlocks.push({ type: 'p', text: tx })
+        if (tx.length >= minLen && tx !== contentH1 && tx !== bannerTitle && !/^(About|Locations?|Contact|Search)$/i.test(tx)) blocks.push({ type: 'p', text: tx })
+      }
+
+      if (isIntro) bands.push({ kind: 'intro', heading: secHeading, blocks, image: introImage || null })
+      else if (blocks.length) bands.push({ kind: 'prose', blocks })
+
+      // Accordion bands (per-section, in order): plan accordions ([aria-expanded]/
+      // <summary>) render COLLAPSED; FAQ (.qst slider / schema Question) renders
+      // EXPANDED, as the original does. Expand state is the source signature.
+      const seen = new Set<string>()
+      const planItems: { title: string; body: string }[] = []
+      for (const h of Array.from(sec.querySelectorAll('[aria-expanded], summary')) as HTMLElement[]) {
+        const t = (h.textContent || '').replace(/\s+/g, ' ').trim()
+        if (!t || t.length < 3 || t.length > 120 || seen.has(t) || /accessibility|skip to/i.test(t)) continue
+        const ctl = h.getAttribute('aria-controls')
+        let panel: HTMLElement | null = ctl ? document.getElementById(ctl) : (h.nextElementSibling as HTMLElement)
+        if (!panel && h.parentElement) panel = h.parentElement.querySelector('[class*=body],[class*=panel],[class*=content]')
+        planItems.push({ title: t, body: panel ? (panel.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 2000) : '' }); seen.add(t)
+      }
+      const faqItems: { title: string; body: string }[] = []
+      for (const q of Array.from(sec.querySelectorAll('.qst, [class*=qst]')) as HTMLElement[]) {
+        const t = (q.textContent || '').replace(/\s+/g, ' ').trim()
+        if (!t || t.length < 8 || t.length > 160 || seen.has(t)) continue
+        let panel = q.nextElementSibling as HTMLElement | null
+        if (!panel || !(panel.textContent || '').trim()) panel = (q.parentElement?.querySelector('.ans, [class*=ans], [class*=answer], [class*=body], [class*=panel]') as HTMLElement | null)
+        faqItems.push({ title: t, body: panel ? (panel.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 2000) : '' }); seen.add(t)
+      }
+      for (const q of Array.from(sec.querySelectorAll('[itemtype*="Question"]')) as HTMLElement[]) {
+        const nameEl = q.querySelector('[itemprop="name"]') as HTMLElement | null
+        const ansEl = q.querySelector('[itemprop="acceptedAnswer"] [itemprop="text"], [itemprop="text"]') as HTMLElement | null
+        const t = (nameEl?.textContent || '').replace(/\s+/g, ' ').trim()
+        if (!t || t.length < 5 || t.length > 200 || seen.has(t)) continue
+        faqItems.push({ title: t, body: ansEl ? (ansEl.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 2000) : '' }); seen.add(t)
+      }
+      if (planItems.length) bands.push({ kind: 'accordion', instruction: 'Expand Each Section to Learn More', items: planItems, expanded: false })
+      if (faqItems.length) {
+        let fh = ''
+        for (const e of Array.from(sec.querySelectorAll('h2,h3,h4,strong')) as HTMLElement[]) { const tx = (e.textContent || '').replace(/\s+/g, ' ').trim(); if (/Virtual Services FAQ|Frequently Asked|^FAQ$/i.test(tx) && tx.length < 60) { fh = tx; break } }
+        bands.push({ kind: 'accordion', heading: fh || 'Virtual Services FAQ', items: faqItems, expanded: true })
       }
     }
-    const items: { title: string; body: string; top: number; group: string }[] = []
-    const seen = new Set<string>()
-    // Plan accordions use [aria-expanded]/<summary>; their panel is aria-controlled.
-    for (const h of Array.from(document.querySelectorAll('[aria-expanded], summary')) as HTMLElement[]) {
-      const t = (h.textContent || '').replace(/\s+/g, ' ').trim()
-      if (!t || t.length < 3 || t.length > 120 || seen.has(t) || /accessibility|skip to/i.test(t)) continue
-      const ctl = h.getAttribute('aria-controls')
-      let panel: HTMLElement | null = ctl ? document.getElementById(ctl) : (h.nextElementSibling as HTMLElement)
-      if (!panel && h.parentElement) panel = h.parentElement.querySelector('[class*=body],[class*=panel],[class*=content]')
-      items.push({ title: t, body: panel ? (panel.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 2000) : '', top: Math.round(h.getBoundingClientRect().top), group: 'plans' })
-      seen.add(t)
-    }
-    // FAQ uses Scorpion .qst question rows; the answer is the sibling/parent panel.
-    for (const q of Array.from(document.querySelectorAll('.qst, [class*=qst]')) as HTMLElement[]) {
-      const t = (q.textContent || '').replace(/\s+/g, ' ').trim()
-      if (!t || t.length < 8 || t.length > 160 || seen.has(t)) continue
-      let panel = q.nextElementSibling as HTMLElement | null
-      if (!panel || !(panel.textContent || '').trim()) panel = (q.parentElement?.querySelector('.ans, [class*=ans], [class*=answer], [class*=body], [class*=panel]') as HTMLElement | null)
-      items.push({ title: t, body: panel ? (panel.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 2000) : '', top: Math.round(q.getBoundingClientRect().top), group: 'faq' })
-      seen.add(t)
-    }
-    // schema.org FAQ (microdata Question/Answer, no .qst class): question is
-    // [itemprop=name], answer is [itemprop=text] inside acceptedAnswer.
-    for (const q of Array.from(document.querySelectorAll('[itemtype*="Question"]')) as HTMLElement[]) {
-      const nameEl = q.querySelector('[itemprop="name"]') as HTMLElement | null
-      const ansEl = q.querySelector('[itemprop="acceptedAnswer"] [itemprop="text"], [itemprop="text"]') as HTMLElement | null
-      const t = (nameEl?.textContent || '').replace(/\s+/g, ' ').trim()
-      if (!t || t.length < 5 || t.length > 200 || seen.has(t)) continue
-      items.push({ title: t, body: ansEl ? (ansEl.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 2000) : '', top: Math.round(q.getBoundingClientRect().top), group: 'faq' })
-      seen.add(t)
-    }
-    let faqHeading = ''
-    for (const e of Array.from(document.querySelectorAll('h2,h3,h4,strong')) as HTMLElement[]) { const tx = (e.textContent || '').replace(/\s+/g, ' ').trim(); if (/Virtual Services FAQ|Frequently Asked|^FAQ$/i.test(tx) && tx.length < 60) { faqHeading = tx; break } }
 
-    // Sidebar (sd-zn three-8ths): the right-rail <aside> blocks — sibling-page nav
-    // (sd-nv), CTA cards (sd-cta, e.g. download-guide), office/contact. Captured as
-    // structured blocks the renderer reproduces; links render as-is (relative).
-    const sdEl = document.querySelector('.sd-zn') as HTMLElement | null
+    // Right-rail sidebar (sd-zn three-8ths): sibling-page nav, CTA cards, office.
     const sidebar: { kind: string; heading: string; links: { text: string; href: string }[] }[] = []
+    const sdEl = document.querySelector('.sd-zn') as HTMLElement | null
     if (sdEl) {
       for (const aside of Array.from(sdEl.children) as HTMLElement[]) {
-        const cls = (aside.className?.toString() || '').toLowerCase()
-        const kind = /sd-nv|(^|\s)nav/.test(cls) ? 'nav' : /cta/.test(cls) ? 'cta' : 'block'
+        const acls = (aside.className?.toString() || '').toLowerCase()
+        const kind = /sd-nv|(^|\s)nav/.test(acls) ? 'nav' : /cta/.test(acls) ? 'cta' : 'block'
         const hEl = aside.querySelector('h1, h2, h3, h4, strong, .fnt_t-co, [class*=fnt_t]') as HTMLElement | null
         const heading = hEl ? (hEl.textContent || '').replace(/\s+/g, ' ').trim() : ''
         const links = (Array.from(aside.querySelectorAll('a')) as HTMLAnchorElement[]).map((a) => ({ text: (a.textContent || '').replace(/\s+/g, ' ').trim(), href: a.getAttribute('href') || '' })).filter((l) => l.text && l.text !== heading)
         if (heading || links.length) sidebar.push({ kind, heading, links })
       }
     }
-    // Closer SEQUENCE in document order (robust to nesting). Three band types:
-    //  testimonials = reviews feed (#ReviewsS8 / .rvw); pillars = #ValuesV2 / .vls;
-    //  schedule = a CTAs section headed "Schedule a Consultation Today!". Sorted by
-    //  document position, then collapsed to consecutive-unique so a band's nested
-    //  sub-nodes (ReviewsS8Feed/Header/Button) count once. This is the authoritative
-    //  per-page order the renderer reads (flat-rate p>t>s; allen t>p>s; justin s).
-    const closerNodes: [string, Element][] = []
-    document.querySelectorAll('[id^="Reviews"], .rvw').forEach((e) => closerNodes.push(['testimonials', e]))
-    document.querySelectorAll('#ValuesV2, .vls').forEach((e) => closerNodes.push(['pillars', e]))
-    document.querySelectorAll('section[id^="CTAs"]').forEach((e) => { if (/Schedule a Consultation Today/i.test(e.textContent || '')) closerNodes.push(['schedule', e]) })
-    closerNodes.sort((a, b) => (a[1].compareDocumentPosition(b[1]) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1))
-    const closers: string[] = []
-    for (const [t] of closerNodes) if (closers[closers.length - 1] !== t) closers.push(t)
-    return { bannerTitle, contentH1, bodyBlocks, introImage, items, faqHeading, sidebar, badgeStrip, bannerSearch, closers }
+
+    return { bannerTitle, contentH1, introImage, bannerSearch, badgeStrip, sidebar, bands }
   })
 
-  // Intro image: resolve to absolute, download via in-page fetch (browser
-  // networking bypasses the bot-block) ONLY when online. Offline re-runs reuse the
-  // asset captured on the original live run — the site is never re-hit.
+  // Intro image: resolve + download (online only); offline re-runs reuse the asset.
   let introImagePath = ''
   if (data.introImage) {
     const imgUrl = /^https?:/.test(data.introImage) ? data.introImage : ORIGIN + (data.introImage.startsWith('/') ? '' : '/') + data.introImage
@@ -233,28 +212,32 @@ async function main() {
   }
   await b.close()
 
-  // split accordion items by source group: plans (aria-expanded) vs FAQ (.qst)
-  const plans = data.items.filter((i) => i.group === 'plans').sort((a, b) => a.top - b.top).map(({ title, body }) => ({ title, body }))
-  const faq = data.items.filter((i) => i.group === 'faq').sort((a, b) => a.top - b.top).map(({ title, body }) => ({ title, body }))
-  // Per-page closer sequence, in document order (computed in-page above).
-  const closers = data.closers
+  // Resolve the intro band's image to the downloaded asset path.
+  const bands = data.bands as Record<string, unknown>[]
+  const intro = bands.find((bd) => bd.kind === 'intro')
+  if (intro) intro.image = introImagePath || null
+
+  // Legacy fields (derived) keep older non-refactored renderers + tooling working
+  // and feed the console summary; the renderer prefers `bands` when present.
+  const flow = bands.filter((bd) => bd.kind === 'intro' || bd.kind === 'prose')
+  const bodyBlocks = flow.flatMap((bd) => (bd.blocks as unknown[]) || [])
+  const accordionGroups = bands.filter((bd) => bd.kind === 'accordion').map((bd) => ({ heading: bd.heading, instruction: bd.instruction, items: bd.items, expanded: bd.expanded }))
+  const closers = [...new Set(bands.filter((bd) => bd.kind === 'closer').map((bd) => bd.which as string))]
 
   const out = {
     path: key,
     bannerTitle: data.bannerTitle,
     contentH1: data.contentH1,
-    bodyBlocks: data.bodyBlocks,
     introImage: introImagePath || null,
-    accordionGroups: [
-      ...(plans.length ? [{ instruction: 'Expand Each Section to Learn More', items: plans }] : []),
-      ...(faq.length ? [{ heading: data.faqHeading || 'Virtual Services FAQ', items: faq }] : []),
-    ],
+    bands,
     sidebar: data.sidebar,
     badgeStrip: data.badgeStrip,
     bannerSearch: data.bannerSearch,
+    // legacy/back-compat:
+    bodyBlocks,
+    accordionGroups,
     closers,
   }
-  // Upsert into one combined keyed file so the rollout needs no per-page import.
   mkdirSync('lib/legacy/family-b', { recursive: true })
   const idxFile = 'lib/legacy/family-b/pages.json'
   let pages: Record<string, unknown> = {}
@@ -262,7 +245,8 @@ async function main() {
   pages[key] = out
   const sorted = Object.fromEntries(Object.keys(pages).sort().map((k) => [k, pages[k]]))
   writeFileSync(idxFile, JSON.stringify(sorted, null, 2))
-  console.log(`extracted ${key}: banner="${out.bannerTitle}" h1="${out.contentH1}" blocks=${out.bodyBlocks.length} image=${introImagePath || 'none'} planAcc=${plans.length} faqAcc=${faq.length} closers=[${closers.join(',')}]`)
+  const bandSummary = bands.map((bd) => bd.kind === 'closer' ? bd.which : bd.kind === 'accordion' ? (bd.expanded ? 'faq+' : 'acc') : bd.kind).join(' > ')
+  console.log(`extracted ${key}: banner="${out.bannerTitle}" image=${introImagePath || 'none'} bands=[${bandSummary}]`)
 }
 
 main().catch((e) => { console.error(e); process.exit(1) })

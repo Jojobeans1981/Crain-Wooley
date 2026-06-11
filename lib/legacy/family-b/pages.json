@@ -100,8 +100,137 @@
     "path": "/about-us/pricing/flat-rate-services",
     "bannerTitle": "Flat Rate Services",
     "contentH1": "Flat Rate Estate Planning Services",
-    "bodyBlocks": [],
     "introImage": "/interior/about-us__pricing__flat-rate-services-intro.jpg",
+    "bands": [
+      {
+        "kind": "intro",
+        "heading": "Flat Rate Estate Planning Services",
+        "blocks": [],
+        "image": "/interior/about-us__pricing__flat-rate-services-intro.jpg"
+      },
+      {
+        "kind": "accordion",
+        "instruction": "Expand Each Section to Learn More",
+        "items": [
+          {
+            "title": "Comprehensive Will Plan | $2,115",
+            "body": "The Comprehensive Will Plan offers a thorough and accessible estate planning solution for those who want to ensure that their wishes are clearly documented and that they receive the guidance they need. This plan includes the creation of a Last Will and Testament along with other essential documents to manage your affairs during your lifetime and upon your passing. Unlike our basic Will Plan, the Comprehensive Will Plan includes 12 months of access to our firm at no additional charge, allowing you to make updates and ask questions without worrying about extra fees. We also take the time to review your documents with you, ensuring that you fully understand their contents and how to use your estate plan effectively.Included Documents and Services (Click Here for Legal Term Descriptions):Durable Power of AttorneyMedical Power of AttorneyHIPAA ReleaseDirective to PhysiciansDeclaration of Guardians in Advance of NeedLast Will and TestamentDocument Signing ServicesWritten Legal EducationScheduled Document Review and EducationSecure Client Portal & Document StorageUnlimited Support and Updates for 12 MonthsEstate Plan and Law Review (Month 10)Client-Only WebinarsEstate Plan Organizational System"
+          },
+          {
+            "title": "Comprehensive Trust Plan | $6,985",
+            "body": "The Comprehensive Trust Portfolio is a complete, turn-key estate planning solution designed for those who want thorough, personalized guidance and peace of mind. Unlike our Will Plan and Trust Plan, which provide essential documents but do not include additional assistance or ongoing education, the Comprehensive Trust Portfolio goes beyond the basics. With this plan, you receive not only the foundational estate planning documents but also an entire year of unlimited support—without worrying about being billed for every meeting, question, or update.What makes this plan truly unique is that all services are provided for a single, one-time flat fee. This means you won't face unexpected charges for meetings, revisions, or additional requests. We take care of everything from start to finish, including drafting and filing documents, reviewing your assets, and providing ongoing education to ensure you fully understand how your estate plan works. The typical process takes 2-3 months, but with 12 months of access, you have ample time to ask questions, adjust your plan, and gain the confidence that everything is handled correctly—without the pressure of running out of time or incurring extra costs.By choosing the Comprehensive Trust Portfolio, you gain the assurance that your plan is not only comprehensive but also proactively managed. You receive the support you need to make sure every asset is accounted for, every document is understood, and every detail of your estate plan is implemented correctly. This inclusive approach allows you to focus on what matters most—knowing that your estate plan is ready to serve your needs and protect your legacy.Included Documents and Services (Click Here for Legal Term Descriptions):Durable Power of AttorneyMedical Power of AttorneyHIPAA ReleaseDirective to PhysiciansDeclaration of Guardians in Advance of NeedPour-Over WillDocument Signing ServicesWritten Legal EducationLiving TrustTrust Funding Education MemoMemorandum of Personal Property"
+          },
+          {
+            "title": "Lifetime Lawyer Program | $9,970",
+            "body": "The Lifetime Lawyer Program offers a truly comprehensive estate planning experience, designed for clients seeking ongoing support without worrying about additional costs. Whether you choose to use a Living Trust, Last Will and Testament, or a combination of both as part of your plan, our program provides lifetime assistance to ensure your estate plan remains effective and aligned with your goals. This includes continuous support not just for you, but also for those who will manage your estate after you, such as Trustees and Executors, ensuring they have the guidance they need to fulfill their roles.With the Lifetime Lawyer Program, all services are included for as long as you are living (or, in the case of married couples, as long as one spouse is living), making it easier to navigate life changes and legal updates. You’ll receive all necessary documents, unlimited updates, and ongoing legal education, allowing us to focus on building a lasting relationship with you—without the worry of being billed by the hour or for every meeting. It’s a turn-key solution that handles everything from the creation and filing of documents to the education needed to ensure you fully understand your estate plan.Key Benefits of the Lifetime Lawyer Program:Unlimited Support and Updates for Life: Make as many changes or updates to your estate plan as needed, ask questions, and receive guidance without worrying about hourly fees. Whether you need adjustments due to life events, law changes, or simply have questions about your documents, we are here for you with no additional charges.Annual Law Review and Unlimited Meetings: Each year, we provide you with a report detailing updates on estate and tax laws, helping you stay informed about relevant changes. If you want to understand how these updates might impact your specific estate plan, you can schedule a meeting with us anytime, at no extra cost, ensuring your plan remains aligned with your goals.Client-Only Webinars: Access exclusive web"
+          }
+        ],
+        "expanded": false
+      },
+      {
+        "kind": "closer",
+        "which": "pillars"
+      },
+      {
+        "kind": "accordion",
+        "heading": "Virtual Services FAQ",
+        "items": [
+          {
+            "title": "What is the first thing I should do?",
+            "body": "Stop procrastinating and schedule a complimentary consultation to talk 1:1 with one of our attorneys."
+          },
+          {
+            "title": "What is a basic will?",
+            "body": "A basic will directs for the immediate distribution of assets and contains no specific provisions such as a testamentary trust for minor children, etc."
+          },
+          {
+            "title": "What is a basic trust?",
+            "body": "A basic trust directs for the immediate distribution of assets and contains no specific provisions such as divorce proofing via descendant’s trusts, special needs provisions, international asset distribution, etc."
+          },
+          {
+            "title": "What is a comprehensive trust?",
+            "body": "A comprehensive trust contains more complex distributions instructions including, but not limited to, such things as divorce protection via descendant’s trusts, trusts for minor beneficiaries, education trusts, age appropriate distributions, generational trusts, annual distributions, charitable bequests and more."
+          },
+          {
+            "title": "What are some benefits of trust planning?",
+            "body": "There are too many to list, but here are a few: trusts are portable state-to-state; trusts (when funding correctly) avoid probate; trusts keep your affairs private; trusts are flexible enough to accomplish personal goals like creating an education fund; trusts protect an inheritance from divorce; trusts plan for a loved one with special needs and much, much more!"
+          },
+          {
+            "title": "Why do you conduct monthly legal education?",
+            "body": "One of the keys to having an up-to-date estate plan is to keep abreast of changes and best-practices in all areas of estate and finance law. While not every month will pertain to your specific situation, you will find the information presented informative and empowering."
+          },
+          {
+            "title": "Texas is a community property state. Why do spouses need to write a will or trust?",
+            "body": "Community property is vastly misunderstood in Texas. Community property means that each spouse owns 50% of asset “X” and as such needs to leave instructions on how to dispose of that 50% upon his or her death. Assets do NOT automatically transfer to a surviving spouse."
+          },
+          {
+            "title": "Why is the Comprehensive Trust Portfolio most popular?",
+            "body": "The Comprehensive Trust Portfolio allows Crain & Wooley to provide you with the highest level of service without worrying about the billable hour. The first 12 months of having a trust are the most important; it is during these months that you fund your trust. This portfolio gives you access to the firm for 12 months for assistance, questions, advice, changes and more without incurring billable hour charges."
+          },
+          {
+            "title": "What comes in the Annual Report?",
+            "body": "Around month 11 of Comprehensive Trust Portfolio service, we conduct a review detailing: implications of law and tax changes, beneficiaries, special beneficiary instructions, assets funded into the trust and power of attorney agents. This report acts as a reminder of how your plan works and what it accomplishes as well as gives you about 1 month to request any changes be completed free of charge."
+          },
+          {
+            "title": "Why should I pay a lawyer to write my will or trust when I can do it myself online for A LOT cheaper?",
+            "body": "To be blunt, you get what you pay for. If you look closely legal self-help websites, you will see disclaimer statements like “this is not legal advice” and “services are not protected by attorney-client privilege or as legal work product”. These template services don’t provide you with the opportunity to engage with an attorney for comprehensive planning: current goals, future goals, what-if planning, tax planning and much more. So, the real question is why would you trust a non-legal entity to draw up documents that dispose of all your hard-earned assets?"
+          },
+          {
+            "title": "What is a digital document locker?",
+            "body": "Secure exchange of information is vital to crafting your perfect estate plan. Crain & Wooley utilizes SmartVault, an SEC and FNRA approved, cloud-based document storage system. When using SmartVault we can securely communicate about your assets, end of life plans and general estate information without worrying about cyber security. SmartVault also allows you to store all your vital information like life insurance contracts, estate planning documents, assets lists and more in a secure manner while being able to access the information from anywhere on the globe."
+          },
+          {
+            "title": "How do I know if I need a will or a trust?",
+            "body": "Schedule a free consultation with one of our attorneys; tell us your goals and concerns and then we will outline which estate planning tool best accomplishes your current and future goals."
+          },
+          {
+            "title": "What is funding a trust?",
+            "body": "Funding your trust are the steps taken to make your trust is the owner of titled assets like your house, financial accounts, CDs, etc. Don’t worry – these actions do NOT impact your tax rate or your tax exemptions AND you remain in complete control of all assets. Your daily life does not change."
+          },
+          {
+            "title": "Does a will require probate?",
+            "body": "Short answer – yes. There are at least 10 different types of probate. Schedule a time to talk with our attorneys to learn which type of probate fits your situation."
+          },
+          {
+            "title": "What happens when my first 12 months is up?",
+            "body": "You have the option of renewing for $595/year to gain an additional 12 months of access to the firm. This access provides you with unlimited firm support for questions, changes and amendments without worrying about the billable hour. You will also receive an annual report for each renewal year."
+          },
+          {
+            "title": "What if I only want a will or a trust and nothing else?",
+            "body": "Crain & Wooley does not try to up-sell or talk you into anything. We will lay out the best option for your situation and then complete only the work that you deem necessary."
+          },
+          {
+            "title": "Do you offer payment plan options?",
+            "body": "Yes, our firm offers internal financing options."
+          },
+          {
+            "title": "What services do you offer?",
+            "body": "Crain & Wooley is a full-service estate planning law firm. We have expertise in standard & taxable trusts, standard & complex wills, probate, adult guardianship, nursing home/Medicaid planning, small business formation, real estate transactions, existing document review/updates and more."
+          },
+          {
+            "title": "I am not rich. Why do I need an estate plan?",
+            "body": "It’s a common misconception that estate planning is only for the wealthy. In reality, having an estate plan is important for everyone, no matter the size of your estate. An estate plan ensures that your assets—no matter how modest—are distributed according to your wishes, providing peace of mind that your loved ones are cared for. Without a plan in place, your estate becomes subject to intestacy laws, meaning that the state decides how your assets will be divided.Intestacy can be a lengthy and costly process, often requiring heirship proceedings and the appointment of an attorney ad litem to represent unknown heirs. This can create significant delays, expenses, and stress for your loved ones, all while potentially resulting in outcomes you wouldn’t have chosen—like distant relatives inheriting your assets.By creating a personalized estate plan, you maintain control over what happens to your assets, ensuring they go to the people or causes you care about most. You can avoid the complications of intestacy, simplify the process for your loved ones, and ensure that your wishes are honored.At our firm, we make estate planning accessible and straightforward, no matter your situation. Contact us today to learn how we can help you create a plan that protects your legacy and gives you peace of mind."
+          },
+          {
+            "title": "What technology do I need for virtual services?",
+            "body": "For 100% virtual services, you will need a computer, tablet or smartphone with a camera and file sharing capabilities. Each document signer (husband, wife, etc.) will need a separate email address. A free email service such as Gmail or Yahoo will work just fine."
+          }
+        ],
+        "expanded": true
+      },
+      {
+        "kind": "closer",
+        "which": "testimonials"
+      },
+      {
+        "kind": "closer",
+        "which": "schedule"
+      }
+    ],
+    "sidebar": [],
+    "badgeStrip": true,
+    "bannerSearch": true,
+    "bodyBlocks": [],
     "accordionGroups": [
       {
         "instruction": "Expand Each Section to Learn More",
@@ -118,7 +247,8 @@
             "title": "Lifetime Lawyer Program | $9,970",
             "body": "The Lifetime Lawyer Program offers a truly comprehensive estate planning experience, designed for clients seeking ongoing support without worrying about additional costs. Whether you choose to use a Living Trust, Last Will and Testament, or a combination of both as part of your plan, our program provides lifetime assistance to ensure your estate plan remains effective and aligned with your goals. This includes continuous support not just for you, but also for those who will manage your estate after you, such as Trustees and Executors, ensuring they have the guidance they need to fulfill their roles.With the Lifetime Lawyer Program, all services are included for as long as you are living (or, in the case of married couples, as long as one spouse is living), making it easier to navigate life changes and legal updates. You’ll receive all necessary documents, unlimited updates, and ongoing legal education, allowing us to focus on building a lasting relationship with you—without the worry of being billed by the hour or for every meeting. It’s a turn-key solution that handles everything from the creation and filing of documents to the education needed to ensure you fully understand your estate plan.Key Benefits of the Lifetime Lawyer Program:Unlimited Support and Updates for Life: Make as many changes or updates to your estate plan as needed, ask questions, and receive guidance without worrying about hourly fees. Whether you need adjustments due to life events, law changes, or simply have questions about your documents, we are here for you with no additional charges.Annual Law Review and Unlimited Meetings: Each year, we provide you with a report detailing updates on estate and tax laws, helping you stay informed about relevant changes. If you want to understand how these updates might impact your specific estate plan, you can schedule a meeting with us anytime, at no extra cost, ensuring your plan remains aligned with your goals.Client-Only Webinars: Access exclusive web"
           }
-        ]
+        ],
+        "expanded": false
       },
       {
         "heading": "Virtual Services FAQ",
@@ -203,12 +333,10 @@
             "title": "What technology do I need for virtual services?",
             "body": "For 100% virtual services, you will need a computer, tablet or smartphone with a camera and file sharing capabilities. Each document signer (husband, wife, etc.) will need a separate email address. A free email service such as Gmail or Yahoo will work just fine."
           }
-        ]
+        ],
+        "expanded": true
       }
     ],
-    "sidebar": [],
-    "badgeStrip": true,
-    "bannerSearch": true,
     "closers": [
       "pillars",
       "testimonials",
@@ -289,6 +417,274 @@
     "path": "/allen",
     "bannerTitle": "Allen",
     "contentH1": "Allen Estate Planning Attorney",
+    "introImage": null,
+    "bands": [
+      {
+        "kind": "intro",
+        "heading": "Allen Estate Planning Attorney",
+        "blocks": [
+          {
+            "type": "h2",
+            "text": "Comprehensive Estate Planning in Allen: What You Need to Know"
+          },
+          {
+            "type": "p",
+            "text": "Estate planning is essential for securing your family's future and ensuring that your assets are distributed according to your wishes. At Crain & Wooley, we understand the unique needs of residents in Allen and are committed to guiding you through this important process."
+          },
+          {
+            "type": "p",
+            "text": "Whether you are creating a plan for the first time or updating existing documents, our team offers comprehensive estate planning services tailored to your goals. We coordinate key components such as Allen wills, Allen trusts, and Allen power of attorney documents so that each part of your plan works together seamlessly."
+          },
+          {
+            "type": "p",
+            "text": "To get started, call (972) 945-1610 or contact our office to schedule a consultation with an estate planning attorney in Allen."
+          },
+          {
+            "type": "h2",
+            "text": "Why Choose an Estate Planning Lawyer in Allen?"
+          },
+          {
+            "type": "p",
+            "text": "Local experience is crucial when it comes to estate planning, as laws can vary significantly from one locality to another. An estate planning attorney in Allen is familiar with Texas state laws and any local regulations that could impact your estate plan. Here’s why choosing a local attorney can make a difference:"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Understanding Texas Law: Texas laws on wills, trusts, and probate can be complex; a local lawyer offers the knowledge needed to navigate these intricacies effectively.",
+              "Personalized Service: A lawyer in Allen ensures face-to-face interactions, offering a personal touch that virtual-only services might lack."
+            ]
+          },
+          {
+            "type": "p",
+            "text": "When you work with a lawyer who regularly appears in Collin County probate courts and understands how local judges and procedures operate, you gain practical guidance that goes beyond what generic forms can provide. A local estate planning lawyer can also coordinate strategies if you own property in nearby communities such as Plano, McKinney, or Frisco, helping you align your documents with how those assets are titled and how Texas community property rules apply. This local insight can make your plan easier to administer for the people you leave in charge."
+          },
+          {
+            "type": "h2",
+            "text": "Our Allen Estate Planning Services: Comprehensive & Transparent"
+          },
+          {
+            "type": "p",
+            "text": "At Crain & Wooley, our estate planning services are designed to cover every aspect of your needs. We cater to individuals and families across diverse backgrounds and income levels, ensuring thorough and compassionate support throughout the estate planning process."
+          },
+          {
+            "type": "p",
+            "text": "As part of our commitment to thorough service, we also evaluate potential long-term care plans and asset protection strategies tailored to your future needs. This helps ensure that all aspects of your well-being and legacy planning are covered under our comprehensive approach."
+          },
+          {
+            "type": "p",
+            "text": "We work with you to create and coordinate key documents such as wills, revocable living trusts, financial powers of attorney, and medical directives so that each piece of your estate plan supports the others. Our team explains how beneficiary designations, retirement accounts, and life insurance fit into your overall strategy, and we help you decide who should serve in important roles like executor or trustee. By approaching your plan as an integrated whole, our estate planning attorney can help you reduce conflict, streamline probate where possible, and make transitions smoother for your loved ones."
+          },
+          {
+            "type": "p",
+            "text": "Our Allen estate planning services commonly include:"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Foundational documents such as wills, revocable living trusts, and powers of attorney to address incapacity and asset transfers.",
+              "Healthcare planning with medical powers of attorney and advance directives that reflect your treatment preferences under Texas law.",
+              "Long-term care strategies that consider future needs, potential Medicaid eligibility, and how to protect key assets when appropriate.",
+              "Business and tax planning for owners and professionals who need to address succession, buy-sell arrangements, or tax-efficient transfers."
+            ]
+          },
+          {
+            "type": "h2",
+            "text": "FAQs About Estate Planning in Allen"
+          },
+          {
+            "type": "h3",
+            "text": "What Is a First Step in Estate Planning?"
+          },
+          {
+            "type": "p",
+            "text": "The first step in estate planning is to evaluate your current assets and clarify your goals. It’s essential to review your financials, including your properties, accounts, and any other significant assets. After that, consider what you want for the future of your estate—such as beneficiaries for your assets and appointing someone to manage your affairs if you become incapacitated. Meeting with an estate planning attorney in Allen can simplify this process, providing you with clarity and direction."
+          },
+          {
+            "type": "p",
+            "text": "During an initial meeting, we typically walk through a detailed questionnaire that covers your family structure, existing documents, and concerns, such as protecting a family home or planning for a loved one with special needs. This conversation helps us identify potential issues like out-of-state property, business interests, or complex family dynamics that may require more tailored planning. By outlining your priorities early, your estate planning attorney can recommend tools that fit your situation instead of relying on one-size-fits-all forms."
+          },
+          {
+            "type": "h3",
+            "text": "Why Do I Need an Estate Planning Attorney in Allen?"
+          },
+          {
+            "type": "p",
+            "text": "An estate planning attorney can provide tailored advice and help create a legally sound estate plan. Local attorneys understand Texas-specific rules, which can affect the distribution of your assets. By working with a professional, you ensure that your documents are comprehensive, valid, and enforceable. An attorney can also assist in updating documents and making adjustments as laws or your circumstances change."
+          },
+          {
+            "type": "p",
+            "text": "Moreover, a local attorney can provide insights into the specific considerations regional residents might face, such as managing property in flood-prone areas or dealing with community property laws unique to Texas. These aspects make the guidance of a locally attuned estate planning lawyer indispensable for protecting your estate comprehensively."
+          },
+          {
+            "type": "p",
+            "text": "In addition, an estate planning lawyer in Allen can explain how the probate process works in Collin County and what steps your family would need to take if something happens to you. Understanding typical timelines, filing requirements, and court expectations gives you a clearer picture of what your loved ones may experience. With that knowledge, we can tailor your plan to reduce delays and confusion, and to make it easier for the people you choose to carry out your wishes."
+          },
+          {
+            "type": "h3",
+            "text": "How Often Should I Update My Estate Plan?"
+          },
+          {
+            "type": "p",
+            "text": "Your estate plan should be reviewed at significant life events, such as marriages, births, or a change in financial circumstances. Generally, we recommend reviewing your estate plan every three to five years to ensure it reflects your current wishes and aligns with any new legal requirements. Keeping your documents up-to-date reduces future complications and keeps your loved ones secure."
+          },
+          {
+            "type": "p",
+            "text": "By regularly updating your estate plan, you can adapt to changes in tax laws or shifts in asset management strategies, ensuring your legacy remains intact. Our team at Crain & Wooley is continually informed on legislative shifts that could impact your estate, providing proactive updates to help you adjust your plans wisely."
+          },
+          {
+            "type": "p",
+            "text": "When we review an existing plan, we look at whether your chosen decision makers are still appropriate, whether your beneficiaries are listed correctly, and whether any new assets need to be incorporated. We also consider practical questions, such as whether the people you have named still live nearby in Allen or the greater Dallas–Fort Worth area and can realistically step into their roles. This kind of periodic checkup with an estate attorney helps keep your planning aligned with your life as it changes over time."
+          },
+          {
+            "type": "h3",
+            "text": "What Happens If I Don’t Have an Estate Plan?"
+          },
+          {
+            "type": "p",
+            "text": "If you pass away without an estate plan in Allen, your assets will be distributed according to Texas intestacy laws. This typically means that assets go to the closest family members, which may not align with your wishes. Without a plan, your estate could face lengthy and costly probate processes, adding undue stress to your loved ones. Having a proactive estate plan in place ensures that your wishes are respected and can minimize burdens on your family."
+          },
+          {
+            "type": "p",
+            "text": "An estate plan also specifies your healthcare directives, ensuring that your medical and end-of-life care preferences are honored. Without such documents, decisions may be made by those you haven't chosen, potentially resulting in outcomes not aligned with your wishes. This is why having an attorney assist in preparing these documents is critical."
+          },
+          {
+            "type": "p",
+            "text": "Without clear written instructions, disagreements can arise among relatives about who should receive certain assets or who should make important decisions, which may lead to court involvement. In some situations, the court may need to appoint a guardian or administrator who does not know your personal values or preferences. Working with an estate attorney Allen families trust allows you to choose the people you want in charge and to leave detailed guidance that can reduce confusion and conflict."
+          },
+          {
+            "type": "h2",
+            "text": "How We Work With Estate Planning Clients"
+          },
+          {
+            "type": "p",
+            "text": "Understanding what to expect from the process can make it easier to take the first step. When you reach out to Crain & Wooley, we begin by listening carefully to your concerns and goals, whether you are focused on avoiding conflicts, planning for long-term care, or simplifying matters for your family. From there, we outline a clear roadmap so you know how information will be gathered, when drafts will be ready, and how final documents will be signed and stored."
+          },
+          {
+            "type": "p",
+            "text": "We typically start with an initial consultation, which can take place in our office or virtually for your convenience, where we review your current situation and answer your questions. After that meeting, we work on tailored recommendations and draft documents that reflect Texas law and the realities of administering estates in local courts such as those in Collin County. Before anything is finalized, we take time to review each provision with you in plain language so you understand how your decisions will work in practice."
+          },
+          {
+            "type": "p",
+            "text": "During the planning process, you can expect:"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Clear communication about timelines, next steps, and what we need from you at each stage.",
+              "Organized document preparation that brings together wills, trusts, and powers of attorney into a coordinated plan.",
+              "Thoughtful discussion of how your choices may affect your family members, beneficiaries, and chosen decision makers."
+            ]
+          },
+          {
+            "type": "p",
+            "text": "After your plan is signed, we discuss how to keep it current, including when you might want to schedule future reviews and what changes in your life should trigger a call to our office. We also talk about practical issues, such as where to store originals and who should know how to find them, so your loved ones are not left searching during a difficult time. By offering this kind of ongoing guidance, our estate planning attorney Allen residents work with can help ensure that your plan remains both understandable today and useful in the future."
+          },
+          {
+            "type": "h2",
+            "text": "Take the Next Step: Secure Your Peace of Mind Today"
+          },
+          {
+            "type": "p",
+            "text": "At Crain & Wooley, we prioritize transparency, integrity, and compassion in estate planning. Don't wait until it's too late—ensure that your future and loved ones are protected. Contact us today to schedule a consultation with an estate planning attorney in Allen, and let us provide you with the peace of mind you deserve."
+          },
+          {
+            "type": "p",
+            "text": "Call us at (972) 945-1610 or book your consultation online."
+          }
+        ],
+        "image": null
+      },
+      {
+        "kind": "closer",
+        "which": "testimonials"
+      },
+      {
+        "kind": "closer",
+        "which": "pillars"
+      },
+      {
+        "kind": "closer",
+        "which": "schedule"
+      }
+    ],
+    "sidebar": [
+      {
+        "kind": "nav",
+        "heading": "Staff Profiles",
+        "links": [
+          {
+            "text": "Justin T. Crain",
+            "href": "/staff-profiles/justin-t-crain/"
+          },
+          {
+            "text": "Jacob Wooley",
+            "href": "/staff-profiles/jacob-wooley/"
+          },
+          {
+            "text": "Matthew White",
+            "href": "/staff-profiles/matthew-white/"
+          },
+          {
+            "text": "Kevin Berber",
+            "href": "/staff-profiles/kevin-berber/"
+          },
+          {
+            "text": "Brynn Siciliano",
+            "href": "/staff-profiles/brynn-siciliano/"
+          },
+          {
+            "text": "Jeremy Crew",
+            "href": "/staff-profiles/jeremy-crew/"
+          },
+          {
+            "text": "Joy Crosby",
+            "href": "/staff-profiles/joy-crosby/"
+          },
+          {
+            "text": "Marcel Williams",
+            "href": "/staff-profiles/marcel-williams/"
+          },
+          {
+            "text": "Connor Martin",
+            "href": "/staff-profiles/connor-martin/"
+          },
+          {
+            "text": "Mary Hughes",
+            "href": "/staff-profiles/mary-hughes/"
+          }
+        ]
+      },
+      {
+        "kind": "cta",
+        "heading": "Download Our Free Estate Planning Guide",
+        "links": [
+          {
+            "text": "Download the Guide",
+            "href": "/resources/free-estate-planning-guide/"
+          }
+        ]
+      },
+      {
+        "kind": "cta",
+        "heading": "Plano",
+        "links": [
+          {
+            "text": "Contact Us",
+            "href": "/plano-contact-us/"
+          },
+          {
+            "text": "Contact Us",
+            "href": "https://outlook.office.com/book/CrainWooleyCopy3@crainwooley.law/?ismsaljsauthenabled=true"
+          },
+          {
+            "text": "Contact Us",
+            "href": "https://outlook.office.com/book/CrainWooleyCopy3@crainwooley.law/?ismsaljsauthenabled=true"
+          }
+        ]
+      }
+    ],
+    "badgeStrip": true,
+    "bannerSearch": false,
     "bodyBlocks": [
       {
         "type": "h2",
@@ -459,86 +855,7 @@
         "text": "Call us at (972) 945-1610 or book your consultation online."
       }
     ],
-    "introImage": null,
     "accordionGroups": [],
-    "sidebar": [
-      {
-        "kind": "nav",
-        "heading": "Staff Profiles",
-        "links": [
-          {
-            "text": "Justin T. Crain",
-            "href": "/staff-profiles/justin-t-crain/"
-          },
-          {
-            "text": "Jacob Wooley",
-            "href": "/staff-profiles/jacob-wooley/"
-          },
-          {
-            "text": "Matthew White",
-            "href": "/staff-profiles/matthew-white/"
-          },
-          {
-            "text": "Kevin Berber",
-            "href": "/staff-profiles/kevin-berber/"
-          },
-          {
-            "text": "Brynn Siciliano",
-            "href": "/staff-profiles/brynn-siciliano/"
-          },
-          {
-            "text": "Jeremy Crew",
-            "href": "/staff-profiles/jeremy-crew/"
-          },
-          {
-            "text": "Joy Crosby",
-            "href": "/staff-profiles/joy-crosby/"
-          },
-          {
-            "text": "Marcel Williams",
-            "href": "/staff-profiles/marcel-williams/"
-          },
-          {
-            "text": "Connor Martin",
-            "href": "/staff-profiles/connor-martin/"
-          },
-          {
-            "text": "Mary Hughes",
-            "href": "/staff-profiles/mary-hughes/"
-          }
-        ]
-      },
-      {
-        "kind": "cta",
-        "heading": "Download Our Free Estate Planning Guide",
-        "links": [
-          {
-            "text": "Download the Guide",
-            "href": "/resources/free-estate-planning-guide/"
-          }
-        ]
-      },
-      {
-        "kind": "cta",
-        "heading": "Plano",
-        "links": [
-          {
-            "text": "Contact Us",
-            "href": "/plano-contact-us/"
-          },
-          {
-            "text": "Contact Us",
-            "href": "https://outlook.office.com/book/CrainWooleyCopy3@crainwooley.law/?ismsaljsauthenabled=true"
-          },
-          {
-            "text": "Contact Us",
-            "href": "https://outlook.office.com/book/CrainWooleyCopy3@crainwooley.law/?ismsaljsauthenabled=true"
-          }
-        ]
-      }
-    ],
-    "badgeStrip": true,
-    "bannerSearch": false,
     "closers": [
       "testimonials",
       "pillars",
@@ -19305,6 +19622,62 @@
     "path": "/staff-profiles/justin-t-crain",
     "bannerTitle": "Justin T. Crain",
     "contentH1": "About",
+    "introImage": null,
+    "bands": [
+      {
+        "kind": "intro",
+        "heading": "About",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Justin T. Crain is an estate planning attorney and partner at Crain & Wooley. Justin has been recognized by the Texas Bar College as one of the best-trained attorneys in Texas, and he is a member of the State Bar of Texas’ Real Estate, Probate, and Trust Law Section, The National Elder Counsel, and the National Academy of Elder Law Attorneys. He is committed to providing ongoing education regarding important estate planning and financial issues."
+          },
+          {
+            "type": "p",
+            "text": "Apart from being named one of the top three estate planning lawyers in Plano, Justin is the author of the book “Leaving a Legacy,” covering Texas and multi-state estate planning topics and strategies."
+          },
+          {
+            "type": "p",
+            "text": "He is also a licensed attorney with the Supreme Court of Texas, has been licensed as a risk manager and an agent with the Texas Department of Insurance, and holds the Associate Risk Manager designation with the American Institute for Chartered Property Casualty Underwriters."
+          },
+          {
+            "type": "p",
+            "text": "For exceptional legal service that is personalized and affordable, you can contact Justin at (972) 945-1610."
+          },
+          {
+            "type": "h3",
+            "text": "Locations"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Map & Directions",
+              "972-945-1610"
+            ]
+          },
+          {
+            "type": "p",
+            "text": "Managing Partner & Attorney"
+          },
+          {
+            "type": "p",
+            "text": "2805 Dallas Parkway, Suite 400 Plano, TX 75093"
+          },
+          {
+            "type": "p",
+            "text": "Managing Partner & Attorney"
+          }
+        ],
+        "image": null
+      },
+      {
+        "kind": "closer",
+        "which": "schedule"
+      }
+    ],
+    "sidebar": [],
+    "badgeStrip": false,
+    "bannerSearch": true,
     "bodyBlocks": [
       {
         "type": "p",
@@ -19346,11 +19719,7 @@
         "text": "Managing Partner & Attorney"
       }
     ],
-    "introImage": null,
     "accordionGroups": [],
-    "sidebar": [],
-    "badgeStrip": false,
-    "bannerSearch": true,
     "closers": [
       "schedule"
     ]

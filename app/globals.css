@@ -1461,6 +1461,17 @@
   .cw-locations .cw-btn-gold { background: #fff; color: var(--cw-gold-text); border-color: #fff; }
   .cw-locations .cw-btn-gold:hover { background: rgba(255,255,255,0.88); color: var(--cw-gold-text); }
 
+  /* Expanded FAQ closer (#FAQsS3) — navy full-bleed band, white Q&A shown (not
+     collapsed), gold flair under the heading. Matches the original's dk-bg band. */
+  .cw-faqband { background: #304451; padding: 96px 0; color: #fff; }
+  .cw-faqband-head { text-align: center; max-width: 820px; margin: 0 auto 44px; }
+  .cw-faqband-title { color: #fff; }
+  .cw-faqband-list { max-width: 880px; margin: 0 auto; display: flex; flex-direction: column; gap: 30px; }
+  .cw-faqband-item { border-top: 1px solid rgba(255,255,255,0.14); padding-top: 28px; }
+  .cw-faqband-item:first-child { border-top: none; padding-top: 0; }
+  .cw-faqband-q { font-family: var(--font-display); font-weight: 600; font-size: 1.4rem; line-height: 1.2; color: #fff; margin: 0 0 12px; }
+  .cw-faqband-a { font-family: var(--font-sans); font-size: 0.95rem; line-height: 1.7; color: rgba(255,255,255,0.86); margin: 0 0 8px; }
+
   @media (prefers-reduced-motion: reduce) {
     .cw-badge, .cw-service-tint, .cw-news-card,
     .blog-card-link, .blog-card-thumb img, .cw-intro-quiz { transition: none; }

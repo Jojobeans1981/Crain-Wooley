@@ -17,17 +17,27 @@ export type BodyBlock =
   // so the renderer re-inserts the shared full-bleed component in source order.
   | { type: 'closer'; which: string }
 export type SidebarBlock = { kind: string; heading: string; links: { text: string; href: string }[] }
+// Source-order bands: the renderer reproduces the original's band interleaving
+// (intro / prose / accordion / closer in DOM order). `expanded` accordions render
+// as a visible Q&A band (the original's navy FAQ), collapsed ones as the accordion.
+export type Band =
+  | { kind: 'intro'; heading: string; blocks: BodyBlock[]; image: string | null }
+  | { kind: 'prose'; blocks: BodyBlock[] }
+  | { kind: 'accordion'; heading?: string; instruction?: string; items: { title: string; body: string }[]; expanded: boolean }
+  | { kind: 'closer'; which: string }
 export type FamilyBData = {
   path: string
   bannerTitle: string
   contentH1: string
-  bodyBlocks: BodyBlock[]
   introImage: string | null
-  accordionGroups: AccordionGroup[]
+  bands?: Band[] // preferred: ordered band model (older entries fall back below)
   sidebar?: SidebarBlock[] // sd-zn right-rail (sibling nav, CTA cards, office)
   badgeStrip?: boolean // aws accolade strip present under the banner
   bannerSearch?: boolean // Form_BannerV1 site-search box in the banner
-  closers: string[] // 'pillars' | 'testimonials' | 'schedule', in render order
+  // legacy / back-compat (still emitted; used when `bands` is absent):
+  bodyBlocks: BodyBlock[]
+  accordionGroups: AccordionGroup[]
+  closers: string[]
 }
 
 const PAGES = pages as Record<string, FamilyBData>
