@@ -110,7 +110,12 @@ async function main() {
         const cCrop = crop(cloneImg, cr), oCrop = crop(origImg, or)
         const W = Math.max(cCrop.width, oCrop.width), H = Math.max(cCrop.height, oCrop.height)
         const a = pad(oCrop, W, H), c = pad(cCrop, W, H)
-        const bm = (masks[`${slug}:${bd.key}`] || []) as Rect[]
+        // Masks are in the band's local coords; values <=1 are treated as
+        // FRACTIONS of the band box (viewport-agnostic).
+        const bm = ((masks[`${slug}:${bd.key}`] || masks[`*:${bd.key}`] || []) as Rect[]).map((r) => ({
+          x: Math.round(r.x <= 1 ? r.x * W : r.x), y: Math.round(r.y <= 1 ? r.y * H : r.y),
+          w: Math.round(r.w <= 1 ? r.w * W : r.w), h: Math.round(r.h <= 1 ? r.h * H : r.h),
+        }))
         paint(a, bm); paint(c, bm)
         const diff = new PNG({ width: W, height: H })
         const changed = pixelmatch(a.data, c.data, diff.data, W, H, { threshold: 0.1 })

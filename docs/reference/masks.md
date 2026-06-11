@@ -14,7 +14,7 @@ Mask rects live in `scripts/visual-diff/proof-masks.json`, keyed by
 
 | Page | Region | Selector / id | Reason | Rendered-truth source |
 | --- | --- | --- | --- | --- |
-| _(none yet)_ | | | | |
+| _all interior_ | badge carousel viewport (logo strip only) | `.cw-badges-interior` / `#AwardsS*` — mask `*:badge` = `{x:.05,y:.16,w:.9,h:.66}` (band-local fractions) | Divergent re-hosted credential set: clone hosts 15 firm badges, the original carousel shows ~6 different images (`new.png`, `Top-3-Estate-Planning-2022.png`, …). The band SHELL (height, bg, prev/next arrows) stays UNMASKED in the `<1%` structure tier so the mask can't hide structural drift. | owner live verification 2026-06-11 |
 
 <!--
 Template for an entry:
