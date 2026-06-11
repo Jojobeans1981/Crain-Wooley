@@ -78,3 +78,8 @@ mobile-audit/
 docs/reference/capture/**/clone.png
 docs/reference/capture/**/clone.html
 diff-report/**/*.png
+
+# Pixel-gate screenshot sets (regenerable; commit only manifest + masks + diff reports)
+pixel-baselines/original/
+pixel-baselines/clone/
+pixel-baselines/diff/
