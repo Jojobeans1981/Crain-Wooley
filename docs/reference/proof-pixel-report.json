@@ -4,30 +4,30 @@
     {
       "page": "/about-us/pricing/flat-rate-services/",
       "vp": "desktop",
-      "pct": 0.5712206335094911,
+      "pct": 0.5545556900462357,
       "pass": false,
       "w": 1440,
-      "h": 6749,
+      "h": 7642,
       "masks": 0,
       "maskAreaPct": 0
     },
     {
       "page": "/about-us/pricing/flat-rate-services/",
       "vp": "tablet",
-      "pct": 0.5627058495905588,
+      "pct": 0.5315413871520993,
       "pass": false,
       "w": 768,
-      "h": 6920,
+      "h": 7677,
       "masks": 0,
       "maskAreaPct": 0
     },
     {
       "page": "/about-us/pricing/flat-rate-services/",
       "vp": "mobile",
-      "pct": 0.392859132178466,
+      "pct": 0.3772857221182239,
       "pass": false,
       "w": 390,
-      "h": 9667,
+      "h": 9821,
       "masks": 0,
       "maskAreaPct": 0
     }

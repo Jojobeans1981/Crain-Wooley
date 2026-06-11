@@ -1377,15 +1377,15 @@
 
   /* 7. Testimonials closer (#ImageGroupS1/#ReviewsS8) — gold #9B8059 with the
      faint handwritten-letters watermark, white text, one centered review. */
-  .cw-reviews { position: relative; overflow: hidden; background: #304451 url('/interior/closer-band-bg.jpg') center / cover no-repeat; padding: 106px 0; }
+  .cw-reviews { position: relative; overflow: hidden; background: #304451 url('/interior/closer-band-bg.jpg') center / cover no-repeat; padding: 150px 0; }
   .cw-reviews-wm { display: none; }
   .cw-reviews-inner { position: relative; z-index: 1; max-width: 760px; text-align: center; }
   .cw-reviews-cta { margin-top: 26px; display: inline-block; }
   .cw-reviews-carousel { outline: none; }
   .cw-reviews-carousel:focus-visible { outline: 2px solid var(--cw-gold-soft); outline-offset: 6px; }
   /* Taller viewport so the band reads as full as the live reviews zone. */
-  .cw-reviews-viewport { position: relative; min-height: 420px; }
-  @media (min-width: 900px) { .cw-reviews-viewport { min-height: 480px; } }
+  .cw-reviews-viewport { position: relative; min-height: 560px; }
+  @media (min-width: 900px) { .cw-reviews-viewport { min-height: 760px; } }
   .cw-review { display: none; margin: 0; }
   .cw-review-active { display: block; }
   .cw-review-stars { color: #fff; font-size: 1.4rem; letter-spacing: 3px; margin-bottom: 16px; }
@@ -1426,7 +1426,7 @@
   .cw-values-head .cw-btn-gold { margin-top: 8px; background: #fff; color: var(--cw-gold-text); border-color: #fff; }
   .cw-values-head .cw-btn-gold:hover { background: rgba(255,255,255,0.88); color: var(--cw-gold-text); }
   /* White card holding the value rows */
-  .cw-values-card { background: #fff; padding: 44px 44px; list-style: none; margin: 0; display: flex; flex-direction: column; gap: 26px; }
+  .cw-values-card { background: #fff; padding: 60px 52px; list-style: none; margin: 0; display: flex; flex-direction: column; gap: 40px; }
   .cw-value { display: flex; gap: 18px; align-items: flex-start; }
   .cw-value-icon { flex: none; width: 54px; height: 54px; display: inline-flex; align-items: center; justify-content: center; color: var(--cw-gold); border: 1px solid var(--cw-gold); }
   .cw-value-title { font-family: var(--font-display); font-weight: 700; font-size: 1.3125rem; color: var(--cw-slate); margin: 0 0 8px; }
@@ -1463,8 +1463,8 @@
 
   /* Light value-card panel (#CTAsS7) — soft panel, centered serif heading + lead,
      3-up value cards. */
-  .cw-cardsec { background: #fff; padding: 70px 0; }
-  .cw-cardsec-panel { background: #f6f6f6; padding: clamp(40px, 5vw, 72px) clamp(24px, 4vw, 56px); }
+  .cw-cardsec { background: #fff; padding: 104px 0; }
+  .cw-cardsec-panel { background: #f6f6f6; padding: clamp(56px, 6vw, 96px) clamp(24px, 4vw, 56px); }
   .cw-cardsec-title { font-family: var(--font-display); font-weight: 400; font-size: clamp(30px, 3.6vw, 44px); line-height: 1.1; color: #343434; text-align: center; margin: 0 0 22px; }
   .cw-cardsec-lead { font-family: var(--font-sans); font-size: 0.95rem; line-height: 1.7; color: #4a4a4a; text-align: center; max-width: 880px; margin: 0 auto 44px; }
   .cw-cardsec-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 32px; }
@@ -1474,12 +1474,12 @@
 
   /* FAQ closer (#FAQsS3) — navy full-bleed band, collapsed GOLD question-bars
      (serif white question + right chevron), navy gaps between bars. */
-  .cw-faqband { background: #304451; padding: 96px 0; color: #fff; }
+  .cw-faqband { background: #304451; padding: 132px 0; color: #fff; }
   .cw-faqband-head { text-align: center; max-width: 820px; margin: 0 auto 44px; }
   .cw-faqband-title { color: #fff; }
-  .cw-faqband-acc { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+  .cw-faqband-acc { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px; }
   .cw-faqbar { background: #9B8059; }
-  .cw-faqbar-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 17px 26px; cursor: pointer; list-style: none; }
+  .cw-faqbar-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 23px 28px; cursor: pointer; list-style: none; }
   .cw-faqbar-head::-webkit-details-marker { display: none; }
   .cw-faqbar-q { font-family: var(--font-display); font-weight: 600; font-size: 1.15rem; line-height: 1.25; color: #fff; }
   .cw-faqbar-chev { flex: none; color: #fff; transition: transform .2s ease; }
