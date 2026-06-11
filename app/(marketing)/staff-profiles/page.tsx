@@ -98,9 +98,9 @@ export default function StaffProfilesPage() {
         .cw-team-arrow { flex: none; color: var(--cw-gold-soft, #D5C0A2); transition: transform .15s ease, color .15s ease; }
         a.cw-team-card:hover .cw-team-arrow { transform: translate(2px, -2px); color: #fff; }
         a.cw-team-card:focus-visible { outline: 2px solid ${GOLD_TEXT}; outline-offset: 4px; }
-        @media (max-width: 1100px) { .cw-team-grid { grid-template-columns: repeat(3, 1fr) !important; } }
-        @media (max-width: 820px) { .cw-team-grid { grid-template-columns: repeat(2, 1fr) !important; } }
-        @media (max-width: 520px) { .cw-team-grid { grid-template-columns: 1fr !important; } }
+        @media (max-width: 1180px) { .cw-team-grid { grid-template-columns: repeat(3, 1fr) !important; } }
+        @media (max-width: 680px) { .cw-team-grid { grid-template-columns: repeat(2, 1fr) !important; } }
+        @media (max-width: 460px) { .cw-team-grid { grid-template-columns: 1fr !important; } }
         @media (prefers-reduced-motion: reduce) { .cw-team-arrow { transition: none; } }
       `}</style>
     </div>
