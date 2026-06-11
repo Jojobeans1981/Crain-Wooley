@@ -65,9 +65,10 @@ async function main() {
       const diff = new PNG({ width: w, height: h })
       const changed = pixelmatch(a.data, c.data, diff.data, w, h, { threshold: 0.1 })
       const pct = changed / (w * h)
+      const maskArea = rs.reduce((s, r) => s + Math.max(0, r.w) * Math.max(0, r.h), 0) / (w * h)
       writeFileSync(`pixel-baselines/diff/${slug}-${vp.n}.png`, PNG.sync.write(diff))
-      results.push({ page: path, vp: vp.n, pct, pass: pct < TOL, w, h, masks: rs.length })
-      console.log(`${path} @ ${vp.n}: ${(pct * 100).toFixed(2)}% ${pct < TOL ? 'PASS' : 'FAIL'} (orig ${orig.height} / clone ${clone.height}px, ${rs.length} masks)`)
+      results.push({ page: path, vp: vp.n, pct, pass: pct < TOL, w, h, masks: rs.length, maskAreaPct: maskArea })
+      console.log(`${path} @ ${vp.n}: ${(pct * 100).toFixed(2)}% ${pct < TOL ? 'PASS' : 'FAIL'} (orig ${orig.height} / clone ${clone.height}px, ${rs.length} masks / ${(maskArea * 100).toFixed(2)}% area)`)
     }
   }
   await b.close()
