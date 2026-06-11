@@ -58,7 +58,7 @@ async function main() {
     const bodyBlocks = blockEls.map((e) => {
       const tag = e.tagName.toLowerCase()
       const tx = (e.textContent || '').replace(/\s+/g, ' ').trim()
-      if (tag === 'ul' || tag === 'ol') return { type: 'ul', items: (Array.from(e.querySelectorAll(':scope > li')) as HTMLElement[]).map((li) => (li.textContent || '').replace(/\s+/g, ' ').trim()).filter((s) => s.length > 0) }
+      if (tag === 'ul' || tag === 'ol') return { type: 'ul', items: (Array.from(e.querySelectorAll('li')) as HTMLElement[]).filter((li) => !li.querySelector('ul, ol')).map((li) => (li.textContent || '').replace(/\s+/g, ' ').trim()).filter((s) => s.length > 0) }
       if (tag === 'h2') return { type: 'h2', text: tx }
       if (tag === 'h3' || tag === 'h4') return { type: 'h3', text: tx }
       return { type: 'p', text: tx }
