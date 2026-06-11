@@ -1299,8 +1299,8 @@
   .cw-badge-nav:hover { background: var(--cw-slate); color: #fff; }
   .cw-badge-nav:focus-visible { outline: 2px solid var(--cw-gold); outline-offset: 2px; }
   /* Interior pages repeat the credentials below the banner at a smaller size. */
-  .cw-badges-interior { padding: 64px 0; }
-  .cw-badges-interior .cw-badge { height: clamp(96px, 9vw, 150px); }
+  .cw-badges-interior { padding: 104px 0; }
+  .cw-badges-interior .cw-badge { height: clamp(120px, 11vw, 190px); }
 
   /* Interior consultation CTA band — slate, matches the original's
      "Call or Visit Crain & Wooley Today" block above the reviews. */
@@ -1377,7 +1377,7 @@
 
   /* 7. Testimonials closer (#ImageGroupS1/#ReviewsS8) — gold #9B8059 with the
      faint handwritten-letters watermark, white text, one centered review. */
-  .cw-reviews { position: relative; overflow: hidden; background: #304451 url('/interior/closer-band-bg.jpg') center / cover no-repeat; padding: 150px 0; }
+  .cw-reviews { position: relative; overflow: hidden; background: #304451 url('/interior/closer-band-bg.jpg') center / cover no-repeat; padding: 185px 0; }
   .cw-reviews-wm { display: none; }
   .cw-reviews-inner { position: relative; z-index: 1; max-width: 760px; text-align: center; }
   .cw-reviews-cta { margin-top: 26px; display: inline-block; }
@@ -1385,7 +1385,7 @@
   .cw-reviews-carousel:focus-visible { outline: 2px solid var(--cw-gold-soft); outline-offset: 6px; }
   /* Taller viewport so the band reads as full as the live reviews zone. */
   .cw-reviews-viewport { position: relative; min-height: 560px; }
-  @media (min-width: 900px) { .cw-reviews-viewport { min-height: 760px; } }
+  @media (min-width: 900px) { .cw-reviews-viewport { min-height: 900px; } }
   .cw-review { display: none; margin: 0; }
   .cw-review-active { display: block; }
   .cw-review-stars { color: #fff; font-size: 1.4rem; letter-spacing: 3px; margin-bottom: 16px; }
@@ -1426,7 +1426,7 @@
   .cw-values-head .cw-btn-gold { margin-top: 8px; background: #fff; color: var(--cw-gold-text); border-color: #fff; }
   .cw-values-head .cw-btn-gold:hover { background: rgba(255,255,255,0.88); color: var(--cw-gold-text); }
   /* White card holding the value rows */
-  .cw-values-card { background: #fff; padding: 60px 52px; list-style: none; margin: 0; display: flex; flex-direction: column; gap: 40px; }
+  .cw-values-card { background: #fff; padding: 84px 56px; list-style: none; margin: 0; display: flex; flex-direction: column; gap: 56px; }
   .cw-value { display: flex; gap: 18px; align-items: flex-start; }
   .cw-value-icon { flex: none; width: 54px; height: 54px; display: inline-flex; align-items: center; justify-content: center; color: var(--cw-gold); border: 1px solid var(--cw-gold); }
   .cw-value-title { font-family: var(--font-display); font-weight: 700; font-size: 1.3125rem; color: var(--cw-slate); margin: 0 0 8px; }
@@ -1463,11 +1463,11 @@
 
   /* Light value-card panel (#CTAsS7) — soft panel, centered serif heading + lead,
      3-up value cards. */
-  .cw-cardsec { background: #fff; padding: 104px 0; }
+  .cw-cardsec { background: #fff; padding: 150px 0; }
   .cw-cardsec-panel { background: #f6f6f6; padding: clamp(56px, 6vw, 96px) clamp(24px, 4vw, 56px); }
   .cw-cardsec-title { font-family: var(--font-display); font-weight: 400; font-size: clamp(30px, 3.6vw, 44px); line-height: 1.1; color: #343434; text-align: center; margin: 0 0 22px; }
   .cw-cardsec-lead { font-family: var(--font-sans); font-size: 0.95rem; line-height: 1.7; color: #4a4a4a; text-align: center; max-width: 880px; margin: 0 auto 44px; }
-  .cw-cardsec-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 32px; }
+  .cw-cardsec-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 32px; min-height: 280px; }
   @media (min-width: 760px) { .cw-cardsec-grid { grid-template-columns: repeat(3, 1fr); gap: 36px; } }
   .cw-cardsec-card-title { font-family: var(--font-display); font-weight: 700; font-size: 1.3125rem; color: var(--cw-slate); margin: 0 0 10px; }
   .cw-cardsec-card-body { font-family: var(--font-sans); font-size: 0.9375rem; line-height: 1.65; color: #4a4a4a; margin: 0; }
@@ -1553,7 +1553,7 @@
      behind the image as the original's fallback. ~210px tall desktop. */
   .legacy-banner--navy {
     background: #9B8059 url('/interior/sub-banner.jpg') center / cover no-repeat;
-    padding: clamp(46px, 5.6vw, 58px) 0;
+    padding: clamp(64px, 6.6vw, 84px) 0;
   }
   .legacy-banner--navy .legacy-banner-title {
     color: #fff;
