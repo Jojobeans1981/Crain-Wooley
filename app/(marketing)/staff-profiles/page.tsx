@@ -28,17 +28,20 @@ export const metadata: Metadata = {
 function Card({ m }: { m: TeamMember }) {
   const inner = (
     <>
-      <span style={{ position: 'relative', display: 'block', width: '100%', aspectRatio: '1 / 1', background: '#fff', border: `1px solid ${LINE}`, overflow: 'hidden' }}>
-        {/* alt="" is intentional — decorative; the name is the adjacent <h3>,
-            so an alt would be a redundant SR announcement (image-redundant-alt). */}
-        <Image src={m.photo} alt="" fill sizes="(max-width: 640px) 100vw, (max-width: 980px) 50vw, 360px" style={{ objectFit: 'cover' }} />
+      <span style={{ position: 'relative', display: 'block', width: '100%', aspectRatio: '4 / 5', background: '#fff', overflow: 'hidden' }}>
+        {/* alt="" is intentional — decorative; the name is in the footer box below. */}
+        <Image src={m.photo} alt="" fill sizes="(max-width: 640px) 100vw, (max-width: 980px) 50vw, 320px" style={{ objectFit: 'cover', objectPosition: 'top' }} />
       </span>
-      <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.4rem', fontWeight: 600, color: INK, margin: '16px 0 4px', lineHeight: 1.2 }}>
-        {m.name}
-      </h3>
-      <p style={{ fontFamily: 'var(--font-sans)', fontSize: '0.84rem', fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase', color: GOLD_TEXT, margin: 0, lineHeight: 1.45 }}>
-        {m.title}
-      </p>
+      {/* Navy footer box: white serif name, gold italic title, gold external arrow. */}
+      <span className="cw-team-foot">
+        <span className="cw-team-foot-text">
+          <span className="cw-team-name">{m.name}</span>
+          <span className="cw-team-title">{m.title}</span>
+        </span>
+        {m.bio && (
+          <svg className="cw-team-arrow" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M17 7H9M17 7v8" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+        )}
+      </span>
     </>
   )
 
@@ -61,7 +64,7 @@ function OfficeSection({ office, members }: { office: string; members: TeamMembe
       <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.6rem, 2.6vw, 2.1rem)', fontWeight: 600, color: SLATE, margin: '0 0 28px' }}>
         {office}
       </h2>
-      <ul className="cw-team-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '32px 28px', margin: 0, padding: 0 }}>
+      <ul className="cw-team-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '28px 24px', margin: 0, padding: 0 }}>
         {members.map((m) => <Card key={m.slug} m={m} />)}
       </ul>
     </section>
@@ -87,12 +90,18 @@ export default function StaffProfilesPage() {
       </div>
 
       <style>{`
-        .cw-team-card { transition: transform .15s ease; }
-        a.cw-team-card:hover h3 { color: ${GOLD_TEXT}; }
+        .cw-team-card { display: block; }
+        .cw-team-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; background: ${SLATE}; padding: 18px 20px; }
+        .cw-team-foot-text { display: block; min-width: 0; }
+        .cw-team-name { display: block; font-family: var(--font-display); font-weight: 600; font-size: 1.18rem; line-height: 1.15; color: #fff; }
+        .cw-team-title { display: block; font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: 0.92rem; line-height: 1.3; color: var(--cw-gold-soft, #D5C0A2); margin-top: 4px; }
+        .cw-team-arrow { flex: none; color: var(--cw-gold-soft, #D5C0A2); transition: transform .15s ease, color .15s ease; }
+        a.cw-team-card:hover .cw-team-arrow { transform: translate(2px, -2px); color: #fff; }
         a.cw-team-card:focus-visible { outline: 2px solid ${GOLD_TEXT}; outline-offset: 4px; }
-        @media (max-width: 980px) { .cw-team-grid { grid-template-columns: repeat(2, 1fr) !important; } }
-        @media (max-width: 560px) { .cw-team-grid { grid-template-columns: 1fr !important; } }
-        @media (prefers-reduced-motion: reduce) { .cw-team-card { transition: none; } }
+        @media (max-width: 1100px) { .cw-team-grid { grid-template-columns: repeat(3, 1fr) !important; } }
+        @media (max-width: 820px) { .cw-team-grid { grid-template-columns: repeat(2, 1fr) !important; } }
+        @media (max-width: 520px) { .cw-team-grid { grid-template-columns: 1fr !important; } }
+        @media (prefers-reduced-motion: reduce) { .cw-team-arrow { transition: none; } }
       `}</style>
     </div>
   )
