@@ -57,6 +57,7 @@ async function main() {
     let contentH1 = ''
     let introImage = ''
     let firstContent = true
+    let badgeStrip = false
     const bodyBlocks: { type: string; text?: string; items?: string[]; which?: string }[] = []
     for (const sec of Array.from(mainEl.children) as HTMLElement[]) {
       const stx = (sec.textContent || '').replace(/\s+/g, ' ')
@@ -68,9 +69,11 @@ async function main() {
         if (!bannerTitle) { const h = sec.querySelector('.fnt_t-1, h1, h2, .h1, strong') as HTMLElement | null; if (h) bannerTitle = (h.textContent || '').replace(/\s+/g, ' ').trim().replace(/\bSearch\s*$/, '').trim() }
         continue
       }
-      // Skip awards (badges) and staff-LISTING bands — but NOT a staff PROFILE band
-      // (stf-pfl), which is the bio content on /staff-profiles/<name> pages.
-      if (/(^|\s)(aws|awards)/.test(cls) || (/(^|\s)(stf|staff)/.test(cls) && !/stf-pfl|profile/i.test(cls))) continue
+      // Badge strip (aws) — record presence (rendered as the shared BadgeStrip),
+      // then skip. Staff-LISTING bands are skipped too; staff PROFILE (stf-pfl) is
+      // content and handled above.
+      if (/(^|\s)(aws|awards)/.test(cls)) { badgeStrip = true; continue }
+      if (/(^|\s)(stf|staff)/.test(cls) && !/stf-pfl|profile/i.test(cls)) continue
       if (firstContent) {
         firstContent = false
         const cz = (sec.querySelector('.cnt-zn') || sec) as HTMLElement // content zone, not the sd-zn sidebar
@@ -177,7 +180,7 @@ async function main() {
         if (heading || links.length) sidebar.push({ kind, heading, links })
       }
     }
-    return { bannerTitle, contentH1, bodyBlocks, introImage, items, faqHeading, sidebar }
+    return { bannerTitle, contentH1, bodyBlocks, introImage, items, faqHeading, sidebar, badgeStrip }
   })
 
   // Intro image: resolve to absolute, download via in-page fetch (browser
@@ -221,6 +224,7 @@ async function main() {
       ...(faq.length ? [{ heading: data.faqHeading || 'Virtual Services FAQ', items: faq }] : []),
     ],
     sidebar: data.sidebar,
+    badgeStrip: data.badgeStrip,
     closers,
   }
   // Upsert into one combined keyed file so the rollout needs no per-page import.

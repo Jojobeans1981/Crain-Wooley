@@ -1,4 +1,5 @@
 import { ValueProps, ReviewsSection, Locations } from '@/components/site/home/sections'
+import { BadgeStrip } from '@/components/site/home/BadgeWall'
 import { Accordion } from './Accordion'
 import { Sidebar } from './Sidebar'
 import type { FamilyBData, BodyBlock } from '@/lib/legacy/family-b'
@@ -54,6 +55,9 @@ export default function FamilyBPage({ page }: { page: FamilyBData }) {
           <h1 className="legacy-banner-title">{page.bannerTitle}</h1>
         </div>
       </header>
+
+      {/* Accolade badge strip under the banner (present per census on most B/D). */}
+      {page.badgeStrip && <BadgeStrip />}
 
       {/* Content zone + right-rail sidebar (the original's cnt-zn / sd-zn split). */}
       <section className="cw-fb-main">

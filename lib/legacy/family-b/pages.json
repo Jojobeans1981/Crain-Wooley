@@ -385,6 +385,8 @@
         ]
       }
     ],
+    "sidebar": [],
+    "badgeStrip": true,
     "closers": [
       "pillars",
       "schedule"
@@ -720,6 +722,7 @@
         ]
       }
     ],
+    "badgeStrip": true,
     "closers": [
       "pillars",
       "schedule"
@@ -19532,6 +19535,8 @@
     ],
     "introImage": null,
     "accordionGroups": [],
+    "sidebar": [],
+    "badgeStrip": false,
     "closers": [
       "schedule"
     ]
