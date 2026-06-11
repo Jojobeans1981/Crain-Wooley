@@ -1,25 +1,37 @@
 import type { SidebarBlock } from '@/lib/legacy/family-b'
 
 /**
- * Interior sidebar (the original's `sd-zn three-8ths` right rail): sibling-page
- * nav (`sd-nv`), CTA cards (`sd-cta`, e.g. the download-guide), and office /
- * contact blocks. Rendered from the structured records; links render as-is
- * (relative paths resolve on the clone now and after cutover).
+ * Geo/practice interior LEFT sidebar — a stack of navy boxes per the baseline:
+ *  - nav (Staff Profiles): white serif heading + uppercase, letter-spaced staff
+ *    links with dashed dividers.
+ *  - cta (Download Guide / location boxes): serif heading + gold button(s).
+ * Rendered from the structured `sd-zn` records; links render as-is.
  */
 export function Sidebar({ blocks }: { blocks: SidebarBlock[] }) {
   return (
     <div className="cw-sd">
       {blocks.map((b, i) => (
-        <section key={i} className={`cw-sd-block cw-sd-${b.kind}`}>
+        <section key={i} className={`cw-sd-box cw-sd-${b.kind}`}>
           {b.heading && <h3 className="cw-sd-heading">{b.heading}</h3>}
-          {b.links.length > 0 && (
-            <ul className="cw-sd-links">
+          {b.kind === 'nav' ? (
+            <ul className="cw-sd-navlinks">
               {b.links.map((l, j) => (
-                <li key={j}>
-                  <a href={l.href}>{l.text}</a>
-                </li>
+                <li key={j}><a href={l.href}>{l.text}</a></li>
               ))}
             </ul>
+          ) : (
+            <div className="cw-sd-actions">
+              {b.links.map((l, j) => (
+                <a
+                  key={j}
+                  href={l.href}
+                  className="cw-btn-gold cw-sd-btn"
+                  {...(/^https?:/.test(l.href) ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                >
+                  {l.text}
+                </a>
+              ))}
+            </div>
           )}
         </section>
       ))}

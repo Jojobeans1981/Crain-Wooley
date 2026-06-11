@@ -85,11 +85,11 @@ function ContentSection({ bands, sidebar }: { bands: Band[]; sidebar?: SidebarBl
   return (
     <section className="cw-fb-main">
       <div className="cw-container">
-        <div className={`cw-fb-layout${sidebar ? '' : ' cw-fb-layout--full'}`}>
+        <div className={`cw-fb-layout${sidebar ? ' cw-fb-layout--left' : ' cw-fb-layout--full'}`}>
+          {sidebar && <aside className="cw-fb-sidebar"><Sidebar blocks={sidebar} /></aside>}
           <div className="cw-fb-content">
             {bands.map((b, i) => <FlowBand key={i} band={b} />)}
           </div>
-          {sidebar && <aside className="cw-fb-sidebar"><Sidebar blocks={sidebar} /></aside>}
         </div>
       </div>
     </section>
