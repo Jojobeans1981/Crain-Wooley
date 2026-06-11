@@ -9,7 +9,7 @@
  * Output: lib/legacy/family-b/<slug>.json  +  public/interior/<slug>-intro.<ext>
  */
 import { chromium } from 'playwright'
-import { writeFileSync, mkdirSync, readFileSync } from 'node:fs'
+import { writeFileSync, mkdirSync, readFileSync, existsSync } from 'node:fs'
 
 const ORIGIN = 'https://www.estateplanningdfw.law'
 
@@ -19,34 +19,44 @@ async function main() {
   const key = '/' + rawPath.replace(/^\/+|\/+$/g, '')
   const slug = key.replace(/^\//, '').replace(/\//g, '__')
 
+  // Reproducible + courteous: load the committed baseline HTML offline when it
+  // exists (the live site is never re-hit for a captured URL); otherwise fetch
+  // ONCE, save the baseline, then work from the DOM. Detection is structural
+  // (section/class signatures), so it does not need live CSS/layout.
+  const capDir = `docs/reference/capture/${slug}/desktop`
+  const capFile = `${capDir}/original.html`
   const b = await chromium.launch()
   const p = await b.newPage({ viewport: { width: 1440, height: 1000 } })
-  await p.goto(ORIGIN + key + '/', { waitUntil: 'load', timeout: 60_000 })
-  await p.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 500) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 70)) } window.scrollTo(0, 0) })
-  await p.waitForTimeout(1000)
+  let online = false
+  if (existsSync(capFile)) {
+    await p.route('**', (r) => r.abort())
+    await p.setContent(readFileSync(capFile, 'utf8'), { waitUntil: 'commit', timeout: 20_000 }).catch(() => {})
+    await p.waitForTimeout(200)
+  } else {
+    await p.goto(ORIGIN + key + '/', { waitUntil: 'load', timeout: 60_000 })
+    await p.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 500) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 70)) } window.scrollTo(0, 0) })
+    await p.waitForTimeout(1000)
+    mkdirSync(capDir, { recursive: true })
+    writeFileSync(capFile, await p.content())
+    online = true
+  }
 
   const data = await p.evaluate(() => {
-    const all = Array.from(document.querySelectorAll('*')) as HTMLElement[]
-    // (no named helpers — esbuild wraps them in an undefined __name in page context)
-    let band: HTMLElement | null = null
-    for (const e of all) { const r = e.getBoundingClientRect(); if (r.width > 1300 && r.top > 100 && r.top < 700 && r.height > 150 && r.height < 360 && getComputedStyle(e).backgroundColor === 'rgb(155, 128, 89)') { band = e; break } }
-    const bannerTitle = band ? (band.textContent || '').replace(/\s+/g, ' ').trim().replace(/Search$/, '').trim() : ''
-    // content H1 — the original marks it as a large <h4> (~60px Cormorant), so
-    // include h3/h4 and pick the first big heading in the content zone.
-    let contentH1 = ''
-    for (const h of Array.from(document.querySelectorAll('h1,h2,h3,h4,strong,.h1,[class*=heading]')) as HTMLElement[]) { const r = h.getBoundingClientRect(); const tx = (h.textContent || '').replace(/\s+/g, ' ').trim(); if (r.top > 480 && r.top < 1300 && parseFloat(getComputedStyle(h).fontSize) > 30 && tx.length > 6 && tx.length < 90) { contentH1 = tx; break } }
-    let introImage = ''
-    for (const i of Array.from(document.querySelectorAll('img')) as HTMLImageElement[]) { const r = i.getBoundingClientRect(); if (i.naturalWidth > 250 && i.naturalHeight > 250 && r.top > 480 && r.top < 1500 && !/logo|accolade|badge|bar-college|elder|naela|banner/i.test(i.src)) { introImage = i.src; break } }
-    // Section-based body capture (container signatures, not positions). Walk
-    // <main>'s top-level sections in document order:
-    //  - closer bands (pillars/testimonials/schedule: dk-bg vls/cta/img-grp, or the
-    //    closer heading text) -> a {type:'closer'} marker, so the renderer re-inserts
-    //    the shared component AT THE SAME position (mid-page interleaving = parity)
-    //  - banner / awards (badges) / staff-listing bands -> skipped
-    //  - content bands -> their full ordered blocks (h2/h3/p/ul); accordion panels
-    //    are excluded (extracted separately). No position cutoff -> body after a
-    //    mid-page closer band survives.
+    // Single structural pass over <main>'s top-level sections (container/class
+    // signatures, NOT live positions/styles — so it runs on the offline baseline
+    // DOM too). Each band is classified once:
+    //  - closer (pillars/testimonials/schedule: dk-bg vls/cta/img-grp, or closer
+    //    heading text) -> {type:'closer'} marker, re-inserted by the renderer in
+    //    source order (interleaving = layout parity)
+    //  - banner (form/bnr) -> page title; awards/staff -> skipped
+    //  - first content band -> contentH1 (first heading) + intro photo (first
+    //    non-logo img); every content band -> full ordered blocks (h2/h3/p/ul),
+    //    accordion panels excluded (extracted separately). No position cutoff.
     const mainEl = (document.querySelector('main') || document.body) as HTMLElement
+    let bannerTitle = ''
+    let contentH1 = ''
+    let introImage = ''
+    let firstContent = true
     const bodyBlocks: { type: string; text?: string; items?: string[]; which?: string }[] = []
     for (const sec of Array.from(mainEl.children) as HTMLElement[]) {
       const stx = (sec.textContent || '').replace(/\s+/g, ' ')
@@ -54,7 +64,17 @@ async function main() {
       if (/Estate Planning With Us Means|DESIGNED FOR YOUR COMFORT/i.test(stx) || /(^|\s)vls(\s|$)/.test(cls)) { bodyBlocks.push({ type: 'closer', which: 'pillars' }); continue }
       if (/Schedule a Consultation Today/i.test(stx) || /(^|\s)cta(\s|$)/.test(cls)) { bodyBlocks.push({ type: 'closer', which: 'schedule' }); continue }
       if (/What (Our|People)[^.]{0,30}Say|client testimonials|hear from our clients/i.test(stx) || /(^|\s)(rvw|tst|testim|review)/.test(cls)) { bodyBlocks.push({ type: 'closer', which: 'testimonials' }); continue }
-      if (sec.tagName === 'FORM' || /^(Form_)?Banner/.test(sec.id) || /(^|\s)(bnr|banner|aws|awards|stf|staff)/.test(cls)) continue
+      if (sec.tagName === 'FORM' || /^(Form_)?Banner/.test(sec.id) || /(^|\s)(bnr|banner)/.test(cls)) {
+        if (!bannerTitle) { const h = sec.querySelector('.fnt_t-1, h1, h2, .h1, strong') as HTMLElement | null; if (h) bannerTitle = (h.textContent || '').replace(/\s+/g, ' ').trim().replace(/\bSearch\s*$/, '').trim() }
+        continue
+      }
+      if (/(^|\s)(aws|awards|stf|staff)/.test(cls)) continue
+      if (firstContent) {
+        firstContent = false
+        const h = sec.querySelector('h1, h2, h3, h4') as HTMLElement | null
+        if (h) contentH1 = (h.textContent || '').replace(/\s+/g, ' ').trim()
+        for (const i of Array.from(sec.querySelectorAll('img')) as HTMLImageElement[]) { const src = i.getAttribute('src') || i.src || ''; if (src && !/^data:|\.svg|logo|accolade|badge|bar-college|elder|naela|banner|icon|sprite/i.test(src)) { introImage = src; break } }
+      }
       for (const e of Array.from(sec.querySelectorAll('h2,h3,h4,p,ul,ol')) as HTMLElement[]) {
         if (e.closest('[aria-expanded], .qst, footer, nav, header')) continue
         const tag = e.tagName.toLowerCase()
@@ -94,18 +114,26 @@ async function main() {
     return { bannerTitle, contentH1, bodyBlocks, introImage, items, faqHeading }
   })
 
-  // download the intro image via in-page fetch (browser networking bypasses the bot-block)
+  // Intro image: resolve to absolute, download via in-page fetch (browser
+  // networking bypasses the bot-block) ONLY when online. Offline re-runs reuse the
+  // asset captured on the original live run — the site is never re-hit.
   let introImagePath = ''
   if (data.introImage) {
-    const ext = (data.introImage.split('.').pop() || 'jpg').split('?')[0].slice(0, 4)
-    const b64 = await p.evaluate(async (url) => {
-      const r = await fetch(url); const buf = await r.arrayBuffer()
-      let bin = ''; const bytes = new Uint8Array(buf); for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i])
-      return btoa(bin)
-    }, data.introImage)
-    mkdirSync('public/interior', { recursive: true })
-    introImagePath = `/interior/${slug}-intro.${ext}`
-    writeFileSync('public' + introImagePath, Buffer.from(b64, 'base64'))
+    const imgUrl = /^https?:/.test(data.introImage) ? data.introImage : ORIGIN + (data.introImage.startsWith('/') ? '' : '/') + data.introImage
+    const ext = ((imgUrl.split('/').pop() || 'jpg').split('?')[0].split('.').pop() || 'jpg').slice(0, 4)
+    const candidate = `/interior/${slug}-intro.${ext}`
+    if (online) {
+      const b64 = await p.evaluate(async (url) => {
+        const r = await fetch(url); const buf = await r.arrayBuffer()
+        let bin = ''; const bytes = new Uint8Array(buf); for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i])
+        return btoa(bin)
+      }, imgUrl)
+      mkdirSync('public/interior', { recursive: true })
+      writeFileSync('public' + candidate, Buffer.from(b64, 'base64'))
+      introImagePath = candidate
+    } else {
+      for (const e of ['jpg', 'jpeg', 'png', 'webp', 'gif']) { if (existsSync(`public/interior/${slug}-intro.${e}`)) { introImagePath = `/interior/${slug}-intro.${e}`; break } }
+    }
   }
   await b.close()
 
