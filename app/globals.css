@@ -1377,8 +1377,8 @@
 
   /* 7. Testimonials closer (#ImageGroupS1/#ReviewsS8) — gold #9B8059 with the
      faint handwritten-letters watermark, white text, one centered review. */
-  .cw-reviews { position: relative; overflow: hidden; background: #9B8059; padding: 106px 0; }
-  .cw-reviews-wm { position: absolute; inset: 0; background: url('/interior/closer-band-bg.jpg') center / cover no-repeat; opacity: 0.14; pointer-events: none; z-index: 0; }
+  .cw-reviews { position: relative; overflow: hidden; background: #304451 url('/interior/closer-band-bg.jpg') center / cover no-repeat; padding: 106px 0; }
+  .cw-reviews-wm { display: none; }
   .cw-reviews-inner { position: relative; z-index: 1; max-width: 760px; text-align: center; }
   .cw-reviews-cta { margin-top: 26px; display: inline-block; }
   .cw-reviews-carousel { outline: none; }
@@ -1415,7 +1415,7 @@
 
   /* 8. Pillars / value props closer (#ValuesV2) — gold #9B8059, white-on-gold
      header on the left, a WHITE CARD of value rows on the right. */
-  .cw-values { position: relative; overflow: hidden; background: #9B8059; padding: 106px 0; }
+  .cw-values { position: relative; overflow: hidden; background: #304451 url('/interior/closer-band-bg.jpg') center / cover no-repeat; padding: 106px 0; }
   .cw-values-grid { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center; }
   @media (min-width: 900px) { .cw-values-grid { grid-template-columns: 1fr 1.25fr; gap: 56px; } }
   .cw-values-head .cw-eyebrow-light { color: rgba(255,255,255,0.92); }
