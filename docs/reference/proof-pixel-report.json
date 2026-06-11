@@ -4,7 +4,7 @@
     {
       "page": "/about-us/pricing/flat-rate-services/",
       "vp": "desktop",
-      "pct": 0.3223261664401734,
+      "pct": 0.3273495437779072,
       "pass": false,
       "w": 1440,
       "h": 8585,
@@ -14,20 +14,80 @@
     {
       "page": "/about-us/pricing/flat-rate-services/",
       "vp": "tablet",
-      "pct": 0.31931137476833465,
+      "pct": 0.36771940406384884,
       "pass": false,
       "w": 768,
-      "h": 8813,
+      "h": 8186,
       "masks": 0,
       "maskAreaPct": 0
     },
     {
       "page": "/about-us/pricing/flat-rate-services/",
       "vp": "mobile",
-      "pct": 0.4075372240019425,
+      "pct": 0.3691239860163595,
       "pass": false,
       "w": 390,
       "h": 9821,
+      "masks": 0,
+      "maskAreaPct": 0
+    },
+    {
+      "page": "/allen/",
+      "vp": "desktop",
+      "pct": 0.21960251034513117,
+      "pass": false,
+      "w": 1440,
+      "h": 10096,
+      "masks": 0,
+      "maskAreaPct": 0
+    },
+    {
+      "page": "/allen/",
+      "vp": "tablet",
+      "pct": 0.24982240954726273,
+      "pass": false,
+      "w": 768,
+      "h": 10558,
+      "masks": 0,
+      "maskAreaPct": 0
+    },
+    {
+      "page": "/allen/",
+      "vp": "mobile",
+      "pct": 0.22414230296149115,
+      "pass": false,
+      "w": 390,
+      "h": 16260,
+      "masks": 0,
+      "maskAreaPct": 0
+    },
+    {
+      "page": "/staff-profiles/justin-t-crain/",
+      "vp": "desktop",
+      "pct": 0.2901447840030183,
+      "pass": false,
+      "w": 1440,
+      "h": 2945,
+      "masks": 0,
+      "maskAreaPct": 0
+    },
+    {
+      "page": "/staff-profiles/justin-t-crain/",
+      "vp": "tablet",
+      "pct": 0.47982235561323816,
+      "pass": false,
+      "w": 768,
+      "h": 3082,
+      "masks": 0,
+      "maskAreaPct": 0
+    },
+    {
+      "page": "/staff-profiles/justin-t-crain/",
+      "vp": "mobile",
+      "pct": 0.4028043036517613,
+      "pass": false,
+      "w": 390,
+      "h": 4366,
       "masks": 0,
       "maskAreaPct": 0
     }
