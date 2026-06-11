@@ -32,9 +32,57 @@ Proof trio: `/about-us/pricing/flat-rate-services/` (B), `/allen/` (D geo),
    each band to its true element. ALWAYS sanity-check a "passing" band by eyeballing
    its two crops — a false green is as dangerous as a false red.
 
+4. **3rd-party Scorpion "Connect" webchat widget contaminates band crops
+   (instrument-bug class #6 — overlay contamination).** The live original mounts
+   `#scorpion_connect` (a shadow-DOM host, z-index 2147483647) NONDETERMINISTICALLY;
+   its green `.connect-page` panel ("How can we help? / Text with Us / Call Me /
+   Email Us") floats over the banner/badge/testimonials/etc and the force-reveal
+   CSS un-hides it. Because it's intermittent, it inflated random bands on random
+   runs. The clone has no such widget. It lives in a shadow root, so an
+   `addStyleTag` into the main document CANNOT reach `.connect-page` — you must hide
+   the LIGHT-DOM host `#scorpion_connect`. Fix (in all three capture scripts'
+   prep/shot): `#scorpion_connect,.connect-page,[class*="cta-tile"],[class*="ctas-tiles"]{display:none!important}`.
+   Impact when removed (flat-rate desktop): banner 27.5%→7.0%, badge 5.2%→0.5%
+   (now PASS), testimonials 41%→25-37%, schedule 6.8%→2.0%. UNIT 0 (2026-06-11)
+   re-baselined the WHOLE scorecard after this fix; all numbers prior to it were
+   suspect. Cached pixel-proof originals captured before the fix were deleted so
+   they re-capture clean. ALWAYS eyeball the two band crops (now emitted by
+   `unit0-crop-verify.ts` as `-sidebyside.png`) before accepting a high number.
+
+## Session progress — Type-B desktop tuning (2026-06-11, post-UNIT-0)
+
+After UNIT 0 re-baselined, desktop Type-B passes landed (all uncommitted):
+- **banner** 7.0→4.65% (flat-rate), 15.9→8.0 (allen), 6.6→4.2 (justin): added the
+  gold `ln-flr` rule under the heading (686x2px, `.legacy-banner-title::after`),
+  raised heading (padding-top→57px, line-height 1.1), dropped search ~59px to hold
+  height, and matched the search PILL + 55px gold CIRCLE button (legacy-mirror, so
+  baseline shape over the intake app's square-input rule). Residual ~4% = sub-pixel
+  white-heading AA (likely a floor) + search width.
+- **values** 32.6→20.4 (flat-rate), 26.0→12.7 (allen): "Contact Us" → gold-fill
+  white-text square button (was white fill); white value-card padding 84→112 / gap
+  56→80 to recover the ~110px height deficit.
+- **faq** 40.6→25.5: gold bars widened to the full content container (`acc max-width
+  900→none`; original bars are w1296), questions fw600→700 / 1.15→1.26rem.
+- **cards** 29.1→24.3: the 3 cards → NAVY boxes (#304451) + white serif titles +
+  light body (were transparent/dark); panel grey removed; section heading forced
+  mixed-case (out of the global UPPERCASE h2). Residual is HEIGHT (clone ~822 vs
+  orig ~1088) — the original `#CTAsS7` is a JS `ui-repeater` (CTAsS7Feed) whose live
+  DOM diverges; this is the planned `*:cards` MASK target (feed region), not a
+  height-chase. Still OPEN.
+
+STILL OPEN (next session): cards CTAsS7 feed mask; testimonials residual (gold-fill
+"See all Reviews" + carousel ARROWS not dots + heading); footer + intro text bands;
+and the big one — TABLET/MOBILE (testimonials 62%, intro 50%, cards 41%): the
+original changes LAYOUT MODE (stacks columns) at <900px; replicate the stacking,
+don't chase height with padding (owner note). Fast single-band tool added:
+`scripts/visual-diff/_band1.ts <origSel> <cloneSel> <name>`.
+
 2. **Turbopack stale-CSS gotcha.** The Next dev (Turbopack) file watcher silently
    MISSES script/heredoc writes to `app/globals.css` and serves STALE styles — the
    pixel gate then reports byte-identical numbers across edits (that's the tell).
+   Note: even Edit-tool writes are UNRELIABLE here (some reload, some don't);
+   `rm -rf .next` + restart + warm with a fresh log (don't reuse a log whose old
+   "Ready in" line makes an `until grep` a no-op) is the only reliable path.
    Always `rm -rf .next` + restart dev before measuring after a CSS edit, or verify a
    computed style first (`getComputedStyle`).
 
