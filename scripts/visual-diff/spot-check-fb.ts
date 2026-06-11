@@ -14,7 +14,7 @@ import pixelmatch from 'pixelmatch'
 
 const ORIG = 'https://www.estateplanningdfw.law'
 const CLONE = process.env.CLONE_ORIGIN || 'https://crain-wooley-intake.vercel.app'
-const PATHS = ['/estate-planning/asset-protection/', '/estate-planning/supplemental-needs-trust/', '/about-us/pricing/flat-rate-services/']
+const PATHS = process.argv.slice(2).length ? process.argv.slice(2) : ['/estate-planning/asset-protection/', '/estate-planning/supplemental-needs-trust/', '/about-us/pricing/flat-rate-services/']
 const VP = { width: 1440, height: 900 }
 
 type Rect = { x: number; y: number; w: number; h: number; viewports?: string[] }

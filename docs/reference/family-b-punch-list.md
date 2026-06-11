@@ -1,7 +1,14 @@
-# Family-B parity punch list
+# Family-B / D parity punch list
 
-Open items from the family-B rollout (body-text gate: 100/103 ≥99%, mean 99.7%).
-These are tracked for follow-up; none block the family-B content migration.
+Status:
+- **Family B (103):** body 100/103 ≥99% (mean 99.7%), metadata 103/103.
+- **Family D (36 geo):** body 36/36 ≥99% (mean 99.7%), metadata 36/36 — COMPLETE.
+  Geo pixel-check (deployed /allen/): top 37.6% / full 36.8% — same approved
+  interior-redesign signature as B (identical FamilyBPage template), structurally
+  correct (banner→intro→body→pillars→schedule). The original geo pages also carry
+  a left practice-area sidebar nav the clone omits (see Observation below).
+
+Open items below are tracked for follow-up; none block the content migration.
 
 ## P2 — Read-more collapsed-toggle rendering
 **Pages:** `/media-center/firm-videos/estate-planning-webinar`,
