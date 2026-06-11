@@ -72,6 +72,13 @@ async function prep(pg: Page, url: string): Promise<void> {
   // locator.screenshot() scrolls it into view (contaminates the clone crops, which
   // have a sticky header; the original's isn't) -> false reds on every band.
   await pg.addStyleTag({ content: '.cw-site-header,[id^="Header"],.hdr,header.hdr,[class*="hdr-sticky"],[class*="-sticky"]{position:static!important;top:auto!important}' }).catch(() => {})
+  // Hide the Scorpion "Connect" 3rd-party webchat widget (.connect-page green panel
+  // + cta-tile launcher). It mounts NONDETERMINISTICALLY on the live original only
+  // (absent from the clone) and the force-reveal rule above un-hides its panel,
+  // floating it over banner/testimonials/etc and inflating EVERY overlapped band's
+  // diff (instrument bug class #6 — overlay contamination). No clone collision
+  // (grep: zero refs). Hiding on both sides normalizes to the same content.
+  await pg.addStyleTag({ content: '#scorpion_connect,.connect-page,[class*="cta-tile"],[class*="ctas-tiles"]{display:none!important}' }).catch(() => {})
   await pg.evaluate(() => { document.querySelectorAll('img[data-src], source[data-src]').forEach((e) => { const s = e.getAttribute('data-src'); if (s) { e.setAttribute('src', s); if (e.tagName === 'SOURCE') e.setAttribute('srcset', s) } }) })
   await pg.evaluate(() => Promise.all(Array.from(document.images).map((i) => i.complete ? 0 : new Promise<void>((r) => { i.onload = () => r(); i.onerror = () => r(); setTimeout(() => r(), 4000) }))))
   await pg.waitForTimeout(800)
@@ -83,6 +90,14 @@ async function bandShot(pg: Page, sel: string): Promise<PNG | null> {
   if (!(await loc.count())) return null
   const box = await loc.boundingBox().catch(() => null)
   if (!box || box.height < 8) return null
+  // Scroll the band into view + settle ITS OWN images before the screenshot. The
+  // page-level settle in prep() runs at scroll-top, so a band's lazy (loading=lazy
+  // / Next <Image>) photos haven't triggered their IntersectionObserver yet and
+  // screenshot EMPTY (e.g. the testimonials couple photo requested a heavy w=3840
+  // variant). Settling per-band after scroll-in makes the crop deterministic.
+  await loc.scrollIntoViewIfNeeded().catch(() => {})
+  await loc.evaluate((el) => Promise.all(Array.from(el.querySelectorAll('img')).map((i) => i.complete && i.naturalWidth > 0 ? 0 : new Promise<void>((r) => { i.loading = 'eager'; i.onload = () => r(); i.onerror = () => r(); setTimeout(() => r(), 5000) })))).catch(() => {})
+  await pg.waitForTimeout(150)
   const buf = await loc.screenshot({ timeout: 15_000 }).catch(() => null)
   return buf ? PNG.sync.read(buf as Buffer) : null
 }

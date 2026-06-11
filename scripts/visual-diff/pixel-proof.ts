@@ -31,6 +31,11 @@ async function shot(pg: Page, url: string): Promise<Buffer> {
   // screenshot EMPTY (text is in the DOM but invisible). The clone uses .reveal/
   // .reveal-stagger. Pin both visible so the capture is deterministic + complete.
   await pg.addStyleTag({ content: '[data-onvisible],.anm,[class*="anm"],.reveal,.reveal-stagger,.reveal-stagger>*{opacity:1!important;transform:none!important;visibility:visible!important;animation:none!important;transition:none!important}' }).catch(() => {})
+  // Hide the Scorpion "Connect" 3rd-party webchat widget (.connect-page green panel
+  // + cta-tile launcher) — mounts nondeterministically on the live original only,
+  // and the force-reveal rule above floats its panel over content (instrument bug
+  // class #6). No clone collision. See band-gate.ts for the full rationale.
+  await pg.addStyleTag({ content: '#scorpion_connect,.connect-page,[class*="cta-tile"],[class*="ctas-tiles"]{display:none!important}' }).catch(() => {})
   // Force lazy backgrounds/images to resolve (data-src -> src). The dark bands'
   // navy watermark is a lazy <img>/<source>; without this it loads inconsistently
   // band-to-band and the gold fallback shows through, making the baseline itself

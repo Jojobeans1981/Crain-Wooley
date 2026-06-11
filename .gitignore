@@ -83,3 +83,4 @@ diff-report/**/*.png
 pixel-baselines/original/
 pixel-baselines/clone/
 pixel-baselines/diff/
+pixel-baselines/band/
