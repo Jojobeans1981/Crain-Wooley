@@ -695,11 +695,23 @@
           {
             "text": "Contact Us",
             "href": "/plano-contact-us/"
-          },
+          }
+        ]
+      },
+      {
+        "kind": "cta",
+        "heading": "Mansfield",
+        "links": [
           {
             "text": "Contact Us",
             "href": "https://outlook.office.com/book/CrainWooleyCopy3@crainwooley.law/?ismsaljsauthenabled=true"
-          },
+          }
+        ]
+      },
+      {
+        "kind": "cta",
+        "heading": "Ft Worth",
+        "links": [
           {
             "text": "Contact Us",
             "href": "https://outlook.office.com/book/CrainWooleyCopy3@crainwooley.law/?ismsaljsauthenabled=true"

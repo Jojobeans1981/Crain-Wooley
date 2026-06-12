@@ -1729,6 +1729,8 @@
 
   /* Geo/practice sidebar (sd-zn) — navy box stack. */
   .cw-fb-sidebar { font-family: var(--font-sans); }
+  /* Navy box stack (the original .sd-zn rail): staff-nav box + Download CTA + the
+     three location boxes (Plano / Mansfield / Ft Worth, split from a single feed). */
   .cw-sd { display: flex; flex-direction: column; gap: 24px; }
   .cw-sd-box { background: #304451; padding: 34px 28px; color: #fff; }
   .cw-sd-heading { font-family: var(--font-display); font-weight: 400; font-size: 1.6rem; line-height: 1.15; color: #fff; text-align: center; margin: 0 0 20px; }
