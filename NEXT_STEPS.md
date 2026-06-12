@@ -1,5 +1,24 @@
 # Crain & Wooley — Next Steps for Cutover
 
+## 🚦 DEPLOY TOPOLOGY + CUTOVER DECISION (added 2026-06-12)
+
+- **Interior-parity review URL:** `https://crain-wooley-parity-review.vercel.app`
+  (this team, deploy of `Jojobeans1981/Crain-Wooley` `main`; marketing-only, no intake
+  env, `no-store` staging-fresh, `noindex`). Re-deploy with
+  `vercel deploy --prod --scope wemovenewyorknet-8057s-projects` from `~/Crain-Wooley`.
+  Details: `docs/reference/parity-review-deploy.md`.
+- **Canonical staging:** Joseph's Vercel (`joseph-panettas-projects`) deploy of
+  `Jojobeans1981/Crain-Wooley` — confirm it now builds green (FaqBand type error +
+  missing `prisma generate` were failing every build; fixed in `a8abe5c` + `29d01d2`).
+- **DO NOT touch** `crain-wooley-intake.vercel.app` (`wemovenewyork/crain-wooley-intake`)
+  — older fork + the LIVE intake form + the `…-rose` design reference. Never repoint, never push.
+
+### ⬜ CUTOVER DECISION — which Vercel project/account serves `estateplanningdfw.law` at DNS flip
+Owner + Joseph: decide whether the live domain is served by **Joseph's Vercel**
+(`Jojobeans1981/Crain-Wooley`) or a project in this team, then migrate ALL env vars
+(Supabase, Stripe, Twilio, Clio, QStash, Resend, `NEXT_PUBLIC_SITE_INDEXABLE=true`) to
+the chosen project. The parity-review URL above carries NONE of these (marketing-only).
+
 ## ✅ COMPLETE (as of commit `30fb6c8`)
 
 - **Audit:** Full project audit against spec — see `AUDIT_REPORT.md` (generated below)

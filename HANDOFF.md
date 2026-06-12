@@ -1,5 +1,20 @@
 # Crain & Wooley — interior parity rebuild · HANDOFF
 
+## ⚠️ DEPLOY TOPOLOGY (read before touching any Vercel project)
+
+- **`Jojobeans1981/Crain-Wooley`** (this repo, `~/Crain-Wooley`) = THE APP (marketing +
+  intake). Canonical staging deploys via **Joseph's Vercel** (`joseph-panettas-projects`
+  team). Review URL for this team: **`crain-wooley-parity-review`** (see
+  `docs/reference/parity-review-deploy.md`) — marketing-only, no intake env, staging-fresh.
+- **`wemovenewyork/crain-wooley-intake`** = an OLDER fork that ALSO serves the **live
+  intake form** at `crain-wooley-intake.vercel.app` / `…-rose.vercel.app` (the design
+  reference). **NEVER repoint its Git integration to this repo and NEVER push this repo
+  over it.** Reviewing it for interior-parity work is the recurring confusion.
+- **Build gotcha (fixed 2026-06-12):** `next build` has no `ignoreBuildErrors`; a
+  FaqBand type error (FamilyBPage.tsx) was failing EVERY build → all deploys stale
+  (`a8abe5c`). Also there's no postinstall hook, so `scripts/build.mjs` now runs
+  `prisma generate` before `next build` (`29d01d2`). Keep both green.
+
 ## Session 5 (2026-06-12) — fix-list 1a–1e + verification tables (committed per unit)
 
 Proof-trio improvements (all committed): **values card** box DOM-pinned pixel-exact
