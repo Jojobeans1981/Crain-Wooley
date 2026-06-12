@@ -1393,6 +1393,13 @@
   /* Original photo is 593x519 VERTICALLY CENTERED in the taller band (measured y107
      in a 732px band) — not stretched, not top-aligned. */
   @media (min-width: 900px) { .cw-reviews-photo { align-self: center; height: 519px; min-height: 0; } }
+  /* <900px the original DROPS the testimonials photo entirely (text-only, band ~629
+     @768 vs the clone's 954 with a stacked photo) — hide it, and the text becomes a
+     NARROWER CENTERED column (orig quote x115 w538 in a 768 band), not full-width. */
+  @media (max-width: 899px) {
+    .cw-reviews-photo { display: none; }
+    .cw-reviews-left { max-width: 538px; margin-left: auto; margin-right: auto; }
+  }
   .cw-reviews-left { min-width: 0; }
   .cw-reviews-cta { margin-top: 22px; display: inline-block; }
   .cw-reviews-carousel { outline: none; }
