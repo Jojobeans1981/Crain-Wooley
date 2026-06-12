@@ -1,65 +1,65 @@
 {
   "/about-us/pricing/flat-rate-services/|desktop|banner": {
-    "status": "PENDING",
-    "residualPct": 0.0461,
-    "reason": "Geometry verified identical via computed truth: heading Cormorant 400 / 60.9px / line-height 67 / letter-spacing normal; gold ln-flr rule 686x2px under the heading; search = white pill + 55px gold circle button. Residual is the large white-heading antialiasing on the navy/watermark band.",
-    "evidence": "pixel-baselines/band/unit0/banner-sidebyside.png + banner-orig.png + banner-clone.png",
+    "status": "REJECTED",
+    "residualPct": 0.0341,
+    "reason": "Owner-rejected (pill/rule/heading were real diffs, not AA). FIXED + resubmitted: search pill rebuilt (solid-white fully-rounded 216x57 pill, italic placeholder, 55px gold button nested inside); gold rule softened to faint rgba(155,128,89,0.42) 1px; Cormorant Garamond now loaded via next/font so the heading renders 424 vs orig 423 (was 462). 4.61->3.41%. Awaiting owner re-review of the new 1:1 crops.",
+    "evidence": "~/Desktop/banner-review-flat/flatrate-desktop.png",
     "signedBy": null,
     "signedOn": null
   },
   "/staff-profiles/justin-t-crain/|desktop|banner": {
-    "status": "PENDING",
-    "residualPct": 0.0435,
-    "reason": "Same form-banner geometry as flat-rate (verified identical); residual is white-heading antialiasing.",
-    "evidence": "pixel-baselines/band/unit0/banner-sidebyside.png",
+    "status": "REJECTED",
+    "residualPct": 0.0327,
+    "reason": "Same form-banner as flat-rate desktop; same pill/rule/heading fixes. 4.35->3.27%. Awaiting owner re-review.",
+    "evidence": "~/Desktop/banner-review-flat/justin-desktop.png",
     "signedBy": null,
     "signedOn": null
   },
   "/about-us/pricing/flat-rate-services/|tablet|banner": {
-    "status": "PENDING",
-    "residualPct": 0.0448,
-    "reason": "Geometry verified: heading 41.70px (orig 41.71, matched), search pill+gold-circle 56px, band height 242 (orig 243, matched). Residual is the white-serif-heading-on-navy AA floor — same root cause as the desktop banner exception.",
-    "evidence": "~/Desktop/banner-exception-review/flat-rate/tablet/banner-sidebyside.png",
+    "status": "REJECTED",
+    "residualPct": 0.0614,
+    "reason": "Pill/rule/heading fixes applied (pill 269x58, button 56). Residual: band 248 vs 243 (5px, from the taller correct pill) + AA. 4.48->6.14% (pill is correct now but +5px tall). Awaiting owner re-review.",
+    "evidence": "~/Desktop/banner-review-flat/flatrate-tablet.png",
     "signedBy": null,
     "signedOn": null
   },
   "/about-us/pricing/flat-rate-services/|mobile|banner": {
-    "status": "PENDING",
-    "residualPct": 0.0646,
-    "reason": "Geometry verified: heading 37.8px (matched), search pill capped to a compact ~188px box. One residual metric differs: band height 224 vs orig 228 (4px) + search width 188 vs orig 170. Otherwise the white-heading AA floor.",
-    "evidence": "~/Desktop/banner-exception-review/flat-rate/mobile/banner-sidebyside.png",
+    "status": "REJECTED",
+    "residualPct": 0.033,
+    "reason": "Pill/rule/heading fixes applied (pill 170x52, button 50). 6.46->3.30%. Band 225 vs 228 (3px). Awaiting owner re-review.",
+    "evidence": "~/Desktop/banner-review-flat/flatrate-mobile.png",
     "signedBy": null,
     "signedOn": null
   },
   "/staff-profiles/justin-t-crain/|tablet|banner": {
-    "status": "PENDING",
-    "residualPct": 0.0412,
-    "reason": "Same form-banner geometry as flat-rate tablet (verified): heading 41.7px, search 56px, band 242. Residual is the white-heading AA floor.",
-    "evidence": "~/Desktop/banner-exception-review/justin/tablet/banner-sidebyside.png",
+    "status": "REJECTED",
+    "residualPct": 0.059,
+    "reason": "Same as flat-rate tablet. 4.12->5.90%. Awaiting owner re-review.",
+    "evidence": "~/Desktop/banner-review-flat/justin-tablet.png",
     "signedBy": null,
     "signedOn": null
   },
   "/staff-profiles/justin-t-crain/|mobile|banner": {
-    "status": "PENDING",
-    "residualPct": 0.0584,
-    "reason": "Same form-banner geometry as flat-rate mobile (verified). Residual: band height 224 vs 228 (4px) + white-heading AA floor.",
-    "evidence": "~/Desktop/banner-exception-review/justin/mobile/banner-sidebyside.png",
+    "status": "REJECTED",
+    "residualPct": 0.03,
+    "reason": "Same as flat-rate mobile. 5.84->3.00%. Awaiting owner re-review.",
+    "evidence": "~/Desktop/banner-review-flat/justin-mobile.png",
     "signedBy": null,
     "signedOn": null
   },
   "/allen/|mobile|banner": {
-    "status": "PENDING",
-    "residualPct": 0.0474,
-    "reason": "Geo banner (no search box): heading 37.8px matched. Band height 140 vs orig 145 (5px residual). Otherwise the white-heading AA floor.",
-    "evidence": "~/Desktop/banner-exception-review/allen/mobile/banner-sidebyside.png",
+    "status": "REJECTED",
+    "residualPct": 0.0477,
+    "reason": "Geo banner (no search): heading font fix applied. 4.74->4.77% (band 139 vs 145, 6px). Awaiting owner re-review.",
+    "evidence": "~/Desktop/banner-review-flat/allen-mobile.png",
     "signedBy": null,
     "signedOn": null
   },
   "/allen/|tablet|banner": {
-    "status": "PENDING",
-    "residualPct": 0.0611,
-    "reason": "Geo banner (no search box): heading 41.7px matched. One metric differs — band height 144 vs orig 151 (7px, the no-search banner's top/bottom padding); flagged for owner: accept as AA-floor exception OR a small padding fix. Residual otherwise the white-heading AA floor.",
-    "evidence": "~/Desktop/banner-exception-review/allen/tablet/banner-sidebyside.png",
+    "status": "REJECTED",
+    "residualPct": 0.0619,
+    "reason": "Geo banner: heading font fix applied. Band 143 vs 151 (8px, no-search padding). Awaiting owner re-review or a small padding fix.",
+    "evidence": "~/Desktop/banner-review-flat/allen-tablet.png",
     "signedBy": null,
     "signedOn": null
   }

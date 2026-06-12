@@ -28,7 +28,13 @@ const VPS = [{ n: 'desktop', w: 1440, h: 900 }, { n: 'tablet', w: 768, h: 1024 }
 const STRUCT_TOL = 0.01, TEXT_TOL = 0.05
 
 type Rect = { x: number; y: number; w: number; h: number }
-type BandDef = { key: string; tier: 'structure' | 'text'; clone: string; orig: string }
+// `origClipBoxes`: when the original band element is a COLUMN that spans far past its
+// visible content (e.g. the geo sidebar `.sd-zn` is as tall as the whole article —
+// boxes in the top ~1858px, empty below to ~5934px), clip the orig crop to the
+// bottom of its real boxes so the empty column isn't diffed against the clone's
+// box-stack-height crop. Selector matches the box children whose union defines the
+// content region.
+type BandDef = { key: string; tier: 'structure' | 'text'; clone: string; orig: string; origClipBoxes?: string }
 // Per-page ordered band maps (clone selector <-> original selector). Selector is
 // the first match. Order is top->bottom so the scorecard reads down the page.
 const PAGES: Record<string, BandDef[]> = {
@@ -46,7 +52,7 @@ const PAGES: Record<string, BandDef[]> = {
   '/allen/': [
     { key: 'banner', tier: 'structure', clone: '.legacy-banner', orig: '#BannerV1, [id^="Banner"], .bnr' },
     { key: 'badge', tier: 'structure', clone: '.cw-badges-interior', orig: '#AwardsS1, .aws' },
-    { key: 'sidebar', tier: 'structure', clone: '.cw-fb-sidebar', orig: '.sd-zn' },
+    { key: 'sidebar', tier: 'structure', clone: '.cw-fb-sidebar', orig: '.sd-zn', origClipBoxes: '.sd-nv, .sd-cta' },
     { key: 'intro+body', tier: 'text', clone: '.cw-fb-content', orig: '#TwoColumnLayout .cnt-zn, #TwoColumnLayout' },
     { key: 'testimonials', tier: 'structure', clone: '.cw-reviews', orig: '#ReviewsS8, .rvw' },
     { key: 'values', tier: 'structure', clone: '.cw-values', orig: '#ValuesV2' },
@@ -66,7 +72,7 @@ const masks: Record<string, Rect[]> = existsSync('scripts/visual-diff/band-masks
 // here as PENDING (awaiting owner crop review) or SIGNED. It NEVER bends the <1%
 // gate — it relabels a FAIL as EXCEPTION-PENDING/SIGNED so the scorecard tracks it
 // honestly. docs/reference/exceptions.md carries the human-readable evidence.
-type Exc = { status: 'PENDING' | 'SIGNED'; residualPct?: number; reason?: string; evidence?: string }
+type Exc = { status: 'PENDING' | 'SIGNED' | 'REJECTED'; residualPct?: number; reason?: string; evidence?: string }
 const exceptions: Record<string, Exc> = existsSync('scripts/visual-diff/exceptions.json') ? JSON.parse(readFileSync('scripts/visual-diff/exceptions.json', 'utf8')) : {}
 
 // Prepare a page for band-element screenshots: navigate, scroll-reveal, force
@@ -92,7 +98,7 @@ async function prep(pg: Page, url: string): Promise<void> {
 }
 // Screenshot a single band ELEMENT directly (Playwright clips its bbox + scrolls
 // it into view) — avoids fullPage relayout coordinate skew. null if not found.
-async function bandShot(pg: Page, sel: string): Promise<PNG | null> {
+async function bandShot(pg: Page, sel: string, clipBoxes?: string): Promise<PNG | null> {
   const loc = pg.locator(sel).first()
   if (!(await loc.count())) return null
   const box = await loc.boundingBox().catch(() => null)
@@ -120,7 +126,26 @@ async function bandShot(pg: Page, sel: string): Promise<PNG | null> {
     await pg.waitForTimeout(250)
   }
   const buf = await loc.screenshot({ timeout: 15_000 }).catch(() => null)
-  return buf ? PNG.sync.read(buf as Buffer) : null
+  if (!buf) return null
+  const png = PNG.sync.read(buf as Buffer)
+  // Clip a too-tall column crop to the bottom of its real boxes (e.g. sidebar.sd-zn).
+  if (clipBoxes) {
+    const contentH = await loc.evaluate((el, csel) => {
+      const top = el.getBoundingClientRect().top
+      let max = 0
+      for (const b of Array.from(el.querySelectorAll(csel as string))) {
+        const r = (b as Element).getBoundingClientRect()
+        if (r.height > 8) max = Math.max(max, r.bottom - top)
+      }
+      return Math.round(max)
+    }, clipBoxes).catch(() => 0)
+    if (contentH > 8 && contentH < png.height) {
+      const clipped = new PNG({ width: png.width, height: contentH })
+      for (let y = 0; y < contentH; y++) for (let x = 0; x < png.width; x++) { const i = (png.width * y + x) << 2; clipped.data[i] = png.data[i]; clipped.data[i + 1] = png.data[i + 1]; clipped.data[i + 2] = png.data[i + 2]; clipped.data[i + 3] = png.data[i + 3] }
+      return clipped
+    }
+  }
+  return png
 }
 // Place src top-left into a (w x h) white canvas.
 function pad(src: PNG, w: number, h: number): PNG { const o = new PNG({ width: w, height: h }); o.data.fill(255); for (let y = 0; y < Math.min(h, src.height); y++) for (let x = 0; x < Math.min(w, src.width); x++) { const si = (src.width * y + x) << 2, di = (w * y + x) << 2; o.data[di] = src.data[si]; o.data[di + 1] = src.data[si + 1]; o.data[di + 2] = src.data[si + 2]; o.data[di + 3] = src.data[si + 3] } return o }
@@ -138,7 +163,7 @@ async function main() {
       await prep(pgC, CLONE + path)
       await prep(pgO, ORIG + path)
       for (const bd of bands) {
-        const cCrop = await bandShot(pgC, bd.clone), oCrop = await bandShot(pgO, bd.orig)
+        const cCrop = await bandShot(pgC, bd.clone), oCrop = await bandShot(pgO, bd.orig, bd.origClipBoxes)
         if (!cCrop || !oCrop) { scorecard.push({ page: path, vp: vp.n, band: bd.key, tier: bd.tier, pct: null, pass: false, note: !cCrop ? 'clone band not found' : 'orig band not found' }); continue }
         const W = Math.max(cCrop.width, oCrop.width), H = Math.max(cCrop.height, oCrop.height)
         const a = pad(oCrop, W, H), c = pad(cCrop, W, H)
@@ -156,7 +181,8 @@ async function main() {
         const tol = bd.tier === 'text' ? TEXT_TOL : STRUCT_TOL
         writeFileSync(`pixel-baselines/band/diff/${slug}-${vp.n}-${bd.key}.png`, PNG.sync.write(diff))
         const exc = exceptions[`${path}|${vp.n}|${bd.key}`]
-        const classification = pct < tol ? 'PASS' : exc ? `EXCEPTION-${exc.status}` : 'FAIL'
+        // A REJECTED exception is owner-rejected — it reverts to FAIL, never an exception.
+        const classification = pct < tol ? 'PASS' : (exc && exc.status !== 'REJECTED') ? `EXCEPTION-${exc.status}` : 'FAIL'
         scorecard.push({ page: path, vp: vp.n, band: bd.key, tier: bd.tier, pct, pass: pct < tol, classification, tol, maskAreaPct: maskArea, cloneH: cCrop.height, origH: oCrop.height })
       }
       await pgC.close(); await pgO.close()
