@@ -42,7 +42,10 @@ function Banner({ page }: { page: FamilyBData }) {
 }
 
 // Two-column intro: lede beside the framed photo, then the remaining body.
-function Intro({ band }: { band: Extract<Band, { kind: 'intro' }> }) {
+// `subhead` (when supplied) is the following accordion's instruction, hoisted to
+// sit between the heading and the lede — the original's source order on the pricing
+// pages (heading y0 / "Expand Each Section…" H5 y167 / lede y242).
+function Intro({ band, subhead }: { band: Extract<Band, { kind: 'intro' }>; subhead?: string }) {
   let lede = band.image ? band.blocks.slice(0, 3) : []
   const cut = lede.findIndex((b) => b.type === 'h2' || b.type === 'h3')
   if (cut > 0) lede = lede.slice(0, cut)
@@ -53,6 +56,7 @@ function Intro({ band }: { band: Extract<Band, { kind: 'intro' }> }) {
       <div className={`cw-fb-intro-grid${band.image ? '' : ' cw-fb-intro-grid--noimg'}`}>
         <div className="cw-fb-intro-copy">
           {band.heading && <h2 className="cw-fb-h1">{band.heading}</h2>}
+          {subhead && <h5 className="cw-fb-subhead">{subhead}</h5>}
           {lede.map((b, i) => <Block key={i} block={b} k={i} />)}
         </div>
         {band.image && (
@@ -68,13 +72,15 @@ function Intro({ band }: { band: Extract<Band, { kind: 'intro' }> }) {
 }
 
 // A flow band (intro / prose / collapsed accordion) inside the content column.
-function FlowBand({ band }: { band: Band }) {
-  if (band.kind === 'intro') return <Intro band={band} />
+// `introSubhead` hoists the accordion instruction into the intro; `suppressInstruction`
+// stops the accordion from rendering it a second time once it has been hoisted.
+function FlowBand({ band, introSubhead, suppressInstruction }: { band: Band; introSubhead?: string; suppressInstruction?: boolean }) {
+  if (band.kind === 'intro') return <Intro band={band} subhead={introSubhead} />
   if (band.kind === 'prose') return <div className="cw-fb-body">{band.blocks.map((b, i) => <Block key={i} block={b} k={i} />)}</div>
   if (band.kind === 'accordion') return (
     <div className="cw-fb-accgroup">
       {band.heading && <h2 className="cw-h2 cw-fb-acc-heading">{band.heading}</h2>}
-      {band.instruction && <p className="cw-fb-instruction">{band.instruction}</p>}
+      {band.instruction && !suppressInstruction && <p className="cw-fb-instruction">{band.instruction}</p>}
       <Accordion items={band.items} />
     </div>
   )
@@ -91,13 +97,18 @@ function ContentSection({ bands, sidebar }: { bands: Band[]; sidebar?: SidebarBl
   // unaffected.
   const first = bands[0]
   const introSplit = !sidebar && first?.kind === 'intro' && !!(first as Extract<Band, { kind: 'intro' }>).image && bands.some((b) => b.kind === 'accordion')
+  // On the introsplit (pricing) pages the original renders the accordion's
+  // instruction as an H5 subhead between the intro heading and the lede. Hoist it
+  // into the intro and suppress it on the accordion so it shows exactly once.
+  const acc = introSplit ? (bands.find((b) => b.kind === 'accordion' && (b as Extract<Band, { kind: 'accordion' }>).instruction) as Extract<Band, { kind: 'accordion' }> | undefined) : undefined
+  const hoist = acc?.instruction
   return (
-    <section className="cw-fb-main">
+    <section className={`cw-fb-main${introSplit ? ' cw-fb-main--introsplit' : ''}`}>
       <div className="cw-container">
         <div className={`cw-fb-layout${sidebar ? ' cw-fb-layout--left' : ' cw-fb-layout--full'}`}>
           {sidebar && <aside className="cw-fb-sidebar"><Sidebar blocks={sidebar} /></aside>}
           <div className={`cw-fb-content${introSplit ? ' cw-fb-content--introsplit' : ''}`}>
-            {bands.map((b, i) => <FlowBand key={i} band={b} />)}
+            {bands.map((b, i) => <FlowBand key={i} band={b} introSubhead={hoist && b === first ? hoist : undefined} suppressInstruction={!!hoist && b === acc} />)}
           </div>
         </div>
       </div>

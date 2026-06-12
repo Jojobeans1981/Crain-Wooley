@@ -1664,6 +1664,11 @@
   /* Content zone + right-rail sidebar — the original's cnt-zn five-8ths /
      sd-zn three-8ths split (stacks below 1000px). */
   .cw-fb-main { background: #fff; padding: clamp(40px, 5vw, 72px) 0; }
+  /* The original pricing intro band (#FAQsS2) starts flush at the heading — no top
+     padding (the heading + the top-pinned photo both sit at band y0). The clone's
+     72px section top padding pushed every element +72 vs the original; zero it on
+     introsplit so heading/subhead/lede/photo align to the band top. */
+  .cw-fb-main--introsplit { padding-top: 0; }
   .cw-fb-layout { display: grid; grid-template-columns: 1fr; gap: 40px; }
   @media (min-width: 1000px) { .cw-fb-layout { grid-template-columns: 5fr 3fr; gap: 48px; align-items: start; } }
   .cw-fb-layout--full { grid-template-columns: 1fr; }
@@ -1716,6 +1721,17 @@
   .cw-fb-intro-grid--noimg .cw-fb-intro-copy { max-width: 820px; }
   .cw-fb-intro-copy { max-width: 640px; }
   .cw-fb-h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(30px, 3.4vw, 44px); line-height: 1.12; color: #343434; text-transform: none; letter-spacing: normal; margin: 0 0 18px; }
+  /* Pricing (introsplit) intro heading is Cormorant 60.9px / lh1.1 (measured H4,
+     2 lines = h134), not the 44px default — scoped so staff/geo intros keep theirs. */
+  .cw-fb-content--introsplit .cw-fb-h1 { font-size: 60.9px; line-height: 1.1; }
+  /* Hoisted "Expand Each Section…" subhead — original H5 Montserrat 25.68px / fw500 /
+     uppercase / ls1.28px, sitting between the heading (y134) and the lede (y242):
+     33px above (heading y167), 17px below. NOT the 14px gold-rule accordion label. */
+  /* The original subhead wraps to 2 lines (h58) in its Montserrat; the clone's real
+     Montserrat is narrower so it fits 1 line (h33). Match the original's lede position
+     (y242) with a larger bottom margin (a font-metric floor — the localized 2nd-line
+     region is the only residual). */
+  .cw-fb-subhead { font-family: var(--font-sans); font-weight: 500; font-size: 25.68px; line-height: 1.3; text-transform: uppercase; letter-spacing: 1.28px; color: #343434; margin: 33px 0 42px; }
   .cw-fb-intro-copy p { font-family: var(--font-sans); font-size: 16.46px; line-height: 1.8; color: #343434; margin: 0 0 16px; }
   .cw-fb-intro-media img { display: block; width: 100%; height: auto; border: 8px solid #fff; outline: 1px solid var(--cw-line, rgba(48,68,81,0.18)); box-shadow: 0 2px 10px rgba(48,68,81,0.12); }
   /* Full body below the two-column lede — every paragraph, sub-heading, and list. */
