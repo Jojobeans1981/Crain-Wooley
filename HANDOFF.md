@@ -181,6 +181,21 @@ zsh globs `[id^=..]`). unit0-crop-verify.ts emits all 7 flat-rate band crops.
    Always `rm -rf .next` + restart dev before measuring after a CSS edit, or verify a
    computed style first (`getComputedStyle`).
 
+## <900px STACKING RULE (default for the 149 batch — verified design-system behavior)
+
+Below 900px the original collapses every multi-column band to a SINGLE NARROW CENTERED
+column and DROPS side imagery:
+- **Drop** the side photo/feature image (testimonials, intro) — it's display:none'd
+  (often a lazy background-image at desktop, so `<img>` probes read "no photo" —
+  confirm via a crop, not an img query).
+- **Collapse** to one column, **centered**, ~**538px @768** / ~**340px @390** (cap the
+  content/grid at `max-width: 538px; margin-inline: auto`).
+- **Footer** specifically: the 3-up column grid is desktop-only — it stacks <1000px
+  into the same 538-centered single column (raise the grid breakpoint to >=1000).
+This is the DEFAULT; for each of the 149, the check is per-band BASELINE VERIFICATION
+(does this band actually drop imagery / re-width at <900 on the original?), not
+re-discovery. Confirmed on testimonials (e9347c3), footer (3a836f7), intro (f56c4d3).
+
 ## Model
 
 Interior pages render a source-order `bands[]` model (`lib/legacy/family-b`):
