@@ -105,6 +105,20 @@ async function bandShot(pg: Page, sel: string): Promise<PNG | null> {
   await loc.scrollIntoViewIfNeeded().catch(() => {})
   await loc.evaluate((el) => Promise.all(Array.from(el.querySelectorAll('img')).map((i) => i.complete && i.naturalWidth > 0 ? 0 : new Promise<void>((r) => { i.loading = 'eager'; i.onload = () => r(); i.onerror = () => r(); setTimeout(() => r(), 5000) })))).catch(() => {})
   await pg.waitForTimeout(150)
+  // Poll the band HEIGHT until it stabilizes (2 consecutive equal reads) before the
+  // screenshot. Late-settling bands — notably the footer, whose legal strip + cover
+  // background-image lay out after first paint — otherwise capture SHORT and
+  // nondeterministically (the original #FooterZone read 854px on allen/justin vs its
+  // true 960). Background-images aren't <img>, so the per-band img-settle above can't
+  // catch them; height-stability does.
+  let lastH = -1
+  for (let i = 0; i < 12; i++) {
+    const bb = await loc.boundingBox().catch(() => null)
+    const h = bb ? Math.round(bb.height) : -1
+    if (h === lastH && h > 0) break
+    lastH = h
+    await pg.waitForTimeout(250)
+  }
   const buf = await loc.screenshot({ timeout: 15_000 }).catch(() => null)
   return buf ? PNG.sync.read(buf as Buffer) : null
 }
