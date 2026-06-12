@@ -205,7 +205,11 @@ export function ReviewsSection() {
     <section className="cw-reviews" aria-label="Client testimonials">
       <div className="cw-container cw-reviews-grid reveal">
         <div className="cw-reviews-photo">
-          <Image src="/interior/reviews-photo.png" alt="" fill sizes="(max-width: 900px) 100vw, 460px" style={{ objectFit: 'cover' }} />
+          {/* unoptimized: serve the raw 1264x1107 PNG so the browser downscales it to
+              the 593px column EXACTLY as the original does (the original serves the same
+              full-res PNG). Next's optimizer was downscaling to a soft q75 ~460px variant
+              — the dominant testimonials-photo diff (19.9% of the left half). */}
+          <Image src="/interior/reviews-photo.png" alt="" fill sizes="(max-width: 900px) 100vw, 593px" quality={100} unoptimized style={{ objectFit: 'contain' }} />
         </div>
         <div className="cw-reviews-left">
           <Testimonials reviews={FEATURED_REVIEWS} />

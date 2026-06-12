@@ -1392,10 +1392,15 @@
   .cw-reviews-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr; gap: 36px; align-items: start; }
   /* Original photo is 593px (41.2%) wide @1440; quote column narrower. Was 1:1.25
      (photo 553px) -> 1:1.1 puts the photo at ~592px to match. */
-  @media (min-width: 900px) { .cw-reviews-grid { grid-template-columns: 1fr 1.1fr; gap: 52px; } }
-  .cw-reviews-photo { position: relative; min-height: 300px; align-self: stretch; border: 6px solid rgba(255,255,255,0.12); }
-  /* Original photo is 593x519 VERTICALLY CENTERED in the taller band (measured y107
-     in a 732px band) — not stretched, not top-aligned. */
+  /* Original #ReviewsS8 is the SAME grid as values: two equal 593px columns + 110px
+     gap (photo x72-665, quote x775-1368). Clone was 1fr/1.1fr + 52px (photo 580 /
+     quote 652) — wrong widths + x-positions, and the wider quote column under-wrapped. */
+  @media (min-width: 900px) { .cw-reviews-grid { grid-template-columns: 1fr 1fr; gap: 110px; } }
+  .cw-reviews-photo { position: relative; min-height: 300px; align-self: stretch; }
+  /* Original photo (settled band capture) is 593x519, NO border (the 1264x1107 image,
+     aspect 1.142, fits 593x519 exactly). The clone's 6px white border inset the img to
+     581x508 and misregistered the detailed photo — removing it lets the img fill 593x519
+     at x72 (orig x70), aligning the photo. */
   @media (min-width: 900px) { .cw-reviews-photo { align-self: center; height: 519px; min-height: 0; } }
   /* <900px the original DROPS the testimonials photo entirely (text-only, band ~629
      @768 vs the clone's 954 with a stacked photo) — hide it, and the text becomes a
@@ -1413,9 +1418,11 @@
   .cw-review { display: none; margin: 0; }
   .cw-review-active { display: block; }
   .cw-review-stars { color: #fff; font-size: 1.4rem; letter-spacing: 3px; margin-bottom: 16px; }
-  .cw-review-title { font-family: var(--font-display); font-weight: 700; font-size: 1.75rem; color: #fff; margin: 0 0 16px; }
-  .cw-review-quote { font-family: var(--font-sans); font-size: 1.0625rem; line-height: 1.75; color: rgba(255,255,255,0.94); margin: 0 0 18px; border: none; }
-  .cw-review-name { font-family: var(--font-sans); font-weight: 600; font-size: 0.9375rem; letter-spacing: 0.04em; color: #fff; }
+  /* Leaf-matched to the original carousel slide: title Cormorant 29.2px, quote +
+     name Montserrat 16.46px (clone was 28/17.48/15.42 — title small, quote too big). */
+  .cw-review-title { font-family: var(--font-display); font-weight: 700; font-size: 29.2px; color: #fff; margin: 0 0 16px; }
+  .cw-review-quote { font-family: var(--font-sans); font-size: 16.46px; line-height: 1.8; color: rgba(255,255,255,0.94); margin: 0 0 18px; border: none; }
+  .cw-review-name { font-family: var(--font-sans); font-weight: 600; font-size: 16.46px; letter-spacing: 0.04em; color: #fff; }
   /* wrap so the dot row (one dot per review) can't overflow narrow viewports */
   .cw-reviews-controls { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 12px 16px; margin-top: 26px; }
   .cw-reviews-arrow { width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; color: #fff; background: transparent; border: 1px solid var(--cw-line-on-slate); cursor: pointer; transition: border-color .15s, color .15s; }
