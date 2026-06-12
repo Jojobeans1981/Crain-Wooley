@@ -65,3 +65,24 @@ Scorpion feed, like cards/schedule).
 ## allen sidebar — navy box stack built (5 boxes incl. 3-location split); see exceptions.md.
 Residual is the ui-repeater JS-feed divergence + the desktop empty-column capture
 artifact (orig .sd-zn spans the 5934px article column). Owner decision: harness fix or mask.
+
+## AA-classifier adjudication (2026-06-12) — desktop bands
+
+Ran `scripts/visual-diff/aa-classifier.ts` (height-match + per-row diff distribution).
+A band is exception-eligible ONLY if height matches AND the diff is spatially DISTRIBUTED
++ thin (true sub-pixel AA). Result — **none qualify; all NEEDS-FIX with a real cause:**
+
+| Band (flat-rate desktop) | diff% | heightΔ | rowMax% | verdict + cause |
+| --- | --- | --- | --- | --- |
+| intro+body | 6.03 | −31px | 87.8 | NEEDS-FIX — 31px content-height gap (subhead wraps 1 line in clone real-Montserrat vs 2 in orig; lede + body cascade). |
+| values | 15.85 | −2 | 100 | NEEDS-FIX — card box pixel-exact, but the left head column's eyebrow wraps 1 line (clone) vs 2 (orig) → heading column offset; full-width rows of complete mismatch. |
+| faq | 15.28 | 0 | 100 | NEEDS-FIX — 20 collapsed gold bars accumulate ~3px/bar; bar edges misregister (concentrated 100% rows), not AA. |
+| testimonials | 13.53 | 3 | 100 | NEEDS-FIX — grid + photo matched, but the quote text wraps/positions differently → concentrated rows. |
+| footer | 6.85 | 2 | 95 | NEEDS-FIX — per-page padding now correct; residual is the footer-column content (logo/links/locations) line offsets. |
+
+**Conclusion:** the 6–16% desktop residuals are NOT a sub-pixel AA floor — they are real
+(if small) layout/content differences (font-metric line-wraps, bar accumulation, text
+reflow). They are NOT exception-eligible under the verification-table standard; reaching
+PASS requires per-element fixes (the font-wrap floors resist CSS without fragile forced
+wraps). This matches the owner's banner rejection (a "geometry-verified" claim that did
+not survive human review). Recommend owner adjudication OR a focused deep-dive per band.
