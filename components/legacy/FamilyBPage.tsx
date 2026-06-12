@@ -195,11 +195,21 @@ function BandPage({ page }: { page: FamilyBData }) {
     else out.push(<FaqBand key={`b${i}`} band={b} />)
   })
   flush()
+  // Footer top-padding parity (matches the original's `main:has(> section:last-child
+  // :is(.pd_v.alt-bg, …))` rule). The original wraps a TRAILING testimonials→schedule
+  // pair into a no-pad `img-grp` group, so the footer KEEPS its 106px top padding;
+  // every other ending leaves a self-padded closer (`pd_v`) as the last section,
+  // collapsing the footer top padding to 0. Emit a marker for the flush case; the
+  // global footer CSS reads `.cw-page:has(.cw-foot-flush)`.
+  const last = bands[bands.length - 1]
+  const prev = bands[bands.length - 2]
+  const groupedClose = !!prev && prev.kind === 'closer' && prev.which === 'testimonials' && !!last && last.kind === 'closer' && last.which === 'schedule'
   return (
     <>
       <Banner page={page} />
       {page.badgeStrip && <BadgeStrip />}
       {out}
+      {!groupedClose && <span className="cw-foot-flush" hidden aria-hidden="true" />}
     </>
   )
 }

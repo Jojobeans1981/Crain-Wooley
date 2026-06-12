@@ -1176,7 +1176,13 @@
   /* Original navy footer band (#FooterV1) is 781px: 106px top/bottom padding around
      a ~568px columns row. Match that padding + the taller logo + column spacing so
      the footer reaches the original's ~960px without the invented tagline bar. */
-  .cw-footer-grid { display: grid; grid-template-columns: 1fr; gap: 40px; padding-top: 106px; padding-bottom: 100px; }
+  /* Footer vertical padding matches the original .ftr `pd_v` clamp (106.5 desktop /
+     58.4 tablet / 39 mobile = clamp(39px, 7.6vw, 106.5px)), top AND bottom. */
+  .cw-footer-grid { display: grid; grid-template-columns: 1fr; gap: 40px; padding-top: clamp(39px, 7.6vw, 106.5px); padding-bottom: clamp(39px, 7.6vw, 106.5px); }
+  /* Footer top-padding parity: the original keeps the top padding only when the page's
+     last section is a no-pad reviews+schedule group; pages ending in a self-padded
+     closer collapse it to 0. BandPage emits .cw-foot-flush for that case. */
+  .cw-page:has(.cw-foot-flush) .cw-footer-grid { padding-top: 0; }
   /* <1000px the original STACKS the footer columns into a single centered ~538px
      column (measured: orig 3 cols all x115 w538 @768, vs the clone's 3-across). The
      3-up grid is desktop-only. */
@@ -1191,6 +1197,9 @@
   .cw-footer-head { font-family: var(--font-display); font-size: 28px; font-weight: 700; color: var(--cw-on-slate); margin: 0 0 18px; padding-bottom: 8px; position: relative; }
   .cw-footer-head::after { content: ""; position: absolute; left: 0; bottom: 0; width: 46px; height: 2px; background: var(--cw-gold); }
   .cw-footer-links { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 28px; list-style: none; margin: 0; padding: 0; }
+  /* At mobile (<600px) the original lays the links in a SINGLE column (taller); at
+     tablet it stays 2-up. (Matching this closes the footer mobile height gap.) */
+  @media (max-width: 599px) { .cw-footer-links { grid-template-columns: 1fr; } }
   .cw-footer-links a { font-family: var(--font-sans); font-size: 15px; color: var(--cw-on-slate-mute); text-decoration: none; padding: 8px 0; display: inline-block; }
   .cw-footer-links a:hover { color: var(--cw-gold-soft); }
   /* Original Locations column is 568px (the tallest, drives the navy row); clone's
