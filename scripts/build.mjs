@@ -19,7 +19,15 @@ function run(scriptPath, args) {
 }
 
 function main() {
+  const prismaBin = path.join(root, 'node_modules', 'prisma', 'build', 'index.js')
   const nextBin = path.join(root, 'node_modules', 'next', 'dist', 'bin', 'next')
+
+  // Generate the Prisma client before building. There is no postinstall hook, so a
+  // fresh CI/Vercel install otherwise leaves @prisma/client ungenerated and `next
+  // build` (which compiles the admin/intake routes importing it) fails. `prisma
+  // generate` only reads the schema — it does NOT need DATABASE_URL.
+  const genStatus = run(prismaBin, ['generate'])
+  if (genStatus !== 0) process.exit(genStatus)
 
   console.warn('prisma migrate deploy skipped - run separately when the database is reachable')
 
