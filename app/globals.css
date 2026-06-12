@@ -1450,6 +1450,11 @@
   /* Closer headings are mixed-case Cormorant serif (overrides the uppercase
      Montserrat .cw-page h2 rule used for section heads). */
   .cw-values-head .cw-h2-light, .cw-locations .cw-h2-light { font-family: var(--font-display); text-transform: none; font-weight: 400; letter-spacing: normal; }
+  /* Original values heading is Cormorant 60.9px lh1.1 -> wraps to 3 lines (h222), so
+     the left column is 316px and centers at y353. The clone capped at 40px (1 line,
+     col 150px) -> the head-column centered 84px too LOW. Scoped to values so faq /
+     schedule headings keep their own sizes. */
+  .cw-values-head .cw-h2-light { font-size: clamp(40px, 5vw, 60.9px); line-height: 1.1; }
   .cw-values-head .cw-h2-light { color: #fff; }
   /* Original "Contact Us" is a GOLD-fill, white-text, square button (#9B8059,
      ~141x53, radius 0) — not the clone's white fill. */
