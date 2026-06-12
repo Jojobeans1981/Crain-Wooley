@@ -108,12 +108,12 @@
     "vp": "desktop",
     "band": "footer",
     "tier": "structure",
-    "pct": 0.06298032407407407,
+    "pct": 0.06862367174867175,
     "pass": false,
     "classification": "FAIL",
     "tol": 0.01,
     "maskAreaPct": 0,
-    "cloneH": 955,
+    "cloneH": 962,
     "origH": 960
   },
   {
@@ -121,7 +121,7 @@
     "vp": "tablet",
     "band": "banner",
     "tier": "structure",
-    "pct": 0.061434181787634407,
+    "pct": 0.06139217909946237,
     "pass": false,
     "classification": "FAIL",
     "tol": 0.01,
@@ -225,12 +225,12 @@
     "vp": "tablet",
     "band": "footer",
     "tier": "structure",
-    "pct": 0.11878725330823636,
+    "pct": 0.10726669272643038,
     "pass": false,
     "classification": "FAIL",
     "tol": 0.01,
     "maskAreaPct": 0,
-    "cloneH": 1461,
+    "cloneH": 1372,
     "origH": 1439
   },
   {
@@ -342,12 +342,12 @@
     "vp": "mobile",
     "band": "footer",
     "tier": "structure",
-    "pct": 0.12245748638235684,
+    "pct": 0.11667586599093449,
     "pass": false,
     "classification": "FAIL",
     "tol": 0.01,
     "maskAreaPct": 0,
-    "cloneH": 1544,
+    "cloneH": 1533,
     "origH": 1493
   },
   {
@@ -446,12 +446,12 @@
     "vp": "desktop",
     "band": "footer",
     "tier": "structure",
-    "pct": 0.14722440144119014,
+    "pct": 0.06665368639667706,
     "pass": false,
     "classification": "FAIL",
     "tol": 0.01,
     "maskAreaPct": 0,
-    "cloneH": 956,
+    "cloneH": 856,
     "origH": 854
   },
   {
@@ -550,12 +550,12 @@
     "vp": "tablet",
     "band": "footer",
     "tier": "structure",
-    "pct": 0.1410028804471823,
+    "pct": 0.09949481806661839,
     "pass": false,
     "classification": "FAIL",
     "tol": 0.01,
     "maskAreaPct": 0,
-    "cloneH": 1461,
+    "cloneH": 1313,
     "origH": 1381
   },
   {
@@ -654,12 +654,12 @@
     "vp": "mobile",
     "band": "footer",
     "tier": "structure",
-    "pct": 0.14023068625010374,
+    "pct": 0.12001029071263185,
     "pass": false,
     "classification": "FAIL",
     "tol": 0.01,
     "maskAreaPct": 0,
-    "cloneH": 1545,
+    "cloneH": 1495,
     "origH": 1454
   },
   {
@@ -680,7 +680,7 @@
     "vp": "desktop",
     "band": "intro+body",
     "tier": "text",
-    "pct": 0.09146022786662486,
+    "pct": 0.09145957457928296,
     "pass": false,
     "classification": "FAIL",
     "tol": 0.05,
@@ -706,12 +706,12 @@
     "vp": "desktop",
     "band": "footer",
     "tier": "structure",
-    "pct": 0.14721931355439208,
+    "pct": 0.06553089304257528,
     "pass": false,
     "classification": "FAIL",
     "tol": 0.01,
     "maskAreaPct": 0,
-    "cloneH": 955,
+    "cloneH": 856,
     "origH": 854
   },
   {
@@ -758,12 +758,12 @@
     "vp": "tablet",
     "band": "footer",
     "tier": "structure",
-    "pct": 0.14090217174309833,
+    "pct": 0.09937601828385229,
     "pass": false,
     "classification": "FAIL",
     "tol": 0.01,
     "maskAreaPct": 0,
-    "cloneH": 1461,
+    "cloneH": 1313,
     "origH": 1381
   },
   {
@@ -810,12 +810,12 @@
     "vp": "mobile",
     "band": "footer",
     "tier": "structure",
-    "pct": 0.14029873039581778,
+    "pct": 0.12022468055912872,
     "pass": false,
     "classification": "FAIL",
     "tol": 0.01,
     "maskAreaPct": 0,
-    "cloneH": 1545,
+    "cloneH": 1495,
     "origH": 1454
   }
 ]
