@@ -1388,7 +1388,9 @@
      (photo 553px) -> 1:1.1 puts the photo at ~592px to match. */
   @media (min-width: 900px) { .cw-reviews-grid { grid-template-columns: 1fr 1.1fr; gap: 52px; } }
   .cw-reviews-photo { position: relative; min-height: 300px; align-self: stretch; border: 6px solid rgba(255,255,255,0.12); }
-  @media (min-width: 900px) { .cw-reviews-photo { min-height: 460px; } }
+  /* Original photo is 593x519 VERTICALLY CENTERED in the taller band (measured y107
+     in a 732px band) — not stretched, not top-aligned. */
+  @media (min-width: 900px) { .cw-reviews-photo { align-self: center; height: 519px; min-height: 0; } }
   .cw-reviews-left { min-width: 0; }
   .cw-reviews-cta { margin-top: 22px; display: inline-block; }
   .cw-reviews-carousel { outline: none; }
