@@ -1654,6 +1654,21 @@
     margin: 22px auto 0;
     background: var(--cw-gold);
   }
+  /* Tablet/mobile banner heading: the original scales larger than the clone's
+     clamp(34px,5vw,61px) below 900px — measured 41.7px @768, 37.8px @390. Scoped to
+     <900px so the EXCEPTION-PENDING desktop (capped at the 61px max) is byte-identical. */
+  @media (max-width: 899px) {
+    .legacy-banner--navy .legacy-banner-title { font-size: clamp(37.8px, 5.43vw, 48px); }
+  }
+  /* Tablet-range only: the original's search pill + gold circle are 56px (mobile is
+     50px = clone default, desktop is the untouched exception) and the search-page band
+     runs ~14px taller (242 vs 228). Bump the search row to 56 + add bottom padding to
+     reach 242. (Allen's no-search banner overshoots ~7px but lands near the floor.) */
+  @media (min-width: 600px) and (max-width: 899px) {
+    .legacy-banner-search input, .legacy-banner-search button { height: 56px; }
+    .legacy-banner-search button { width: 56px; }
+    .legacy-banner--navy:has(.legacy-banner-search) { padding-bottom: 48px; }
+  }
   /* Banner site-search box (Form_BannerV1 pages), wired to /site-search. */
   /* Banner site-search: the original is a white PILL input with a 55px gold CIRCLE
      submit button (border-radius 50%, bg #9B8059) — a legacy-mirror element, so it
@@ -1663,6 +1678,11 @@
   .legacy-banner-search input::placeholder { color: #6b6356; }
   .legacy-banner-search button { flex: none; width: 50px; height: 50px; border-radius: 50%; background: var(--cw-gold); border: 1px solid var(--cw-gold); color: #fff; margin-left: -6px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
   .legacy-banner-search button:hover { background: var(--cw-gold-dark, #7a6444); }
+  /* Mobile: the original banner search pill is a compact ~180px centered box, not the
+     clone's near-full-width 292px. Placed after the base rule so it wins source order. */
+  @media (max-width: 599px) {
+    .legacy-banner-search { max-width: 188px; }
+  }
 
   /* ── Family-B interior template ── */
   /* Two-column intro: copy left, framed photo right. */
