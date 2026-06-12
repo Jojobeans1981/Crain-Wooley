@@ -1,0 +1,18 @@
+{
+  "/about-us/pricing/flat-rate-services/|desktop|banner": {
+    "status": "PENDING",
+    "residualPct": 0.0461,
+    "reason": "Geometry verified identical via computed truth: heading Cormorant 400 / 60.9px / line-height 67 / letter-spacing normal; gold ln-flr rule 686x2px under the heading; search = white pill + 55px gold circle button. Residual is the large white-heading antialiasing on the navy/watermark band.",
+    "evidence": "pixel-baselines/band/unit0/banner-sidebyside.png + banner-orig.png + banner-clone.png",
+    "signedBy": null,
+    "signedOn": null
+  },
+  "/staff-profiles/justin-t-crain/|desktop|banner": {
+    "status": "PENDING",
+    "residualPct": 0.0435,
+    "reason": "Same form-banner geometry as flat-rate (verified identical); residual is white-heading antialiasing.",
+    "evidence": "pixel-baselines/band/unit0/banner-sidebyside.png",
+    "signedBy": null,
+    "signedOn": null
+  }
+}

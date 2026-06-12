@@ -61,6 +61,13 @@ const PAGES: Record<string, BandDef[]> = {
   ],
 }
 const masks: Record<string, Rect[]> = existsSync('scripts/visual-diff/band-masks.json') ? JSON.parse(readFileSync('scripts/visual-diff/band-masks.json', 'utf8')) : {}
+// Owner-sign-off exception registry (keyed `<page>|<vp>|<band>`). A band whose
+// geometry verifies identical but whose residual is pure sub-pixel AA is recorded
+// here as PENDING (awaiting owner crop review) or SIGNED. It NEVER bends the <1%
+// gate — it relabels a FAIL as EXCEPTION-PENDING/SIGNED so the scorecard tracks it
+// honestly. docs/reference/exceptions.md carries the human-readable evidence.
+type Exc = { status: 'PENDING' | 'SIGNED'; residualPct?: number; reason?: string; evidence?: string }
+const exceptions: Record<string, Exc> = existsSync('scripts/visual-diff/exceptions.json') ? JSON.parse(readFileSync('scripts/visual-diff/exceptions.json', 'utf8')) : {}
 
 // Prepare a page for band-element screenshots: navigate, scroll-reveal, force
 // reveal-gated content + lazy images, settle images so layout is final.
@@ -134,7 +141,9 @@ async function main() {
         const maskArea = bm.reduce((s, r) => s + Math.max(0, r.w) * Math.max(0, r.h), 0) / (W * H)
         const tol = bd.tier === 'text' ? TEXT_TOL : STRUCT_TOL
         writeFileSync(`pixel-baselines/band/diff/${slug}-${vp.n}-${bd.key}.png`, PNG.sync.write(diff))
-        scorecard.push({ page: path, vp: vp.n, band: bd.key, tier: bd.tier, pct, pass: pct < tol, tol, maskAreaPct: maskArea, cloneH: cCrop.height, origH: oCrop.height })
+        const exc = exceptions[`${path}|${vp.n}|${bd.key}`]
+        const classification = pct < tol ? 'PASS' : exc ? `EXCEPTION-${exc.status}` : 'FAIL'
+        scorecard.push({ page: path, vp: vp.n, band: bd.key, tier: bd.tier, pct, pass: pct < tol, classification, tol, maskAreaPct: maskArea, cloneH: cCrop.height, origH: oCrop.height })
       }
       await pgC.close(); await pgO.close()
     }
@@ -143,17 +152,20 @@ async function main() {
   writeFileSync('docs/reference/band-scorecard.json', JSON.stringify(scorecard, null, 2))
   // Console scorecard
   let lastKey = ''
-  for (const r of scorecard as { page: string; vp: string; band: string; tier: string; pct: number | null; pass: boolean; tol?: number; maskAreaPct?: number; note?: string }[]) {
+  for (const r of scorecard as { page: string; vp: string; band: string; tier: string; pct: number | null; pass: boolean; classification?: string; tol?: number; maskAreaPct?: number; note?: string }[]) {
     const key = `${r.page} @ ${r.vp}`
     if (key !== lastKey) { console.log(`\n${key}`); lastKey = key }
     const pctS = r.pct == null ? r.note || '—' : `${(r.pct * 100).toFixed(2)}%`
     const tierS = r.tier === 'text' ? '≤5%' : '<1%'
     const maskS = r.maskAreaPct ? ` (mask ${(r.maskAreaPct * 100).toFixed(1)}%)` : ''
-    console.log(`  ${r.pass ? 'PASS' : 'FAIL'} ${r.band.padEnd(14)} [${tierS}] ${pctS}${maskS}`)
+    const label = r.classification === 'EXCEPTION-PENDING' ? 'EXC-PEND' : r.classification === 'EXCEPTION-SIGNED' ? 'EXC-SIGN' : r.pass ? 'PASS' : 'FAIL'
+    console.log(`  ${label.padEnd(8)} ${r.band.padEnd(14)} [${tierS}] ${pctS}${maskS}`)
   }
   const struct = scorecard.filter((r) => r.tier === 'structure')
   const text = scorecard.filter((r) => r.tier === 'text')
   const sp = struct.filter((r) => r.pass).length, tp = text.filter((r) => r.pass).length
-  console.log(`\nstructure bands: ${sp}/${struct.length} <1% | text bands: ${tp}/${text.length} ≤5%`)
+  const excP = scorecard.filter((r) => (r as { classification?: string }).classification === 'EXCEPTION-PENDING').length
+  const excS = scorecard.filter((r) => (r as { classification?: string }).classification === 'EXCEPTION-SIGNED').length
+  console.log(`\nstructure bands: ${sp}/${struct.length} <1% | text bands: ${tp}/${text.length} ≤5% | exceptions: ${excS} signed, ${excP} pending`)
 }
 main().catch((e) => { console.error(e); process.exit(1) })
