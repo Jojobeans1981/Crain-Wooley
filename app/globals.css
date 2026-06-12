@@ -1523,9 +1523,13 @@
   .cw-faqband-title { color: #fff; }
   /* Original FAQ gold bars span the full content container (w1296 @1440, 72px side
      margins), not a 900px center column. */
-  .cw-faqband-acc { max-width: none; margin: 0 auto; display: flex; flex-direction: column; gap: 18px; }
+  /* Original bars are 83px tall with an ~8px gap (clone was 72px / 18px gap, so the
+     20 bars sat at different Y positions than the original even at a similar band
+     height). Match bar height via PADDING (not lh — that over-compacted) + tighten
+     the gap so the 20-bar column lines up with the original (band ~2160). */
+  .cw-faqband-acc { max-width: none; margin: 0 auto; display: flex; flex-direction: column; gap: 8px; }
   .cw-faqbar { background: #9B8059; }
-  .cw-faqbar-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 23px 28px; cursor: pointer; list-style: none; }
+  .cw-faqbar-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 28.5px 28px; cursor: pointer; list-style: none; }
   .cw-faqbar-head::-webkit-details-marker { display: none; }
   /* Original faq question is STRONG.fnt_t-4 Cormorant fw700 ~20.17px (verified leaf)
      — font/weight already match. lh kept at 1.25: pinning the exact 1.2 made the 20
