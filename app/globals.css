@@ -1644,15 +1644,17 @@
     line-height: 1.1;
     letter-spacing: normal; /* original is ls:normal; clone base was -0.012em (read bolder) */
   }
-  /* Gold flair rule (the original's `ln-flr`): a ~686px x 2px gold rule directly
-     UNDER the heading text (not below the search). Original measures w686 h2. */
+  /* Gold flair rule (the original's `ln-flr`): a ~686px x 1px rule directly UNDER the
+     heading. The original renders it FAINT (barely visible over the navy watermark —
+     pixel-sampling finds no strong gold), NOT the bright solid #9B8059 line the clone
+     had. Match with a low-opacity gold, 1px high. (Owner rejection #2.) */
   .legacy-banner--navy .legacy-banner-title::after {
     content: "";
     display: block;
     width: clamp(280px, 48vw, 686px);
-    height: 2px;
+    height: 1px;
     margin: 22px auto 0;
-    background: var(--cw-gold);
+    background: rgba(155, 128, 89, 0.42);
   }
   /* Tablet/mobile banner heading: the original scales larger than the clone's
      clamp(34px,5vw,61px) below 900px — measured 41.7px @768, 37.8px @390. Scoped to
@@ -1660,28 +1662,30 @@
   @media (max-width: 899px) {
     .legacy-banner--navy .legacy-banner-title { font-size: clamp(37.8px, 5.43vw, 48px); }
   }
-  /* Tablet-range only: the original's search pill + gold circle are 56px (mobile is
-     50px = clone default, desktop is the untouched exception) and the search-page band
-     runs ~14px taller (242 vs 228). Bump the search row to 56 + add bottom padding to
-     reach 242. (Allen's no-search banner overshoots ~7px but lands near the floor.) */
+  /* Tablet-range only: the original search pill is 269x58 with a 56px gold circle, and
+     the search-page band runs ~14px taller (242 vs 228) — add bottom padding to reach
+     242 (allen's no-search banner is excluded via :has). */
   @media (min-width: 600px) and (max-width: 899px) {
-    .legacy-banner-search input, .legacy-banner-search button { height: 56px; }
-    .legacy-banner-search button { width: 56px; }
+    .legacy-banner-search { width: 269px; height: 58px; border-radius: 29px; }
+    .legacy-banner-search button { width: 56px; height: 56px; }
     .legacy-banner--navy:has(.legacy-banner-search) { padding-bottom: 48px; }
   }
-  /* Banner site-search box (Form_BannerV1 pages), wired to /site-search. */
-  /* Banner site-search: the original is a white PILL input with a 55px gold CIRCLE
-     submit button (border-radius 50%, bg #9B8059) — a legacy-mirror element, so it
-     follows baseline shape here, not the intake app's square-input rule. */
-  .legacy-banner-search { display: flex; justify-content: center; align-items: center; margin: 18px auto 0; max-width: 292px; }
-  .legacy-banner-search input { flex: 1; min-width: 0; height: 50px; font-family: var(--font-sans); font-size: 15px; padding: 0 22px; border: 1px solid rgba(255,255,255,0.5); border-right: none; border-radius: 999px 0 0 999px; background: rgba(255,255,255,0.96); color: #343434; }
-  .legacy-banner-search input::placeholder { color: #6b6356; }
-  .legacy-banner-search button { flex: none; width: 50px; height: 50px; border-radius: 50%; background: var(--cw-gold); border: 1px solid var(--cw-gold); color: #fff; margin-left: -6px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
+  /* Banner site-search (Form_BannerV1 pages, wired to /site-search). REBUILT after
+     owner rejection #1: the original is ONE solid-white, fully-rounded PILL containing
+     an ITALIC "Search" placeholder and a gold CIRCLE button NESTED INSIDE the pill's
+     right end. The clone previously had a translucent left-rounded input with a
+     SQUARE right edge and the circle button OVERLAPPING OUTSIDE (the white notch).
+     Pill = the flex container itself: solid #fff, radius = height/2; button is the
+     last flex child, flush-right inside. Desktop 216x57 / button 55px. */
+  .legacy-banner-search { display: flex; align-items: center; width: 216px; height: 57px; margin: 18px auto 0; background: #fff; border-radius: 28.5px; padding: 0 1px 0 24px; }
+  .legacy-banner-search input { flex: 1; min-width: 0; height: 100%; padding: 0; border: none; border-radius: 0; background: transparent; font-family: var(--font-sans); font-style: italic; font-size: 16px; color: #343434; }
+  .legacy-banner-search input::placeholder { color: #6b6356; font-style: italic; opacity: 1; }
+  .legacy-banner-search button { flex: none; width: 55px; height: 55px; border-radius: 50%; background: var(--cw-gold); border: none; color: #fff; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
   .legacy-banner-search button:hover { background: var(--cw-gold-dark, #7a6444); }
-  /* Mobile: the original banner search pill is a compact ~180px centered box, not the
-     clone's near-full-width 292px. Placed after the base rule so it wins source order. */
+  /* Mobile: the original pill is a compact 170x52 box with a 50px button. */
   @media (max-width: 599px) {
-    .legacy-banner-search { max-width: 188px; }
+    .legacy-banner-search { width: 170px; height: 52px; border-radius: 26px; padding-left: 20px; }
+    .legacy-banner-search button { width: 50px; height: 50px; }
   }
 
   /* ── Family-B interior template ── */

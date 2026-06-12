@@ -1,6 +1,13 @@
 import type { Metadata } from 'next'
-import { Montserrat, Pinyon_Script } from 'next/font/google'
+import { Montserrat, Pinyon_Script, Cormorant_Garamond } from 'next/font/google'
 import './globals.css'
+
+// Display serif. The ORIGINAL (estateplanningdfw.law) renders headings in real
+// Cormorant Garamond (narrow). It was never actually bundled here — --font-display
+// referenced the family name with no font loaded, so headings fell through to a ~9%
+// wider Hoefler/Times fallback (the rejected banner "heavier heading"). Load it for
+// real and lead the display chain with it.
+const cormorant = Cormorant_Garamond({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--font-cormorant', display: 'swap' })
 
 // Cursive script for the faint handwriting watermark on the pillars band,
 // matching the original's script-handwriting background.
@@ -12,7 +19,7 @@ const script = Pinyon_Script({ subsets: ['latin'], weight: '400', variable: '--f
 const montserrat = Montserrat({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--font-marketing-sans', display: 'swap' })
 
 const fontVars = {
-  '--font-display-fallback': '"Cormorant Garamond", "Hoefler Text", "Times New Roman", serif',
+  '--font-display-fallback': 'var(--font-cormorant), "Cormorant Garamond", "Hoefler Text", "Times New Roman", serif',
   '--font-sans': 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
   '--font-mono': '"JetBrains Mono", ui-monospace, Menlo, monospace',
 } as React.CSSProperties
@@ -76,7 +83,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const isDemo = process.env.NEXT_PUBLIC_DEMO_MODE === 'true'
 
   return (
-    <html lang="en" style={fontVars} className={`${montserrat.variable} ${script.variable}`}>
+    <html lang="en" style={fontVars} className={`${montserrat.variable} ${script.variable} ${cormorant.variable}`}>
       <head>
         {/* arno-pro (display serif) â€” Adobe Typekit, matches the approved intake design */}
         <link rel="preconnect" href="https://use.typekit.net" crossOrigin="" />
