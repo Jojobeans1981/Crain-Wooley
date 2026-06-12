@@ -14,5 +14,53 @@
     "evidence": "pixel-baselines/band/unit0/banner-sidebyside.png",
     "signedBy": null,
     "signedOn": null
+  },
+  "/about-us/pricing/flat-rate-services/|tablet|banner": {
+    "status": "PENDING",
+    "residualPct": 0.0448,
+    "reason": "Geometry verified: heading 41.70px (orig 41.71, matched), search pill+gold-circle 56px, band height 242 (orig 243, matched). Residual is the white-serif-heading-on-navy AA floor — same root cause as the desktop banner exception.",
+    "evidence": "~/Desktop/banner-exception-review/flat-rate/tablet/banner-sidebyside.png",
+    "signedBy": null,
+    "signedOn": null
+  },
+  "/about-us/pricing/flat-rate-services/|mobile|banner": {
+    "status": "PENDING",
+    "residualPct": 0.0646,
+    "reason": "Geometry verified: heading 37.8px (matched), search pill capped to a compact ~188px box. One residual metric differs: band height 224 vs orig 228 (4px) + search width 188 vs orig 170. Otherwise the white-heading AA floor.",
+    "evidence": "~/Desktop/banner-exception-review/flat-rate/mobile/banner-sidebyside.png",
+    "signedBy": null,
+    "signedOn": null
+  },
+  "/staff-profiles/justin-t-crain/|tablet|banner": {
+    "status": "PENDING",
+    "residualPct": 0.0412,
+    "reason": "Same form-banner geometry as flat-rate tablet (verified): heading 41.7px, search 56px, band 242. Residual is the white-heading AA floor.",
+    "evidence": "~/Desktop/banner-exception-review/justin/tablet/banner-sidebyside.png",
+    "signedBy": null,
+    "signedOn": null
+  },
+  "/staff-profiles/justin-t-crain/|mobile|banner": {
+    "status": "PENDING",
+    "residualPct": 0.0584,
+    "reason": "Same form-banner geometry as flat-rate mobile (verified). Residual: band height 224 vs 228 (4px) + white-heading AA floor.",
+    "evidence": "~/Desktop/banner-exception-review/justin/mobile/banner-sidebyside.png",
+    "signedBy": null,
+    "signedOn": null
+  },
+  "/allen/|mobile|banner": {
+    "status": "PENDING",
+    "residualPct": 0.0474,
+    "reason": "Geo banner (no search box): heading 37.8px matched. Band height 140 vs orig 145 (5px residual). Otherwise the white-heading AA floor.",
+    "evidence": "~/Desktop/banner-exception-review/allen/mobile/banner-sidebyside.png",
+    "signedBy": null,
+    "signedOn": null
+  },
+  "/allen/|tablet|banner": {
+    "status": "PENDING",
+    "residualPct": 0.0611,
+    "reason": "Geo banner (no search box): heading 41.7px matched. One metric differs — band height 144 vs orig 151 (7px, the no-search banner's top/bottom padding); flagged for owner: accept as AA-floor exception OR a small padding fix. Residual otherwise the white-heading AA floor.",
+    "evidence": "~/Desktop/banner-exception-review/allen/tablet/banner-sidebyside.png",
+    "signedBy": null,
+    "signedOn": null
   }
 }
