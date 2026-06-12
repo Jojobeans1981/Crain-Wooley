@@ -76,6 +76,39 @@ masks.md logged, committed 0ce3064) — band shell scored, JS-feed region masked
 gold-fill button (committed 0ce3064). Desktop testimonials still ~25% — the photo
 proportions + quote-text block (content/position) drive it, not the controls.
 
+## Session 4 (2026-06-11) — rebuild queue c/d/e + verify-table gating
+
+- **(c) testimonials photo-height** 21->17.3% (desktop): photo is 593x519 VERTICALLY
+  CENTERED (y107), not stretched/top-aligned (1460f5a).
+- **(d) footer column-height** 13.3->6.3% (desktop): orig navy row 568px driven by
+  the Locations column; bumped office spacing + address lh so it reaches ~568, band
+  955 vs 960 (c5e0e7b).
+- **(b verify-table)** value-card title -> Montserrat fw500 16.5px (was Cormorant
+  fw700 21.6; verified leaf STRONG.fnt_t-6); faq question CONFIRMED Cormorant fw700
+  ~20px (orig leaf STRONG.fnt_t-4) — clone already right, the exact-lh pin
+  over-compacted 20 bars so reverted. values 20.5->19.8, faq held 25.5 (81914a7).
+  GATING WORKED: the verify-table caught a real bug AND blocked a wrong change.
+  Build it leaf-precise (`el.children.length<=1`) — broad selectors match containers
+  and lie about font-family (the "Inter vs Montserrat" scare was a container match;
+  body text IS Montserrat via `.cw-page{--font-sans:var(--font-marketing-sans)}`).
+- **(e) tablet/mobile stacking — testimonials** 63->26% / 64->33%: original DROPS the
+  photo <900px (text-only) + narrows the text to a 538px CENTERED column; clone was
+  full-width with a stacked photo (e9347c3). The photo is a lazy BACKGROUND-image at
+  desktop, display:none <900 — <img> probes read "no photo", confirm via crops.
+
+REMAINING tablet/mobile (unit e, worst-first after testimonials): footer 33-37% @
+tablet, intro 32-42%, values 35, faq 36 — each needs the original's <900px
+layout-mode replicated (stacking, not padding). Plus desktop residuals (values ~20%
+left-col y-offset/width; faq ~25% 20-bar height accumulation; banner EXC-PENDING).
+
+FOOTER CAPTURE ARTIFACT (investigate): the GLOBAL footer is identical on every page,
+but the ORIGINAL footer captures at different heights — 960px on flat-rate vs 854px
+on allen/justin (the footer-bg/legal-strip loads short on some pages). The clone is a
+correct fixed 955 (matches the real 960), so flat-rate footer reads 6.4% but
+allen/justin read ~14.8% purely from the 854 short-capture. Fix the harness footer
+settle (wait for footer-bg + legal strip) before trusting per-page footer numbers;
+the flat-rate footer is the reliable one.
+
 ## Session 3 (2026-06-11) — structural rebuild queue (committed per unit)
 
 DONE + committed:
