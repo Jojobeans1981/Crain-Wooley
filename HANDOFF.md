@@ -1,5 +1,27 @@
 # Crain & Wooley — interior parity rebuild · HANDOFF
 
+## Session 5 (2026-06-12) — fix-list 1a–1e + verification tables (committed per unit)
+
+Proof-trio improvements (all committed): **values card** box DOM-pinned pixel-exact
+(593×808, 20.0→16.67%; residual = head-col eyebrow font-wrap floor, `4aadb66`);
+**intro** subhead reorder (H5 25.68px hoisted heading→lede) + flush-top (the clone's
+72px band padding pushed every element +72 — the whole 20%) → 20.3→6.50% (`f17c179`);
+**testimonials** grid → two 593 cols + 110 gap, photo border removed (593×519 fills,
+was 581×508 misregistered) + unoptimized raw PNG, leaf fonts → 17.6→13.84% (`1a11420`);
+**banner tablet/mobile** heading scaling + search sizing + mobile pill width, ALL
+scoped <900px so the EXCEPTION-PENDING desktop is byte-identical → 8.6-15.8%→4.1-6.5%
+(`4f4010b`); **allen sidebar** location feed split into 3 navy boxes (Plano/Mansfield/
+Ft Worth) + <900 stacking verified (`b2dc7d7`).
+
+Verification tables (`docs/reference/verification-tables.md`) gate the exceptions.
+**Banner family** (8 cells: desktop+tablet+mobile × the search pages, geometry verified)
+is EXCEPTION-PENDING; crops in `~/Desktop/banner-exception-review/<page>/<vp>/`.
+Scorecard: **11 PASS · 8 EXC-PENDING · 44 FAIL**. The 44 FAILs are honestly reported
+(NOT excepted): tablet/mobile <900 stacking for values/faq/testimonials/intro
+(unbuilt), the footer-settle capture artifact (allen/justin 14.8%), and the allen
+sidebar ui-repeater/empty-column divergence — all flagged for owner adjudication in
+`exceptions.md`. STOPPED here for owner sign-off before scaling to the 149.
+
 Working repo: **`~/Crain-Wooley`** (NOT `/tmp/Crain-Wooley`, which is a corrupt copy).
 Proof trio: `/about-us/pricing/flat-rate-services/` (B), `/allen/` (D geo),
 `/staff-profiles/justin-t-crain/` (C staff). Gate: `scripts/visual-diff/pixel-proof.ts`
