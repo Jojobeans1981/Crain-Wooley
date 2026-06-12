@@ -192,7 +192,7 @@ function BandPage({ page }: { page: FamilyBData }) {
     flush()
     if (b.kind === 'closer') { const C = CLOSER[b.which]; if (C) out.push(<C key={`b${i}`} />) }
     else if (b.kind === 'cards') out.push(<CardSection key={`b${i}`} band={b} />)
-    else out.push(<FaqBand key={`b${i}`} band={b} />)
+    else if (b.kind === 'accordion') out.push(<FaqBand key={`b${i}`} band={b} />)
   })
   flush()
   // Footer top-padding parity (matches the original's `main:has(> section:last-child
