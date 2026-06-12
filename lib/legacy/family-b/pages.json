@@ -105,7 +105,12 @@
       {
         "kind": "intro",
         "heading": "Flat Rate Estate Planning Services",
-        "blocks": [],
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Proactively completing a comprehensive estate plan is one of the greatest gifts you can give your loved ones. You will provide peace of mind knowing that your estate settlement will be greatly simplified and estate administration costs lessened or eliminated depending on the estate planning tool you choose to use – a Will or a Trust."
+          }
+        ],
         "image": "/interior/about-us__pricing__flat-rate-services-intro.jpg"
       },
       {

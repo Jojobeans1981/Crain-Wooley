@@ -1629,11 +1629,18 @@
   .cw-fb-content .cw-fb-body { max-width: none; margin: 24px 0 0; }
   .cw-fb-content .cw-fb-intro-copy, .cw-fb-content .cw-fb-intro-grid--noimg .cw-fb-intro-copy { max-width: none; }
   .cw-fb-content .cw-fb-accgroup { background: transparent; padding: 32px 0 0; }
-  /* NOTE: the original keeps the plan accordions in a LEFT column (~593px) beside a
-     SPANNING intro photo (measured: orig bar w593 @x72 vs clone full-width). A CSS
-     width-constraint alone makes the bars wrap TALLER (band 882->1008px, worse) —
-     the real fix is a two-column intro layout where the photo spans heading + lede
-     + accordions. Deferred to a FamilyBPage structural unit; left as-is. */
+  /* Two-column intro split (original #FAQsS2): heading + lede + accordions in a LEFT
+     ~593px column, photo pinned TOP-RIGHT (593x519, not spanning). Measured: orig
+     content col x72 w593, photo x775 w593 h519, gap ~110 (container 1296). Reserve
+     the right column with padding-right (~54.3%) and absolutely position the photo.
+     <900px the split collapses (see the stacking rules) back to normal flow. */
+  @media (min-width: 900px) {
+    .cw-fb-content--introsplit { position: relative; padding-right: 54.3%; }
+    .cw-fb-content--introsplit .cw-fb-intro-grid { display: block; }
+    .cw-fb-content--introsplit .cw-fb-intro-copy { max-width: none; }
+    .cw-fb-content--introsplit .cw-fb-intro-media { position: absolute; top: 0; right: 0; width: 45.8%; height: 519px; margin: 0; }
+    .cw-fb-content--introsplit .cw-fb-intro-media img { width: 100%; height: 100%; object-fit: cover; }
+  }
 
   /* Geo/practice sidebar (sd-zn) — navy box stack. */
   .cw-fb-sidebar { font-family: var(--font-sans); }
@@ -1682,6 +1689,14 @@
   .cw-accordion-item[open] .cw-accordion-chev { transform: rotate(180deg); }
   .cw-accordion-body { padding: 18px 22px 4px; font-family: var(--font-sans); }
   .cw-accordion-body p { font-size: 16px; line-height: 1.8; color: #343434; margin: 0 0 14px; }
+  /* Intro plan-accordions (#FAQsS2, the pricing pages) are LIGHT bordered boxes with
+     DARK text + ~30px vertical padding (orig `.bg-bx lk-bg pd_v-30`, bg transparent,
+     #343434, h83) — NOT the gold bar. Scoped to the intro accgroup so the expanded
+     navy FAQ (.cw-faqbar) and any other Accordion use are unaffected. */
+  .cw-fb-accgroup .cw-accordion-head { background: #fff; color: #343434; border: 1px solid rgba(48,68,81,0.14); box-shadow: 0 1px 3px rgba(0,0,0,0.05); padding: 28px 24px; font-weight: 700; }
+  .cw-fb-accgroup .cw-accordion-head:hover { background: #f6f6f6; color: #343434; }
+  .cw-fb-accgroup .cw-accordion-item { border-bottom: none; }
+  .cw-fb-accgroup .cw-accordion { border-top: none; }
   /* Live blog body column is wider than the standard 760 article measure. */
   .legacy-body--blog .learn-article { max-width: 900px; }
 

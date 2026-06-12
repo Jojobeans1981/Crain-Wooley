@@ -82,12 +82,21 @@ function FlowBand({ band }: { band: Band }) {
 }
 
 function ContentSection({ bands, sidebar }: { bands: Band[]; sidebar?: SidebarBlock[] }) {
+  // Two-column intro split (the original #FAQsS2 layout): when an intro WITH an
+  // image is followed by a collapsed accordion (the pricing plan-accordion pages),
+  // the original puts heading + lede + accordions in a LEFT ~593px column with the
+  // photo pinned TOP-RIGHT (519px, not spanning). The `--introsplit` modifier drives
+  // that via CSS (content padding-right reserves the right column; the intro photo
+  // is absolutely positioned). Other pages (staff intro w/o accordion, geo) are
+  // unaffected.
+  const first = bands[0]
+  const introSplit = !sidebar && first?.kind === 'intro' && !!(first as Extract<Band, { kind: 'intro' }>).image && bands.some((b) => b.kind === 'accordion')
   return (
     <section className="cw-fb-main">
       <div className="cw-container">
         <div className={`cw-fb-layout${sidebar ? ' cw-fb-layout--left' : ' cw-fb-layout--full'}`}>
           {sidebar && <aside className="cw-fb-sidebar"><Sidebar blocks={sidebar} /></aside>}
-          <div className="cw-fb-content">
+          <div className={`cw-fb-content${introSplit ? ' cw-fb-content--introsplit' : ''}`}>
             {bands.map((b, i) => <FlowBand key={i} band={b} />)}
           </div>
         </div>
