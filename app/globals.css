@@ -1189,9 +1189,11 @@
   .cw-footer-links { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 28px; list-style: none; margin: 0; padding: 0; }
   .cw-footer-links a { font-family: var(--font-sans); font-size: 15px; color: var(--cw-on-slate-mute); text-decoration: none; padding: 8px 0; display: inline-block; }
   .cw-footer-links a:hover { color: var(--cw-gold-soft); }
-  .cw-office { margin-bottom: 32px; }
+  /* Original Locations column is 568px (the tallest, drives the navy row); clone's
+     was 497. More office spacing + address line-height closes the ~71px. */
+  .cw-office { margin-bottom: 46px; }
   .cw-office-name { font-family: var(--font-sans); font-size: 12.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cw-gold-soft); margin: 0 0 6px; }
-  .cw-office address { font-style: normal; font-family: var(--font-sans); font-size: 14.5px; line-height: 1.55; color: var(--cw-on-slate-mute); }
+  .cw-office address { font-style: normal; font-family: var(--font-sans); font-size: 14.5px; line-height: 1.78; color: var(--cw-on-slate-mute); }
   .cw-office-map { display: inline-block; margin-top: 4px; font-size: 13.5px; color: var(--cw-gold-soft); text-decoration: none; }
   .cw-office-map:hover { color: var(--cw-gold-soft); text-decoration: underline; }
 
