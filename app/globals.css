@@ -1662,6 +1662,13 @@
     .cw-fb-content--introsplit .cw-fb-intro-media { position: absolute; top: 0; right: 0; width: 45.8%; height: 519px; margin: 0; }
     .cw-fb-content--introsplit .cw-fb-intro-media img { width: 100%; height: 100%; object-fit: cover; }
   }
+  /* <900px the original intro (like testimonials) DROPS the photo and uses a NARROWER
+     CENTERED column (measured: orig no photo, content x115 w538 @768 / x25 w340 @390;
+     clone showed the photo + full-width -> band 1282 vs orig 804). */
+  @media (max-width: 899px) {
+    .cw-fb-content--introsplit { max-width: 538px; margin-left: auto; margin-right: auto; }
+    .cw-fb-content--introsplit .cw-fb-intro-media { display: none; }
+  }
 
   /* Geo/practice sidebar (sd-zn) — navy box stack. */
   .cw-fb-sidebar { font-family: var(--font-sans); }
