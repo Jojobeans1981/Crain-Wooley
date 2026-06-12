@@ -1445,7 +1445,11 @@
      header on the left, a WHITE CARD of value rows on the right. */
   .cw-values { position: relative; overflow: hidden; background: #304451 url('/interior/closer-band-bg.jpg') center / cover no-repeat; padding: clamp(64px, 8vw, 106px) 0; }
   .cw-values-grid { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center; }
-  @media (min-width: 900px) { .cw-values-grid { grid-template-columns: 1fr 1.25fr; gap: 56px; } }
+  /* Original ValuesV2 is TWO EQUAL 593px columns with a 110px gap (measured by DOM:
+     head col L72-R665, card col L775-R1368, both 593 wide; 1296 container). The clone
+     was 1fr/1.25fr (551/689) + 56px gap -> the card sat 96px too wide and 96px too far
+     left. 1fr 1fr + 110px gap reproduces the box exactly. */
+  @media (min-width: 900px) { .cw-values-grid { grid-template-columns: 1fr 1fr; gap: 110px; } }
   /* Original values eyebrow is 20.08px / fw500 / ls0.05em / mb36px — wraps to 2
      lines (h52). The base .cw-eyebrow (13px/1 line/mb12) made the head-column 60px
      short, so it centered ~84px too low. Matching it restores the left-column rhythm
@@ -1464,15 +1468,23 @@
      ~141x53, radius 0) — not the clone's white fill. */
   .cw-values-head .cw-btn-gold { margin-top: 8px; background: var(--cw-gold); color: #fff; border-color: var(--cw-gold); border-radius: 0; padding: 15px 25px; }
   .cw-values-head .cw-btn-gold:hover { background: var(--cw-gold-dark, #7a6444); color: #fff; }
-  /* White card holding the value rows */
-  .cw-values-card { background: #fff; padding: 112px 56px; list-style: none; margin: 0; display: flex; flex-direction: column; gap: 80px; }
+  /* White card holding the value rows. Box pinned to the original ul.flx-grd-lrg by
+     DOM: 593px wide (equal column), padding 57.6px top/bottom · 47.4px left/right,
+     row gap 37.35px (was 112/56 + 80px gap — a height hack that widened the card). */
+  .cw-values-card { background: #fff; padding: 57.6px 47.4px; list-style: none; margin: 0; display: flex; flex-direction: column; gap: 37.35px; }
   .cw-value { display: flex; gap: 18px; align-items: flex-start; }
   .cw-value-icon { flex: none; width: 54px; height: 54px; display: inline-flex; align-items: center; justify-content: center; color: var(--cw-gold); border: 1px solid var(--cw-gold); }
   /* Original value-card title is Montserrat 16.48px fw500 lh1.5 (a small sans label,
      verified) — NOT a Cormorant serif heading. */
   .cw-value-title { font-family: var(--font-sans); font-weight: 500; font-size: 16.48px; line-height: 1.5; color: var(--cw-slate); margin: 0 0 8px; }
-  .cw-value-body { font-family: var(--font-sans); font-size: 0.9375rem; line-height: 1.65; color: #4a4a4a; margin: 0; }
-  .cw-value-fine { font-family: var(--font-sans); font-size: 0.8125rem; color: #6b6356; margin: 8px 0 0; }
+  /* Original value-body is Montserrat 16.46px / lh 29.63px (~1.8) fw400 (measured leaf).
+     Clone was 15.42px / 25.44px (lh 1.65) -> rows 134/160/184 vs the original 181/181/257,
+     the 142px card-height deficit. Matching the body font closes it. */
+  .cw-value-body { font-family: var(--font-sans); font-size: 16.46px; line-height: 1.8; color: #4a4a4a; margin: 0; }
+  /* Original fine print (*flat-rate footnote) is a plain paragraph, SAME as body:
+     16.46px / lh 29.63 (~1.8) fw400, 16.46px gap above (measured leaf). The clone's
+     13px muted version made row 3 read 205 vs the original 257 (the third-row deficit). */
+  .cw-value-fine { font-family: var(--font-sans); font-size: 16.46px; line-height: 1.8; color: #4a4a4a; margin: 16.46px 0 0; }
 
   /* 9. Latest news */
   .cw-news { background: var(--cw-bg); padding: 72px 0; }
