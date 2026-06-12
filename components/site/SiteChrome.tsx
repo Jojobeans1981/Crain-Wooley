@@ -466,11 +466,10 @@ const SOCIAL = [
 export function SiteFooter() {
   return (
     <footer className="cw-site-footer">
-      {/* Extra content row (matches the live multi-row footer height) */}
-      <div className="cw-container cw-footer-top">
-        <p className="cw-footer-tagline">Compassionate estate planning &amp; elder law for Dallas&ndash;Fort Worth families.</p>
-        <Link href="/contact-us/" className="cw-btn-gold">Schedule a Consultation</Link>
-      </div>
+      {/* NOTE: the original #FooterV1 has NO full-width tagline + "Schedule a
+          Consultation" bar (verified: only a "Contact Us" nav link inside the
+          columns). The previously-invented .cw-footer-top row was removed for
+          baseline parity. */}
       <div className="cw-container cw-footer-grid">
         {/* Brand + phone + social */}
         <div>
