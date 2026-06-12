@@ -96,10 +96,31 @@ proportions + quote-text block (content/position) drive it, not the controls.
   full-width with a stacked photo (e9347c3). The photo is a lazy BACKGROUND-image at
   desktop, display:none <900 — <img> probes read "no photo", confirm via crops.
 
-REMAINING tablet/mobile (unit e, worst-first after testimonials): footer 33-37% @
-tablet, intro 32-42%, values 35, faq 36 — each needs the original's <900px
-layout-mode replicated (stacking, not padding). Plus desktop residuals (values ~20%
-left-col y-offset/width; faq ~25% 20-bar height accumulation; banner EXC-PENDING).
+TABLET/MOBILE done (unit e, worst-first): **testimonials** 63->26/64->33 (e9347c3),
+**footer** tablet 31.6->11.7 (3a836f7: original STACKS columns <1000px into a 538px
+centered single column — raised the 3-col breakpoint 768->1000), **intro** tablet
+32.4->3.9 PASS / mobile 21.5->7.5 (f56c4d3: drops photo + 538-centered <900). The
+recurring <900 pattern: the original DROPS side imagery and collapses to a single
+NARROW CENTERED column (~538 @768 / ~340 @390) — replicate, don't pad.
+
+STILL MURKY (no clean single-pattern fix — needs per-element work):
+- **values** tablet 35 / mobile 22 / desktop 19.8: the left heading-column sits ~84px
+  too LOW (orig eyebrow leaf y353 vs clone y437) — the grid `align-items:center`
+  centers the short head-column against the tall white card, but the original lands
+  it higher (neither start@106 nor center@437). Needs the original's left-column
+  vertical rhythm matched (card height + alignment), not a 1-liner.
+- **faq** tablet 36 / mobile 35 / desktop 25.6: 20-bar height accumulation — bars
+  ~3px/bar off compounds over 20. Pinning the exact question lh over-compacted them
+  (band 2096 vs orig 2160). Needs the bar height matched to the original h83
+  (padding, not lh) so 20 bars sum to 2160.
+
+HARNESS footer-settle (still TODO): the original #FooterZone boundingBox is 854px on
+allen/justin vs 960 on flat-rate (same global footer) — it captures SHORT there (the
+legal strip / footer-bg settles late). band-gate's bandShot should wait for the band
+HEIGHT to stabilize (poll boundingBox until steady) before screenshotting. Until
+then allen/justin desktop footer (~14.8%) is harness noise; flat-rate (6.4%) is true.
+
+Banner stays EXCEPTION-PENDING until owner crop review.
 
 FOOTER CAPTURE ARTIFACT (investigate): the GLOBAL footer is identical on every page,
 but the ORIGINAL footer captures at different heights — 960px on flat-rate vs 854px
