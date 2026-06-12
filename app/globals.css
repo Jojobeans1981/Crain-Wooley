@@ -1448,7 +1448,9 @@
   .cw-values-card { background: #fff; padding: 112px 56px; list-style: none; margin: 0; display: flex; flex-direction: column; gap: 80px; }
   .cw-value { display: flex; gap: 18px; align-items: flex-start; }
   .cw-value-icon { flex: none; width: 54px; height: 54px; display: inline-flex; align-items: center; justify-content: center; color: var(--cw-gold); border: 1px solid var(--cw-gold); }
-  .cw-value-title { font-family: var(--font-display); font-weight: 700; font-size: 1.3125rem; color: var(--cw-slate); margin: 0 0 8px; }
+  /* Original value-card title is Montserrat 16.48px fw500 lh1.5 (a small sans label,
+     verified) — NOT a Cormorant serif heading. */
+  .cw-value-title { font-family: var(--font-sans); font-weight: 500; font-size: 16.48px; line-height: 1.5; color: var(--cw-slate); margin: 0 0 8px; }
   .cw-value-body { font-family: var(--font-sans); font-size: 0.9375rem; line-height: 1.65; color: #4a4a4a; margin: 0; }
   .cw-value-fine { font-family: var(--font-sans); font-size: 0.8125rem; color: #6b6356; margin: 8px 0 0; }
 
@@ -1509,6 +1511,10 @@
   .cw-faqbar { background: #9B8059; }
   .cw-faqbar-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 23px 28px; cursor: pointer; list-style: none; }
   .cw-faqbar-head::-webkit-details-marker { display: none; }
+  /* Original faq question is STRONG.fnt_t-4 Cormorant fw700 ~20.17px (verified leaf)
+     — font/weight already match. lh kept at 1.25: pinning the exact 1.2 made the 20
+     bars too compact and shrank the band away from the original's 2160px (worse
+     overlay). The ~25% residual is many-element bar-height accumulation, not font. */
   .cw-faqbar-q { font-family: var(--font-display); font-weight: 700; font-size: 1.26rem; line-height: 1.25; color: #fff; }
   .cw-faqbar-chev { flex: none; color: #fff; transition: transform .2s ease; }
   .cw-faqbar[open] .cw-faqbar-chev { transform: rotate(180deg); }
