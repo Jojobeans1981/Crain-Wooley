@@ -1446,7 +1446,11 @@
   .cw-values { position: relative; overflow: hidden; background: #304451 url('/interior/closer-band-bg.jpg') center / cover no-repeat; padding: clamp(64px, 8vw, 106px) 0; }
   .cw-values-grid { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center; }
   @media (min-width: 900px) { .cw-values-grid { grid-template-columns: 1fr 1.25fr; gap: 56px; } }
-  .cw-values-head .cw-eyebrow-light { color: rgba(255,255,255,0.92); }
+  /* Original values eyebrow is 20.08px / fw500 / ls0.05em / mb36px — wraps to 2
+     lines (h52). The base .cw-eyebrow (13px/1 line/mb12) made the head-column 60px
+     short, so it centered ~84px too low. Matching it restores the left-column rhythm
+     (col ~315 -> centers at y353). */
+  .cw-values-head .cw-eyebrow-light { color: rgba(255,255,255,0.92); font-size: 20.08px; font-weight: 500; letter-spacing: 0.05em; margin-bottom: 36px; }
   /* Closer headings are mixed-case Cormorant serif (overrides the uppercase
      Montserrat .cw-page h2 rule used for section heads). */
   .cw-values-head .cw-h2-light, .cw-locations .cw-h2-light { font-family: var(--font-display); text-transform: none; font-weight: 400; letter-spacing: normal; }
