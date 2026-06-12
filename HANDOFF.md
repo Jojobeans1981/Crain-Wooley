@@ -76,24 +76,40 @@ masks.md logged, committed 0ce3064) — band shell scored, JS-feed region masked
 gold-fill button (committed 0ce3064). Desktop testimonials still ~25% — the photo
 proportions + quote-text block (content/position) drive it, not the controls.
 
-STILL OPEN (next session), in directive order:
-- **footer** (11.5% desktop / 30% tablet / 14% mobile, SHARED -> 9 cells): footer
-  IS navy (`#FooterV1.ftr dk-bg` #304451 — verified; the `footer`/#FooterZone
-  wrapper is transparent and fooled the crop into looking light). Real diffs: the
-  clone's full-width `.cw-footer-top` tagline+"Schedule a Consultation" bar is NOT
-  in the original (its tagline is a small inline h30 by the logo/phone, no button
-  row); AND the original #FooterZone is TALLER (959 vs clone 867). Tablet 30% =
-  column stacking differs <768px.
-- **intro+body** text band (27% desktop, clone +85px TALLER): tighten lede/photo
-  block + body spacing.
-- **TABLET/MOBILE** (biggest): testimonials 62-64%, intro 42-50%, faq/values 22-36%
-  — the original changes LAYOUT MODE (stacks columns) <900px; replicate the
-  stacking, don't chase height with padding (owner note).
-- **testimonials desktop residual** (~25%): photo column width + quote-text block.
-- **sub-pixel-floor exceptions** (new protocol): banner is the candidate but at
-  ~4.65% it still has minor geometry residual (search width/heading) — verify
-  geometry identical first, THEN log as OWNER-APPROVED EXCEPTION with crops +
-  evidence; don't bend the <1% gate.
+## Session 3 (2026-06-11) — structural rebuild queue (committed per unit)
+
+DONE + committed:
+- **banner** -> de-chromed + geometry matched: gold ln-flr rule, ls:normal, search
+  pill+circle. Desktop ~4.4-4.6% = **EXCEPTION-PENDING** (geometry verified, residual
+  is white-heading AA). Registry: `scripts/visual-diff/exceptions.json` +
+  `docs/reference/exceptions.md`; band-gate stamps EXCEPTION-PENDING/SIGNED into the
+  scorecard. AWAITING owner crop sign-off -> flip status to SIGNED (commit 5632ced).
+- **footer** 25.5->13.25%: removed the invented `.cw-footer-top` tagline+Schedule bar
+  (verified NOT in the original), matched the navy band's 106px padding + 140px logo
+  (b67a529).
+- **testimonials** 25->21%: arrows-not-dots, gold "See all Reviews", photo widened
+  1:1.25->1:1.1 (592px = orig 593) (0ce3064, b67a529).
+- **cards** 24->1.74% (masked): navy boxes + `*:cards` feed mask (0ce3064).
+- **intro (a)** 27->20.5%: two-column rebuild (`cw-fb-content--introsplit`: left col
+  + photo abs top-right 519px), restored the lede paragraph (was missing from
+  pages.json), intro plan-accordion bars -> light boxes (orig `bg-bx lk-bg`)
+  (d783836).
+
+STILL OPEN (the remaining queue), worst-first:
+- **TABLET/MOBILE stacking (unit e — biggest, UNBUILT)**: testimonials 63-64%, intro
+  42-50%, footer 33-36% @ tablet, faq/values 22-36%. The original changes LAYOUT MODE
+  (stacks columns) <900px — replicate the stacking per band, NOT padding (owner note).
+- **footer** last ~90px (d): clone 870 vs orig 960 — real column-height, not the bar.
+- **testimonials** photo-HEIGHT (c): clone photo stretches 562 vs orig 519 (fixed
+  height/aspect); + quote block.
+- **intro** instruction-order (residual): orig has "Expand Each Section" as a subhead
+  UNDER the heading (y167) ABOVE the lede (y242); clone renders it after the lede —
+  cross-band reorder.
+- **values 20% / faq 25% (b)**: structurally faithful (eyebrow/heading/button/card on
+  values; full-width gold bars on faq). Residual is fine-grained text-rendering at a
+  floor like banner — likely EXCEPTION territory once the last geometry is confirmed,
+  NOT more CSS. (faq section-heading weight unverifiable — orig heading not found by
+  h1/h2/h3/strong; needs a better selector before touching it.)
 
 CAUTION (hard-won this session): side-by-side COMPOSITE crops misled me 4x (cards
 navy/light, faq, values, footer). ALWAYS confirm a band's bg/structure via
