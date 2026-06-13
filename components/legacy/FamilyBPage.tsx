@@ -28,6 +28,7 @@ function Banner({ page }: { page: FamilyBData }) {
     <header className="legacy-banner legacy-banner--navy">
       <div className="cw-container legacy-banner-inner">
         <h1 className="legacy-banner-title">{page.bannerTitle}</h1>
+        {page.bannerSubtitle && <p className="legacy-banner-subtitle">{page.bannerSubtitle}</p>}
         {page.bannerSearch && (
           <form className="legacy-banner-search" action="/site-search" method="get" role="search">
             <input type="search" name="q" aria-label="Search the site" placeholder="Search" />

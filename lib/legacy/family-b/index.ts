@@ -29,6 +29,7 @@ export type Band =
 export type FamilyBData = {
   path: string
   bannerTitle: string
+  bannerSubtitle?: string // staff job title, shown under the name (matches the original)
   contentH1: string
   introImage: string | null
   bands?: Band[] // preferred: ordered band model (older entries fall back below)

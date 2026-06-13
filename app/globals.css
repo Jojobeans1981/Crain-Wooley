@@ -1696,6 +1696,7 @@
      horizontal gradient (transparent -> gold -> transparent), NOT the solid line the
      clone had. Matched exactly from the original's computed style:
      linear-gradient(to right, rgba(0,0,0,0), rgb(155,128,89), rgba(0,0,0,0)), 686x2. */
+  .legacy-banner-subtitle { font-family: var(--font-sans); font-size: 15px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.7); text-align: center; margin: 14px 0 0; }
   .legacy-banner--navy .legacy-banner-title::after {
     content: "";
     display: block;

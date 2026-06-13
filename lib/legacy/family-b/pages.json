@@ -19453,15 +19453,7 @@
       },
       {
         "type": "p",
-        "text": "Marketing and Event Coordinator/Legal Services Coordinator"
-      },
-      {
-        "type": "p",
         "text": "2805 Dallas Parkway, Suite 400 Plano, TX 75093"
-      },
-      {
-        "type": "p",
-        "text": "Marketing and Event Coordinator/Legal Services Coordinator"
       },
       {
         "type": "closer",
@@ -19472,7 +19464,8 @@
     "accordionGroups": [],
     "closers": [
       "schedule"
-    ]
+    ],
+    "bannerSubtitle": "Marketing and Event Coordinator/Legal Services Coordinator"
   },
   "/staff-profiles/connor-martin": {
     "path": "/staff-profiles/connor-martin",
@@ -19507,10 +19500,6 @@
         "text": "2805 Dallas Parkway, Suite 400 Plano, TX 75093"
       },
       {
-        "type": "p",
-        "text": "Attorney"
-      },
-      {
         "type": "closer",
         "which": "schedule"
       }
@@ -19519,7 +19508,8 @@
     "accordionGroups": [],
     "closers": [
       "schedule"
-    ]
+    ],
+    "bannerSubtitle": "Attorney"
   },
   "/staff-profiles/jacob-wooley": {
     "path": "/staff-profiles/jacob-wooley",
@@ -19550,10 +19540,6 @@
         "text": "1000 N Walnut Creek Dr., Suite 120 Mansfield, TX 76063"
       },
       {
-        "type": "p",
-        "text": "Partner & Attorney"
-      },
-      {
         "type": "closer",
         "which": "schedule"
       }
@@ -19562,7 +19548,8 @@
     "accordionGroups": [],
     "closers": [
       "schedule"
-    ]
+    ],
+    "bannerSubtitle": "Partner & Attorney"
   },
   "/staff-profiles/jeremy-crew": {
     "path": "/staff-profiles/jeremy-crew",
@@ -19593,10 +19580,6 @@
         "text": "2805 Dallas Parkway, Suite 400 Plano, TX 75093"
       },
       {
-        "type": "p",
-        "text": "Senior Attorney"
-      },
-      {
         "type": "closer",
         "which": "schedule"
       }
@@ -19605,7 +19588,8 @@
     "accordionGroups": [],
     "closers": [
       "schedule"
-    ]
+    ],
+    "bannerSubtitle": "Senior Attorney"
   },
   "/staff-profiles/joy-crosby": {
     "path": "/staff-profiles/joy-crosby",
@@ -19633,15 +19617,7 @@
       },
       {
         "type": "p",
-        "text": "Chief Operating Officer"
-      },
-      {
-        "type": "p",
         "text": "2805 Dallas Parkway, Suite 400 Plano, TX 75093"
-      },
-      {
-        "type": "p",
-        "text": "Chief Operating Officer"
       },
       {
         "type": "closer",
@@ -19652,7 +19628,8 @@
     "accordionGroups": [],
     "closers": [
       "schedule"
-    ]
+    ],
+    "bannerSubtitle": "Chief Operating Officer"
   },
   "/staff-profiles/justin-t-crain": {
     "path": "/staff-profiles/justin-t-crain",
@@ -19744,21 +19721,14 @@
       },
       {
         "type": "p",
-        "text": "Managing Partner & Attorney"
-      },
-      {
-        "type": "p",
         "text": "2805 Dallas Parkway, Suite 400 Plano, TX 75093"
-      },
-      {
-        "type": "p",
-        "text": "Managing Partner & Attorney"
       }
     ],
     "accordionGroups": [],
     "closers": [
       "schedule"
-    ]
+    ],
+    "bannerSubtitle": "Managing Partner & Attorney"
   },
   "/staff-profiles/kevin-berber": {
     "path": "/staff-profiles/kevin-berber",
@@ -19778,15 +19748,7 @@
       },
       {
         "type": "p",
-        "text": "Director of Marketing and Communications"
-      },
-      {
-        "type": "p",
         "text": "2805 Dallas Parkway, Suite 400 Plano, TX 75093"
-      },
-      {
-        "type": "p",
-        "text": "Director of Marketing and Communications"
       },
       {
         "type": "p",
@@ -19801,7 +19763,8 @@
     "accordionGroups": [],
     "closers": [
       "schedule"
-    ]
+    ],
+    "bannerSubtitle": "Director of Marketing and Communications"
   },
   "/staff-profiles/marcel-williams": {
     "path": "/staff-profiles/marcel-williams",
@@ -19832,10 +19795,6 @@
         "text": "2805 Dallas Parkway, Suite 400 Plano, TX 75093"
       },
       {
-        "type": "p",
-        "text": "Paralegal"
-      },
-      {
         "type": "closer",
         "which": "schedule"
       }
@@ -19844,7 +19803,8 @@
     "accordionGroups": [],
     "closers": [
       "schedule"
-    ]
+    ],
+    "bannerSubtitle": "Paralegal"
   },
   "/staff-profiles/mary-hughes": {
     "path": "/staff-profiles/mary-hughes",
@@ -19879,10 +19839,6 @@
         "text": "2805 Dallas Parkway, Suite 400 Plano, TX 75093"
       },
       {
-        "type": "p",
-        "text": "Paralegal"
-      },
-      {
         "type": "closer",
         "which": "schedule"
       }
@@ -19891,7 +19847,8 @@
     "accordionGroups": [],
     "closers": [
       "schedule"
-    ]
+    ],
+    "bannerSubtitle": "Paralegal"
   },
   "/staff-profiles/matthew-white": {
     "path": "/staff-profiles/matthew-white",
@@ -19911,15 +19868,7 @@
       },
       {
         "type": "p",
-        "text": "Operations & Legal Assistant"
-      },
-      {
-        "type": "p",
         "text": "2805 Dallas Parkway, Suite 400 Plano, TX 75093"
-      },
-      {
-        "type": "p",
-        "text": "Operations & Legal Assistant"
       },
       {
         "type": "p",
@@ -19934,7 +19883,8 @@
     "accordionGroups": [],
     "closers": [
       "schedule"
-    ]
+    ],
+    "bannerSubtitle": "Operations & Legal Assistant"
   },
   "/wylie": {
     "path": "/wylie",
