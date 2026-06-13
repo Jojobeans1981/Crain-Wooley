@@ -60,6 +60,27 @@ sub-pixel on a content-dense band (structure tier <1% is unrealistic here). Cand
 for an owner-signed content-band exception OR a quote-feed mask (the reviews are a
 Scorpion feed, like cards/schedule).
 
+## faq (flat-rate desktop) — stride-pinned; residual = bar-edge AA → EXCEPTION-PENDING
+
+| Metric | Original | Clone | Match |
+| --- | --- | --- | --- |
+| band height | 2161 | 2161 | ✓ (0px) |
+| collapsed bars | 20, gold | 20, gold | ✓ |
+| bar stride / gap | matched | 8.5px gap (pinned) | ✓ |
+| heading-region offset | 0 | 0 (was 43px) | ✓ |
+| question font | Cormorant 20.17px / 700 | Cormorant 20.17px / 700 | ✓ |
+| band padding | clamp(64,9vw,132) / clamp(45,7.7vw,111) | same | ✓ |
+| render mode | ui-repeat, STATIC captured | ui-repeat, STATIC | ✓ (not a live feed) |
+| **bar edges** | gold/navy 1px transitions | gold/navy 1px | ✗ sub-pixel AA |
+
+Verdict: stride-pin landed (15.28→4.65%). Every computed-truth metric matches and both
+bands render an IDENTICAL 2161px height (bars register edge-to-edge). The residual is the
+gold/navy bar-edge AA over 20 bars (~22% rows active, concentrated at the 40 edge
+transitions) + a ~0.5px question-size delta. Because the ui-repeater renders STATIC
+captured content on both sides (NOT a divergent live feed), it is **not** a mask
+candidate — this is a genuine sub-pixel edge floor. → **faq EXCEPTION-PENDING** per the
+banner standard; 1:1 crops at `~/Desktop/faq-exception-review/`.
+
 ## banner family — see exceptions.md (geometry-verified on all 3 viewports, AA floor).
 
 ## allen sidebar — navy box stack built (5 boxes incl. 3-location split); see exceptions.md.

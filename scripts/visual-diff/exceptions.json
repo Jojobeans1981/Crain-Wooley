@@ -62,5 +62,13 @@
     "evidence": "~/Desktop/banner-review-flat/allen-tablet.png",
     "signedBy": null,
     "signedOn": null
+  },
+  "/about-us/pricing/flat-rate-services/|desktop|faq": {
+    "status": "PENDING",
+    "residualPct": 0.0465,
+    "reason": "Stride-pin landed (15.24->4.65%). Geometry-verified: both bands render 1440x2161 IDENTICAL height (bars register edge-to-edge); 20 collapsed bars at matched stride/gap; question font confirmed Cormorant 20.17/700 (not Montserrat). Residual is the gold/navy bar-edge AA (~22% rows active, concentrated at the 40 bar-edge transitions) + a ~0.5px question-size delta. ui-repeater renders STATIC captured content on both sides (not a live feed) -> NOT a mask candidate; this is a sub-pixel edge floor. EXCEPTION-PENDING per the banner standard.",
+    "evidence": "~/Desktop/faq-exception-review/faq-desktop-full.png (+ faq-desktop-top.png zoom)",
+    "signedBy": null,
+    "signedOn": null
   }
 }
