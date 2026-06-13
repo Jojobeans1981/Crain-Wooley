@@ -1470,7 +1470,10 @@
      lines (h52). The base .cw-eyebrow (13px/1 line/mb12) made the head-column 60px
      short, so it centered ~84px too low. Matching it restores the left-column rhythm
      (col ~315 -> centers at y353). */
-  .cw-values-head .cw-eyebrow-light { color: rgba(255,255,255,0.92); font-size: 20.08px; font-weight: 500; letter-spacing: 0.05em; margin-bottom: 36px; }
+  /* Head rhythm pinned to the original's DOM: the orig eyebrow is 1 line (lh 24.1) +
+     27.49px bottom PADDING + 36.22px margin (the clone used margin only, dropping the
+     head column ~28px). */
+  .cw-values-head .cw-eyebrow-light { color: rgba(255,255,255,0.92); font-size: 20.08px; font-weight: 500; line-height: 24.1px; letter-spacing: 0.05em; padding-bottom: 27.49px; margin-bottom: 36.22px; }
   /* Closer headings are mixed-case Cormorant serif (overrides the uppercase
      Montserrat .cw-page h2 rule used for section heads). */
   .cw-values-head .cw-h2-light, .cw-locations .cw-h2-light { font-family: var(--font-display); text-transform: none; font-weight: 400; letter-spacing: normal; }
@@ -1479,10 +1482,11 @@
      col 150px) -> the head-column centered 84px too LOW. Scoped to values so faq /
      schedule headings keep their own sizes. */
   .cw-values-head .cw-h2-light { font-size: clamp(40px, 5vw, 60.9px); line-height: 1.1; }
-  .cw-values-head .cw-h2-light { color: #fff; }
+  .cw-values-head .cw-h2-light { color: #fff; margin-bottom: 0; }
   /* Original "Contact Us" is a GOLD-fill, white-text, square button (#9B8059,
-     ~141x53, radius 0) — not the clone's white fill. */
-  .cw-values-head .cw-btn-gold { margin-top: 8px; background: var(--cw-gold); color: #fff; border-color: var(--cw-gold); border-radius: 0; padding: 15px 25px; }
+     ~141x53, radius 0). Pinned to DOM: fs 16.46, pad 16.46/24.69 (h53); the
+     heading→button gap is the button's 41px top margin (orig heading mb is 0). */
+  .cw-values-head .cw-btn-gold { margin-top: 41px; background: var(--cw-gold); color: #fff; border-color: var(--cw-gold); border-radius: 0; padding: 16.46px 24.69px; font-size: 16.46px; display: flex; width: -moz-fit-content; width: fit-content; margin-left: auto; margin-right: auto; }
   .cw-values-head .cw-btn-gold:hover { background: var(--cw-gold-dark, #7a6444); color: #fff; }
   /* White card holding the value rows. Box pinned to the original ul.flx-grd-lrg by
      DOM: 593px wide (equal column), padding 57.6px top/bottom · 47.4px left/right,
@@ -1765,7 +1769,7 @@
   .cw-fb-h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(30px, 3.4vw, 44px); line-height: 1.12; color: #343434; text-transform: none; letter-spacing: normal; margin: 0 0 18px; }
   /* Pricing (introsplit) intro heading is Cormorant 60.9px / lh1.1 (measured H4,
      2 lines = h134), not the 44px default — scoped so staff/geo intros keep theirs. */
-  .cw-fb-content--introsplit .cw-fb-h1 { font-size: 60.9px; line-height: 1.1; }
+  .cw-fb-content--introsplit .cw-fb-h1 { font-size: 60.9px; line-height: 1.1; margin-bottom: 0; }
   /* Hoisted "Expand Each Section…" subhead — original H5 Montserrat 25.68px / fw500 /
      uppercase / ls1.28px, sitting between the heading (y134) and the lede (y242):
      33px above (heading y167), 17px below. NOT the 14px gold-rule accordion label. */
@@ -1773,8 +1777,12 @@
      Montserrat is narrower so it fits 1 line (h33). Match the original's lede position
      (y242) with a larger bottom margin (a font-metric floor — the localized 2nd-line
      region is the only residual). */
-  .cw-fb-subhead { font-family: var(--font-sans); font-weight: 500; font-size: 25.68px; line-height: 1.3; text-transform: uppercase; letter-spacing: 1.28px; color: #343434; margin: 33px 0 42px; }
+  /* Subhead rhythm pinned to DOM: orig is 1 line (lh 30.82) + 27.49px bottom PADDING,
+     32.92px above (heading mb is 0); the lede sits 16.46px below (lede margin-top).
+     The clone previously faked the gap with a 42px bottom MARGIN + 1.3 lh. */
+  .cw-fb-subhead { font-family: var(--font-sans); font-weight: 500; font-size: 25.68px; line-height: 30.82px; text-transform: uppercase; letter-spacing: 1.28px; color: #343434; padding-bottom: 27.49px; margin: 32.92px 0 0; }
   .cw-fb-intro-copy p { font-family: var(--font-sans); font-size: 16.46px; line-height: 1.8; color: #343434; margin: 0 0 16px; }
+  .cw-fb-content--introsplit .cw-fb-intro-copy p:first-of-type { margin-top: 16.46px; }
   .cw-fb-intro-media img { display: block; width: 100%; height: auto; border: 8px solid #fff; outline: 1px solid var(--cw-line, rgba(48,68,81,0.18)); box-shadow: 0 2px 10px rgba(48,68,81,0.12); }
   /* Full body below the two-column lede — every paragraph, sub-heading, and list. */
   .cw-fb-body { max-width: 980px; margin: 28px auto 0; }
