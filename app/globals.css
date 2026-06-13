@@ -1707,7 +1707,7 @@
      242 (allen's no-search banner is excluded via :has). */
   @media (min-width: 600px) and (max-width: 899px) {
     .legacy-banner-search { width: 269px; height: 58px; border-radius: 29px; }
-    .legacy-banner-search button { width: 56px; height: 56px; }
+    .legacy-banner-search button { width: 58px; height: 58px; }
     .legacy-banner--navy:has(.legacy-banner-search) { padding-bottom: 48px; }
   }
   /* Banner site-search (Form_BannerV1 pages, wired to /site-search). REBUILT after
@@ -1717,15 +1717,18 @@
      SQUARE right edge and the circle button OVERLAPPING OUTSIDE (the white notch).
      Pill = the flex container itself: solid #fff, radius = height/2; button is the
      last flex child, flush-right inside. Desktop 216x57 / button 55px. */
-  .legacy-banner-search { display: flex; align-items: center; width: 216px; height: 57px; margin: 18px auto 0; background: #fff; border-radius: 28.5px; padding: 0 1px 0 24px; }
+  .legacy-banner-search { display: flex; align-items: center; width: 216px; height: 57px; margin: 18px auto 0; background: #fff; border-radius: 28.5px; padding: 0 0 0 24px; }
   .legacy-banner-search input { flex: 1; min-width: 0; height: 100%; padding: 0; border: none; border-radius: 0; background: transparent; font-family: var(--font-sans); font-style: italic; font-size: 16px; color: #343434; }
   .legacy-banner-search input::placeholder { color: #6b6356; font-style: italic; opacity: 1; }
-  .legacy-banner-search button { flex: none; width: 55px; height: 55px; border-radius: 50%; background: var(--cw-gold); border: none; color: #fff; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
+  /* Button = pill HEIGHT, flush at the right end: its circle forms the pill's right cap
+     (matching the original, whose gold circle covers the right end). Was 55px in a 57px
+     pill with a 1px gap -> left a white crescent on the right; now flush. */
+  .legacy-banner-search button { flex: none; width: 57px; height: 57px; border-radius: 50%; background: var(--cw-gold); border: none; color: #fff; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
   .legacy-banner-search button:hover { background: var(--cw-gold-dark, #7a6444); }
   /* Mobile: the original pill is a compact 170x52 box with a 50px button. */
   @media (max-width: 599px) {
     .legacy-banner-search { width: 170px; height: 52px; border-radius: 26px; padding-left: 20px; }
-    .legacy-banner-search button { width: 50px; height: 50px; }
+    .legacy-banner-search button { width: 52px; height: 52px; }
   }
 
   /* ── Family-B interior template ── */
