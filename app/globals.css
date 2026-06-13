@@ -1410,7 +1410,7 @@
      aspect 1.142, fits 593x519 exactly). The clone's 6px white border inset the img to
      581x508 and misregistered the detailed photo — removing it lets the img fill 593x519
      at x72 (orig x70), aligning the photo. */
-  @media (min-width: 900px) { .cw-reviews-photo { align-self: center; height: 519px; min-height: 0; } }
+  @media (min-width: 900px) { .cw-reviews-photo { align-self: start; margin-top: 21px; height: 519px; min-height: 0; } }
   /* <900px the original DROPS the testimonials photo entirely (text-only, band ~629
      @768 vs the clone's 954 with a stacked photo) — hide it, and the text becomes a
      NARROWER CENTERED column (orig quote x115 w538 in a 768 band), not full-width. */
@@ -1419,6 +1419,25 @@
     .cw-reviews-left { max-width: 538px; margin-left: auto; margin-right: auto; }
   }
   .cw-reviews-left { min-width: 0; }
+  /* DOM-pinned to the original (not centering): the orig grid row is ~533px (photo
+     centered -> y107), and the quote column's content starts ~58px down (title y201,
+     quote col y152). Capping the column height bounds the row so align-self:center lands
+     the 519 photo at y107, and padding-top pushes the quote block to title y201. The
+     clone's nav/CTA below spill into the band's bottom padding (as in the original). */
+  /* DOM-pinned to the original (not centering). The orig column height is ~natural
+     (band 733 == clone's 736), so DON'T cap it. Two measured offsets: (1) the orig
+     photo sits near the column TOP (y107 = grid-top+7), NOT vertically centered like
+     the clone was (y122); (2) the orig quote block starts ~58px lower (title y201 vs
+     143) — the clone simply carries that 58px as dead space BELOW the block. So push
+     the block down (carousel padding-top) and reclaim the same 58px below (viewport
+     slack + controls margin) — column height unchanged → band stays 733. */
+  @media (min-width: 900px) {
+    /* shift the quote block down WITHOUT reflow (relative offset, not padding) so the
+       column height — and thus the band height (732) — is unchanged. Authoritative orig
+       targets (band-gate prep, widget hidden, photo loaded): title y164, photo y107,
+       name y507. */
+    .cw-reviews-carousel { position: relative; top: 35px; }
+  }
   .cw-reviews-cta { margin-top: 22px; display: inline-block; }
   .cw-reviews-carousel { outline: none; }
   .cw-reviews-carousel:focus-visible { outline: 2px solid var(--cw-gold-soft); outline-offset: 6px; }
@@ -1429,9 +1448,9 @@
   .cw-review-stars { color: #fff; font-size: 1.4rem; letter-spacing: 3px; margin-bottom: 16px; }
   /* Leaf-matched to the original carousel slide: title Cormorant 29.2px, quote +
      name Montserrat 16.46px (clone was 28/17.48/15.42 — title small, quote too big). */
-  .cw-review-title { font-family: var(--font-display); font-weight: 700; font-size: 29.2px; color: #fff; margin: 0 0 16px; }
+  .cw-review-title { font-family: var(--font-display); font-weight: 400; font-size: 29.2px; line-height: 44px; color: #fff; margin: 0 0 16px; }
   .cw-review-quote { font-family: var(--font-sans); font-size: 16.46px; line-height: 1.8; color: rgba(255,255,255,0.94); margin: 0 0 18px; border: none; }
-  .cw-review-name { font-family: var(--font-sans); font-weight: 600; font-size: 16.46px; letter-spacing: 0.04em; color: #fff; }
+  .cw-review-name { font-family: var(--font-sans); font-weight: 400; font-size: 16.46px; line-height: 16.46px; letter-spacing: 0.04em; color: #fff; }
   /* wrap so the dot row (one dot per review) can't overflow narrow viewports */
   .cw-reviews-controls { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 12px 16px; margin-top: 26px; }
   .cw-reviews-arrow { width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; color: #fff; background: transparent; border: 1px solid var(--cw-line-on-slate); cursor: pointer; transition: border-color .15s, color .15s; }

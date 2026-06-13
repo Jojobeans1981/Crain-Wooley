@@ -52,5 +52,23 @@
     "url": "https://www.estateplanningdfw.law/staff-profiles/justin-t-crain/",
     "viewport": "mobile",
     "bytes": 376312
+  },
+  {
+    "src": "original",
+    "url": "https://www.estateplanningdfw.law/staff-profiles/",
+    "viewport": "desktop",
+    "bytes": 1219686
+  },
+  {
+    "src": "original",
+    "url": "https://www.estateplanningdfw.law/staff-profiles/",
+    "viewport": "tablet",
+    "bytes": 430831
+  },
+  {
+    "src": "original",
+    "url": "https://www.estateplanningdfw.law/staff-profiles/",
+    "viewport": "mobile",
+    "bytes": 1315756
   }
 ]
