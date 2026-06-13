@@ -167,6 +167,12 @@ Full step-by-step guide in `CUTOVER_ENV_CHECKLIST.md`:
 2. **Search index 192 vs 190 posts** — `public/search-index.json` counts 192 blog entries
    vs the canonical 190 posts. Reconcile during final QA (duplicates / drafts / index +
    archive double-count / miscount?).
+3. **probate-quiz → native quiz scoring sign-off (CLIENT TRACK, before cutover)** — the
+   original's indexed `/probate-quiz` (a Google-Forms embed) now 301s to the native
+   `/learn/quizzes/do-you-need-probate`. That native quiz's SCORING LOGIC is gated on
+   Justin's quiz-scoring sign-off (open client-track item) — so his sign-off on the
+   native quiz scoring now ALSO covers the probate-quiz redirect destination. Don't ship
+   the cutover until the native quiz scoring is signed off.
 
 ## 🎨 PIXEL-FAITHFUL PASS — Open Items (Phase 0–4 rig)
 

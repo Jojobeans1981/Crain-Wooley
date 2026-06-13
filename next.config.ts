@@ -44,6 +44,12 @@ const nextConfig: NextConfig = {
       { source: '/mansfield-fw/probate', destination: '/mansfield/probate', permanent: true },
       { source: '/about-us/our-team', destination: '/staff-profiles', permanent: true },
 
+      // /probate-quiz was an INDEXED Google-Forms embed page on the original; it's
+      // rebuilt natively as /learn/quizzes/do-you-need-probate (no third-party
+      // dependency). 301 (literal, via statusCode — `permanent:true` would emit 308) so
+      // the indexed URL keeps its equity and routes to the native quiz at cutover.
+      { source: '/probate-quiz', destination: '/learn/quizzes/do-you-need-probate', statusCode: 301 },
+
       // Blog category routes are now REAL pages (Family E build) — all 36 source
       // slugs were live + sitemap-indexed, so they're served (not 301'd). The one
       // typo'd slug consolidates to its canonical (posts were re-tagged in the data
