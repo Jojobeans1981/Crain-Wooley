@@ -22,12 +22,15 @@ the measured clone-vs-original truth captured this session (DOM `getBoundingClie
 | fine print | same as body 16.46 / lh 29.63 | 16.46 / 29.63 | ✓ |
 | **head-col eyebrow** | DESIGNED… wraps **2 lines** (h52) | wraps **1 line** (h24) | ✗ font-metric |
 
-Verdict: the CARD box is geometry-verified pixel-exact (16.67% band residual is the
-left head column). The ONE differing metric — the eyebrow wrap — is a font-metric
-floor (orig Montserrat renders the eyebrow at 597px → 2 lines; the clone's real
-Montserrat is 554px → 1 line; same text/size/ls/weight). Not cleanly fixable without
-a forced-wrap hack; flagged for owner. → values stays FAIL pending owner call on the
-eyebrow floor.
+Verdict (SUPERSEDED 2026-06-13): the "eyebrow wrap floor" is RESOLVED. Re-measured by
+text-locator under band-gate prep: orig eyebrow y353/x70/h52 vs clone y351/x72/h52 —
+**both wrap 2 lines (h52)**, identical (the earlier "1 line h24" was a stale/contaminated
+read; the font-bundling fix corrected the metrics). The live values residual (14.74%) is
+the CARD COLUMN: orig card-title x907–935 (**nondeterministic across captures**, ±28px)
+vs the clone's stable x894 — a ~13–40px internal indent (orig icon/gap/padding is larger)
+that can't be pinned to a moving orig target. Card y positions match (164 / 600–601).
+Plus the navy band watermark bg (same as testimonials). → values residual is orig-capture
+instability + watermark, NOT a clone geometry defect.
 
 ## intro+body (flat-rate desktop) — geometry aligned; residual = subhead wrap floor
 
@@ -41,8 +44,22 @@ eyebrow floor.
 | **subhead lines** | 2 (h58) | 1 (h33) | ✗ font-metric |
 | band height | 797 | 766 (31px) | ✗ content |
 
-Verdict: structure reordered + aligned (20.31→6.50%). Residual is the same Montserrat
-wrap floor as values + ~31px content height. Text-tier band; close to ≤5%.
+Verdict (UPDATED 2026-06-13): the subhead wrap floor is RESOLVED — orig subhead
+"Expand Each Section to Learn More" y58/h58/**2 lines** vs clone h58/2 lines, identical
+(Montserrat 25.68/500/ls1.28, w593≈592). The intro residual (6.25%) is now CONTENT, not
+geometry: (1) the framed PHOTO differs (orig man-reading frame vs the clone's asset —
+different image/crop) and (2) the accordion bar PRICE text differs (orig "($425)" vs the
+clone's "| $x.xx" format). Both are content/asset items (blocked on the original's exact
+photo + price strings), not CSS pins. Heading + subhead pin exact.
+
+## footer (flat-rate desktop) — per-page padding correct; residual = bg + 3rd-party chrome
+
+Verdict (2026-06-13): footer 6.87%. Columns (Links / Locations) + the per-page padding
+are correct. Residual is (1) the city-skyline BACKGROUND image (wash/position vs the
+orig), (2) minor Locations address-text offsets, and (3) residual 3rd-party Scorpion
+chrome in the original footer (a green "Connect" chip bottom-left + the "SCORPION"
+attribution bottom-right) that the clone doesn't carry. Largely instrument/3rd-party +
+background, not a clone layout defect.
 
 ## testimonials (flat-rate desktop) — DOM-pinned exact; residual = text AA + watermark → EXCEPTION-PENDING
 
