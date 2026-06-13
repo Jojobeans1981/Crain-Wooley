@@ -45,7 +45,7 @@ export function generateStaticParams() {
     // /staff-profiles is owned by the dedicated app/(marketing)/staff-profiles
     // route (the real Meet-the-Team page with headshots); individual bio
     // sub-pages (/staff-profiles/<name>) still resolve here.
-    .filter((p) => p !== '/staff-profiles' && p !== '/resources/free-estate-planning-guide')
+    .filter((p) => p !== '/staff-profiles' && p !== '/resources/free-estate-planning-guide' && p !== '/contact-us')
     .map((p) => ({ slug: p.replace(/^\//, '').split('/') }))
 }
 
