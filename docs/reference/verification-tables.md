@@ -44,21 +44,33 @@ eyebrow floor.
 Verdict: structure reordered + aligned (20.31→6.50%). Residual is the same Montserrat
 wrap floor as values + ~31px content height. Text-tier band; close to ≤5%.
 
-## testimonials (flat-rate desktop) — grid + photo box matched; residual = text/photo AA
+## testimonials (flat-rate desktop) — DOM-pinned exact; residual = text AA + watermark → EXCEPTION-PENDING
+
+Re-measured 2026-06-13 against the AUTHORITATIVE original (band-gate prep: scorpion
+widget + cta-tiles hidden, photo force-loaded, settled). The prior "title 29.2 /
+band 733" row was read from a CONTAMINATED capture (the Scorpion Connect webchat
+overlaid the band's right half — aa-classifier wasn't hiding the cta-tiles; now fixed).
 
 | Metric | Original | Clone | Match |
 | --- | --- | --- | --- |
 | grid columns / gap | two 593 cols, 110px | two 593 cols, 110px | ✓ |
-| photo box | 593×519, NO border, x71 | 593×519, no border, x72 | ✓ |
+| photo | 593×519, y107, align-TOP | 593×519, y107 (align-start +21mt) | ✓ |
 | photo source | raw 1264×1107 PNG | raw 1264×1107 PNG (unoptimized) | ✓ |
-| title font | Cormorant 29.2px | 29.2px | ✓ |
-| quote / name font | Montserrat 16.46px | 16.46px | ✓ |
-| band height | 733 (settled) | 736 | ✓ (3px) |
+| title position | y164 | y164 | ✓ (0px) |
+| title height (line-height) | h44 (lh44) | h44 (lh44) | ✓ |
+| title weight | Cormorant 29.2 / **400** | Cormorant 29.2 / 400 (was 700) | ✓ |
+| quote body | Montserrat 16.46 / 400 / lh29.63, h267 w593 | 16.46 / 400 / lh29.63, h266 w593 | ✓ |
+| name | Montserrat 16.46 / **400** / lh16.46, y507 | 16.46 / 400 / lh16.46, y509 | ✓ (2px) |
+| band height | 732 | 735 | ✓ (3px) |
+| **quote text block** | — | ~2px drift down 8 lines | ✗ sub-pixel AA |
+| **band watermark** | CW monogram (bg) | closer-band-bg.jpg monogram | ✗ bg-image placement |
 
-Verdict: geometry matched (17.61→13.84%). Residual is the quote-text wrap + photo
-sub-pixel on a content-dense band (structure tier <1% is unrealistic here). Candidate
-for an owner-signed content-band exception OR a quote-feed mask (the reviews are a
-Scorpion feed, like cards/schedule).
+Verdict: DOM-pin landed (13.80→10.20%). Every position/size/font metric matches the
+original; render is deterministic (Donna V both sides). The residual is non-geometric:
+the dense 8-line quote text accumulates a ~2px sub-pixel drift (each line's AA edges
+misregister → high % on a text-heavy band) plus the navy band's watermark background
+image placing the monogram slightly off the original's. → **testimonials
+EXCEPTION-PENDING**; 1:1 crop at `~/Desktop/testimonials-exception-review/`.
 
 ## faq (flat-rate desktop) — stride-pinned; residual = bar-edge AA → EXCEPTION-PENDING
 

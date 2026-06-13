@@ -70,5 +70,13 @@
     "evidence": "~/Desktop/faq-exception-review/faq-desktop-full.png (+ faq-desktop-top.png zoom)",
     "signedBy": null,
     "signedOn": null
+  },
+  "/about-us/pricing/flat-rate-services/|desktop|testimonials": {
+    "status": "PENDING",
+    "residualPct": 0.102,
+    "reason": "DOM-pin landed (13.80->10.20%). Every computed-truth metric now matches the original (band-gate prep: scorpion widget hidden, photo force-loaded, settled): title y164/h44, photo y107, name y507, band 732 -- all exact. Photo is align-TOP (orig is not centered). Title corrected fw700->400 + lh44; name fw600->400 + lh16.46; quote body was already IDENTICAL (Montserrat 16.46/400/lh29.63, w593, h266=267). Render is deterministic (Donna V both sides). Residual is (a) the dense 8-line quote-text sub-pixel AA -- ~2px block drift accumulating down the column, and (b) the navy band watermark (closer-band-bg.jpg) placing the CW monogram slightly differently than the orig's bg. Both non-geometric. EXCEPTION-PENDING per the banner standard.",
+    "evidence": "~/Desktop/testimonials-exception-review/testimonials-desktop.png",
+    "signedBy": null,
+    "signedOn": null
   }
 }
