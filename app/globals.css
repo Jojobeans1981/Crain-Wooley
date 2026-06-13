@@ -1478,7 +1478,9 @@
 
   /* 8. Pillars / value props closer (#ValuesV2) — gold #9B8059, white-on-gold
      header on the left, a WHITE CARD of value rows on the right. */
-  .cw-values { position: relative; overflow: hidden; background: #304451 url('/interior/closer-band-bg.jpg') center / cover no-repeat; padding: clamp(64px, 8vw, 106px) 0; }
+  /* Real Scorpion script-bg watermark (migrated): navy + cursive handwriting
+     (callout-v1-bg.jpg, 1920x455) — same motif as the banner, the closer crop. */
+  .cw-values { position: relative; overflow: hidden; background: #304451 url('/interior/callout-v1-bg.jpg') center / cover no-repeat; padding: clamp(64px, 8vw, 106px) 0; }
   .cw-values-grid { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center; }
   /* Original ValuesV2 is TWO EQUAL 593px columns with a 110px gap (measured by DOM:
      head col L72-R665, card col L775-R1368, both 593 wide; 1296 container). The clone
@@ -1668,7 +1670,10 @@
      (Cormorant) title centered, thin gold rule beneath. Gold rgb(155,128,89) sits
      behind the image as the original's fallback. ~210px tall desktop. */
   .legacy-banner--navy {
-    background: #9B8059 url('/interior/sub-banner.jpg') center / cover no-repeat;
+    /* Real Scorpion script-bg watermark (migrated): navy + cursive testimonial
+       handwriting (sub-banner-about.jpg, 1920x506). Base navy matches the image so
+       there's no gold flash before it paints. */
+    background: #1b2f3c url('/interior/sub-banner-about.jpg') center / cover no-repeat;
     padding: clamp(40px, 4vw, 57px) 0 clamp(34px, 3.5vw, 49px);
   }
   /* Original drops the search box well below the gold rule (search ~210px from the
