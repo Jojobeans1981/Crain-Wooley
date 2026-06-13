@@ -1165,10 +1165,11 @@
 
   /* ── Footer ── */
   /* Dark textured footer (Scorpion footer-v1-bg) — slate wash over the texture. */
+  /* Original footer is PLAIN SOLID NAVY — no city-skyline image (confirmed in the asset
+     recon: every footer element bg:none). Removed the clone's /home/footer-bg.jpg
+     skyline addition for parity. */
   .cw-site-footer {
     background-color: var(--cw-slate);
-    background-image: linear-gradient(rgba(30,44,53,0.88), rgba(26,38,48,0.94)), url('/home/footer-bg.jpg');
-    background-size: cover; background-position: center; background-repeat: no-repeat;
     color: var(--cw-on-slate);
   }
   .cw-footer-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; padding: 44px 0; border-bottom: 1px solid var(--cw-line-on-slate); }
@@ -1395,7 +1396,9 @@
 
   /* 7. Testimonials closer (#ImageGroupS1/#ReviewsS8) — gold #9B8059 with the
      faint handwritten-letters watermark, white text, one centered review. */
-  .cw-reviews { position: relative; overflow: hidden; background: #304451 url('/interior/closer-band-bg.jpg') center / cover no-repeat; padding: clamp(48px, 6vw, 92px) 0; }
+  /* Original #ReviewsS8 is PLAIN NAVY (couple photo + quote only, no script watermark
+     — confirmed in the asset recon). Removed the closer-band-bg.jpg watermark for parity. */
+  .cw-reviews { position: relative; overflow: hidden; background: #304451; padding: clamp(48px, 6vw, 92px) 0; }
   .cw-reviews-wm { display: none; }
   /* Two-column: framed photo (left) + review carousel (right). */
   .cw-reviews-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr; gap: 36px; align-items: start; }
