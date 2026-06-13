@@ -21,6 +21,7 @@ import { chromium, type Page } from 'playwright'
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs'
 import { PNG } from 'pngjs'
 import pixelmatch from 'pixelmatch'
+import { SCORPION_HIDE_CSS } from './scorpion-hide'
 
 const ORIG = 'https://www.estateplanningdfw.law'
 const CLONE = process.env.CLONE_ORIGIN || 'https://crain-wooley-intake.vercel.app'
@@ -85,13 +86,14 @@ async function prep(pg: Page, url: string): Promise<void> {
   // locator.screenshot() scrolls it into view (contaminates the clone crops, which
   // have a sticky header; the original's isn't) -> false reds on every band.
   await pg.addStyleTag({ content: '.cw-site-header,[id^="Header"],.hdr,header.hdr,[class*="hdr-sticky"],[class*="-sticky"]{position:static!important;top:auto!important}' }).catch(() => {})
-  // Hide the Scorpion "Connect" 3rd-party webchat widget (.connect-page green panel
-  // + cta-tile launcher). It mounts NONDETERMINISTICALLY on the live original only
-  // (absent from the clone) and the force-reveal rule above un-hides its panel,
-  // floating it over banner/testimonials/etc and inflating EVERY overlapped band's
-  // diff (instrument bug class #6 — overlay contamination). No clone collision
-  // (grep: zero refs). Hiding on both sides normalizes to the same content.
-  await pg.addStyleTag({ content: '#scorpion_connect,.connect-page,[class*="cta-tile"],[class*="ctas-tiles"]{display:none!important}' }).catch(() => {})
+  // Hide ALL Scorpion-injected 3rd-party chrome (webchat/Connect overlay + chip +
+  // SCORPION footer attribution) on the live original. It mounts NONDETERMINISTICALLY
+  // and the force-reveal rule above un-hides its panel, floating it over
+  // banner/testimonials/footer and inflating EVERY overlapped band's diff (instrument
+  // bug class #6 — overlay contamination). The clone legitimately omits Scorpion
+  // branding, so the original must be measured with it hidden. Shared hide-set is the
+  // single source of truth (scorpion-hide.ts) used by every measurement path.
+  await pg.addStyleTag({ content: SCORPION_HIDE_CSS }).catch(() => {})
   await pg.evaluate(() => { document.querySelectorAll('img[data-src], source[data-src]').forEach((e) => { const s = e.getAttribute('data-src'); if (s) { e.setAttribute('src', s); if (e.tagName === 'SOURCE') e.setAttribute('srcset', s) } }) })
   await pg.evaluate(() => Promise.all(Array.from(document.images).map((i) => i.complete ? 0 : new Promise<void>((r) => { i.onload = () => r(); i.onerror = () => r(); setTimeout(() => r(), 4000) }))))
   await pg.waitForTimeout(800)
