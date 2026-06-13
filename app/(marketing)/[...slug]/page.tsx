@@ -4,6 +4,7 @@ import { getLegacyPage, allLegacyPaths } from '@/lib/legacy'
 import { pageMetadata } from '@/lib/seo'
 import LegacyArticle from '@/components/legacy/LegacyArticle'
 import FamilyBPage from '@/components/legacy/FamilyBPage'
+import BlogPostPage from '@/components/legacy/BlogPostPage'
 import { getFamilyBPage } from '@/lib/legacy/family-b'
 
 type Params = { slug: string[] }
@@ -66,6 +67,9 @@ export default async function LegacyCatchAll({ params }: { params: Promise<Param
   const fb = getFamilyBPage(path)
   if (fb && (fb.bodyBlocks.length > 0 || fb.accordionGroups.length > 0)) return <FamilyBPage page={fb} />
   const page = getLegacyPage(path)
+  // Blog posts (Family E) render the dedicated blog POST template (2-col body +
+  // Related Posts + prev/next + CTA), not the generic interior article.
+  if (page && page.type === 'blog_post') return <BlogPostPage page={page} path={path} />
   if (page) return <LegacyArticle page={page} path={path} />
 
   // Not captured yet — bridge high-value paths to their live guide (temporary).
