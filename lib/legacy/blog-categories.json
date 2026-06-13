@@ -1,0 +1,177 @@
+[
+ {
+  "slug": "attorney",
+  "name": "Attorney",
+  "count": 2
+ },
+ {
+  "slug": "beneficiaries",
+  "name": "Beneficiaries",
+  "count": 8
+ },
+ {
+  "slug": "business",
+  "name": "Business",
+  "count": 5
+ },
+ {
+  "slug": "community-property",
+  "name": "Community Property",
+  "count": 3
+ },
+ {
+  "slug": "deed",
+  "name": "Deed",
+  "count": 1
+ },
+ {
+  "slug": "disability-planning",
+  "name": "Disability Planning",
+  "count": 4
+ },
+ {
+  "slug": "divorce",
+  "name": "Divorce",
+  "count": 1
+ },
+ {
+  "slug": "dnr",
+  "name": "DNR",
+  "count": 1
+ },
+ {
+  "slug": "estate-planning",
+  "name": "Estate Planning",
+  "count": 90
+ },
+ {
+  "slug": "executor",
+  "name": "Executor",
+  "count": 4
+ },
+ {
+  "slug": "family-relationships",
+  "name": "Family Relationships",
+  "count": 3
+ },
+ {
+  "slug": "financial-power-of-attorney",
+  "name": "Financial Power of Attorney",
+  "count": 3
+ },
+ {
+  "slug": "firm-news",
+  "name": "Firm News",
+  "count": 1
+ },
+ {
+  "slug": "gift-tax",
+  "name": "Gift Tax",
+  "count": 3
+ },
+ {
+  "slug": "gaurdianship",
+  "name": "Guardianship",
+  "count": 7
+ },
+ {
+  "slug": "inheritance",
+  "name": "Inheritance",
+  "count": 3
+ },
+ {
+  "slug": "intellectual-property",
+  "name": "Intellectual Property",
+  "count": 2
+ },
+ {
+  "slug": "irrevocable-trusts",
+  "name": "Irrevocable Trusts",
+  "count": 3
+ },
+ {
+  "slug": "last-wills-and-testaments",
+  "name": "Last Wills and Testaments",
+  "count": 10
+ },
+ {
+  "slug": "life-insurance",
+  "name": "Life Insurance",
+  "count": 2
+ },
+ {
+  "slug": "living-will",
+  "name": "Living Will",
+  "count": 6
+ },
+ {
+  "slug": "long-term-care-planning",
+  "name": "Long-Term Care Planning",
+  "count": 1
+ },
+ {
+  "slug": "marriage",
+  "name": "Marriage",
+  "count": 1
+ },
+ {
+  "slug": "medicaid",
+  "name": "Medicaid",
+  "count": 6
+ },
+ {
+  "slug": "medical-power-of-attorney",
+  "name": "Medical Power of Attorney",
+  "count": 3
+ },
+ {
+  "slug": "online-wills",
+  "name": "Online Wills",
+  "count": 3
+ },
+ {
+  "slug": "power-of-attorney",
+  "name": "Power of Attorney",
+  "count": 14
+ },
+ {
+  "slug": "probate",
+  "name": "Probate",
+  "count": 41
+ },
+ {
+  "slug": "qualified-domestic-trusts",
+  "name": "Qualified Domestic Trusts",
+  "count": 1
+ },
+ {
+  "slug": "revocable-living",
+  "name": "Revocable Living",
+  "count": 5
+ },
+ {
+  "slug": "secure-act",
+  "name": "SECURE Act",
+  "count": 2
+ },
+ {
+  "slug": "spousal-inheritance",
+  "name": "Spousal Inheritance",
+  "count": 1
+ },
+ {
+  "slug": "taxes",
+  "name": "Taxes",
+  "count": 13
+ },
+ {
+  "slug": "trusts",
+  "name": "Trusts",
+  "count": 26
+ },
+ {
+  "slug": "wills",
+  "name": "Wills",
+  "count": 16
+ }
+]
