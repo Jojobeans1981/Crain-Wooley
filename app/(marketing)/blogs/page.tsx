@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { allPostsSorted } from '@/lib/legacy/blog-index'
 import { BlogCardGrid } from '@/components/legacy/BlogCardGrid'
+import { BlogCategorySidebar } from '@/components/legacy/BlogCategorySidebar'
 
 export const metadata: Metadata = {
   title: 'Estate Planning Blog | Crain & Wooley',
@@ -34,13 +35,18 @@ export default async function BlogIndexPage({ searchParams }: { searchParams: Pr
       </section>
 
       <div className="cw-container blog-listing">
-        <h2 className="blog-listing-head">Most Recent Posts</h2>
-        <BlogCardGrid posts={slice} />
-        <nav className="blog-pagination" aria-label="Blog pages">
-          {cur > 1 ? <Link href={url(cur - 1)} className="blog-page-arrow" aria-label="Previous page">‹</Link> : <span className="blog-page-arrow is-disabled" aria-hidden="true">‹</span>}
-          <span className="blog-page-count">{cur} / {total}</span>
-          {cur < total ? <Link href={url(cur + 1)} className="blog-page-arrow" aria-label="Next page">›</Link> : <span className="blog-page-arrow is-disabled" aria-hidden="true">›</span>}
-        </nav>
+        <div className="blog-listing--sidebar">
+          <div>
+            <h2 className="blog-listing-head">Most Recent Posts</h2>
+            <BlogCardGrid posts={slice} />
+            <nav className="blog-pagination" aria-label="Blog pages">
+              {cur > 1 ? <Link href={url(cur - 1)} className="blog-page-arrow" aria-label="Previous page">‹</Link> : <span className="blog-page-arrow is-disabled" aria-hidden="true">‹</span>}
+              <span className="blog-page-count">{cur} / {total}</span>
+              {cur < total ? <Link href={url(cur + 1)} className="blog-page-arrow" aria-label="Next page">›</Link> : <span className="blog-page-arrow is-disabled" aria-hidden="true">›</span>}
+            </nav>
+          </div>
+          <BlogCategorySidebar />
+        </div>
       </div>
     </>
   )

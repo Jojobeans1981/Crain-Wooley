@@ -44,10 +44,11 @@ const nextConfig: NextConfig = {
       { source: '/mansfield-fw/probate', destination: '/mansfield/probate', permanent: true },
       { source: '/about-us/our-team', destination: '/staff-profiles', permanent: true },
 
-      // Blog category/tag pages were low-value listing URLs — 301 them to the
-      // blog index (per the 301 map: "301 if dropped"). Individual posts and the
-      // year/month date archives are served as real pages.
-      { source: '/blogs/categories/:slug*', destination: '/blogs', permanent: true },
+      // Blog category routes are now REAL pages (Family E build) — all 36 source
+      // slugs were live + sitemap-indexed, so they're served (not 301'd). The one
+      // typo'd slug consolidates to its canonical (posts were re-tagged in the data
+      // layer, so the redirected page actually lists them).
+      { source: '/blogs/categories/disability-plannng', destination: '/blogs/categories/disability-planning', permanent: true },
 
       // Live site 301s the singular /blog to the /blogs index — match it.
       { source: '/blog', destination: '/blogs', permanent: true },
