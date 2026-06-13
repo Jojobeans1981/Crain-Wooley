@@ -1950,6 +1950,7 @@
   .cw-input { font-family: var(--font-sans); font-size: 16px; color: var(--cw-text, #1a2230); background: #fff; border: 1px solid rgba(26,34,48,0.18); border-radius: 0; padding: 13px 15px; width: 100%; }
   .cw-input:focus { outline: none; border-color: var(--cw-gold, #9A825E); box-shadow: 0 0 0 3px rgba(154,130,94,0.13); }
   .cw-textarea { resize: vertical; min-height: 130px; line-height: 1.6; }
+  .cw-contact-disclaimer { font-family: var(--font-sans); font-size: 13px; line-height: 1.6; color: var(--cw-text-mute, #6b6356); margin: 4px 0 0; }
   .cw-contact-submit { align-self: flex-start; margin-top: 4px; }
   .cw-contact-notice { font-family: var(--font-sans); font-size: 15px; line-height: 1.6; color: var(--cw-text, #1a2230); background: var(--cw-ivory-warm, #ede5d3); border-left: 2px solid var(--cw-gold, #9A825E); padding: 14px 18px; margin: 4px 0 0; }
 

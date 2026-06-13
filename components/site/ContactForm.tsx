@@ -40,10 +40,15 @@ export function ContactForm() {
         <span className="cw-field-label">How can we help?</span>
         <textarea className="cw-input cw-textarea" name="message" rows={5} />
       </label>
+      <p className="cw-contact-disclaimer">
+        Submitting this form does not create an attorney-client relationship. Please do not send
+        confidential or time-sensitive information through this form.
+      </p>
       <button type="submit" className="cw-btn-gold cw-contact-submit">Send Message</button>
       {submitted && (
         <p className="cw-contact-notice" role="status">
-          Online message delivery is being connected. To reach us now, call{' '}
+          Thank you. This form routes to the firm&rsquo;s intake system, which we&rsquo;re connecting
+          ahead of launch. In the meantime, the fastest way to reach us is to call{' '}
           <a href="tel:+19729451610">(972) 945-1610</a> or{' '}
           <a href="/get-started">schedule a consultation</a>.
         </p>
