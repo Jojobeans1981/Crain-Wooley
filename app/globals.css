@@ -1683,17 +1683,18 @@
     line-height: 1.1;
     letter-spacing: normal; /* original is ls:normal; clone base was -0.012em (read bolder) */
   }
-  /* Gold flair rule (the original's `ln-flr`): a ~686px x 1px rule directly UNDER the
-     heading. The original renders it FAINT (barely visible over the navy watermark —
-     pixel-sampling finds no strong gold), NOT the bright solid #9B8059 line the clone
-     had. Match with a low-opacity gold, 1px high. (Owner rejection #2.) */
+  /* Gold flair rule (the original's `ln-flr` ::before): a 686px x 2px rule directly
+     UNDER the heading that TAPERS to transparent at BOTH ends. The original is a
+     horizontal gradient (transparent -> gold -> transparent), NOT the solid line the
+     clone had. Matched exactly from the original's computed style:
+     linear-gradient(to right, rgba(0,0,0,0), rgb(155,128,89), rgba(0,0,0,0)), 686x2. */
   .legacy-banner--navy .legacy-banner-title::after {
     content: "";
     display: block;
     width: clamp(280px, 48vw, 686px);
-    height: 1px;
+    height: 2px;
     margin: 22px auto 0;
-    background: rgba(155, 128, 89, 0.42);
+    background: linear-gradient(to right, rgba(155, 128, 89, 0), rgb(155, 128, 89), rgba(155, 128, 89, 0));
   }
   /* Tablet/mobile banner heading: the original scales larger than the clone's
      clamp(34px,5vw,61px) below 900px — measured 41.7px @768, 37.8px @390. Scoped to
