@@ -22,6 +22,7 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs'
 import { PNG } from 'pngjs'
 import pixelmatch from 'pixelmatch'
 import { SCORPION_HIDE_CSS } from './scorpion-hide'
+import { pollFaqBars } from './faq-paint'
 
 const ORIG = 'https://www.estateplanningdfw.law'
 const CLONE = process.env.CLONE_ORIGIN || 'https://crain-wooley-intake.vercel.app'
@@ -157,6 +158,7 @@ async function main() {
   for (const d of ['original', 'clone', 'diff']) mkdirSync(`pixel-baselines/band/${d}`, { recursive: true })
   const b = await chromium.launch()
   const scorecard: Record<string, unknown>[] = []
+  const faqPaint: { page: string; vp: string; clone: number; orig: number }[] = []
   for (const [path, bands] of Object.entries(PAGES)) {
     const slug = path.replace(/^\/+|\/+$/g, '').replace(/\//g, '__') || 'home'
     for (const vp of VPS) {
@@ -165,6 +167,15 @@ async function main() {
       await prep(pgC, CLONE + path)
       await prep(pgO, ORIG + path)
       for (const bd of bands) {
+        // FAQ paint-gate: the original paints its 20 gold bars late (lazy gold bg, applied
+        // after the Scorpion slider hydrates ~2.5s); the clone is instant. Poll BOTH until
+        // 20 bars have actually painted before screenshotting, so the diff is never measured
+        // against a half-rendered (blank-navy) band. Record the counts for the report.
+        if (bd.key === 'faq') {
+          const cBars = await pollFaqBars(pgC, bd.clone, 20)
+          const oBars = await pollFaqBars(pgO, bd.orig, 20)
+          faqPaint.push({ page: path, vp: vp.n, clone: cBars, orig: oBars })
+        }
         const cCrop = await bandShot(pgC, bd.clone), oCrop = await bandShot(pgO, bd.orig, bd.origClipBoxes)
         if (!cCrop || !oCrop) { scorecard.push({ page: path, vp: vp.n, band: bd.key, tier: bd.tier, pct: null, pass: false, note: !cCrop ? 'clone band not found' : 'orig band not found' }); continue }
         const W = Math.max(cCrop.width, oCrop.width), H = Math.max(cCrop.height, oCrop.height)
@@ -209,5 +220,9 @@ async function main() {
   const excP = scorecard.filter((r) => (r as { classification?: string }).classification === 'EXCEPTION-PENDING').length
   const excS = scorecard.filter((r) => (r as { classification?: string }).classification === 'EXCEPTION-SIGNED').length
   console.log(`\nstructure bands: ${sp}/${struct.length} <1% | text bands: ${tp}/${text.length} ≤5% | exceptions: ${excS} signed, ${excP} pending`)
+  if (faqPaint.length) {
+    console.log('\nFAQ painted gold bars (must be 20/20 before the faq diff is trustworthy):')
+    for (const f of faqPaint) console.log(`  ${f.page} ${f.vp}: clone ${f.clone}/20, orig ${f.orig}/20${f.clone === 20 && f.orig === 20 ? '' : '  ⚠ NOT FULLY PAINTED'}`)
+  }
 }
 main().catch((e) => { console.error(e); process.exit(1) })
