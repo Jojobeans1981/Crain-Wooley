@@ -1554,8 +1554,11 @@
 
   /* FAQ closer (#FAQsS3) — navy full-bleed band, collapsed GOLD question-bars
      (serif white question + right chevron), navy gaps between bars. */
-  .cw-faqband { background: #304451; padding: clamp(64px, 9vw, 132px) 0; color: #fff; }
-  .cw-faqband-head { text-align: center; max-width: 820px; margin: 0 auto 44px; }
+  /* Bottom padding trimmed ~19px vs the top: the +10 heading-region + the 0.5px/bar
+     stride bump push the content down, so a symmetric pad overshot the band 2179 vs the
+     original's 2160; bottom clamp lands it back at 2160 (bars register from y230). */
+  .cw-faqband { background: #304451; padding: clamp(64px, 9vw, 132px) 0 clamp(45px, 7.7vw, 111px); color: #fff; }
+  .cw-faqband-head { text-align: center; max-width: 820px; margin: 0 auto 54px; }
   .cw-faqband-title { color: #fff; }
   /* Original FAQ gold bars span the full content container (w1296 @1440, 72px side
      margins), not a 900px center column. */
@@ -1563,7 +1566,10 @@
      20 bars sat at different Y positions than the original even at a similar band
      height). Match bar height via PADDING (not lh — that over-compacted) + tighten
      the gap so the 20-bar column lines up with the original (band ~2160). */
-  .cw-faqband-acc { max-width: none; margin: 0 auto; display: flex; flex-direction: column; gap: 8px; }
+  /* Bar stride pinned to the original: bars h83, gap 8.5px (orig stride 91.5, rendered
+     91/92 alternating); heading region +10 (orig first bar y230 vs clone y220) so all
+     20 bars register edge-to-edge instead of drifting ~1px/bar. */
+  .cw-faqband-acc { max-width: none; margin: 0 auto; display: flex; flex-direction: column; gap: 8.5px; }
   .cw-faqbar { background: #9B8059; }
   .cw-faqbar-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 28.5px 28px; cursor: pointer; list-style: none; }
   .cw-faqbar-head::-webkit-details-marker { display: none; }
