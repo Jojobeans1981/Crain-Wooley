@@ -156,6 +156,18 @@ Full step-by-step guide in `CUTOVER_ENV_CHECKLIST.md`:
 
 ---
 
+## ✅ FINAL QA LOG (Family F — logged, not fixed; verify before launch)
+
+1. **RevealScript production hydration** — the React dev warning "Encountered a script tag
+   while rendering React component" comes from `RevealScript` in the SHARED `SiteChrome`
+   (site-wide, not 404-specific). During the homepage pixel pass / final QA, VERIFY the
+   force-reveal actually fires in a PRODUCTION build (`next build && next start`), not just
+   in dev capture — "reveal works in dev" ≠ confirmed in production hydration. If the
+   reveal is only a capture-time helper production doesn't need, confirm that explicitly.
+2. **Search index 192 vs 190 posts** — `public/search-index.json` counts 192 blog entries
+   vs the canonical 190 posts. Reconcile during final QA (duplicates / drafts / index +
+   archive double-count / miscount?).
+
 ## 🎨 PIXEL-FAITHFUL PASS — Open Items (Phase 0–4 rig)
 
 Flagged for decision, not resolved in code (except where noted). Ordered by impact. The visual-diff
