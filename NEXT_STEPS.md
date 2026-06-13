@@ -1,5 +1,23 @@
 # Crain & Wooley — Next Steps for Cutover
 
+## ⚠️ CLIENT-TRACK / JOSEPH DECISIONS — deploy plumbing (added 2026-06-13)
+
+1. **parity-review has NO auto-deploy — it goes stale after every push.** The
+   `Jojobeans1981/Crain-Wooley` GitHub→Vercel auto-deploy webhook points at **Joseph's
+   canonical Vercel**, NOT at the `crain-wooley-parity-review` project (this team). So
+   pushes do NOT redeploy the review URL — it only updates via a manual
+   `vercel deploy --prod` from `~/Crain-Wooley`. It was 34 commits stale (29d01d2 vs
+   1acb8b6) until a one-off manual redeploy on 2026-06-13 brought it current. **It will
+   drift stale again** after the next push unless auto-deploy is wired to this project
+   (or someone keeps manually redeploying). Decision: wire auto-deploy for parity-review,
+   or accept manual redeploys.
+2. **Which Vercel serves the production domain at cutover is still OPEN (Joseph's call).**
+   Confirm whether **Joseph's canonical Vercel** (`Jojobeans1981/Crain-Wooley`, where the
+   auto-deploy webhook points) is the intended PRODUCTION/cutover target for
+   `estateplanningdfw.law` — see the DEPLOY TOPOLOGY + CUTOVER DECISION section below. The
+   parity-review URL is review-only (marketing, no intake env); it is NOT the cutover
+   target. This is the unresolved "which-Vercel-serves-domain" decision.
+
 ## 🚦 DEPLOY TOPOLOGY + CUTOVER DECISION (added 2026-06-12)
 
 - **Interior-parity review URL:** `https://crain-wooley-parity-review.vercel.app`
