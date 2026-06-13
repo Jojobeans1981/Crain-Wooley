@@ -1512,7 +1512,8 @@
      row gap 37.35px (was 112/56 + 80px gap — a height hack that widened the card). */
   .cw-values-card { background: #fff; padding: 57.6px 47.4px; list-style: none; margin: 0; display: flex; flex-direction: column; gap: 37.35px; }
   .cw-value { display: flex; gap: 18px; align-items: flex-start; }
-  .cw-value-icon { flex: none; width: 54px; height: 54px; display: inline-flex; align-items: center; justify-content: center; color: var(--cw-gold); border: 1px solid var(--cw-gold); }
+  /* Original .vls-icn is 49px and BORDERLESS — no bordered box around the glyph. */
+  .cw-value-icon { flex: none; width: 49px; height: 49px; display: inline-flex; align-items: center; justify-content: center; color: var(--cw-gold); }
   /* Original value-card title is Montserrat 16.48px fw500 lh1.5 (a small sans label,
      verified) — NOT a Cormorant serif heading. */
   .cw-value-title { font-family: var(--font-sans); font-weight: 500; font-size: 16.48px; line-height: 1.5; color: var(--cw-slate); margin: 0 0 8px; }
