@@ -97,6 +97,11 @@ async function prep(pg: Page, url: string): Promise<void> {
   await pg.addStyleTag({ content: SCORPION_HIDE_CSS }).catch(() => {})
   await pg.evaluate(() => { document.querySelectorAll('img[data-src], source[data-src]').forEach((e) => { const s = e.getAttribute('data-src'); if (s) { e.setAttribute('src', s); if (e.tagName === 'SOURCE') e.setAttribute('srcset', s) } }) })
   await pg.evaluate(() => Promise.all(Array.from(document.images).map((i) => i.complete ? 0 : new Promise<void>((r) => { i.onload = () => r(); i.onerror = () => r(); setTimeout(() => r(), 4000) }))))
+  // Await webfont load before any measurement: a font-swap mid-settle re-sizes the
+  // values head column (and thus the card column's x), the kind of cross-capture
+  // reflow that makes a measured x look like it "wobbles". fonts.ready makes layout
+  // deterministic across runs. (Capped so a stuck font can't hang the capture.)
+  await Promise.race([pg.evaluate(() => document.fonts.ready.then(() => undefined)), pg.waitForTimeout(4000)]).catch(() => {})
   await pg.waitForTimeout(800)
 }
 // Screenshot a single band ELEMENT directly (Playwright clips its bbox + scrolls
