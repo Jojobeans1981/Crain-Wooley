@@ -2,6 +2,7 @@ import { ValueProps, ReviewsSection, Locations } from '@/components/site/home/se
 import { BadgeStrip } from '@/components/site/home/BadgeWall'
 import { Accordion } from './Accordion'
 import { Sidebar } from './Sidebar'
+import { ReadMore } from './ReadMore'
 import type { FamilyBData, BodyBlock, Band, SidebarBlock } from '@/lib/legacy/family-b'
 
 // Render one ordered body block (paragraph, sub-heading, or list) faithfully.
@@ -227,6 +228,12 @@ function LegacyFamilyBPage({ page }: { page: FamilyBData }) {
   if (cut > 0) lede = lede.slice(0, cut)
   else if (cut === 0) lede = []
   const rest = contentBlocks.slice(lede.length)
+  // Punch item 1 — read-more: the original /about-us truncates the "Working With Our
+  // Team" section with "Continue Reading". Wrap that section's content (everything after
+  // its h2) in <ReadMore> so the clone matches; other pages render normally.
+  const rmIdx = page.path === '/about-us'
+    ? rest.findIndex((b) => b.type === 'h2' && /working with our team/i.test((b as { text?: string }).text || ''))
+    : -1
   return (
     <>
       <Banner page={page} />
@@ -247,7 +254,16 @@ function LegacyFamilyBPage({ page }: { page: FamilyBData }) {
                   </div>
                 )}
               </div>
-              {rest.length > 0 && <div className="cw-fb-body">{rest.map((b, i) => <Block key={i} block={b} k={i} />)}</div>}
+              {rest.length > 0 && (
+                <div className="cw-fb-body">
+                  {rmIdx >= 0 ? (
+                    <>
+                      {rest.slice(0, rmIdx + 1).map((b, i) => <Block key={i} block={b} k={i} />)}
+                      <ReadMore>{rest.slice(rmIdx + 1).map((b, i) => <Block key={rmIdx + 1 + i} block={b} k={rmIdx + 1 + i} />)}</ReadMore>
+                    </>
+                  ) : rest.map((b, i) => <Block key={i} block={b} k={i} />)}
+                </div>
+              )}
               {page.accordionGroups.map((g, i) => (
                 <div key={i} className="cw-fb-accgroup">
                   {g.heading && <h2 className="cw-h2 cw-fb-acc-heading">{g.heading}</h2>}
